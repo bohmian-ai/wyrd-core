@@ -12,6 +12,28 @@ pub mod derive {
     pub use wyrd_error_derive::WyrdError;
 }
 
+/// RFC 9457 problem value emitted by every public Wyrd error boundary.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, schemars::JsonSchema)]
+#[cfg_attr(feature = "server", derive(utoipa::ToSchema))]
+#[serde(deny_unknown_fields)]
+pub struct WyrdProblem {
+    /// Problem type URI.
+    #[serde(rename = "type")]
+    pub r#type: String,
+    /// Short problem title.
+    pub title: String,
+    /// HTTP status.
+    pub status: u16,
+    /// Human-readable problem detail.
+    pub detail: String,
+    /// Stable Wyrd error code.
+    pub code: String,
+    /// Structured machine-readable details.
+    pub details: serde_json::Value,
+    /// Remediation guidance.
+    pub remediation: String,
+}
+
 /// Public storage error catalog.
 pub mod storage {
     use serde::{Deserialize, Serialize};
@@ -289,6 +311,90 @@ pub enum WyrdError {
         remediation = "Check the submitted Wyrd request fields against the published schema and retry."
     )]
     Validation {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Loader encountered an IO error reading a card file.
+    #[error("[WYRD_LOADER_400_IO] {message}")]
+    #[wyrd_error(
+        code = "WYRD_LOADER_400_IO",
+        status = 400,
+        title = "Loader IO error",
+        remediation = "Check file permissions and that all referenced files exist."
+    )]
+    LoaderIo {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Loader encountered a YAML syntax error.
+    #[error("[WYRD_LOADER_400_YAML_SYNTAX] {message}")]
+    #[wyrd_error(
+        code = "WYRD_LOADER_400_YAML_SYNTAX",
+        status = 400,
+        title = "YAML syntax error",
+        remediation = "Fix the YAML syntax error and retry."
+    )]
+    LoaderYamlSyntax {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Card envelope is missing required fields.
+    #[error("[WYRD_LOADER_400_INVALID_ENVELOPE] {message}")]
+    #[wyrd_error(
+        code = "WYRD_LOADER_400_INVALID_ENVELOPE",
+        status = 400,
+        title = "Invalid card envelope",
+        remediation = "Ensure the card has apiVersion, kind, metadata, and spec fields."
+    )]
+    LoaderInvalidEnvelope {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Path reference escapes the workspace sandbox.
+    #[error("[WYRD_LOADER_400_PATH_ESCAPE] {message}")]
+    #[wyrd_error(
+        code = "WYRD_LOADER_400_PATH_ESCAPE",
+        status = 400,
+        title = "Path reference escapes workspace",
+        remediation = "Use relative paths within the workspace root."
+    )]
+    LoaderPathEscape {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Absolute path reference breaks portability (advisory warning).
+    #[error("[WYRD_LOADER_400_PATH_ABSOLUTE_ADVISORY] {message}")]
+    #[wyrd_error(
+        code = "WYRD_LOADER_400_PATH_ABSOLUTE_ADVISORY",
+        status = 400,
+        title = "Absolute path reference breaks portability",
+        remediation = "Use relative paths for portability across environments."
+    )]
+    LoaderPathAbsoluteAdvisory {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Config load failed.
+    #[error("[WYRD_LOADER_400_CONFIG_LOAD_FAILED] {message}")]
+    #[wyrd_error(
+        code = "WYRD_LOADER_400_CONFIG_LOAD_FAILED",
+        status = 400,
+        title = "Config load failed",
+        remediation = "Check wyrd.toml syntax and structure."
+    )]
+    LoaderConfigLoadFailed {
         /// Human-readable error message.
         message: String,
         /// Structured detail payload.
@@ -869,9 +975,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// Card spec failed type-driven deserialization.
-    #[error("[WYRD_REG_400_INVALID_CARD_SPEC] {message}")]
+    #[error("[WYRD_REGISTRY_400_INVALID_CARD_SPEC] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_400_INVALID_CARD_SPEC",
+        code = "WYRD_REGISTRY_400_INVALID_CARD_SPEC",
         status = 400,
         title = "Card spec failed type-driven deserialization",
         remediation = "Verify the kind/spec field combination matches the documented Wyrd v1 schema for that kind."
@@ -882,10 +988,96 @@ pub enum WyrdError {
         /// Structured detail payload.
         details: serde_json::Value,
     },
-    /// The version block is invalid for this operation.
-    #[error("[WYRD_REG_400_INVALID_VERSION_BLOCK] {message}")]
+    /// A local WyrdState bundle contains metadata without required payloads.
+    #[error("[WYRD_SDK_400_UNHYDRATED_ARTIFACT] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_400_INVALID_VERSION_BLOCK",
+        code = "WYRD_SDK_400_UNHYDRATED_ARTIFACT",
+        status = 400,
+        title = "Hydrated bundle is missing artifact payloads",
+        remediation = "Run wyrd get without --metadata-only and load the complete bundle."
+    )]
+    SdkUnhydratedArtifact {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Python-side runtime Card hydration failed while constructing a usable
+    /// local SDK state from a complete bundle.
+    ///
+    /// The boundary uses this variant when a custom interface, prompt,
+    /// artifact loader, or Python object allocation cannot produce the typed
+    /// runtime holder required by the SDK. Call sites may expose only safe
+    /// structured details in `details`: the authored alias, Card reference,
+    /// one of the documented hydration stages, and a concise sanitized
+    /// reason. Python traceback locals and object representations are excluded
+    /// because they can contain secrets, user data, unstable implementation
+    /// details, or non-serializable Python objects.
+    #[error("[WYRD_SDK_400_RUNTIME_HYDRATION_FAILED] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SDK_400_RUNTIME_HYDRATION_FAILED",
+        status = 400,
+        title = "Runtime Card hydration failed",
+        remediation = "Provide the required custom interface/load arguments or regenerate a complete compatible bundle."
+    )]
+    SdkRuntimeHydrationFailed {
+        /// Concise human-readable explanation of the runtime hydration
+        /// failure, suitable for Python and other public boundaries without
+        /// embedding traceback text or object representations.
+        message: String,
+        /// Safe machine-readable hydration context. Callers may include only
+        /// `alias`, `card_ref`, `stage` (`interface`, `prompt`,
+        /// `artifact_load`, or `python_allocation`), and a sanitized `reason`;
+        /// traceback locals and Python object representations must not be
+        /// stored here.
+        details: serde_json::Value,
+    },
+    /// A local WyrdState bundle is malformed or internally inconsistent.
+    #[error("[WYRD_SDK_400_INVALID_STATE_BUNDLE] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SDK_400_INVALID_STATE_BUNDLE",
+        status = 400,
+        title = "Invalid WyrdState bundle",
+        remediation = "Regenerate the bundle with wyrd get and load the complete output."
+    )]
+    SdkInvalidStateBundle {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A local WyrdState alias does not identify a Card.
+    #[error("[WYRD_SDK_404_UNKNOWN_ALIAS] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SDK_404_UNKNOWN_ALIAS",
+        status = 404,
+        title = "Unknown WyrdState alias",
+        remediation = "Use an alias returned by the loaded WyrdState bundle."
+    )]
+    SdkUnknownAlias {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A typed Card lookup found a Card of a different kind.
+    #[error("[WYRD_SDK_400_CARD_KIND_MISMATCH] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SDK_400_CARD_KIND_MISMATCH",
+        status = 400,
+        title = "WyrdState Card kind mismatch",
+        remediation = "Use an alias for a Card of the expected kind."
+    )]
+    SdkCardKindMismatch {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// The version block is invalid for this operation.
+    #[error("[WYRD_REGISTRY_400_INVALID_VERSION_BLOCK] {message}")]
+    #[wyrd_error(
+        code = "WYRD_REGISTRY_400_INVALID_VERSION_BLOCK",
         status = 400,
         title = "The version block is invalid for this operation",
         remediation = "Check the error message for the specific constraint: Service and Agent cards require an exact semver pin; version components must fit i64; a scoped bump must stay within the authored range."
@@ -897,9 +1089,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// Card spec exceeds MAX_SPEC_BYTES (256 KiB).
-    #[error("[WYRD_REG_400_SPEC_TOO_LARGE] {message}")]
+    #[error("[WYRD_REGISTRY_400_SPEC_TOO_LARGE] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_400_SPEC_TOO_LARGE",
+        code = "WYRD_REGISTRY_400_SPEC_TOO_LARGE",
         status = 400,
         title = "Card spec exceeds MAX_SPEC_BYTES (256 KiB)",
         remediation = "Reduce the spec size or split into multiple cards. If artifacts are inlined, move them to an Artifact card with object_store backing."
@@ -911,9 +1103,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// `metadata.version` was present but empty.
-    #[error("[WYRD_REG_400_VERSION_REQUIRED] {message}")]
+    #[error("[WYRD_REGISTRY_400_VERSION_REQUIRED] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_400_VERSION_REQUIRED",
+        code = "WYRD_REGISTRY_400_VERSION_REQUIRED",
         status = 400,
         title = "`metadata.version` is present but empty",
         remediation = "Provide a valid semver string (e.g. `\"1.0.0\"`) or omit `metadata.version` entirely to let the server auto-assign the next version."
@@ -925,9 +1117,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// List `limit` is zero or exceeds the per-tenant cap.
-    #[error("[WYRD_REG_400_LIST_LIMIT_OUT_OF_RANGE] {message}")]
+    #[error("[WYRD_REGISTRY_400_LIST_LIMIT_OUT_OF_RANGE] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_400_LIST_LIMIT_OUT_OF_RANGE",
+        code = "WYRD_REGISTRY_400_LIST_LIMIT_OUT_OF_RANGE",
         status = 400,
         title = "List `limit` is zero or exceeds the per-tenant cap",
         remediation = "Pass a `limit` in `1..=LIST_LIMIT_MAX` (currently 200)."
@@ -939,9 +1131,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// `card_ref.uid` was populated for a registry lookup that resolves by (space, name, version).
-    #[error("[WYRD_REG_400_CARD_REF_UID_NOT_RESOLVABLE_HERE] {message}")]
+    #[error("[WYRD_REGISTRY_400_CARD_REF_UID_NOT_RESOLVABLE_HERE] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_400_CARD_REF_UID_NOT_RESOLVABLE_HERE",
+        code = "WYRD_REGISTRY_400_CARD_REF_UID_NOT_RESOLVABLE_HERE",
         status = 400,
         title = "`card_ref.uid` was populated for a registry lookup that resolves by (space, name, version)",
         remediation = "Submit the request with `card_ref.uid = None`; the registry resolves by identity tuple. Use `get_card_by_uid` if you have a `card_uid`."
@@ -953,9 +1145,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// `card_ref.version` is a Requirement; this endpoint accepts a Pin.
-    #[error("[WYRD_REG_400_REQUIREMENT_NOT_RESOLVABLE_HERE] {message}")]
+    #[error("[WYRD_REGISTRY_400_REQUIREMENT_NOT_RESOLVABLE_HERE] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_400_REQUIREMENT_NOT_RESOLVABLE_HERE",
+        code = "WYRD_REGISTRY_400_REQUIREMENT_NOT_RESOLVABLE_HERE",
         status = 400,
         title = "`card_ref.version` is a Requirement; this endpoint accepts a Pin",
         remediation = "Resolve the Requirement to a Pin via the future `resolve_card_ref` endpoint, or pass a Pin directly."
@@ -967,9 +1159,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// No card matches the supplied identity.
-    #[error("[WYRD_REG_404_CARD_NOT_FOUND] {message}")]
+    #[error("[WYRD_REGISTRY_404_CARD_NOT_FOUND] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_404_CARD_NOT_FOUND",
+        code = "WYRD_REGISTRY_404_CARD_NOT_FOUND",
         status = 404,
         title = "No card matches the supplied identity",
         remediation = "Check (space, kind, name, version) or the `card_uid` is correct and the card is registered in the current tenant."
@@ -980,10 +1172,24 @@ pub enum WyrdError {
         /// Structured detail payload.
         details: serde_json::Value,
     },
-    /// Defense-in-depth: an existing card with the same identity has a different uid.
-    #[error("[WYRD_REG_500_VERSION_CONFLICT] {message}")]
+    /// A submitted card reference was not found in the caller's tenant.
+    #[error("[WYRD_REGISTRY_422_UNRESOLVED_DEPENDENCY] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_500_VERSION_CONFLICT",
+        code = "WYRD_REGISTRY_422_UNRESOLVED_DEPENDENCY",
+        status = 422,
+        title = "Card reference could not be resolved",
+        remediation = "Register the referenced card in the current tenant before submitting this card."
+    )]
+    RegistryUnresolvedDependency {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Defense-in-depth: an existing card with the same identity has a different uid.
+    #[error("[WYRD_REGISTRY_500_VERSION_CONFLICT] {message}")]
+    #[wyrd_error(
+        code = "WYRD_REGISTRY_500_VERSION_CONFLICT",
         status = 500,
         title = "Card uid mismatch for same identity",
         remediation = "Internal invariant violation; report with the request id and audit_id."
@@ -995,9 +1201,9 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// Re-apply with the same identity but a different spec_hash; same-version cards are immutable.
-    #[error("[WYRD_REG_409_SPEC_DRIFT] {message}")]
+    #[error("[WYRD_REGISTRY_409_SPEC_DRIFT] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_409_SPEC_DRIFT",
+        code = "WYRD_REGISTRY_409_SPEC_DRIFT",
         status = 409,
         title = "Re-apply with the same identity but a different spec_hash; same-version cards are immutable",
         remediation = "Bump `metadata.version` to publish a new spec, or revert your spec to match the registered version."
@@ -1009,14 +1215,70 @@ pub enum WyrdError {
         details: serde_json::Value,
     },
     /// Transient Postgres or RLS misconfiguration; retry with backoff.
-    #[error("[WYRD_REG_503_REGISTRY_UNAVAILABLE] {message}")]
+    #[error("[WYRD_REGISTRY_503_REGISTRY_UNAVAILABLE] {message}")]
     #[wyrd_error(
-        code = "WYRD_REG_503_REGISTRY_UNAVAILABLE",
+        code = "WYRD_REGISTRY_503_REGISTRY_UNAVAILABLE",
         status = 503,
         title = "Transient Postgres or RLS misconfiguration; retry with backoff",
         remediation = "Retry with exponential backoff (60s cap). If persistent, check Postgres connectivity, the tenant row, and the RLS role bindings."
     )]
     RegistryUnavailable {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// The submitted card graph contains a dependency cycle.
+    #[error("[WYRD_REGISTRY_400_DEPENDENCY_CYCLE] {message}")]
+    #[wyrd_error(
+        code = "WYRD_REGISTRY_400_DEPENDENCY_CYCLE",
+        status = 400,
+        title = "Card dependency cycle",
+        remediation = "Remove the cyclic CardRef dependency and submit an acyclic card graph."
+    )]
+    RegistryDependencyCycle {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// An inline body reached the server with an unresolved nested reference.
+    #[error("[WYRD_REGISTRY_400_UNRESOLVED_INLINE_REFERENCE] {message}")]
+    #[wyrd_error(
+        code = "WYRD_REGISTRY_400_UNRESOLVED_INLINE_REFERENCE",
+        status = 400,
+        title = "Unresolved inline CardRef",
+        remediation = "Resolve nested inline file references in the loader before submitting the card."
+    )]
+    RegistryUnresolvedInlineReference {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A heavy artifact manifest was included with other submissions.
+    #[error("[WYRD_REGISTRY_400_HEAVY_ARTIFACT_NOT_SOLE_SUBMISSION] {message}")]
+    #[wyrd_error(
+        code = "WYRD_REGISTRY_400_HEAVY_ARTIFACT_NOT_SOLE_SUBMISSION",
+        status = 400,
+        title = "Heavy artifact submission must be standalone",
+        remediation = "Register the artifact-bearing card alone, then reference it from a later composite request."
+    )]
+    RegistryHeavyArtifactNotSoleSubmission {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A loader-only path reference reached the server.
+    #[error("[WYRD_REGISTRY_400_UNRESOLVED_PATH_REF] {message}")]
+    #[wyrd_error(
+        code = "WYRD_REGISTRY_400_UNRESOLVED_PATH_REF",
+        status = 400,
+        title = "Unresolved path CardRef",
+        remediation = "Expand path references in the loader before submitting the card."
+    )]
+    RegistryUnresolvedPathRef {
         /// Human-readable error message.
         message: String,
         /// Structured detail payload.
@@ -1031,6 +1293,34 @@ pub enum WyrdError {
         remediation = "Provide a stable Idempotency-Key header and retry the registration."
     )]
     RegistryIdempotencyKeyRequired {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// The supplied registration idempotency key is malformed.
+    #[error("[WYRD_REGISTRY_400_IDEMPOTENCY_KEY_INVALID] {message}")]
+    #[wyrd_error(
+        code = "WYRD_REGISTRY_400_IDEMPOTENCY_KEY_INVALID",
+        status = 400,
+        title = "Invalid idempotency key",
+        remediation = "Provide an 8-256 character Idempotency-Key without whitespace."
+    )]
+    RegistryIdempotencyKeyInvalid {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// Two submissions have the same graph identity.
+    #[error("[WYRD_SPEC_400_DUPLICATE_SUBMISSION] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SPEC_400_DUPLICATE_SUBMISSION",
+        status = 400,
+        title = "Duplicate card submission",
+        remediation = "Submit each (kind, space, name, version) identity at most once per request."
+    )]
+    SpecDuplicateSubmission {
         /// Human-readable error message.
         message: String,
         /// Structured detail payload.
@@ -1129,6 +1419,76 @@ pub enum WyrdError {
         remediation = "Re-upload the artifact and retry finalization."
     )]
     RegistryArtifactVerifyFailed {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A spec declares the same publication target more than once.
+    #[error("[WYRD_SPEC_400_DUPLICATE_PUBLISH_TARGET] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SPEC_400_DUPLICATE_PUBLISH_TARGET",
+        status = 400,
+        title = "Duplicate publication target",
+        remediation = "Remove duplicate Eval or Drift CardRefs from publishes_to."
+    )]
+    SpecDuplicatePublishTarget {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A spec publication target is not an Eval or Drift card.
+    #[error("[WYRD_SPEC_400_INVALID_PUBLISH_TARGET_KIND] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SPEC_400_INVALID_PUBLISH_TARGET_KIND",
+        status = 400,
+        title = "Invalid publication target kind",
+        remediation = "Set publishes_to targets to Eval or Drift CardRefs."
+    )]
+    SpecInvalidPublishTargetKind {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A Service component references a peer-only Card kind.
+    #[error("[WYRD_SPEC_400_INVALID_SERVICE_COMPONENT_KIND] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SPEC_400_INVALID_SERVICE_COMPONENT_KIND",
+        status = 400,
+        title = "Invalid Service component kind",
+        remediation = "Move Eval, Drift, Trigger, Operator, Audit, and Source cards out of Service.components; connect observability peers with publishes_to."
+    )]
+    SpecInvalidServiceComponentKind {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// A Service-root bundle includes an Eval or Drift with no local publisher.
+    #[error("[WYRD_SPEC_400_UNPUBLISHED_OBSERVABILITY_PEER] {message}")]
+    #[wyrd_error(
+        code = "WYRD_SPEC_400_UNPUBLISHED_OBSERVABILITY_PEER",
+        status = 400,
+        title = "Unpublished observability peer",
+        remediation = "Add the Eval or Drift CardRef to the Service, a Service component, or a submitted Agent publishes_to list, or register the shared peer separately."
+    )]
+    SpecUnpublishedObservabilityPeer {
+        /// Human-readable error message.
+        message: String,
+        /// Structured detail payload.
+        details: serde_json::Value,
+    },
+    /// TypeScript heavy-upload support is deferred to another surface.
+    #[error("[WYRD_TS_501_HEAVY_UPLOAD_DEFERRED] {message}")]
+    #[wyrd_error(
+        code = "WYRD_TS_501_HEAVY_UPLOAD_DEFERRED",
+        status = 501,
+        title = "TypeScript heavy upload is deferred",
+        remediation = "Use the CLI or Python SDK for heavy artifact uploads."
+    )]
+    TsHeavyUploadDeferred {
         /// Human-readable error message.
         message: String,
         /// Structured detail payload.
@@ -2360,6 +2720,13 @@ pub enum WyrdError {
 }
 
 impl WyrdError {
+    /// Return the typed RFC 9457 problem value for this error.
+    #[must_use]
+    pub fn problem(&self) -> WyrdProblem {
+        serde_json::from_value(self.as_problem_json())
+            .expect("WyrdError problem JSON must match WyrdProblem")
+    }
+
     /// RFC 9457 JSON problem payload.
     #[must_use]
     pub fn as_problem_json(&self) -> serde_json::Value {
@@ -2378,6 +2745,12 @@ impl WyrdError {
     fn message_details(&self) -> (Cow<'_, str>, serde_json::Value) {
         match self {
             Self::Validation { message, details }
+            | Self::LoaderIo { message, details }
+            | Self::LoaderYamlSyntax { message, details }
+            | Self::LoaderInvalidEnvelope { message, details }
+            | Self::LoaderPathEscape { message, details }
+            | Self::LoaderPathAbsoluteAdvisory { message, details }
+            | Self::LoaderConfigLoadFailed { message, details }
             | Self::NotFound { message, details }
             | Self::Conflict { message, details }
             | Self::Internal { message, details }
@@ -2491,6 +2864,11 @@ impl WyrdError {
             | Self::CfgSchemaMismatch { message, details }
             | Self::CfgNameDefaultRejected { message, details }
             | Self::RegistryInvalidCardSpec { message, details }
+            | Self::SdkUnhydratedArtifact { message, details }
+            | Self::SdkRuntimeHydrationFailed { message, details }
+            | Self::SdkInvalidStateBundle { message, details }
+            | Self::SdkUnknownAlias { message, details }
+            | Self::SdkCardKindMismatch { message, details }
             | Self::RegistryInvalidVersionBlock { message, details }
             | Self::RegistrySpecTooLarge { message, details }
             | Self::RegistryVersionRequired { message, details }
@@ -2498,10 +2876,16 @@ impl WyrdError {
             | Self::RegistryCardRefUidNotResolvableHere { message, details }
             | Self::RegistryRequirementNotResolvableHere { message, details }
             | Self::RegistryCardNotFound { message, details }
+            | Self::RegistryUnresolvedDependency { message, details }
             | Self::RegistryVersionConflict { message, details }
             | Self::RegistrySpecDrift { message, details }
             | Self::RegistryUnavailable { message, details }
+            | Self::RegistryDependencyCycle { message, details }
+            | Self::RegistryUnresolvedInlineReference { message, details }
+            | Self::RegistryHeavyArtifactNotSoleSubmission { message, details }
+            | Self::RegistryUnresolvedPathRef { message, details }
             | Self::RegistryIdempotencyKeyRequired { message, details }
+            | Self::RegistryIdempotencyKeyInvalid { message, details }
             | Self::RegistryManifestHashMismatch { message, details }
             | Self::RegistryInvalidArtifactPath { message, details }
             | Self::RegistryUploadInterrupted { message, details }
@@ -2509,6 +2893,12 @@ impl WyrdError {
             | Self::RegistryIdempotencyConflict { message, details }
             | Self::RegistryOperationExpired { message, details }
             | Self::RegistryArtifactVerifyFailed { message, details }
+            | Self::SpecDuplicatePublishTarget { message, details }
+            | Self::SpecDuplicateSubmission { message, details }
+            | Self::SpecInvalidPublishTargetKind { message, details }
+            | Self::SpecInvalidServiceComponentKind { message, details }
+            | Self::SpecUnpublishedObservabilityPeer { message, details }
+            | Self::TsHeavyUploadDeferred { message, details }
             | Self::PrincipalOrphaned { message, details }
             | Self::ServerNotReady { message, details }
             | Self::ServiceUnavailable { message, details }
@@ -3427,12 +3817,25 @@ mod error_registry_tests {
             let problem = err.as_problem_json();
             let code = problem["code"].as_str().expect("code is a string");
             assert!(
-                code.starts_with("WYRD_REG_") || code.starts_with("WYRD_AUTH_"),
+                code.starts_with("WYRD_REGISTRY_") || code.starts_with("WYRD_AUTH_"),
                 "unexpected code prefix: {code}"
             );
             assert!(problem["status"].as_u64().unwrap() >= 400);
             assert!(problem["title"].as_str().is_some());
         }
+    }
+
+    #[test]
+    fn typed_problem_matches_problem_json() {
+        let error = WyrdError::RegistryUnavailable {
+            message: "transient".to_owned(),
+            details: serde_json::json!({"retryable": true}),
+        };
+
+        assert_eq!(
+            serde_json::to_value(error.problem()).expect("problem serializes"),
+            error.as_problem_json()
+        );
     }
 
     #[test]
@@ -3443,7 +3846,7 @@ mod error_registry_tests {
         };
         let problem = err.as_problem_json();
         assert_eq!(problem["status"], 503);
-        assert_eq!(problem["code"], "WYRD_REG_503_REGISTRY_UNAVAILABLE");
+        assert_eq!(problem["code"], "WYRD_REGISTRY_503_REGISTRY_UNAVAILABLE");
     }
 
     #[test]
@@ -3454,7 +3857,7 @@ mod error_registry_tests {
         };
         let problem = err.as_problem_json();
         assert_eq!(problem["status"], 409);
-        assert_eq!(problem["code"], "WYRD_REG_409_SPEC_DRIFT");
+        assert_eq!(problem["code"], "WYRD_REGISTRY_409_SPEC_DRIFT");
     }
 
     #[test]
@@ -3465,7 +3868,7 @@ mod error_registry_tests {
         };
         let problem = err.as_problem_json();
         assert_eq!(problem["status"], 404);
-        assert_eq!(problem["code"], "WYRD_REG_404_CARD_NOT_FOUND");
+        assert_eq!(problem["code"], "WYRD_REGISTRY_404_CARD_NOT_FOUND");
     }
 
     #[test]
@@ -3510,7 +3913,7 @@ mod error_registry_tests {
         };
         let problem = err.as_problem_json();
         assert_eq!(problem["status"], 500);
-        assert_eq!(problem["code"], "WYRD_REG_500_VERSION_CONFLICT");
+        assert_eq!(problem["code"], "WYRD_REGISTRY_500_VERSION_CONFLICT");
     }
 
     #[test]
