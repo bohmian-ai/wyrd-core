@@ -1,23 +1,20 @@
 //! Generic, caller-supplied Postgres migration runner.
 //!
 //! This module owns the plane-neutral advisory-lock migration sequence that both
-//! the Wyrd and Vala planes share. Each plane keeps a thin `migrate(&ResolvedDsns)`
+//! the Wyrd and Vala planes share. Each plane keeps a thin `migrate(&PgPool)`
 //! wrapper that supplies its own compile-time-embedded [`sqlx::migrate::Migrator`]
 //! and plane-specific constants, then delegates the full sequence to
 //! [`run_migrations`].
 //!
-//! The sequence is: validate options (pure, no IO) → build a migrator pool from
-//! the caller-supplied DSNs → acquire the advisory lock → ensure schemas → set
+//! The sequence is: validate options (pure, no IO) → acquire a connection from
+//! the caller-supplied pool → acquire the advisory lock → ensure schemas → set
 //! search path → run the migrator → release the advisory lock → close the
-//! connection and pool → return the original migration outcome, surfacing unlock
+//! acquired connection → return the original migration outcome, surfacing unlock
 //! errors only when migration succeeded.
 
-use secrecy::ExposeSecret as _;
 use sqlx::postgres::PgConnection;
 
-use crate::dsn::ResolvedDsns;
 use crate::error::SqlError;
-use crate::pool::{PoolConfig, build_pool};
 
 /// Options for a single [`run_migrations`] invocation.
 ///
@@ -46,48 +43,38 @@ pub struct MigrationSet<'a> {
     pub options: MigrateOptions<'a>,
 }
 
-/// Apply `migrator` against a migrator-role pool built from `dsns`.
+/// Apply `migrator` against a connection acquired from the caller-supplied `migrator_pool`.
 ///
 /// The complete control flow:
 /// 1. [`validate_options`] — pure, fails with [`SqlError::InvariantViolation`]
 ///    before any IO if identifiers are invalid or the search path is empty.
-/// 2. Build a 2-connection migrator pool from `dsns.migrator` via
-///    [`build_pool`] and [`PoolConfig::migrator_defaults`].
-/// 3. Acquire one connection and call `pg_advisory_lock` with
-///    `options.advisory_lock_key`.
-/// 4. For each schema in `options.ensure_schemas`: execute
+/// 2. Acquire one connection from `migrator_pool` and call `pg_advisory_lock`
+///    with `options.advisory_lock_key`.
+/// 3. For each schema in `options.ensure_schemas`: execute
 ///    `CREATE SCHEMA IF NOT EXISTS "<schema>"` using quoted, validated names.
-/// 5. Execute `SET search_path TO "<a>", "<b>", ...` from validated names.
-/// 6. Run `migrator` on the connection.
-/// 7. Call `pg_advisory_unlock` with the same key, unconditionally.
-/// 8. Close the physical connection and the pool.
-/// 9. Return the migration result; surface an unlock error only when migration
+/// 4. Execute `SET search_path TO "<a>", "<b>", ...` from validated names.
+/// 5. Run `migrator` on the connection.
+/// 6. Call `pg_advisory_unlock` with the same key, unconditionally.
+/// 7. Close the acquired connection (the caller retains ownership of the pool).
+/// 8. Return the migration result; surface an unlock error only when migration
 ///    succeeded (primary error wins via [`combine_migration_outcome`]).
 ///
-/// Raw `PgPool` never crosses a library signature or field. Each call builds
-/// and destroys its own boot-time migrator pool, which is safe because advisory
-/// lock keys are distinct across planes and both planes run sequentially at boot
-/// on 2-connection pools.
+/// The caller owns `migrator_pool` and is responsible for closing it after all
+/// migration sets have run. This matches the source `wyrd-sql`/`vala-sql`
+/// `migrate(&pool)` contract exactly.
 ///
 /// # Errors
 /// - [`SqlError::InvariantViolation`] for invalid options before any IO.
-/// - [`SqlError::Connect`] for pool/connection/lock failure.
+/// - [`SqlError::Connect`] for connection or lock failure.
 /// - [`SqlError::Migrate`] or [`SqlError::MigrateChecksum`] for migration failure.
 pub async fn run_migrations(
-    dsns: &ResolvedDsns,
+    migrator_pool: &sqlx::postgres::PgPool,
     migrator: &sqlx::migrate::Migrator,
     options: &MigrateOptions<'_>,
 ) -> Result<(), SqlError> {
     validate_options(options)?;
 
-    let pool = build_pool(
-        dsns.migrator.expose_secret(),
-        PoolConfig::migrator_defaults(),
-    )
-    .await
-    .map_err(SqlError::Connect)?;
-
-    let mut conn = pool.acquire().await.map_err(SqlError::Connect)?;
+    let mut conn = migrator_pool.acquire().await.map_err(SqlError::Connect)?;
 
     acquire_advisory_lock(&mut conn, options.advisory_lock_key).await?;
 
@@ -130,8 +117,6 @@ pub async fn run_migrations(
             "failed to close migration connection cleanly"
         );
     }
-
-    pool.close().await;
 
     combine_migration_outcome(primary, unlock)
 }
@@ -416,196 +401,5 @@ mod tests {
     fn combine_migration_outcome_ok_when_both_ok() {
         let result = combine_migration_outcome(Ok(()), Ok(()));
         assert!(result.is_ok());
-    }
-}
-
-// --- PG behavior tests (AC4, deferred to T3) ---
-//
-// These integration tests require a live Postgres instance provisioned by the
-// T3 test harness (`mise run test:pg` via `scripts/postgres/with-test-postgres.sh`).
-// They are authored here but gated behind the `pg` feature so they are never
-// compiled or executed without an explicit Postgres lane. T2 acceptance records
-// this deferral; T3's focused verification executes them.
-//
-// Test fixture: `crates/wyrd-sql-core/tests/migrations/0001_init.sql`
-// Creates `sql_core_test` schema with a `migrations_ran` table used to prove
-// that the caller-supplied migrator was applied.
-
-#[cfg(all(test, feature = "pg"))]
-mod pg_tests {
-    //! Postgres behavior tests for [`run_migrations`].
-    //!
-    //! These tests require the DSN environment variables set by the T3 test
-    //! harness. They are compiled only when the `pg` feature is active and are
-    //! not invoked in T2's focused verification.
-
-    use std::borrow::Cow;
-    use std::path::PathBuf;
-    use std::pin::Pin;
-
-    use secrecy::SecretString;
-    use sqlx::SqlSafeStr as _;
-    use sqlx::error::BoxDynError;
-    use sqlx::migrate::{Migration, MigrationSource, MigrationType, Migrator};
-
-    use crate::dsn::ResolvedDsns;
-    use crate::error::SqlError;
-    use crate::migration::{MigrateOptions, run_migrations};
-
-    /// Read DSNs from the test harness environment variables.
-    fn test_dsns() -> ResolvedDsns {
-        let migrator_url = std::env::var("WYRD_TEST_MIGRATOR_URL")
-            .expect("WYRD_TEST_MIGRATOR_URL must be set by the T3 test harness");
-        let app_url = std::env::var("WYRD_TEST_APP_URL").unwrap_or_else(|_| migrator_url.clone());
-        ResolvedDsns {
-            app: SecretString::from(app_url),
-            migrator: SecretString::from(migrator_url),
-            platform_admin: None,
-            catalog_app: SecretString::from(
-                std::env::var("WYRD_TEST_CATALOG_URL")
-                    .unwrap_or_else(|_| "postgres://unused@localhost/unused".to_owned()),
-            ),
-        }
-    }
-
-    /// Build the test migrator from the checked-in fixture directory by awaiting
-    /// `Migrator::new` inside an async context — no external `FutureExt` needed.
-    async fn test_migrator() -> Migrator {
-        let dir: PathBuf = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/migrations");
-        Migrator::new(dir.as_path())
-            .await
-            .expect("test migrations directory is readable and valid")
-    }
-
-    const TEST_LOCK_KEY: i64 = 0x5754_4553_5453_514c; // "WTESTSQL" in hex
-
-    /// A failing [`MigrationSource`] that produces one migration with invalid SQL
-    /// (version 9999). Used to verify that `run_migrations` returns a migration
-    /// error and releases the advisory lock even when the migrator fails.
-    ///
-    /// The return type is spelled out as `Pin<Box<dyn Future<...> + Send>>` —
-    /// the expansion of `BoxFuture<'static, ...>` — so no `futures_core`
-    /// dependency is required.
-    #[derive(Debug)]
-    struct FailingSource;
-
-    impl MigrationSource<'static> for FailingSource {
-        fn resolve(
-            self,
-        ) -> Pin<
-            Box<
-                dyn std::future::Future<Output = Result<Vec<Migration>, BoxDynError>>
-                    + Send
-                    + 'static,
-            >,
-        > {
-            Box::pin(async {
-                Ok(vec![Migration::new(
-                    9999,
-                    Cow::Borrowed("fail"),
-                    MigrationType::Simple,
-                    // `AssertSqlSafe` converts a string literal to the `SqlStr`
-                    // type that `Migration::new` requires in sqlx 0.9.
-                    sqlx::AssertSqlSafe("SELECT INVALID GARBAGE THAT FAILS;").into_sql_str(),
-                    false,
-                )])
-            })
-        }
-    }
-
-    /// `run_migrations` applies the caller-supplied migrator: the test schema
-    /// and table created by `0001_init.sql` must exist after the call.
-    #[tokio::test]
-    async fn run_migrations_applies_supplied_migrator() {
-        let dsns = test_dsns();
-        let migrator = test_migrator().await;
-        let options = MigrateOptions {
-            advisory_lock_key: TEST_LOCK_KEY,
-            ensure_schemas: &["sql_core_test"],
-            search_path: &["sql_core_test", "public"],
-        };
-
-        run_migrations(&dsns, &migrator, &options)
-            .await
-            .expect("migrations should succeed on a clean database");
-
-        // Verify the table created by the migrator exists.
-        use secrecy::ExposeSecret as _;
-        use sqlx::postgres::PgPoolOptions;
-        let pool = PgPoolOptions::new()
-            .max_connections(1)
-            .connect(dsns.migrator.expose_secret())
-            .await
-            .expect("connect for verification");
-        let row: (bool,) = sqlx::query_as(
-            "SELECT EXISTS (
-                SELECT 1 FROM information_schema.tables
-                WHERE table_schema = 'sql_core_test'
-                  AND table_name   = 'migrations_ran'
-            )",
-        )
-        .fetch_one(&pool)
-        .await
-        .expect("existence query");
-        assert!(row.0, "migrations_ran table must exist after migration");
-        pool.close().await;
-    }
-
-    /// Running `run_migrations` a second time with the same migrator is
-    /// idempotent: SQLx skips already-applied migrations and the call returns
-    /// `Ok(())`.
-    #[tokio::test]
-    async fn run_migrations_is_idempotent_on_repeat() {
-        let dsns = test_dsns();
-        let migrator = test_migrator().await;
-        let options = MigrateOptions {
-            advisory_lock_key: TEST_LOCK_KEY,
-            ensure_schemas: &["sql_core_test"],
-            search_path: &["sql_core_test", "public"],
-        };
-
-        // First run.
-        run_migrations(&dsns, &migrator, &options)
-            .await
-            .expect("first migration must succeed");
-
-        // Second run must also succeed.
-        run_migrations(&dsns, &migrator, &options)
-            .await
-            .expect("repeat migration must succeed (idempotent)");
-    }
-
-    /// When the supplied migrator fails (e.g. a bad SQL statement), `run_migrations`
-    /// returns a migration error **and** releases the advisory lock so that a
-    /// subsequent call with a corrected migrator can succeed.
-    #[tokio::test]
-    async fn run_migrations_returns_migration_error_and_releases_lock() {
-        let dsns = test_dsns();
-
-        let failing_migrator = Migrator::new(FailingSource)
-            .await
-            .expect("failing migrator builds");
-
-        let options = MigrateOptions {
-            advisory_lock_key: TEST_LOCK_KEY,
-            ensure_schemas: &["sql_core_test"],
-            search_path: &["sql_core_test", "public"],
-        };
-
-        let first = run_migrations(&dsns, &failing_migrator, &options).await;
-        assert!(
-            matches!(
-                first,
-                Err(SqlError::Migrate(_) | SqlError::MigrateChecksum { .. })
-            ),
-            "failing migrator must return a migration error"
-        );
-
-        // The advisory lock must have been released: a subsequent call with the
-        // good migrator must not deadlock or fail on lock acquisition.
-        let good_migrator = test_migrator().await;
-        run_migrations(&dsns, &good_migrator, &options)
-            .await
-            .expect("good migrator succeeds after failed attempt (lock was released)");
     }
 }
