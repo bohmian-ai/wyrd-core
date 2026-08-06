@@ -97,7 +97,7 @@ argon2 = "0.5"
 password-hash = { version = "0.5", features = ["getrandom"] }
 secrecy = "0.10"
 zeroize = "1"
-url = "2"
+url = { version = "2", features = ["serde"] }
 regex = "1"
 syn = { version = "2", features = ["full", "extra-traits"] }
 quote = "1"
