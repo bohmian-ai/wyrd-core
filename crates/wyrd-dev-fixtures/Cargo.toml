@@ -10,4 +10,19 @@ description = "Plane-neutral development fixture primitives for Wyrd SQL integra
 
 [features]
 default = []
-# pg feature is rebuilt in T3 with wyrd-sql-core; plane-specific deps removed here.
+pg = [
+    "dep:secrecy",
+    "dep:sqlx",
+    "dep:thiserror",
+    "dep:tokio",
+    "dep:url",
+    "dep:wyrd-sql-core",
+]
+
+[dependencies]
+secrecy = { workspace = true, optional = true }
+sqlx = { workspace = true, optional = true }
+thiserror = { workspace = true, optional = true }
+tokio = { workspace = true, optional = true, features = ["macros", "rt-multi-thread"] }
+url = { workspace = true, optional = true }
+wyrd-sql-core = { workspace = true, optional = true }
