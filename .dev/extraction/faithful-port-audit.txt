@@ -1,0 +1,281 @@
+CRATE                        surf diff sONLY fONLY  notes
+------------------------------------------------------------------------------------------
+skald-spec                     34    1     0     0  DIVERGES
+wyrd-auth-check                 7    5     0     0  DIVERGES
+wyrd-auth-issue                 2    2     0     0  DIVERGES
+wyrd-auth-oidc                  8    1     0     0  DIVERGES
+wyrd-auth-verify                2    2     0     0  DIVERGES
+wyrd-bench                      -    -     -     9  oracle-only crate (no surfaces source!)
+wyrd-client                    30   11     3     0  DIVERGES
+wyrd-crypt                      2    1     0     0  DIVERGES
+wyrd-dev-fixtures               4    3     1     2  DIVERGES
+wyrd-error-derive               3    1     0     0  DIVERGES
+wyrd-queue                      9    4     0     0  DIVERGES
+wyrd-runtime                   11    4     0     0  DIVERGES
+wyrd-semver                     8    1     0     0  DIVERGES
+wyrd-spec                     442   90    35     9  DIVERGES | 9 oracle-only file(s)
+wyrd-sql-core                   -    -     -    11  NEW (no surfaces source)
+wyrd-telemetry                  2    2     0     0  DIVERGES
+wyrd-test-contract-macros       2    1     0     0  DIVERGES
+wyrd-tls                        -    -     -     2  oracle-only crate (no surfaces source!)
+wyrd-tonic                      8    7     0     4  DIVERGES | 4 oracle-only file(s)
+wyrd-utils                      7    2     1     0  DIVERGES
+wyrd-version                    4    1     0     0  DIVERGES
+
+
+=== DETAIL for diverging crates ===
+
+## skald-spec  (surfaces: crates/skald/skald-spec  oracle: crates/skald/skald-spec)
+  DIFFER (foundation != surfaces target) [1]  =O:0 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+
+## wyrd-auth-check  (surfaces: crates/shared/wyrd-auth-check  oracle: crates/shared/wyrd-auth-check)
+  DIFFER (foundation != surfaces target) [5]  =O:4 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/context.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/guard.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/hook.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/request.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+
+## wyrd-auth-issue  (surfaces: crates/shared/wyrd-auth-issue  oracle: crates/shared/wyrd-auth-issue)
+  DIFFER (foundation != surfaces target) [2]  =O:1 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/lib.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+
+## wyrd-auth-oidc  (surfaces: crates/shared/wyrd-auth-oidc  oracle: crates/shared/wyrd-auth-oidc)
+  DIFFER (foundation != surfaces target) [1]  =O:0 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+
+## wyrd-auth-verify  (surfaces: crates/shared/wyrd-auth-verify  oracle: crates/shared/wyrd-auth-verify)
+  DIFFER (foundation != surfaces target) [2]  =O:1 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/lib.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+
+## wyrd-client  (surfaces: crates/shared/wyrd-client  oracle: crates/shared/wyrd-client)
+  DIFFER (foundation != surfaces target) [11]  =O:10 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/auth.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/client.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/config.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/error.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/lib.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/transport/config.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/transport/credential.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/transport/grpc.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/transport/http.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/transport/http.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+  MISSING from foundation (surfaces has, port dropped) [3]:
+    - src/global_config.rs
+    - tests/pg_auth_e2e_against_fixture.rs
+    - tests/pg_discovery_against_fixture.rs
+
+## wyrd-crypt  (surfaces: crates/shared/wyrd-crypt  oracle: crates/shared/wyrd-crypt)
+  DIFFER (foundation != surfaces target) [1]  =O:0 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+
+## wyrd-dev-fixtures  (surfaces: crates/shared/wyrd-dev-fixtures  oracle: crates/shared/wyrd-dev-fixtures)
+  DIFFER (foundation != surfaces target) [3]  =O:0 =X(reconciled/novel):3:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/lib.rs =X (already reconciled/modified -> inspect)
+    ~ src/pg.rs =X (already reconciled/modified -> inspect)
+  MISSING from foundation (surfaces has, port dropped) [1]:
+    - src/cards.rs
+  EXTRA in foundation (not in surfaces target) [2]:
+    + tests/migrations/0001_init.sql [novel: not in oracle either]
+    + tests/migrations_failing/0001_bad.sql [novel: not in oracle either]
+
+## wyrd-error-derive  (surfaces: crates/shared/wyrd-error-derive  oracle: crates/shared/wyrd-error-derive)
+  DIFFER (foundation != surfaces target) [1]  =O:0 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+
+## wyrd-queue  (surfaces: crates/shared/wyrd-queue  oracle: crates/shared/wyrd-queue)
+  DIFFER (foundation != surfaces target) [4]  =O:3 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/producer.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/queue.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/sink.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+
+## wyrd-runtime  (surfaces: crates/shared/wyrd-runtime  oracle: crates/shared/wyrd-runtime)
+  DIFFER (foundation != surfaces target) [4]  =O:3 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/permission.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/principal.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/request_context.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+
+## wyrd-semver  (surfaces: crates/shared/wyrd-semver  oracle: crates/shared/wyrd-semver)
+  DIFFER (foundation != surfaces target) [1]  =O:1 =X(reconciled/novel):0:
+    ~ src/spec.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+
+## wyrd-spec  (surfaces: crates/wyrd-spec  oracle: crates/wyrd-spec)
+  DIFFER (foundation != surfaces target) [90]  =O:89 =X(reconciled/novel):1:
+    ~ examples/gen_schemas.rs =X (already reconciled/modified -> inspect)
+    ~ schemas/agent_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/artifact_manifest_entry.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/artifact_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/audit_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/auth_token_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/bifrost_audit_event.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/bifrost_register_table_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/bifrost_table_description.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/bifrost_table_entry.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/card.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/card_locator.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/card_ref.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/card_submission.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/create_card_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/create_card_response.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/data_interface.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/data_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/data_split.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/drift_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/eval_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/experiment_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/get_card_response.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/invoke_context.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/list_cards_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/locked_component.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/mcp_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/model_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/operator_budget.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/operator_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/prompt_ref.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/service_lock.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/service_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/split_strategy.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/submission_metadata.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/trigger_source.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/trigger_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/upload_init_response.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/upload_plan.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ schemas/workflow_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/vala/api.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/vala/audit_detail.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/vala/error.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/vala/mod.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/vala/trace/mod.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/fixtures/eval/schemas/agent_turn_submission.schema.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/fixtures/eval/schemas/eval_record_observation.schema.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/fixtures/eval/schemas/eval_run_open_request.schema.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/fixtures/eval/schemas/eval_spec.schema.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/fixtures/eval/schemas/eval_task.schema.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/fixtures/observation/schemas/observation_envelope.schema.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/agent_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/artifact_manifest_entry.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/artifact_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/audit_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/auth_token_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/bifrost_audit_event.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/bifrost_register_table_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/bifrost_table_description.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/bifrost_table_entry.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/card.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/card_locator.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/card_ref.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/card_submission.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/create_card_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/create_card_response.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/data_interface.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/data_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/data_split.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/drift_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/eval_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/experiment_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/get_card_response.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/invoke_context.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/list_cards_request.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/locked_component.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/mcp_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/model_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/operator_budget.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/operator_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/prompt_ref.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/service_lock.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/service_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/split_strategy.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/submission_metadata.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/trigger_source.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/trigger_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/upload_init_response.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/upload_plan.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ tests/schemas/workflow_spec.json =O (pure oracle base -> FLIP to surfaces unless bifrost)
+  MISSING from foundation (surfaces has, port dropped) [35]:
+    - schemas/bifrost_async_job_state.json
+    - schemas/bifrost_async_query_request.json
+    - schemas/bifrost_async_query_response.json
+    - schemas/bifrost_async_query_status.json
+    - schemas/bifrost_executor_availability.json
+    - schemas/bifrost_job_uid.json
+    - schemas/bifrost_table_scope.json
+    - schemas/card_registration_outcome.json
+    - schemas/card_upload_entry.json
+    - schemas/card_upload_plan.json
+    - schemas/http_auth.json
+    - schemas/http_method.json
+    - schemas/notify_channel.json
+    - schemas/operator_action.json
+    - schemas/registration_outcome_kind.json
+    - schemas/registration_replay_seed.json
+    - schemas/trigger_schedule.json
+    - src/vala/system_columns.rs
+    - tests/schemas/bifrost_async_job_state.json
+    - tests/schemas/bifrost_async_query_request.json
+    - tests/schemas/bifrost_async_query_response.json
+    - tests/schemas/bifrost_async_query_status.json
+    - tests/schemas/bifrost_executor_availability.json
+    - tests/schemas/bifrost_job_uid.json
+    - tests/schemas/bifrost_table_scope.json
+    - tests/schemas/card_registration_outcome.json
+    - tests/schemas/card_upload_entry.json
+    - tests/schemas/card_upload_plan.json
+    - tests/schemas/http_auth.json
+    - tests/schemas/http_method.json
+    - tests/schemas/notify_channel.json
+    - tests/schemas/operator_action.json
+    - tests/schemas/registration_outcome_kind.json
+    - tests/schemas/registration_replay_seed.json
+    - tests/schemas/trigger_schedule.json
+  EXTRA in foundation (not in surfaces target) [9]:
+    + schemas/bifrost_query_request.json [==oracle: oracle-only addition to FLAG]
+    + schemas/card_register_outcome.json [==oracle: oracle-only addition to FLAG]
+    + schemas/operator_input.json [==oracle: oracle-only addition to FLAG]
+    + schemas/registration_receipt.json [==oracle: oracle-only addition to FLAG]
+    + src/vala/managed_columns.rs [==oracle: oracle-only addition to FLAG]
+    + tests/schemas/bifrost_query_request.json [==oracle: oracle-only addition to FLAG]
+    + tests/schemas/card_register_outcome.json [==oracle: oracle-only addition to FLAG]
+    + tests/schemas/operator_input.json [==oracle: oracle-only addition to FLAG]
+    + tests/schemas/registration_receipt.json [==oracle: oracle-only addition to FLAG]
+
+## wyrd-telemetry  (surfaces: crates/shared/wyrd-telemetry  oracle: crates/shared/wyrd-telemetry)
+  DIFFER (foundation != surfaces target) [2]  =O:1 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/lib.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+
+## wyrd-test-contract-macros  (surfaces: crates/shared/wyrd-test-contract-macros  oracle: crates/shared/wyrd-test-contract-macros)
+  DIFFER (foundation != surfaces target) [1]  =O:0 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+
+## wyrd-tonic  (surfaces: crates/wyrd/wyrd-tonic  oracle: crates/wyrd/wyrd-tonic)
+  DIFFER (foundation != surfaces target) [7]  =O:6 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ build.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ proto/wyrd.v1.bin =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ proto/wyrd.v1.proto =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/error.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/lib.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+    ~ src/server/mod.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+  EXTRA in foundation (not in surfaces target) [4]:
+    + src/frame_codec.rs [==oracle: oracle-only addition to FLAG]
+    + src/private_conversion.rs [==oracle: oracle-only addition to FLAG]
+    + src/query_conversion.rs [==oracle: oracle-only addition to FLAG]
+    + src/transport.rs [==oracle: oracle-only addition to FLAG]
+
+## wyrd-utils  (surfaces: crates/shared/wyrd-utils  oracle: crates/shared/wyrd-utils)
+  DIFFER (foundation != surfaces target) [2]  =O:1 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
+    ~ src/lib.rs =O (pure oracle base -> FLIP to surfaces unless bifrost)
+  MISSING from foundation (surfaces has, port dropped) [1]:
+    - src/config_dir.rs
+
+## wyrd-version  (surfaces: crates/shared/wyrd-version  oracle: crates/shared/wyrd-version)
+  DIFFER (foundation != surfaces target) [1]  =O:0 =X(reconciled/novel):1:
+    ~ Cargo.toml =X (already reconciled/modified -> inspect)
