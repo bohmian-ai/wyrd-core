@@ -1,0 +1,27 @@
+[package]
+name = "wyrd-auth-issue"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Server-tier authentication issuance helpers for Wyrd: JWT signing, key management, password hashing, and token generation."
+
+[dependencies]
+ed25519-dalek = { workspace = true, features = ["pkcs8", "pem", "rand_core"] }
+jsonwebtoken = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+argon2 = { workspace = true }
+password-hash = { workspace = true }
+secrecy = { workspace = true }
+tracing = { workspace = true }
+ulid = { workspace = true }
+wyrd-spec = { workspace = true }
+wyrd-auth-verify = { workspace = true }
+wyrd-runtime = { workspace = true }
+
+[dev-dependencies]
+wyrd-semver = { workspace = true }

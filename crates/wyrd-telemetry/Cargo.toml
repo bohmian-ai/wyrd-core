@@ -1,0 +1,26 @@
+[package]
+name = "wyrd-telemetry"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Telemetry setup shell for Wyrd: tracing-subscriber configuration, OTLP export, and test-support subscriber."
+
+[features]
+default = []
+test-support = []
+
+[dependencies]
+serde = { workspace = true, features = ["derive"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde_json = { workspace = true }
+wyrd-spec = { workspace = true }
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+opentelemetry-otlp = { workspace = true }
+tracing-opentelemetry = { workspace = true }
+ulid = { workspace = true }
+wyrd-tls = { workspace = true }

@@ -1,0 +1,15 @@
+[package]
+name = "wyrd-crypt"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "AES-256-GCM encryption helpers for Wyrd: sealing key derivation, encrypt/decrypt, and zero-on-drop secret material."
+
+[dependencies]
+aes-gcm = { workspace = true }
+argon2 = { workspace = true }
+thiserror = { workspace = true }
+zeroize = { workspace = true }

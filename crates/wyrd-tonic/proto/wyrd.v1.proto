@@ -1,0 +1,167 @@
+syntax = "proto3";
+package wyrd.v1;
+
+// One typed service per observation type. Bifrost ingest only in Stage 3;
+// drift / agent-trace / otel / eval get their own typed services later.
+service BifrostIngestService {
+  // One sealed Arrow payload is durably acknowledged as one logical batch.
+  rpc InsertBatch(InsertBatchRequest) returns (InsertBatchResponse);
+}
+
+service BifrostQueryService {
+  rpc Query(BifrostQueryRequest) returns (stream QueryStreamFrame);
+}
+
+enum VisibilityMode { VISIBILITY_MODE_UNSPECIFIED = 0; VISIBILITY_MODE_PUBLISHED_ONLY = 1; VISIBILITY_MODE_FUSED = 2; }
+enum FreshnessPolicy { FRESHNESS_POLICY_UNSPECIFIED = 0; FRESHNESS_POLICY_STRICT = 1; FRESHNESS_POLICY_ALLOW_DEGRADED = 2; }
+enum QueryTerminalOutcome { QUERY_TERMINAL_OUTCOME_UNSPECIFIED = 0; QUERY_TERMINAL_OUTCOME_SUCCESS = 1; QUERY_TERMINAL_OUTCOME_DEGRADED = 2; QUERY_TERMINAL_OUTCOME_FAILED = 3; }
+enum QueryFreshness { QUERY_FRESHNESS_UNSPECIFIED = 0; QUERY_FRESHNESS_COMPLETE = 1; QUERY_FRESHNESS_DEGRADED = 2; }
+enum QuerySource { QUERY_SOURCE_UNSPECIFIED = 0; QUERY_SOURCE_ICEBERG = 1; QUERY_SOURCE_HOT_SEALED = 2; QUERY_SOURCE_LIVE_TAIL = 3; }
+enum SourceCompletionOutcome { SOURCE_COMPLETION_OUTCOME_UNSPECIFIED = 0; SOURCE_COMPLETION_OUTCOME_COMPLETE = 1; SOURCE_COMPLETION_OUTCOME_UNAVAILABLE = 2; }
+enum QueryWarning { QUERY_WARNING_UNSPECIFIED = 0; QUERY_WARNING_LIVE_TAIL_UNAVAILABLE = 1; QUERY_WARNING_STALE_CUT_REPLANNED = 2; }
+enum QueryTerminalErrorCode {
+  QUERY_TERMINAL_ERROR_CODE_UNSPECIFIED = 0;
+  QUERY_TERMINAL_ERROR_CODE_QUERY_TIMEOUT = 1;
+  QUERY_TERMINAL_ERROR_CODE_QUERY_VISIBILITY_UNAVAILABLE = 2;
+  QUERY_TERMINAL_ERROR_CODE_QUERY_TENANT_INVARIANT = 3;
+  QUERY_TERMINAL_ERROR_CODE_QUERY_RECONCILIATION_INVARIANT = 4;
+  QUERY_TERMINAL_ERROR_CODE_QUERY_PEER_SECURITY = 5;
+  QUERY_TERMINAL_ERROR_CODE_QUERY_AUDIT_UNAVAILABLE = 6;
+  QUERY_TERMINAL_ERROR_CODE_CATALOG_UNREACHABLE = 7;
+  QUERY_TERMINAL_ERROR_CODE_STORAGE_UNREACHABLE = 8;
+  QUERY_TERMINAL_ERROR_CODE_QUERY_EXECUTION_FAILED = 9;
+}
+message BifrostQueryRequest { string sql = 1; VisibilityMode visibility = 2; FreshnessPolicy freshness = 3; optional uint64 deadline_ms = 4; }
+message QuerySchemaFrame { string schema_fingerprint = 1; bytes arrow_ipc_schema = 2; }
+message QueryBatchFrame { bytes arrow_ipc_batch = 1; }
+message SourceCompletion { QuerySource source = 1; SourceCompletionOutcome outcome = 2; }
+message QueryTerminalError { QueryTerminalErrorCode code = 1; optional string detail = 2; }
+message QueryTerminalFrame {
+  QueryTerminalOutcome outcome = 1; QueryFreshness freshness = 2;
+  uint64 row_count = 3; repeated QueryWarning warnings = 4;
+  repeated SourceCompletion source_completion = 5; optional QueryTerminalError error = 6;
+}
+message QueryStreamFrame {
+  oneof frame { QuerySchemaFrame schema = 1; QueryBatchFrame batch = 2; QueryTerminalFrame terminal = 3; }
+}
+
+service ScribeTailService {
+  rpc ListActiveStreams(ListActiveStreamsRequest) returns (ListActiveStreamsResponse);
+  rpc AcquireFence(AcquireTailFenceRequest) returns (TailReadFence);
+  rpc ReadFencePage(TailPageRequest) returns (TailPage);
+  rpc ReleaseFence(ReleaseTailFenceRequest) returns (ReleaseTailFenceResponse);
+}
+service OraclePeerService {
+  rpc ReserveSlots(ReserveNodeSlotsRequest) returns (ReserveNodeSlotsResponse);
+  rpc ReleaseSlots(ReleaseNodeSlotsRequest) returns (ReleaseNodeSlotsResponse);
+  rpc ExecuteFragment(ExecuteFragmentRequest) returns (stream WorkerAttemptFrame);
+}
+message TenantTableBinding { string tenant_id = 1; string namespace = 2; string table = 3; }
+message TailCursor { uint64 writer_epoch = 1; uint64 wal_lsn = 2; bytes batch_id = 3; uint32 row_ordinal = 4; }
+message TailStreamIdentity { string node_id = 1; uint64 writer_epoch = 2; }
+message AcquireTailFenceRequest {
+  TenantTableBinding binding = 1; string event_day = 2; TailCursor exclusive_sealed = 3;
+  uint64 deadline_unix_ms = 4; string schema_fingerprint = 5; uint32 tail_protocol_version = 6;
+  // Private server-to-server authorization envelope.  The field is intentionally
+  // opaque to public SDKs and is verified by the Scribe tail authority.
+  bytes tail_ticket = 7; bytes query_id = 8;
+}
+message TailReadFence {
+  bytes fence_id = 1; TenantTableBinding binding = 2; string event_day = 3;
+  TailStreamIdentity stream = 4; TailCursor exclusive_sealed = 5;
+  TailCursor inclusive_live = 6; string schema_fingerprint = 7;
+  uint32 tail_protocol_version = 8; uint64 expires_at_unix_ms = 9; bytes capability = 10;
+}
+message TailPageRequest { bytes fence_id = 1; oneof after_cursor { TailCursor after = 2; } uint32 max_rows = 3; uint32 max_encoded_bytes = 4; bytes tail_capability = 5; bytes query_id = 6; }
+message TailPage { repeated bytes arrow_ipc_batches = 1; oneof next_cursor { TailCursor next = 2; } bool complete = 3; }
+message ReleaseTailFenceRequest { bytes fence_id = 1; bytes tail_capability = 2; bytes query_id = 3; }
+message ReleaseTailFenceResponse {}
+message ListActiveStreamsRequest { bytes tail_ticket = 1; TenantTableBinding binding = 2; bytes query_id = 3; }
+message ActiveTailStream { string event_day = 1; TailStreamIdentity stream = 2; }
+message ListActiveStreamsResponse { repeated ActiveTailStream streams = 1; }
+enum QueryClass { QUERY_CLASS_UNSPECIFIED = 0; QUERY_CLASS_INTERACTIVE = 1; QUERY_CLASS_ANALYTICAL = 2; }
+message ReserveNodeSlotsRequest {
+  bytes query_id = 1; string leader_node_id = 2; uint64 leader_fencing_token = 3;
+  QueryClass query_class = 4; uint32 slot_units = 5; uint64 expires_at_unix_ms = 6;
+}
+message ReserveNodeSlotsResponse { oneof outcome { PendingNodeReservation pending = 1; ReservationRejected rejected = 2; } }
+message PendingNodeReservation { bytes reservation_id = 1; uint64 expires_at_unix_ms = 2; }
+message ReservationRejected { uint32 retry_after_ms = 1; }
+message ReleaseNodeSlotsRequest { bytes reservation_id = 1; bytes query_id = 2; string leader_node_id = 3; uint64 leader_fencing_token = 4; }
+message ReleaseNodeSlotsResponse {}
+message SignedPeerTicket { string key_id = 1; bytes claims_bytes = 2; bytes signature = 3; }
+message ExecuteFragmentRequest { SignedPeerTicket ticket = 1; bytes fragment_bytes = 2; bytes reservation_id = 3; }
+message WorkerAttemptFrame { oneof frame { bytes arrow_ipc_schema = 1; bytes arrow_ipc_batch = 2; WorkerFooter footer = 3; } }
+message WorkerFooter {
+  string fragment_id = 1; string manifest_digest = 2; uint64 row_count = 3;
+  uint64 encoded_bytes = 4; string payload_digest = 5; bool completed = 6;
+}
+
+message InsertBatchRequest {
+  string table          = 1;   // fqn "namespace.name"
+  bytes  arrow_ipc      = 2;   // one sealed Arrow IPC payload
+  bytes  wyrd_batch_id  = 3;   // exactly 16 bytes; UUIDv7
+}
+// NOTE: the proto deliberately carries only frame-grain transport metadata.
+// `card_ref` and `run_id` are PER-ROW correlation COLUMNS inside `arrow_ipc`,
+// not proto fields — one stream mixes many cards/runs, so they cannot be
+// stream- or frame-grain metadata.
+
+message InsertBatchResponse {
+  bytes  wyrd_batch_id  = 1;   // echoes the durably acknowledged batch identity
+}
+
+// Typed read surface for Vala observation tables. One unary rpc per query
+// method; mirrors the wyrd-spec::vala::api request/response contracts.
+service ValaQueryService {
+  rpc GetTrace(GetTraceRequest) returns (GetTraceResponse);
+  rpc QueryTraces(QueryTracesRequest) returns (QueryTracesResponse);
+  rpc QueryRecentTraces(QueryRecentTracesRequest) returns (QueryRecentTracesResponse);
+  rpc QueryGenAi(QueryGenAiRequest) returns (QueryGenAiResponse);
+  rpc QueryEval(QueryEvalRequest) returns (QueryEvalResponse);
+  rpc QueryDrift(QueryDriftRequest) returns (QueryDriftResponse);
+  rpc QueryMetrics(QueryMetricsRequest) returns (QueryMetricsResponse);
+  rpc QueryLogs(QueryLogsRequest) returns (QueryLogsResponse);
+  rpc QueryAgentTraces(QueryAgentTracesRequest) returns (QueryAgentTracesResponse);
+}
+
+// Shared time-window + pagination envelope. Timestamps are RFC3339 strings to
+// mirror the wyrd-spec DateTime<Utc> wire form; limit is capped server-side.
+message QueryWindow {
+  string since      = 1;   // RFC3339; empty = unbounded
+  string until      = 2;   // RFC3339; empty = unbounded
+  uint32 limit      = 3;   // 0 = server default; capped at MAX_QUERY_PAGE_SIZE
+  string page_token = 4;   // opaque continuation token
+}
+
+message GetTraceRequest        { QueryWindow window = 1; string trace_id = 2; }
+message QueryTracesRequest      { QueryWindow window = 1; string service = 2; uint32 min_duration_ms = 3; string status = 4; string name = 5; }
+message QueryRecentTracesRequest{ QueryWindow window = 1; string service = 2; string status = 3; uint32 min_duration_ms = 4; }
+message QueryGenAiRequest        { QueryWindow window = 1; string conversation_id = 2; string model = 3; string provider = 4; }
+message QueryEvalRequest         { QueryWindow window = 1; string eval_id = 2; string run_id = 3; }
+message QueryDriftRequest        { QueryWindow window = 1; string feature = 2; string run_id = 3; }
+message QueryMetricsRequest      { QueryWindow window = 1; string metric_name = 2; string metric_type = 3; }
+message QueryLogsRequest         { QueryWindow window = 1; int32 severity_number_min = 2; string trace_id = 3; string event_name = 4; }
+message QueryAgentTracesRequest  { QueryWindow window = 1; string dev_session_id = 2; string repo = 3; string commit_sha = 4; string branch = 5; string run_id = 6; }
+
+message SpanRow      { string span_id = 1; string parent_span_id = 2; string name = 3; string kind = 4; string started_at = 5; double duration_ms = 6; string status = 7; string attributes_json = 8; }
+message SpanEventRow { string name = 1; string timestamp = 2; string attributes_json = 3; }
+message SpanLinkRow  { string linked_trace_id = 1; string linked_span_id = 2; string attributes_json = 3; }
+message TraceWaterfall { string trace_id = 1; repeated SpanRow spans = 2; repeated SpanEventRow events = 3; repeated SpanLinkRow links = 4; }
+message TraceSummaryRow { string trace_id = 1; string root_name = 2; string service = 3; string started_at = 4; double duration_ms = 5; uint32 span_count = 6; bool error = 7; }
+message GenAiRow  { string conversation_id = 1; string model = 2; string provider = 3; string started_at = 4; int64 input_tokens = 5; int64 output_tokens = 6; double cost_usd = 7; string prompt = 8; string completion = 9; }
+message EvalRow   { string eval_id = 1; string run_id = 2; string metric = 3; double score = 4; string started_at = 5; }
+message DriftRow  { string feature = 1; string run_id = 2; double drift_score = 3; double threshold = 4; string computed_at = 5; }
+message MetricRow { string metric_name = 1; string metric_type = 2; double value = 3; string timestamp = 4; string attributes_json = 5; }
+message LogRow    { string timestamp = 1; int32 severity_number = 2; string severity_text = 3; string trace_id = 4; string span_id = 5; string event_name = 6; string body = 7; }
+message AgentTraceRow { string dev_session_id = 1; string repo = 2; string commit_sha = 3; string branch = 4; string run_id = 5; string started_at = 6; string payload_json = 7; }
+
+message GetTraceResponse         { TraceWaterfall trace = 1; }
+message QueryTracesResponse       { repeated TraceSummaryRow rows = 1; string next_page_token = 2; }
+message QueryRecentTracesResponse { repeated TraceSummaryRow rows = 1; string next_page_token = 2; }
+message QueryGenAiResponse        { repeated GenAiRow rows = 1; string next_page_token = 2; }
+message QueryEvalResponse         { repeated EvalRow rows = 1; string next_page_token = 2; }
+message QueryDriftResponse        { repeated DriftRow rows = 1; string next_page_token = 2; }
+message QueryMetricsResponse      { repeated MetricRow rows = 1; string next_page_token = 2; }
+message QueryLogsResponse         { repeated LogRow rows = 1; string next_page_token = 2; }
+message QueryAgentTracesResponse  { repeated AgentTraceRow rows = 1; string next_page_token = 2; }

@@ -1,0 +1,16 @@
+[package]
+name = "wyrd-error-derive"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Proc-macro derive for Wyrd stable error-code enums: WyrdError derive with code, status, title, and remediation metadata."
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { workspace = true }
+quote = { workspace = true }

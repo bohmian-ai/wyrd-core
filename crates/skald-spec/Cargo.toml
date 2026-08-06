@@ -1,0 +1,27 @@
+[package]
+name = "skald-spec"
+version = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+repository = { workspace = true }
+description = "Native provider type set for Skald: request, response, message, and wire contracts shared end to end."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, features = ["raw_value"] }
+schemars = { workspace = true, optional = true }
+thiserror = { workspace = true }
+base64 = { workspace = true }
+regex = { workspace = true }
+
+[dev-dependencies]
+insta = { workspace = true }
+serde_yaml = { workspace = true }
+
+[features]
+default = []
+schemars = ["dep:schemars"]
