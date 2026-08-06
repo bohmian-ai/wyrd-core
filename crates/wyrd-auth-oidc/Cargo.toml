@@ -1,0 +1,26 @@
+[package]
+name = "wyrd-auth-oidc"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Generic OIDC verification toolkit for Wyrd: provider discovery, JWKS caching, trusted-issuer registry, and claim mapping."
+
+[dependencies]
+jsonwebtoken = { workspace = true }
+moka = { version = "0.12", features = ["future"] }
+reqwest = { workspace = true }
+secrecy = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+wyrd-spec = { workspace = true }
+wyrd-tls = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+wiremock = { workspace = true }

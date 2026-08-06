@@ -1,0 +1,139 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/wyrd-spec",
+    "crates/skald-spec",
+    "crates/wyrd-tonic",
+    "crates/wyrd-client",
+    "crates/wyrd-utils",
+    "crates/wyrd-runtime",
+    "crates/wyrd-queue",
+    "crates/wyrd-semver",
+    "crates/wyrd-version",
+    "crates/wyrd-telemetry",
+    "crates/wyrd-crypt",
+    "crates/wyrd-error-derive",
+    "crates/wyrd-test-contract-macros",
+    "crates/wyrd-dev-fixtures",
+    "crates/wyrd-auth-verify",
+    "crates/wyrd-auth-issue",
+    "crates/wyrd-auth-check",
+    "crates/wyrd-auth-oidc",
+    "crates/wyrd-tls",
+    "crates/wyrd-bench",
+]
+exclude = []
+default-members = []
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.94.0"
+repository = "https://github.com/mitari-ai/wyrd-foundation"
+authors = ["Thorrester <sjforrester32@gmail.com>"]
+
+[workspace.dependencies]
+# Intra-workspace crates
+wyrd-spec = { path = "crates/wyrd-spec", version = "0.1.0" }
+skald-spec = { path = "crates/skald-spec", version = "0.1.0" }
+wyrd-tonic = { path = "crates/wyrd-tonic", version = "0.1.0" }
+wyrd-client = { path = "crates/wyrd-client", version = "0.1.0" }
+wyrd-utils = { path = "crates/wyrd-utils", version = "0.1.0" }
+wyrd-runtime = { path = "crates/wyrd-runtime", version = "0.1.0" }
+wyrd-queue = { path = "crates/wyrd-queue", version = "0.1.0" }
+wyrd-semver = { path = "crates/wyrd-semver", version = "0.1.0" }
+wyrd-version = { path = "crates/wyrd-version", version = "0.1.0" }
+wyrd-telemetry = { path = "crates/wyrd-telemetry", version = "0.1.0" }
+wyrd-crypt = { path = "crates/wyrd-crypt", version = "0.1.0" }
+wyrd-error-derive = { path = "crates/wyrd-error-derive", version = "0.1.0" }
+wyrd-test-contract-macros = { path = "crates/wyrd-test-contract-macros", version = "0.1.0" }
+wyrd-dev-fixtures = { path = "crates/wyrd-dev-fixtures", version = "0.1.0" }
+wyrd-auth-verify = { path = "crates/wyrd-auth-verify", version = "0.1.0" }
+wyrd-auth-issue = { path = "crates/wyrd-auth-issue", version = "0.1.0" }
+wyrd-auth-check = { path = "crates/wyrd-auth-check", version = "0.1.0" }
+wyrd-auth-oidc = { path = "crates/wyrd-auth-oidc", version = "0.1.0" }
+wyrd-tls = { path = "crates/wyrd-tls", version = "0.1.0" }
+wyrd-bench = { path = "crates/wyrd-bench", version = "0.1.0" }
+
+# Registry dependencies (only those actually referenced by the 20 crates above)
+tokio = { version = "1.49", features = ["macros", "rt-multi-thread"] }
+tokio-util = { version = "0.7", features = ["io", "rt"] }
+async-trait = "0.1"
+ed25519-dalek = { version = "2.2", features = ["pkcs8"] }
+reqwest = { version = "0.13", default-features = false, features = ["json", "form", "query", "rustls-no-provider", "gzip", "brotli", "stream", "blocking"] }
+rustls = { version = "0.23", default-features = false, features = ["aws_lc_rs", "std", "tls12"] }
+http = "1"
+serde = { version = "1", features = ["derive"] }
+serde_jcs = "0.1"
+serde_json = "1"
+serde_yaml = "0.9"
+strum = { version = "0.27", features = ["derive"] }
+schemars = { version = "0.8", features = ["chrono", "uuid1"] }
+utoipa = { version = "5", features = ["chrono", "uuid", "yaml"] }
+thiserror = "2.0"
+base64 = "0.22"
+criterion = { version = "0.5", features = ["async_tokio"] }
+hdrhistogram = "7.5"
+num-traits = "0.2"
+blake3 = "1"
+insta = { version = "1.43", features = ["json"] }
+wiremock = "0.6"
+chrono = { version = "0.4", default-features = false, features = ["serde", "clock"] }
+crossbeam-queue = "0.3"
+flate2 = "1.*"
+zstd = "0.13"
+walkdir = "2.*"
+sha2 = "0.10"
+uuid = { version = "1", default-features = false, features = ["serde"] }
+semver = { version = "1", features = ["serde"] }
+hex = { version = "0.4", default-features = false, features = ["alloc"] }
+metrics = { version = "0.24", default-features = false }
+proptest = "1"
+aes-gcm = "0.10"
+argon2 = "0.5"
+password-hash = { version = "0.5", features = ["getrandom"] }
+secrecy = "0.10"
+zeroize = "1"
+url = "2"
+regex = "1"
+syn = { version = "2", features = ["full", "extra-traits"] }
+quote = "1"
+proc-macro2 = "1"
+jsonwebtoken = "9"
+sqlx = { version = "0.9", default-features = false, features = ["postgres", "runtime-tokio", "tls-rustls-aws-lc-rs", "macros", "migrate", "chrono", "uuid", "json"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+ulid = "1"
+opentelemetry = "0.31"
+opentelemetry_sdk = { version = "0.31", features = ["rt-tokio"] }
+opentelemetry-otlp = { version = "0.31", features = ["grpc-tonic"] }
+arrow = "58"
+arrow-schema = "58"
+tracing-opentelemetry = "0.32"
+pyo3 = { version = "0.28", features = ["abi3-py310", "chrono", "py-clone"] }
+toml = "0.8"
+shellexpand = "3"
+arc-swap = "1.7"
+# Client-safe baseline (no `transport`/`server` → no axum). `wyrd-tonic` adds the
+# client `channel`/`tls` features and gates `tonic/server` behind its `server`
+# feature. Only `wyrd-tonic` may depend on tonic.
+tonic = { version = "0.14", default-features = false, features = ["codegen"] }
+tonic-health = "0.14"
+tonic-reflection = "0.14"
+tonic-types = "0.14"
+tonic-build = "0.14"
+tonic-prost = "0.14"
+tonic-prost-build = "0.14"
+prost = "0.14"
+opentelemetry-proto = { version = "0.31", default-features = false, features = ["gen-tonic", "gen-tonic-messages", "trace", "metrics", "logs", "with-serde"] }
+tokio-stream = "0.1"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+must_use_candidate = "allow"
+missing_errors_doc = "allow"
+module_name_repetitions = "allow"

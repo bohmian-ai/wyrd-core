@@ -1,0 +1,49 @@
+[package]
+name = "wyrd-spec"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Wyrd foundation types: Card envelope, SpecKinds, and pure data contracts."
+
+[lib]
+path = "src/lib.rs"
+
+[features]
+default = []
+server = ["dep:utoipa", "wyrd-semver/server"]
+test-utils = []
+
+[dependencies]
+base64 = { workspace = true }
+blake3 = { workspace = true }
+chrono = { workspace = true }
+hex = { workspace = true }
+regex = { workspace = true }
+url = { workspace = true }
+schemars = { workspace = true }
+semver = { workspace = true }
+secrecy = { workspace = true }
+skald-spec = { workspace = true, features = ["schemars"] }
+serde = { workspace = true }
+serde_jcs = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+strum = { workspace = true }
+petgraph = { version = "0.6", default-features = false, features = ["graphmap"] }
+utoipa = { workspace = true, optional = true }
+thiserror = { workspace = true }
+uuid = { workspace = true, features = ["std", "v7", "js"] }
+sha2 = { workspace = true }
+wyrd-error-derive = { workspace = true }
+wyrd-semver = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = "1"
+proptest = { workspace = true }
+serde_urlencoded = "0.7"
+[[example]]
+name = "gen_schemas"
+path = "examples/gen_schemas.rs"

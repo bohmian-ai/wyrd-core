@@ -1,0 +1,21 @@
+[package]
+name = "wyrd-runtime"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Runtime singleton and cross-cutting behavior shells for Wyrd: request context, principal, RBAC, audit, and OTEL."
+
+[dependencies]
+chrono = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+uuid = { workspace = true, features = ["std", "v5", "v7"] }
+wyrd-spec = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }
+wyrd-semver = { workspace = true }

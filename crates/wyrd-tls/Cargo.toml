@@ -1,0 +1,12 @@
+[package]
+name = "wyrd-tls"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+description = "Process-wide TLS crypto-provider ownership for Wyrd transports."
+
+[dependencies]
+rustls = { workspace = true }
+thiserror = { workspace = true }

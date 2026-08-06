@@ -1,0 +1,19 @@
+[package]
+name = "wyrd-test-contract-macros"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Attribute macros for declaring test-critical Wyrd contracts that CI checks against pytest coverage markers."
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true }
+[lints]
+workspace = true

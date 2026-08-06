@@ -1,0 +1,28 @@
+[package]
+name = "wyrd-auth-check"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Shared authz-check mechanism primitives for Wyrd: policy hook trait, guard, and request/response types."
+
+[features]
+test-helpers = []
+
+[dependencies]
+async-trait = { workspace = true }
+http = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+wyrd-auth-verify = { workspace = true }
+wyrd-runtime = { workspace = true }
+wyrd-spec = { workspace = true }
+
+[dev-dependencies]
+chrono = { workspace = true }
+tokio = { workspace = true }
+uuid = { workspace = true, features = ["std", "v7"] }
+wyrd-semver = { workspace = true }

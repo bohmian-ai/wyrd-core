@@ -1,0 +1,491 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ServiceSpec",
+  "description": "Composition of cards used by an application or deployment.",
+  "type": "object",
+  "properties": {
+    "components": {
+      "description": "Alias-bound components.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceComponent"
+      }
+    },
+    "content_hash": {
+      "description": "Content hash.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "credential_refs": {
+      "description": "Credential references required by this service.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CredentialRef"
+      }
+    },
+    "deployment": {
+      "description": "Deployment metadata.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/NonSecretValue"
+      }
+    },
+    "description": {
+      "description": "Service description.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "entry_point": {
+      "description": "Entry point descriptor.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lock_hash": {
+      "description": "Lock hash.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata": {
+      "description": "Free-form metadata.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/NonSecretValue"
+      }
+    },
+    "runtime": {
+      "description": "Optional server-side runtime declaration.",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ServiceRuntime"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "service_config": {
+      "description": "Service config.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/NonSecretValue"
+      }
+    },
+    "service_type": {
+      "description": "Service type.",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "definitions": {
+    "CardKind": {
+      "title": "CardKind",
+      "description": "Wyrd Card kind.",
+      "type": "string",
+      "enum": [
+        "Data",
+        "Model",
+        "Experiment",
+        "Prompt",
+        "Agent",
+        "Workflow",
+        "Eval",
+        "Drift",
+        "Service",
+        "Policy",
+        "Mcp",
+        "Audit",
+        "Artifact",
+        "Trigger",
+        "Operator",
+        "Source"
+      ]
+    },
+    "CardName": {
+      "description": "Human-visible Card name.",
+      "type": "string"
+    },
+    "CardRef": {
+      "description": "Reference to a registered Card by kind, name, version, space, and optional UID.",
+      "type": "object",
+      "required": [
+        "kind",
+        "name",
+        "space",
+        "version"
+      ],
+      "properties": {
+        "kind": {
+          "description": "Referenced Card kind.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardKind"
+            }
+          ]
+        },
+        "name": {
+          "description": "Referenced Card name.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardName"
+            }
+          ]
+        },
+        "space": {
+          "description": "Space pinning identity together with `name` and `version`.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SpaceName"
+            }
+          ]
+        },
+        "uid": {
+          "description": "Optional resolved UID.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/CardUid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "version": {
+          "description": "Exact referenced Card version.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VersionBlock"
+            }
+          ]
+        }
+      }
+    },
+    "CardUid": {
+      "description": "Resolved immutable Card UID.",
+      "type": "string"
+    },
+    "ComponentSource": {
+      "description": "Development-time local source resolved by `lock` or `install`.",
+      "type": "object",
+      "required": [
+        "kind",
+        "path"
+      ],
+      "properties": {
+        "kind": {
+          "description": "Source kind hint.",
+          "type": "string"
+        },
+        "path": {
+          "description": "Local path.",
+          "type": "string"
+        }
+      }
+    },
+    "CredentialRef": {
+      "description": "Reference to a credential or secret managed outside public Card specs.",
+      "type": "object",
+      "required": [
+        "name",
+        "provider"
+      ],
+      "properties": {
+        "name": {
+          "description": "Key or logical name in that provider.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Credential provider or secret store name.",
+          "type": "string"
+        }
+      }
+    },
+    "NonSecretValue": {
+      "description": "Non-secret JSON-like configuration value.",
+      "oneOf": [
+        {
+          "description": "String value.",
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "str"
+              ]
+            },
+            "value": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "description": "Numeric value.",
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "number"
+              ]
+            },
+            "value": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        {
+          "description": "Boolean value.",
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "bool"
+              ]
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "description": "List of non-secret values.",
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "list"
+              ]
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NonSecretValue"
+              }
+            }
+          }
+        },
+        {
+          "description": "Object of non-secret values.",
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "object"
+              ]
+            },
+            "value": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/NonSecretValue"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ServiceComponent": {
+      "description": "Alias-bound service component.",
+      "type": "object",
+      "required": [
+        "alias",
+        "ref"
+      ],
+      "properties": {
+        "alias": {
+          "description": "Local AppState handle.",
+          "type": "string"
+        },
+        "config": {
+          "description": "Component config. TODO: does this earn its place?",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NonSecretValue"
+          }
+        },
+        "credential_refs": {
+          "description": "Component credential references. TODO: does this earn its place?",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialRef"
+          }
+        },
+        "ref": {
+          "description": "Canonical Card reference.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardRef"
+            }
+          ]
+        },
+        "source": {
+          "description": "Optional development-time source.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ComponentSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "ServiceRuntime": {
+      "description": "Server-side runtime declaration; tenancy is inherited from `Card.metadata.space`.",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "config": {
+          "description": "Non-secret runtime configuration.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NonSecretValue"
+          }
+        },
+        "framework": {
+          "description": "Framework or adapter hint.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kind": {
+          "description": "Runtime kind.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceRuntimeKind"
+            }
+          ]
+        },
+        "mode": {
+          "description": "Runtime placement mode.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ServiceRuntimeMode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "policy": {
+          "description": "Runtime policy settings.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ServiceRuntimePolicy"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "strict": {
+          "description": "Whether the runtime should fail closed on unsupported features.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "ServiceRuntimeKind": {
+      "description": "Service runtime kind.",
+      "oneOf": [
+        {
+          "description": "API service runtime.",
+          "type": "string",
+          "enum": [
+            "api"
+          ]
+        },
+        {
+          "description": "MCP service runtime.",
+          "type": "string",
+          "enum": [
+            "mcp"
+          ]
+        },
+        {
+          "description": "Agent service runtime.",
+          "type": "string",
+          "enum": [
+            "agent"
+          ]
+        },
+        {
+          "description": "Workflow service runtime.",
+          "type": "string",
+          "enum": [
+            "workflow"
+          ]
+        }
+      ]
+    },
+    "ServiceRuntimeMode": {
+      "description": "Service runtime placement mode.",
+      "oneOf": [
+        {
+          "description": "Run inside Wyrd's server process.",
+          "type": "string",
+          "enum": [
+            "in_process"
+          ]
+        }
+      ]
+    },
+    "ServiceRuntimePolicy": {
+      "description": "Service runtime policy settings.",
+      "type": "object",
+      "properties": {
+        "runtime_hooks": {
+          "description": "Whether to invoke Policy Cards around server-side runtime calls.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "SpaceName": {
+      "description": "Human-visible namespace for Cards and Runs.",
+      "type": "string"
+    },
+    "VersionBlock": {
+      "description": "Semver-compatible version string.",
+      "type": "string"
+    }
+  }
+}

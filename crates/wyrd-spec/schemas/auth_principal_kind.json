@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PrincipalKindTag",
+  "description": "Principal-kind discriminator without a bound card.\n\nSerializes as a bare snake_case string (`\"user\"`, `\"service\"`, `\"agent\"`); this is a stable wire contract for the revoke request body, token claims, and the revocation NOTIFY channel.",
+  "oneOf": [
+    {
+      "description": "Human user principal.",
+      "type": "string",
+      "enum": [
+        "user"
+      ]
+    },
+    {
+      "description": "Service principal.",
+      "type": "string",
+      "enum": [
+        "service"
+      ]
+    },
+    {
+      "description": "Agent principal.",
+      "type": "string",
+      "enum": [
+        "agent"
+      ]
+    }
+  ]
+}
