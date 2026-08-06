@@ -4,6 +4,7 @@ members = [
     "crates/wyrd-spec",
     "crates/skald-spec",
     "crates/wyrd-tonic",
+    "crates/wyrd-sql-core",
     "crates/wyrd-client",
     "crates/wyrd-utils",
     "crates/wyrd-runtime",
@@ -38,6 +39,7 @@ authors = ["Thorrester <sjforrester32@gmail.com>"]
 wyrd-spec = { path = "crates/wyrd-spec", version = "0.1.0" }
 skald-spec = { path = "crates/skald-spec", version = "0.1.0" }
 wyrd-tonic = { path = "crates/wyrd-tonic", version = "0.1.0" }
+wyrd-sql-core = { path = "crates/wyrd-sql-core", version = "0.1.0" }
 wyrd-client = { path = "crates/wyrd-client", version = "0.1.0" }
 wyrd-utils = { path = "crates/wyrd-utils", version = "0.1.0" }
 wyrd-runtime = { path = "crates/wyrd-runtime", version = "0.1.0" }
