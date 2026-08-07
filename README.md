@@ -29,7 +29,6 @@ transport (`wyrd-tonic`). These crates publish as standalone Apache-2.0 librarie
 | `wyrd-dev-fixtures` | Test fixture helpers (dev/test only) |
 | `wyrd-error-derive` | `WyrdError` derive macro |
 | `wyrd-test-contract-macros` | Contract test macros |
-| `wyrd-bench` | Benchmark harness |
 
 ## License
 

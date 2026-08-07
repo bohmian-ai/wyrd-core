@@ -33,7 +33,7 @@ identical bytes, so no checkout/extract needed). Script:
    would discard the oracle addition. Group C = both-advanced → union (surfaces
    wins non-bifrost, oracle additions retained). Retained oracle additions FLAGged.
 5. Editions match source per crate (`wyrd-tls`, `wyrd-tonic` = 2021).
-6. `wyrd-bench` retained as foundation tooling (user-decided).
+6. `wyrd-bench` REMOVED (D14 — Bifrost-only, no foundation consumer).
 
 ## Per-crate disposition
 
@@ -57,7 +57,7 @@ identical bytes, so no checkout/extract needed). Script:
 | wyrd-spec | vala **bifrost** files (`api,audit_detail,error,managed_columns,mod,trace/mod`) + vala schemas =oracle (KEEP); vala **Eval/observation Card contracts** (`eval/{spec,mod,llm_judge,record}.rs`,`observation.rs`) =surfaces (surfaces-only advance; oracle==merge-base — see D12a); 35 non-vala surfaces files replayed; 40+40 goldens regen T6; `system_columns.rs` oracle-deleted (KEEP deleted) | already correct (T4) | T4 (verify) |
 | wyrd-tonic | 6 files =oracle + 4 oracle-only (frame_codec, private_conversion, query_conversion, transport) | KEEP oracle bifrost stack (D12); reconcile non-bifrost error/health/lib/server against surfaces case-by-case | T12 |
 | wyrd-tls | oracle-only crate (absent in surfaces) | KEEP (bifrost transport dep, D12) | T12 |
-| wyrd-bench | oracle-only crate (absent in surfaces) | KEEP (foundation tooling) | T12 |
+| wyrd-bench | oracle-only crate (absent in surfaces) | REMOVED (D14 — Bifrost-only, no foundation consumer) | T13 |
 | wyrd-sql-core | new crate (no source in either) | legitimate new extraction (T2) | — |
 | wyrd-dev-fixtures | reconciled by T3 (lib/pg); dropped surfaces `src/cards.rs`; added 2 novel test-migration SQLs | verify T3's cards.rs drop is intentional plane-neutral design | T3 (verify) |
 
@@ -84,13 +84,12 @@ Full per-file output: see `faithful-port-audit.txt` alongside this file.
 ## T12 verification confirmation (2026-08-06)
 
 Executed blob-SHA fidelity check for all T12-scope files against oracle `6b450184`.
-All 11 wyrd-tonic files, 1 wyrd-tls file, and 8 wyrd-bench files are byte-identical to oracle.
-Edition pins: `wyrd-tonic` = "2021", `wyrd-tls` = "2021", `wyrd-bench` = workspace (inherits 2024) — all match source.
+All 11 wyrd-tonic files and 1 wyrd-tls file are byte-identical to oracle (wyrd-bench verified at T12 time; removed by T13/D14).
+Edition pins: `wyrd-tonic` = "2021", `wyrd-tls` = "2021" — all match source.
 `cargo check -p wyrd-tonic` (default features, no `server` feature, axum-free): PASS (25 deps compiled).
 `cargo check -p wyrd-tls`: PASS.
-`cargo check -p wyrd-bench`: PASS.
 `cargo test --locked -p wyrd-tonic --lib`: 31 PASSED (bifrost conversion + frame-codec unit tests).
-`cargo fmt -p wyrd-tonic -p wyrd-tls -p wyrd-bench -- --check`: CLEAN.
+`cargo fmt -p wyrd-tonic -p wyrd-tls -- --check`: CLEAN.
 No surfaces content introduced; no bifrost module dropped. D12 disposition confirmed.
 
 ## T11 execution confirmation (2026-08-06)

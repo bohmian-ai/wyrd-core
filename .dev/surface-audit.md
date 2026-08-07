@@ -32,7 +32,6 @@ Output files are checked in alongside this document.
 | `wyrd-auth-issue` | ~119 lines | [wyrd-auth-issue.txt](public-api/wyrd-auth-issue.txt) |
 | `wyrd-auth-oidc` | ~228 lines | [wyrd-auth-oidc.txt](public-api/wyrd-auth-oidc.txt) |
 | `wyrd-auth-verify` | ~113 lines | [wyrd-auth-verify.txt](public-api/wyrd-auth-verify.txt) |
-| `wyrd-bench` | ~1 297 lines | [wyrd-bench.txt](public-api/wyrd-bench.txt) |
 | `wyrd-client` | ~397 lines | [wyrd-client.txt](public-api/wyrd-client.txt) |
 | `wyrd-crypt` | ~42 lines | [wyrd-crypt.txt](public-api/wyrd-crypt.txt) |
 | `wyrd-dev-fixtures` | ~19 lines | [wyrd-dev-fixtures.txt](public-api/wyrd-dev-fixtures.txt) |
