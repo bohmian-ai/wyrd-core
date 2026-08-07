@@ -24,9 +24,10 @@ jobs:
         run: rustup component add --toolchain "$RUSTUP_TOOLCHAIN" rustfmt clippy
 
       - uses: Swatinem/rust-cache@v2
-      - run: mise run fmt
+      - run: mise run fmt:check
       - run: mise run lints
       - run: mise run checks
+      - run: mise run codegen:check
       - run: mise run test:unit
       - run: mise run test:integration
   rust-compat: # cross-OS non-PG smoke

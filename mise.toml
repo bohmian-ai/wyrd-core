@@ -181,21 +181,11 @@ depends = [
 # ---------------------------------------------------------------------------
 
 [tasks."pre-pr"]
-description = "Local developer aggregate over the complete gate set (identical to the CI job's ordered step list per D9)"
+description = "Local developer aggregate over the complete gate set (identical to the CI job's ordered step list per D9; boundary gates are grouped under the checks aggregate on both sides)"
 depends = [
     "fmt:check",
     "lints",
-    "check:no-plane-deps",
-    "check:sqlx-scope",
-    "check:client-tier",
-    "check:pyo3-scope",
-    "check:sql-core-seam",
-    "check:mocks-scope",
-    "check:proto-drift",
-    "check:rustls-provider",
-    "check:unwrap-audit",
-    "check:clippy-allow-audit",
-    "check:ci-parity",
+    "checks",
     "codegen:check",
     "test:unit",
     "test:integration",

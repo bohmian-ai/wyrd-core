@@ -14,18 +14,14 @@ else
   # mise.toml present (mise.toml is authored in T8; this guard lets T3 run the
   # negative test in isolation).
   cat >"$temp_dir/mise.toml" <<'TOML'
-[tasks."test:pg"]
-run = "scripts/postgres/with-test-postgres.sh -- mise run test:pg:inner"
-
-[tasks."test:pg:inner"]
-hide = true
-run = "cargo test --locked -p wyrd-dev-fixtures --features pg -- --test-threads=1"
+[tasks."test:integration"]
+run = "scripts/postgres/with-test-postgres.sh -- cargo test --locked -p wyrd-dev-fixtures --features pg -- --test-threads=1"
 
 [tasks."test:unit"]
 run = "cargo test --locked"
 
 [tasks."pre-pr"]
-depends = ["test:unit", "test:pg"]
+depends = ["test:unit", "test:integration"]
 TOML
 fi
 
