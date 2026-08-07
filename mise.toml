@@ -57,7 +57,7 @@ depends = ["fmt:check", "lints"]
 description = "All non-PG tests across the 20 crates (pg feature excluded, so pg-gated code is not compiled here)"
 run = "cargo test --locked --workspace -- --nocapture"
 
-[tasks."test:pg"]
+[tasks."test:integration"]
 description = "PG integration tests for wyrd-sql-core and wyrd-dev-fixtures; the wrapper owns compose-up, role bootstrap (as wyrd_test_admin), DSN env, and teardown"
 run = "bash scripts/postgres/with-test-postgres.sh -- cargo test --locked -p wyrd-sql-core -p wyrd-dev-fixtures --features pg -- --test-threads=1"
 
@@ -154,6 +154,26 @@ run = "python scripts/check_clippy_allow.py"
 description = "D9 parity gate: pre-pr dependency list must match the mise run steps in .github/workflows/lints-test.yml"
 run = "bash scripts/checks/ci-parity.sh"
 
+
+# ---------------------------------------------------------------------------
+# Aggregate CI checks - for GH Actions workflow
+# ---------------------------------------------------------------------------
+[tasks."checks"]
+description = "Aggregate all checks for CI workflow"
+depends = [
+    "check:no-plane-deps",
+    "check:sqlx-scope",
+    "check:client-tier",
+    "check:pyo3-scope",
+    "check:sql-core-seam",
+    "check:mocks-scope",
+    "check:proto-drift",
+    "check:rustls-provider",
+    "check:unwrap-audit",
+    "check:clippy-allow-audit",
+    "check:ci-parity",
+]
+
 # ---------------------------------------------------------------------------
 # Local aggregate (D9 / pre-PR developer gate)
 # Depends DIRECTLY on the flattened gate list — NOT on the check aggregate —
@@ -178,5 +198,5 @@ depends = [
     "check:ci-parity",
     "codegen:check",
     "test:unit",
-    "test:pg",
+    "test:integration",
 ]
