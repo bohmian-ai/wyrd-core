@@ -87,7 +87,7 @@ cargo test --locked -p wyrd-dev-fixtures --features wyrd-dev-fixtures/pg -- --no
 
 # Or via mise (once installed by T8):
 # mise run test:sql
-# mise run test:pg
+# mise run test:integration
 ```
 
 Use `--test-threads=1` for Postgres-gated tests to avoid port and schema
