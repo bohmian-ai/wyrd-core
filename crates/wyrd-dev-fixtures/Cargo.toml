@@ -26,3 +26,8 @@ thiserror = { workspace = true, optional = true }
 tokio = { workspace = true, optional = true, features = ["macros", "rt-multi-thread"] }
 url = { workspace = true, optional = true }
 wyrd-sql-core = { workspace = true, optional = true }
+
+[dev-dependencies]
+# Required by the sql_core_seam compile test (tests/sql_core_seam.rs), which
+# imports the complete wyrd-sql-core public API without a pg feature gate.
+wyrd-sql-core = { workspace = true }

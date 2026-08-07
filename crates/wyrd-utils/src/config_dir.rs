@@ -162,15 +162,24 @@ mod tests {
 
     #[test]
     fn environment_is_restored_after_panic() {
+        // Verify that `with_env` restores environment variables even when the
+        // wrapped closure panics. The baseline values are captured while holding
+        // `ENV_MUTEX` (inside the outer `with_env(&[], ...)` call) to avoid a
+        // TOCTOU race with concurrent tests that also modify the same variables.
         let values = [
             ("WYRD_CONFIG_HOME", Some("/tmp/panic-config")),
             ("XDG_CONFIG_HOME", Some("/tmp/panic-xdg")),
             ("HOME", Some("/tmp/panic-home")),
         ];
-        let previous = values
-            .iter()
-            .map(|(name, _)| ((*name).to_owned(), std::env::var_os(name)))
-            .collect::<Vec<_>>();
+
+        // Capture baseline inside the mutex to prevent concurrent test interference.
+        let previous = with_env(&[], || {
+            values
+                .iter()
+                .map(|(name, _)| ((*name).to_owned(), std::env::var_os(name)))
+                .collect::<Vec<_>>()
+        });
+
         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
             with_env(&values, || panic!("deliberate environment panic"));
         }));

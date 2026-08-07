@@ -315,6 +315,9 @@ mod tests {
     }
 
     fn cache() -> JwksCache {
+        // Install the process-global AWS-LC rustls provider before constructing
+        // any reqwest client; idempotent across concurrent test threads.
+        wyrd_tls::install_crypto_provider().expect("AWS-LC provider installs in test process");
         JwksCache::new(
             reqwest::Client::new(),
             Duration::from_secs(300),
