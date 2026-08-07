@@ -30,7 +30,7 @@ version = "0.1.0"
 edition = "2024"
 license = "Apache-2.0"
 rust-version = "1.94.0"
-repository = "https://github.com/mitari-ai/wyrd-foundation"
+repository = "https://github.com/mitari-ai/wyrd-core"
 authors = ["Thorrester <sjforrester32@gmail.com>"]
 
 [workspace.dependencies]
