@@ -21,10 +21,9 @@ pub mod tenant_conn;
 
 // DSN API
 pub use dsn::{
-    APP_DSN_ENV, CATALOG_APP_PASSWORD_ENV, MIGRATOR_PASSWORD_ENV, PLATFORM_ADMIN_PASSWORD_ENV,
-    ResolvedDsns, WYRD_APP_ROLE, WYRD_CATALOG_APP_ROLE, WYRD_MIGRATOR_ROLE,
-    WYRD_PLATFORM_ADMIN_ROLE, catalog_role_dsn, resolve_external_dsns,
-    resolve_external_dsns_from_env, role_dsn, role_dsn_from_base, with_catalog_options,
+    APP_DSN_ENV, MIGRATOR_PASSWORD_ENV, PLATFORM_ADMIN_PASSWORD_ENV, ResolvedDsns, WYRD_APP_ROLE,
+    WYRD_MIGRATOR_ROLE, WYRD_PLATFORM_ADMIN_ROLE, resolve_external_dsns,
+    resolve_external_dsns_from_env, role_dsn, role_dsn_from_base,
 };
 
 // Pool API

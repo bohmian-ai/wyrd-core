@@ -220,7 +220,6 @@ impl TestDatabase {
                 .as_ref()
                 .map(|dsn| database_dsn(dsn, &self.name))
                 .transpose()?,
-            catalog_app: database_dsn(&self.base_dsns.catalog_app, &self.name)?,
         })
     }
 }
@@ -278,10 +277,8 @@ impl Drop for TestDatabase {
 
 /// Resolve the base external DSNs from the wrapper-set environment variables.
 ///
-/// Requires `WYRD_DATABASE_URL`, `WYRD_DATABASE_MIGRATOR_PASSWORD`, and
-/// `WYRD_DATABASE_CATALOG_APP_PASSWORD` to all be set (the wrapper exports
-/// `WYRD_DATABASE_CATALOG_APP_PASSWORD` with a dummy value to satisfy the
-/// resolver even though no catalog migration runs in the foundation).
+/// Requires `WYRD_DATABASE_URL` and `WYRD_DATABASE_MIGRATOR_PASSWORD` to both
+/// be set.
 ///
 /// # Errors
 /// Returns [`SqlError::InvariantViolation`] when DSN variables are absent or
@@ -292,8 +289,8 @@ fn resolved_external_test_dsns() -> Result<ResolvedDsns, SqlError> {
             detail: format!("test DB DSN config error: {error}"),
         })?
         .ok_or_else(|| SqlError::InvariantViolation {
-            detail: "test DB env unset (WYRD_DATABASE_URL + WYRD_DATABASE_MIGRATOR_PASSWORD + \
-                     WYRD_DATABASE_CATALOG_APP_PASSWORD); set these via with-test-postgres.sh"
+            detail: "test DB env unset (WYRD_DATABASE_URL + \
+                     WYRD_DATABASE_MIGRATOR_PASSWORD); set these via with-test-postgres.sh"
                 .to_owned(),
         })
 }
