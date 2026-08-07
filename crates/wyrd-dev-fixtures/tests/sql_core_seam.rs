@@ -13,13 +13,13 @@
 
 // DSN constants and functions
 use wyrd_sql_core::{
-    APP_DSN_ENV, CATALOG_APP_PASSWORD_ENV, MIGRATOR_PASSWORD_ENV, PLATFORM_ADMIN_PASSWORD_ENV,
-    WYRD_APP_ROLE, WYRD_CATALOG_APP_ROLE, WYRD_MIGRATOR_ROLE, WYRD_PLATFORM_ADMIN_ROLE,
+    APP_DSN_ENV, MIGRATOR_PASSWORD_ENV, PLATFORM_ADMIN_PASSWORD_ENV, WYRD_APP_ROLE,
+    WYRD_MIGRATOR_ROLE, WYRD_PLATFORM_ADMIN_ROLE,
 };
 // DSN types and constructors
 use wyrd_sql_core::{
-    ResolvedDsns, catalog_role_dsn, resolve_external_dsns, resolve_external_dsns_from_env,
-    role_dsn, role_dsn_from_base, with_catalog_options,
+    ResolvedDsns, resolve_external_dsns, resolve_external_dsns_from_env, role_dsn,
+    role_dsn_from_base,
 };
 // Pool API
 use wyrd_sql_core::{
