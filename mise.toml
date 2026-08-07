@@ -74,6 +74,9 @@ cargo run --locked -p wyrd-client --example gen_schemas
 
 [tasks."codegen:check"]
 description = "Fail if generated schema goldens drift from source"
+# Runs under bash: the script uses `set -o pipefail`, which the default sh
+# (dash on Linux CI runners) rejects. Local sh happened to be bash.
+shell = "bash -c"
 run = """
 set -euo pipefail
 # Capture pre-regen state and post-regen state; fail on any diff.
