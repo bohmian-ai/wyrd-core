@@ -198,9 +198,14 @@ impl SloGate {
 }
 
 /// Resolves the checked-in threshold file independently of process cwd.
+///
+/// The foundation workspace has a flat `crates/<name>` layout (two levels deep
+/// from the workspace root), so the threshold file is two parent-traversals up
+/// from the crate's manifest directory, not three as in the oracle's nested
+/// `crates/bifrost/<name>` layout.
 fn default_threshold_path() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../../..")
+        .join("../..")
         .join("benches/thresholds.toml")
 }
 
@@ -216,7 +221,7 @@ fn normalize_group(group: &str) -> String {
 mod tests {
     use super::*;
 
-    const THRESHOLDS: &str = include_str!("../../../../benches/thresholds.toml");
+    const THRESHOLDS: &str = include_str!("../../../benches/thresholds.toml");
 
     /// Proves the canonical loader uses the compile-time repository location.
     #[test]
