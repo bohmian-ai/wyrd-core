@@ -8,7 +8,7 @@ This document is **Wyrd-native**. Do not import legacy names, package names,
 module names, compatibility shims, or migration shorthand into this repository.
 Reproduce useful patterns under Wyrd vocabulary and Wyrd paths.
 
-`wyrd-foundation` contains the 21 published foundation crates — pure contracts,
+`wyrd-foundation` contains the 20 published foundation crates — pure contracts,
 shared primitives, auth, telemetry, crypto, transport, SQL migration core, and
 test fixtures. It does not contain the server, UI, Python package, Skald
 plane, or Vala/Bifrost plane. Cross-plane doctrine is included as explanatory
@@ -115,7 +115,6 @@ Within `wyrd-foundation`:
   permitted here). Never enabled on production builds.
 - `crates/wyrd-error-derive`: `WyrdError` derive macro.
 - `crates/wyrd-test-contract-macros`: contract test macros.
-- `crates/wyrd-bench`: benchmark harness.
 
 Not present in this repo (live in the `wyrd` monorepo):
 
