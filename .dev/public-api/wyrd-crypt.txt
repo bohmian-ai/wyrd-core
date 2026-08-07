@@ -17,7 +17,7 @@
     Checking ghash v0.5.1
     Checking argon2 v0.5.3
     Checking aes-gcm v0.10.3
- Documenting wyrd-crypt v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-crypt)
+ Documenting wyrd-crypt v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-crypt)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.34s
 pub mod wyrd_crypt
 pub enum wyrd_crypt::CryptError

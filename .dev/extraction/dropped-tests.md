@@ -1,6 +1,6 @@
 # Dropped Tests Ledger
 
-Tests removed from `wyrd-foundation` that require excluded dependencies and
+Tests removed from `wyrd-core` that require excluded dependencies and
 must be re-homed as user-journey tests in the source monorepo or its plane
 repositories.
 
@@ -19,7 +19,7 @@ harness which spins up an embedded Postgres instance with migrations applied.
 **Why dropped:** The test depends on `wyrd-testing` (a `dev-dependency` in the
 Oracle `wyrd-client` manifest). `wyrd-testing` is a plane crate that depends on
 `wyrd-server`, `sqlx`, and the embedded Postgres machinery; it is not a
-foundation crate and is explicitly excluded from `wyrd-foundation` (see T5
+foundation crate and is explicitly excluded from `wyrd-core` (see T5
 prohibited changes and D4). Adding `wyrd-testing` to the foundation would
 import the full server plane, violating R1 (no plane-owned dependency).
 

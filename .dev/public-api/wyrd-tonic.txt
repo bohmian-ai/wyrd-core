@@ -7,8 +7,8 @@
     Checking serde_jcs v0.1.0
     Checking url v2.5.8
     Checking security-framework v3.7.0
-    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
-    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-semver)
     Checking rustls-native-certs v0.8.4
     Checking tokio-util v0.7.19
     Checking tokio-stream v0.1.19
@@ -16,15 +16,15 @@
     Checking h2 v0.4.15
     Checking tower v0.5.3
     Checking hyper v1.11.0
-    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
     Checking hyper-util v0.1.20
     Checking hyper-timeout v0.5.2
     Checking tonic v0.14.6
     Checking tonic-prost v0.14.6
     Checking tonic-types v0.14.6
- Documenting wyrd-tonic v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tonic)
+ Documenting wyrd-tonic v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-tonic)
 warning: unclosed HTML tag `Utc`
-   --> /Users/stevenforrester/Documents/GitHub/wyrd-foundation/target/debug/build/wyrd-tonic-9057d27bf05fa912/out/wyrd.v1.rs:338:34
+   --> /Users/stevenforrester/Documents/GitHub/wyrd-core/target/debug/build/wyrd-tonic-9057d27bf05fa912/out/wyrd.v1.rs:338:34
     |
 338 | /// mirror the wyrd-spec DateTime<Utc> wire form; limit is capped server-side.
     |                                  ^^^^^

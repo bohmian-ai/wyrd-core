@@ -48,9 +48,9 @@
     Checking arc-swap v1.9.2
     Checking toml_edit v0.22.27
     Checking walkdir v2.5.0
-    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-semver)
     Checking tokio-util v0.7.19
-    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
    Compiling prost v0.14.4
     Checking h2 v0.4.15
     Checking tower v0.5.3
@@ -59,11 +59,11 @@
     Checking tower-http v0.6.11
     Checking tokio-rustls v0.26.4
     Checking rustls-platform-verifier v0.7.0
-    Checking wyrd-tls v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tls)
+    Checking wyrd-tls v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-tls)
     Checking toml v0.8.23
    Compiling prost-build v0.14.4
    Compiling tonic-prost-build v0.14.6
-   Compiling wyrd-tonic v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tonic)
+   Compiling wyrd-tonic v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-tonic)
     Checking hyper v1.11.0
     Checking hyper-util v0.1.20
     Checking zstd v0.13.3
@@ -71,11 +71,11 @@
     Checking hyper-rustls v0.27.9
     Checking reqwest v0.13.4
     Checking tonic v0.14.6
-    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
     Checking tonic-types v0.14.6
     Checking tonic-prost v0.14.6
-    Checking wyrd-utils v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-utils)
- Documenting wyrd-client v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-client)
+    Checking wyrd-utils v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-utils)
+ Documenting wyrd-client v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-client)
 warning: public documentation for `http` links to private item `HttpTransport::authenticated_url`
   --> crates/wyrd-client/src/transport/http.rs:18:47
    |

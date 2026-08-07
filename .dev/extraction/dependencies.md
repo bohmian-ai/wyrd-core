@@ -2,9 +2,9 @@
 
 Oracle SHA: `6b450184a7ca2a106f2d9bba5b813764dbdbf91e`
 Source monorepo branch: `surfaces-python` @ `f25532692b29b2ef2e718ff89067923da6df1740`
-Target workspace: `/Users/stevenforrester/Documents/GitHub/wyrd-foundation`
+Target workspace: `/Users/stevenforrester/Documents/GitHub/wyrd-core`
 Workspace version: `0.1.0`, edition `2024`, MSRV `1.94.0`, toolchain `1.95.0`, Apache-2.0
-Repository URL: `https://github.com/mitari-ai/wyrd-foundation`
+Repository URL: `https://github.com/mitari-ai/wyrd-core`
 
 ## Crate Source Paths → Target Paths
 

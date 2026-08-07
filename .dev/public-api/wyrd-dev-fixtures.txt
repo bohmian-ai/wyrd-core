@@ -1,4 +1,4 @@
- Documenting wyrd-dev-fixtures v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-dev-fixtures)
+ Documenting wyrd-dev-fixtures v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-dev-fixtures)
 warning: unresolved link to `pg`
  --> crates/wyrd-dev-fixtures/src/lib.rs:3:34
   |

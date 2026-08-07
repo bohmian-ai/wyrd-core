@@ -14,7 +14,7 @@
     Checking matchers v0.2.0
     Checking regex v1.13.1
     Checking tracing-subscriber v0.3.23
-    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
     Checking tokio-util v0.7.19
     Checking tokio-stream v0.1.19
     Checking tracing-opentelemetry v0.32.1
@@ -26,13 +26,13 @@
     Checking hyper-util v0.1.20
     Checking hyper-timeout v0.5.2
     Checking reqwest v0.12.28
-    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
     Checking tonic v0.14.6
     Checking opentelemetry-http v0.31.0
     Checking tonic-prost v0.14.6
     Checking opentelemetry-proto v0.31.0
     Checking opentelemetry-otlp v0.31.1
- Documenting wyrd-telemetry v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-telemetry)
+ Documenting wyrd-telemetry v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-telemetry)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 12.77s
 pub mod wyrd_telemetry
 pub enum wyrd_telemetry::OtlpProtocol

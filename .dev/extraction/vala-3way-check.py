@@ -2,7 +2,7 @@
 """Symmetric-miss check: every wyrd-spec vala file, 3-way + shipped disposition."""
 import subprocess
 WYRD="/Users/stevenforrester/Documents/GitHub/wyrd"
-FOUND="/Users/stevenforrester/Documents/GitHub/wyrd-foundation"
+FOUND="/Users/stevenforrester/Documents/GitHub/wyrd-core"
 SURF="f2553269"; ORACLE="6b450184"; MB="f58ec630"
 BASE="crates/wyrd-spec/src/vala"
 

@@ -10,7 +10,7 @@
    Compiling yoke-derive v0.8.2
    Compiling zerovec-derive v0.11.3
    Compiling strum_macros v0.27.2
-   Compiling wyrd-error-derive v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-error-derive)
+   Compiling wyrd-error-derive v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-error-derive)
    Compiling schemars_derive v0.8.22
     Checking zerofrom v0.1.8
     Checking schemars v0.8.22
@@ -18,8 +18,8 @@
     Checking strum v0.27.2
     Checking zerovec v0.11.6
     Checking zerotrie v0.2.4
-    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
-    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
     Checking tinystr v0.8.3
     Checking potential_utf v0.1.5
     Checking icu_collections v2.2.0
@@ -30,8 +30,8 @@
     Checking idna_adapter v1.2.2
     Checking idna v1.1.0
     Checking url v2.5.8
-    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
- Documenting wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-runtime)
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
+ Documenting wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-runtime)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 13.86s
 pub mod wyrd_runtime
 pub use wyrd_runtime::CardRefScope

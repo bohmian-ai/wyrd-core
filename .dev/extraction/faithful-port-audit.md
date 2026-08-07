@@ -5,7 +5,7 @@ Method: git blob-SHA comparison (content hashes are identical across repos for
 identical bytes, so no checkout/extract needed). Script:
 `.dev/extraction/faithful-port-audit.py` (reproducible).
 
-- Foundation: working tree of `wyrd-foundation` (branch `stack/04-spec-replay`
+- Foundation: working tree of `wyrd-core` (branch `stack/04-spec-replay`
   @ `a2041f0` + uncommitted T5).
 - Surfaces target: `wyrd` monorepo `f2553269` (surfaces-python).
 - Oracle: `wyrd` monorepo `6b450184` (== `wyrd-bifrost-oracle`, bifrost SoT).

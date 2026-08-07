@@ -7,7 +7,7 @@ Blob SHAs are content hashes identical across repos, so this needs no tar/awk.
 import subprocess, sys, os
 
 WYRD = "/Users/stevenforrester/Documents/GitHub/wyrd"
-FOUND = "/Users/stevenforrester/Documents/GitHub/wyrd-foundation"
+FOUND = "/Users/stevenforrester/Documents/GitHub/wyrd-core"
 SURF = "f2553269"
 ORACLE = "6b450184"
 

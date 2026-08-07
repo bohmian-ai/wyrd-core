@@ -4,7 +4,7 @@
    Compiling serde_derive_internals v0.29.1
    Compiling schemars_derive v0.8.22
     Checking schemars v0.8.22
- Documenting wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+ Documenting wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-semver)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.18s
 pub mod wyrd_semver
 pub enum wyrd_semver::VersionBump

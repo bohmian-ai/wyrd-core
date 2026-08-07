@@ -5,7 +5,7 @@ foundation repository. Skills own conversational or execution process; this
 library owns concise, durable product and implementation knowledge. Start here
 and load only the slices required by the question or change.
 
-> **Scope note:** `wyrd-foundation` contains pure contracts, shared primitives,
+> **Scope note:** `wyrd-core` contains pure contracts, shared primitives,
 > auth, telemetry, transport, and SQL migration core. It does not include the
 > server, UI, Python package, Skald runtime plane, or Vala/Bifrost plane. The
 > doctrine and language references below are included verbatim from the Wyrd
