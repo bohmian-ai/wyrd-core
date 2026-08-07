@@ -19,6 +19,10 @@ jobs:
       - uses: jlumbroso/free-disk-space@main
       - uses: jdx/mise-action@v3
         with: { install: true, cache: true }
+      # mise installs a minimal rust toolchain; fmt:check and lints need the
+      # rustfmt + clippy components explicitly added (matches monorepo CI).
+      - name: Install Rust components (rustfmt, clippy)
+        run: rustup component add --toolchain "$RUSTUP_TOOLCHAIN" rustfmt clippy
       - uses: Swatinem/rust-cache@v2
       # Explicit enumerated gates (D9). This ordered list MUST equal
       # `pre-pr`'s dependency set (T8); do NOT collapse to `mise run pre-pr`.
