@@ -16,7 +16,7 @@ fn generate_normalized<T: schemars::JsonSchema>() -> String {
 }
 
 fn load_golden(name: &str) -> String {
-    let path = format!("{}/tests/schemas/{}.json", env!("CARGO_MANIFEST_DIR"), name);
+    let path = format!("{}/schemas/{}.json", env!("CARGO_MANIFEST_DIR"), name);
     fs::read_to_string(&path).unwrap_or_else(|_| {
         panic!(
             "golden missing: {path}\n\

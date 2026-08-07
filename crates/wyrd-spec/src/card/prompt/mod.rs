@@ -869,7 +869,7 @@ mod prompt_schema_drift_tests {
             serde_json::to_string_pretty(&schema).expect("schema serializes")
         );
         let expected = std::fs::read_to_string(format!(
-            "{}/tests/schemas/{name}.json",
+            "{}/schemas/{name}.json",
             env!("CARGO_MANIFEST_DIR")
         ))
         .expect("golden schema exists");
