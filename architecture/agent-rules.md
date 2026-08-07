@@ -53,7 +53,7 @@ to ensure consistent and efficient operation.
   `// justification: <one-line reason>` comment naming why the lint is wrong
   for that specific site.
 - Never hand-edit generated artifacts: OpenAPI/JSON schemas, golden files under
-  `tests/schemas/`. Change the source or generator, regenerate, and let
+  each crate's `schemas/`. Change the source or generator, regenerate, and let
   `codegen:check` verify.
 - Build scripts (`build.rs`) write generated output to `OUT_DIR`, never into
   the source tree.
