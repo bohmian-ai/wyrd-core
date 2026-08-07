@@ -1,0 +1,112 @@
+    Checking uuid v1.24.0
+   Compiling syn v2.0.119
+    Checking chrono v0.4.45
+   Compiling serde_derive_internals v0.29.1
+   Compiling schemars_derive v0.8.22
+    Checking schemars v0.8.22
+ Documenting wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.18s
+pub mod wyrd_semver
+pub enum wyrd_semver::VersionBump
+pub wyrd_semver::VersionBump::Build
+pub wyrd_semver::VersionBump::Build::metadata: alloc::string::String
+pub wyrd_semver::VersionBump::Major
+pub wyrd_semver::VersionBump::Minor
+pub wyrd_semver::VersionBump::Patch
+pub wyrd_semver::VersionBump::Pre
+pub wyrd_semver::VersionBump::Pre::identifier: alloc::string::String
+pub wyrd_semver::VersionBump::PreBuild
+pub wyrd_semver::VersionBump::PreBuild::build: alloc::string::String
+pub wyrd_semver::VersionBump::PreBuild::pre: alloc::string::String
+pub enum wyrd_semver::VersionError
+pub wyrd_semver::VersionError::BoundsOverflow
+pub wyrd_semver::VersionError::EmptyVersion
+pub wyrd_semver::VersionError::Invalid
+pub wyrd_semver::VersionError::Invalid::source: semver::parse::Error
+pub wyrd_semver::VersionError::InvalidBuild
+pub wyrd_semver::VersionError::InvalidBuild::source: semver::parse::Error
+pub wyrd_semver::VersionError::InvalidPrerelease
+pub wyrd_semver::VersionError::InvalidPrerelease::source: semver::parse::Error
+pub wyrd_semver::VersionError::InvalidRange
+pub wyrd_semver::VersionError::InvalidRange::source: semver::parse::Error
+pub wyrd_semver::VersionError::NotRepresentable
+pub wyrd_semver::VersionError::NotRepresentable::reason: &'static str
+pub enum wyrd_semver::VersionSpec
+pub wyrd_semver::VersionSpec::Pin(wyrd_semver::VersionBlock)
+pub wyrd_semver::VersionSpec::Scope(wyrd_semver::VersionRange)
+impl wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::as_str(&self) -> &str
+pub fn wyrd_semver::VersionSpec::is_pin(&self) -> bool
+pub fn wyrd_semver::VersionSpec::is_scope(&self) -> bool
+pub fn wyrd_semver::VersionSpec::parse(value: &str) -> core::result::Result<Self, wyrd_semver::VersionError>
+impl core::convert::From<wyrd_semver::VersionBlock> for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::from(block: wyrd_semver::VersionBlock) -> Self
+impl core::convert::From<wyrd_semver::VersionRange> for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::from(range: wyrd_semver::VersionRange) -> Self
+impl core::fmt::Display for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::str::traits::FromStr for wyrd_semver::VersionSpec
+pub type wyrd_semver::VersionSpec::Err = wyrd_semver::VersionError
+pub fn wyrd_semver::VersionSpec::from_str(value: &str) -> core::result::Result<Self, Self::Err>
+impl schemars::JsonSchema for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::json_schema(_generator: &mut schemars::gen::SchemaGenerator) -> schemars::schema::Schema
+pub fn wyrd_semver::VersionSpec::schema_name() -> alloc::string::String
+impl serde_core::ser::Serialize for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::serialize<S: serde_core::ser::Serializer>(&self, serializer: S) -> core::result::Result<<S as serde_core::ser::Serializer>::Ok, <S as serde_core::ser::Serializer>::Error>
+impl<'de> serde_core::de::Deserialize<'de> for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::deserialize<D: serde_core::de::Deserializer<'de>>(deserializer: D) -> core::result::Result<Self, <D as serde_core::de::Deserializer>::Error>
+pub struct wyrd_semver::SemverTriple
+pub wyrd_semver::SemverTriple::major: u64
+pub wyrd_semver::SemverTriple::minor: u64
+pub wyrd_semver::SemverTriple::patch: u64
+impl wyrd_semver::SemverTriple
+pub const wyrd_semver::SemverTriple::ZERO: Self
+pub const fn wyrd_semver::SemverTriple::new(major: u64, minor: u64, patch: u64) -> Self
+impl core::cmp::Ord for wyrd_semver::SemverTriple
+pub fn wyrd_semver::SemverTriple::cmp(&self, other: &Self) -> core::cmp::Ordering
+impl core::cmp::PartialOrd for wyrd_semver::SemverTriple
+pub fn wyrd_semver::SemverTriple::partial_cmp(&self, other: &Self) -> core::option::Option<core::cmp::Ordering>
+impl core::fmt::Display for wyrd_semver::SemverTriple
+pub fn wyrd_semver::SemverTriple::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_semver::VersionBlock(_)
+impl wyrd_semver::VersionBlock
+pub fn wyrd_semver::VersionBlock::as_str(&self) -> &str
+pub fn wyrd_semver::VersionBlock::bump(&self, bump: wyrd_semver::VersionBump) -> core::result::Result<Self, wyrd_semver::VersionError>
+pub fn wyrd_semver::VersionBlock::from_triple(triple: wyrd_semver::SemverTriple) -> Self
+pub fn wyrd_semver::VersionBlock::is_pin(&self) -> bool
+pub fn wyrd_semver::VersionBlock::parse(value: impl core::convert::Into<alloc::string::String>) -> core::result::Result<Self, wyrd_semver::VersionError>
+pub fn wyrd_semver::VersionBlock::semver(&self) -> core::result::Result<semver::Version, wyrd_semver::VersionError>
+pub fn wyrd_semver::VersionBlock::sort_versions(versions: &mut [Self])
+impl core::convert::From<wyrd_semver::VersionBlock> for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::from(block: wyrd_semver::VersionBlock) -> Self
+impl core::default::Default for wyrd_semver::VersionBlock
+pub fn wyrd_semver::VersionBlock::default() -> Self
+impl core::fmt::Display for wyrd_semver::VersionBlock
+pub fn wyrd_semver::VersionBlock::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::str::traits::FromStr for wyrd_semver::VersionBlock
+pub type wyrd_semver::VersionBlock::Err = wyrd_semver::VersionError
+pub fn wyrd_semver::VersionBlock::from_str(value: &str) -> core::result::Result<Self, Self::Err>
+pub struct wyrd_semver::VersionBounds
+impl wyrd_semver::VersionBounds
+pub fn wyrd_semver::VersionBounds::lower(&self) -> wyrd_semver::SemverTriple
+pub fn wyrd_semver::VersionBounds::new(lower: wyrd_semver::SemverTriple, upper: core::option::Option<wyrd_semver::SemverTriple>, upper_inclusive: bool) -> Self
+pub fn wyrd_semver::VersionBounds::upper(&self) -> core::option::Option<wyrd_semver::SemverTriple>
+pub fn wyrd_semver::VersionBounds::upper_inclusive(&self) -> bool
+pub struct wyrd_semver::VersionRange(_)
+impl wyrd_semver::VersionRange
+pub fn wyrd_semver::VersionRange::as_str(&self) -> &str
+pub fn wyrd_semver::VersionRange::is_loose_partial(&self) -> bool
+pub fn wyrd_semver::VersionRange::matches(&self, version: &wyrd_semver::VersionBlock) -> bool
+pub fn wyrd_semver::VersionRange::parse(value: impl core::convert::Into<alloc::string::String>) -> core::result::Result<Self, wyrd_semver::VersionError>
+pub fn wyrd_semver::VersionRange::parse_loose(value: impl core::convert::Into<alloc::string::String>) -> core::result::Result<Self, wyrd_semver::VersionError>
+pub fn wyrd_semver::VersionRange::to_bounds(&self) -> core::result::Result<wyrd_semver::VersionBounds, wyrd_semver::VersionError>
+impl core::convert::From<wyrd_semver::VersionRange> for wyrd_semver::VersionSpec
+pub fn wyrd_semver::VersionSpec::from(range: wyrd_semver::VersionRange) -> Self
+impl core::default::Default for wyrd_semver::VersionRange
+pub fn wyrd_semver::VersionRange::default() -> Self
+impl core::fmt::Display for wyrd_semver::VersionRange
+pub fn wyrd_semver::VersionRange::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::str::traits::FromStr for wyrd_semver::VersionRange
+pub type wyrd_semver::VersionRange::Err = wyrd_semver::VersionError
+pub fn wyrd_semver::VersionRange::from_str(value: &str) -> core::result::Result<Self, Self::Err>
+pub fn wyrd_semver::seed_version() -> wyrd_semver::VersionBlock

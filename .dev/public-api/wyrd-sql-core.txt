@@ -1,0 +1,372 @@
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling typenum v1.20.1
+   Compiling num-traits v0.2.19
+   Compiling stable_deref_trait v1.2.1
+   Compiling getrandom v0.4.3
+   Compiling zerofrom v0.1.8
+   Compiling writeable v0.6.3
+   Compiling litemap v0.8.2
+    Checking rand_core v0.10.1
+   Compiling utf8_iter v1.0.4
+   Compiling pin-project-lite v0.2.17
+   Compiling yoke v0.8.3
+   Compiling zeroize v1.9.0
+   Compiling cmov v0.5.4
+   Compiling icu_properties_data v2.2.0
+   Compiling icu_normalizer_data v2.2.0
+   Compiling zerovec v0.11.6
+   Compiling zerotrie v0.2.4
+   Compiling futures-core v0.3.33
+   Compiling rustls-pki-types v1.15.1
+   Compiling ctutils v0.4.2
+   Compiling aws-lc-sys v0.43.0
+   Compiling once_cell v1.21.4
+   Compiling scopeguard v1.2.0
+   Compiling lock_api v0.4.14
+   Compiling socket2 v0.6.5
+   Compiling mio v1.2.2
+   Compiling allocator-api2 v0.2.21
+   Compiling core-foundation-sys v0.8.7
+   Compiling tinystr v0.8.3
+   Compiling potential_utf v0.1.5
+    Checking hybrid-array v0.4.14
+    Checking generic-array v0.14.7
+   Compiling aws-lc-rs v1.17.3
+   Compiling icu_collections v2.2.0
+   Compiling icu_locale_core v2.2.0
+   Compiling thiserror v2.0.19
+   Compiling percent-encoding v2.3.2
+   Compiling untrusted v0.9.0
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling futures-sink v0.3.33
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling bytes v1.12.1
+   Compiling tinyvec_macros v0.1.1
+   Compiling foldhash v0.2.0
+   Compiling digest v0.10.7
+   Compiling tinyvec v1.12.0
+   Compiling hashbrown v0.16.1
+   Compiling form_urlencoded v1.2.2
+   Compiling icu_provider v2.2.0
+   Compiling serde_json v1.0.151
+   Compiling iana-time-zone v0.1.65
+   Compiling tracing-core v0.1.36
+   Compiling crossbeam-utils v0.8.22
+   Compiling zmij v1.0.23
+   Compiling icu_properties v2.2.0
+   Compiling tokio v1.53.1
+   Compiling cpufeatures v0.2.17
+    Checking digest v0.11.3
+   Compiling slab v0.4.12
+   Compiling rustls-webpki v0.103.13
+   Compiling futures-task v0.3.33
+   Compiling futures-io v0.3.33
+   Compiling subtle v2.6.1
+   Compiling itoa v1.0.18
+   Compiling parking v2.2.1
+   Compiling crc-catalog v2.5.0
+   Compiling crc v3.4.0
+   Compiling event-listener v5.4.2
+   Compiling indexmap v2.14.0
+   Compiling tracing v0.1.44
+   Compiling hmac v0.13.0
+   Compiling futures-util v0.3.33
+   Compiling crossbeam-queue v0.3.13
+   Compiling hashlink v0.11.1
+   Compiling sha2 v0.10.9
+   Compiling chrono v0.4.45
+   Compiling unicode-normalization v0.1.25
+   Compiling rustls v0.23.43
+   Compiling chacha20 v0.10.1
+    Checking uuid v1.24.0
+   Compiling webpki-roots v1.0.9
+   Compiling cpufeatures v0.3.0
+   Compiling base64 v0.22.1
+    Checking smallvec v1.15.2
+   Compiling unicode-properties v0.1.4
+   Compiling unicode-bidi v0.3.18
+    Checking icu_normalizer v2.2.0
+    Checking parking_lot_core v0.9.12
+    Checking idna_adapter v1.2.2
+   Compiling either v1.17.0
+    Checking idna v1.1.0
+    Checking url v2.5.8
+   Compiling parking_lot v0.12.5
+   Compiling stringprep v0.1.5
+   Compiling sha2 v0.11.0
+   Compiling futures-intrusive v0.5.0
+   Compiling rand v0.10.2
+   Compiling hkdf v0.13.0
+   Compiling md-5 v0.11.0
+   Compiling futures-channel v0.3.33
+   Compiling atoi v2.0.0
+   Compiling byteorder v1.5.0
+   Compiling whoami v2.1.2
+   Compiling bitflags v2.13.1
+   Compiling hex v0.4.3
+   Compiling dotenvy v0.15.7
+    Checking schemars v0.8.22
+    Checking tokio-stream v0.1.19
+    Checking semver v1.0.28
+    Checking serde_yaml v0.9.34+deprecated
+    Checking serde_jcs v0.1.0
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+   Compiling sqlx-core v0.9.0
+    Checking sqlx-postgres v0.9.0
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+   Compiling sqlx-macros-core v0.9.0
+   Compiling sqlx-macros v0.9.0
+    Checking sqlx v0.9.0
+ Documenting wyrd-sql-core v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-sql-core)
+warning: unresolved link to `IdError`
+   --> crates/wyrd-sql-core/src/error.rs:204:19
+    |
+204 |     /// Wrap an [`IdError`] as an [`SqlError::InvariantViolation`].
+    |                   ^^^^^^^ no item named `IdError` in scope
+    |
+    = help: to escape `[` and `]` characters, add '\' before them like `\[` or `\]`
+    = note: `#[warn(rustdoc::broken_intra_doc_links)]` on by default
+
+warning: public documentation for `run_migrations` links to private item `validate_options`
+  --> crates/wyrd-sql-core/src/migration.rs:49:10
+   |
+49 | /// 1. [`validate_options`] — pure, fails with [`SqlError::InvariantViolation`]
+   |          ^^^^^^^^^^^^^^^^ this item is private
+   |
+   = note: this link will resolve properly if you pass `--document-private-items`
+   = note: `#[warn(rustdoc::private_intra_doc_links)]` on by default
+
+warning: public documentation for `run_migrations` links to private item `combine_migration_outcome`
+  --> crates/wyrd-sql-core/src/migration.rs:60:44
+   |
+60 | ///    succeeded (primary error wins via [`combine_migration_outcome`]).
+   |                                            ^^^^^^^^^^^^^^^^^^^^^^^^^ this item is private
+   |
+   = note: this link will resolve properly if you pass `--document-private-items`
+
+warning: `wyrd-sql-core` (lib doc) generated 3 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 21.32s
+pub mod wyrd_sql_core
+pub mod wyrd_sql_core::dsn
+pub enum wyrd_sql_core::dsn::DsnError
+pub wyrd_sql_core::dsn::DsnError::InvalidUrl(url::parser::ParseError)
+pub wyrd_sql_core::dsn::DsnError::Mixed
+pub struct wyrd_sql_core::dsn::ResolvedDsns
+pub wyrd_sql_core::dsn::ResolvedDsns::app: secrecy::SecretString
+pub wyrd_sql_core::dsn::ResolvedDsns::catalog_app: secrecy::SecretString
+pub wyrd_sql_core::dsn::ResolvedDsns::migrator: secrecy::SecretString
+pub wyrd_sql_core::dsn::ResolvedDsns::platform_admin: core::option::Option<secrecy::SecretString>
+impl core::fmt::Debug for wyrd_sql_core::dsn::ResolvedDsns
+pub fn wyrd_sql_core::dsn::ResolvedDsns::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub const wyrd_sql_core::dsn::APP_DSN_ENV: &str
+pub const wyrd_sql_core::dsn::CATALOG_APP_PASSWORD_ENV: &str
+pub const wyrd_sql_core::dsn::MIGRATOR_PASSWORD_ENV: &str
+pub const wyrd_sql_core::dsn::PLATFORM_ADMIN_PASSWORD_ENV: &str
+pub const wyrd_sql_core::dsn::WYRD_APP_ROLE: &str
+pub const wyrd_sql_core::dsn::WYRD_CATALOG_APP_ROLE: &str
+pub const wyrd_sql_core::dsn::WYRD_MIGRATOR_ROLE: &str
+pub const wyrd_sql_core::dsn::WYRD_PLATFORM_ADMIN_ROLE: &str
+pub fn wyrd_sql_core::dsn::catalog_role_dsn(base: &url::Url, password: &secrecy::SecretString) -> secrecy::SecretString
+pub fn wyrd_sql_core::dsn::resolve_external_dsns(app: core::option::Option<alloc::string::String>, migrator_password: core::option::Option<secrecy::SecretString>, platform_admin_password: core::option::Option<secrecy::SecretString>, catalog_app_password: core::option::Option<secrecy::SecretString>) -> core::result::Result<core::option::Option<wyrd_sql_core::dsn::ResolvedDsns>, wyrd_sql_core::dsn::DsnError>
+pub fn wyrd_sql_core::dsn::resolve_external_dsns_from_env() -> core::result::Result<core::option::Option<wyrd_sql_core::dsn::ResolvedDsns>, wyrd_sql_core::dsn::DsnError>
+pub fn wyrd_sql_core::dsn::role_dsn(base: &url::Url, role: &str, password: &secrecy::SecretString) -> secrecy::SecretString
+pub fn wyrd_sql_core::dsn::role_dsn_from_base(base: &secrecy::SecretString, role: &str, password: &secrecy::SecretString) -> core::result::Result<secrecy::SecretString, wyrd_sql_core::dsn::DsnError>
+pub fn wyrd_sql_core::dsn::with_catalog_options(dsn: &secrecy::SecretString) -> secrecy::SecretString
+pub mod wyrd_sql_core::error
+pub enum wyrd_sql_core::error::SqlError
+pub wyrd_sql_core::error::SqlError::CheckViolation
+pub wyrd_sql_core::error::SqlError::CheckViolation::constraint: alloc::string::String
+pub wyrd_sql_core::error::SqlError::Conflict
+pub wyrd_sql_core::error::SqlError::Conflict::detail: alloc::string::String
+pub wyrd_sql_core::error::SqlError::Connect(sqlx_core::error::Error)
+pub wyrd_sql_core::error::SqlError::FkViolation
+pub wyrd_sql_core::error::SqlError::FkViolation::constraint: alloc::string::String
+pub wyrd_sql_core::error::SqlError::ForgeDemandGenerationChanged
+pub wyrd_sql_core::error::SqlError::InsufficientPrivilege
+pub wyrd_sql_core::error::SqlError::InsufficientPrivilege::detail: alloc::string::String
+pub wyrd_sql_core::error::SqlError::InvalidDataTenantId(wyrd_spec::ids::IdError)
+pub wyrd_sql_core::error::SqlError::InvariantViolation
+pub wyrd_sql_core::error::SqlError::InvariantViolation::detail: alloc::string::String
+pub wyrd_sql_core::error::SqlError::Migrate(sqlx_core::migrate::error::MigrateError)
+pub wyrd_sql_core::error::SqlError::MigrateChecksum
+pub wyrd_sql_core::error::SqlError::MigrateChecksum::detail: alloc::string::String
+pub wyrd_sql_core::error::SqlError::MigrateChecksum::version: i64
+pub wyrd_sql_core::error::SqlError::NoRows
+pub wyrd_sql_core::error::SqlError::Query(sqlx_core::error::Error)
+pub wyrd_sql_core::error::SqlError::RlsDenied
+pub wyrd_sql_core::error::SqlError::RlsDenied::detail: alloc::string::String
+pub wyrd_sql_core::error::SqlError::TriggerException
+pub wyrd_sql_core::error::SqlError::TriggerException::constraint: alloc::string::String
+pub wyrd_sql_core::error::SqlError::TxFailed(sqlx_core::error::Error)
+pub wyrd_sql_core::error::SqlError::UniqueViolation
+pub wyrd_sql_core::error::SqlError::UniqueViolation::constraint: alloc::string::String
+impl wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::code(&self) -> &'static str
+pub fn wyrd_sql_core::error::SqlError::remediation(&self) -> &'static str
+pub fn wyrd_sql_core::error::SqlError::status(&self) -> u16
+pub fn wyrd_sql_core::error::SqlError::title(&self) -> &'static str
+impl wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::from_id_error(e: wyrd_spec::ids::IdError) -> Self
+pub fn wyrd_sql_core::error::SqlError::from_spec_decode(e: wyrd_spec::envelope::SpecDecodeError) -> Self
+pub fn wyrd_sql_core::error::SqlError::from_version(e: wyrd_semver::error::VersionError) -> Self
+impl core::convert::From<sqlx_core::error::Error> for wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::from(error: sqlx_core::error::Error) -> Self
+impl core::convert::From<sqlx_core::migrate::error::MigrateError> for wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::from(error: sqlx_core::migrate::error::MigrateError) -> Self
+pub mod wyrd_sql_core::migration
+pub struct wyrd_sql_core::migration::MigrateOptions<'a>
+pub wyrd_sql_core::migration::MigrateOptions::advisory_lock_key: i64
+pub wyrd_sql_core::migration::MigrateOptions::ensure_schemas: &'a [&'a str]
+pub wyrd_sql_core::migration::MigrateOptions::search_path: &'a [&'a str]
+pub struct wyrd_sql_core::migration::MigrationSet<'a>
+pub wyrd_sql_core::migration::MigrationSet::migrator: &'a sqlx_core::migrate::migrator::Migrator
+pub wyrd_sql_core::migration::MigrationSet::options: wyrd_sql_core::migration::MigrateOptions<'a>
+pub async fn wyrd_sql_core::migration::run_migrations(migrator_pool: &sqlx_postgres::PgPool, migrator: &sqlx_core::migrate::migrator::Migrator, options: &wyrd_sql_core::migration::MigrateOptions<'_>) -> core::result::Result<(), wyrd_sql_core::error::SqlError>
+pub mod wyrd_sql_core::operator_pool
+pub struct wyrd_sql_core::operator_pool::OperatorPool(_)
+impl wyrd_sql_core::operator_pool::OperatorPool
+pub async fn wyrd_sql_core::operator_pool::OperatorPool::begin(&self) -> core::result::Result<sqlx_core::transaction::Transaction<'_, sqlx_postgres::database::Postgres>, sqlx_core::error::Error>
+pub fn wyrd_sql_core::operator_pool::OperatorPool::pool(&self) -> &sqlx_postgres::PgPool
+impl core::convert::From<sqlx_core::pool::Pool<sqlx_postgres::database::Postgres>> for wyrd_sql_core::operator_pool::OperatorPool
+pub fn wyrd_sql_core::operator_pool::OperatorPool::from(pool: sqlx_postgres::PgPool) -> Self
+pub mod wyrd_sql_core::pool
+pub struct wyrd_sql_core::pool::PoolConfig
+pub wyrd_sql_core::pool::PoolConfig::acquire_timeout: core::time::Duration
+pub wyrd_sql_core::pool::PoolConfig::idle_timeout: core::option::Option<core::time::Duration>
+pub wyrd_sql_core::pool::PoolConfig::max_connections: u32
+pub wyrd_sql_core::pool::PoolConfig::max_lifetime: core::option::Option<core::time::Duration>
+pub wyrd_sql_core::pool::PoolConfig::min_connections: u32
+pub wyrd_sql_core::pool::PoolConfig::statement_cache_capacity: usize
+pub wyrd_sql_core::pool::PoolConfig::test_before_acquire: bool
+impl wyrd_sql_core::pool::PoolConfig
+pub fn wyrd_sql_core::pool::PoolConfig::app_defaults() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::app_from_env() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::from_env_with_suffix(defaults: Self, suffix: &str) -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::migrator_defaults() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::migrator_from_env() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::platform_admin_defaults() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::platform_admin_from_env() -> Self
+impl core::default::Default for wyrd_sql_core::pool::PoolConfig
+pub fn wyrd_sql_core::pool::PoolConfig::default() -> Self
+pub async fn wyrd_sql_core::pool::build_app_pool(database_url: &str) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub async fn wyrd_sql_core::pool::build_migrator_pool(database_url: &str) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub async fn wyrd_sql_core::pool::build_platform_admin_pool(database_url: &str) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub async fn wyrd_sql_core::pool::build_pool(database_url: &str, config: wyrd_sql_core::pool::PoolConfig) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub mod wyrd_sql_core::tenant_conn
+pub struct wyrd_sql_core::tenant_conn::TenantConn<'a>
+impl<'a> wyrd_sql_core::tenant_conn::TenantConn<'a>
+pub async fn wyrd_sql_core::tenant_conn::TenantConn<'a>::acquire(pool: &'a sqlx_postgres::PgPool, data_tenant_id: wyrd_spec::ids::DataTenantId) -> core::result::Result<Self, wyrd_sql_core::error::SqlError>
+pub async fn wyrd_sql_core::tenant_conn::TenantConn<'a>::commit(self) -> core::result::Result<(), wyrd_sql_core::error::SqlError>
+pub fn wyrd_sql_core::tenant_conn::TenantConn<'a>::data_tenant_id(&self) -> wyrd_spec::ids::DataTenantId
+pub fn wyrd_sql_core::tenant_conn::TenantConn<'a>::transaction(&mut self) -> &mut sqlx_core::transaction::Transaction<'a, sqlx_postgres::database::Postgres>
+pub const wyrd_sql_core::tenant_conn::BIND_CURRENT_TENANT_SQL: &str
+pub const wyrd_sql_core::tenant_conn::CURRENT_TENANT_GUC: &str
+pub enum wyrd_sql_core::SqlError
+pub wyrd_sql_core::SqlError::CheckViolation
+pub wyrd_sql_core::SqlError::CheckViolation::constraint: alloc::string::String
+pub wyrd_sql_core::SqlError::Conflict
+pub wyrd_sql_core::SqlError::Conflict::detail: alloc::string::String
+pub wyrd_sql_core::SqlError::Connect(sqlx_core::error::Error)
+pub wyrd_sql_core::SqlError::FkViolation
+pub wyrd_sql_core::SqlError::FkViolation::constraint: alloc::string::String
+pub wyrd_sql_core::SqlError::ForgeDemandGenerationChanged
+pub wyrd_sql_core::SqlError::InsufficientPrivilege
+pub wyrd_sql_core::SqlError::InsufficientPrivilege::detail: alloc::string::String
+pub wyrd_sql_core::SqlError::InvalidDataTenantId(wyrd_spec::ids::IdError)
+pub wyrd_sql_core::SqlError::InvariantViolation
+pub wyrd_sql_core::SqlError::InvariantViolation::detail: alloc::string::String
+pub wyrd_sql_core::SqlError::Migrate(sqlx_core::migrate::error::MigrateError)
+pub wyrd_sql_core::SqlError::MigrateChecksum
+pub wyrd_sql_core::SqlError::MigrateChecksum::detail: alloc::string::String
+pub wyrd_sql_core::SqlError::MigrateChecksum::version: i64
+pub wyrd_sql_core::SqlError::NoRows
+pub wyrd_sql_core::SqlError::Query(sqlx_core::error::Error)
+pub wyrd_sql_core::SqlError::RlsDenied
+pub wyrd_sql_core::SqlError::RlsDenied::detail: alloc::string::String
+pub wyrd_sql_core::SqlError::TriggerException
+pub wyrd_sql_core::SqlError::TriggerException::constraint: alloc::string::String
+pub wyrd_sql_core::SqlError::TxFailed(sqlx_core::error::Error)
+pub wyrd_sql_core::SqlError::UniqueViolation
+pub wyrd_sql_core::SqlError::UniqueViolation::constraint: alloc::string::String
+impl wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::code(&self) -> &'static str
+pub fn wyrd_sql_core::error::SqlError::remediation(&self) -> &'static str
+pub fn wyrd_sql_core::error::SqlError::status(&self) -> u16
+pub fn wyrd_sql_core::error::SqlError::title(&self) -> &'static str
+impl wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::from_id_error(e: wyrd_spec::ids::IdError) -> Self
+pub fn wyrd_sql_core::error::SqlError::from_spec_decode(e: wyrd_spec::envelope::SpecDecodeError) -> Self
+pub fn wyrd_sql_core::error::SqlError::from_version(e: wyrd_semver::error::VersionError) -> Self
+impl core::convert::From<sqlx_core::error::Error> for wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::from(error: sqlx_core::error::Error) -> Self
+impl core::convert::From<sqlx_core::migrate::error::MigrateError> for wyrd_sql_core::error::SqlError
+pub fn wyrd_sql_core::error::SqlError::from(error: sqlx_core::migrate::error::MigrateError) -> Self
+pub struct wyrd_sql_core::MigrateOptions<'a>
+pub wyrd_sql_core::MigrateOptions::advisory_lock_key: i64
+pub wyrd_sql_core::MigrateOptions::ensure_schemas: &'a [&'a str]
+pub wyrd_sql_core::MigrateOptions::search_path: &'a [&'a str]
+pub struct wyrd_sql_core::MigrationSet<'a>
+pub wyrd_sql_core::MigrationSet::migrator: &'a sqlx_core::migrate::migrator::Migrator
+pub wyrd_sql_core::MigrationSet::options: wyrd_sql_core::migration::MigrateOptions<'a>
+pub struct wyrd_sql_core::OperatorPool(_)
+impl wyrd_sql_core::operator_pool::OperatorPool
+pub async fn wyrd_sql_core::operator_pool::OperatorPool::begin(&self) -> core::result::Result<sqlx_core::transaction::Transaction<'_, sqlx_postgres::database::Postgres>, sqlx_core::error::Error>
+pub fn wyrd_sql_core::operator_pool::OperatorPool::pool(&self) -> &sqlx_postgres::PgPool
+impl core::convert::From<sqlx_core::pool::Pool<sqlx_postgres::database::Postgres>> for wyrd_sql_core::operator_pool::OperatorPool
+pub fn wyrd_sql_core::operator_pool::OperatorPool::from(pool: sqlx_postgres::PgPool) -> Self
+pub struct wyrd_sql_core::PoolConfig
+pub wyrd_sql_core::PoolConfig::acquire_timeout: core::time::Duration
+pub wyrd_sql_core::PoolConfig::idle_timeout: core::option::Option<core::time::Duration>
+pub wyrd_sql_core::PoolConfig::max_connections: u32
+pub wyrd_sql_core::PoolConfig::max_lifetime: core::option::Option<core::time::Duration>
+pub wyrd_sql_core::PoolConfig::min_connections: u32
+pub wyrd_sql_core::PoolConfig::statement_cache_capacity: usize
+pub wyrd_sql_core::PoolConfig::test_before_acquire: bool
+impl wyrd_sql_core::pool::PoolConfig
+pub fn wyrd_sql_core::pool::PoolConfig::app_defaults() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::app_from_env() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::from_env_with_suffix(defaults: Self, suffix: &str) -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::migrator_defaults() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::migrator_from_env() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::platform_admin_defaults() -> Self
+pub fn wyrd_sql_core::pool::PoolConfig::platform_admin_from_env() -> Self
+impl core::default::Default for wyrd_sql_core::pool::PoolConfig
+pub fn wyrd_sql_core::pool::PoolConfig::default() -> Self
+pub struct wyrd_sql_core::ResolvedDsns
+pub wyrd_sql_core::ResolvedDsns::app: secrecy::SecretString
+pub wyrd_sql_core::ResolvedDsns::catalog_app: secrecy::SecretString
+pub wyrd_sql_core::ResolvedDsns::migrator: secrecy::SecretString
+pub wyrd_sql_core::ResolvedDsns::platform_admin: core::option::Option<secrecy::SecretString>
+impl core::fmt::Debug for wyrd_sql_core::dsn::ResolvedDsns
+pub fn wyrd_sql_core::dsn::ResolvedDsns::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_sql_core::TenantConn<'a>
+impl<'a> wyrd_sql_core::tenant_conn::TenantConn<'a>
+pub async fn wyrd_sql_core::tenant_conn::TenantConn<'a>::acquire(pool: &'a sqlx_postgres::PgPool, data_tenant_id: wyrd_spec::ids::DataTenantId) -> core::result::Result<Self, wyrd_sql_core::error::SqlError>
+pub async fn wyrd_sql_core::tenant_conn::TenantConn<'a>::commit(self) -> core::result::Result<(), wyrd_sql_core::error::SqlError>
+pub fn wyrd_sql_core::tenant_conn::TenantConn<'a>::data_tenant_id(&self) -> wyrd_spec::ids::DataTenantId
+pub fn wyrd_sql_core::tenant_conn::TenantConn<'a>::transaction(&mut self) -> &mut sqlx_core::transaction::Transaction<'a, sqlx_postgres::database::Postgres>
+pub const wyrd_sql_core::APP_DSN_ENV: &str
+pub const wyrd_sql_core::BIND_CURRENT_TENANT_SQL: &str
+pub const wyrd_sql_core::CATALOG_APP_PASSWORD_ENV: &str
+pub const wyrd_sql_core::CURRENT_TENANT_GUC: &str
+pub const wyrd_sql_core::MIGRATOR_PASSWORD_ENV: &str
+pub const wyrd_sql_core::PLATFORM_ADMIN_PASSWORD_ENV: &str
+pub const wyrd_sql_core::WYRD_APP_ROLE: &str
+pub const wyrd_sql_core::WYRD_CATALOG_APP_ROLE: &str
+pub const wyrd_sql_core::WYRD_MIGRATOR_ROLE: &str
+pub const wyrd_sql_core::WYRD_PLATFORM_ADMIN_ROLE: &str
+pub async fn wyrd_sql_core::build_app_pool(database_url: &str) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub async fn wyrd_sql_core::build_migrator_pool(database_url: &str) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub async fn wyrd_sql_core::build_platform_admin_pool(database_url: &str) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub async fn wyrd_sql_core::build_pool(database_url: &str, config: wyrd_sql_core::pool::PoolConfig) -> core::result::Result<sqlx_postgres::PgPool, sqlx_core::error::Error>
+pub fn wyrd_sql_core::catalog_role_dsn(base: &url::Url, password: &secrecy::SecretString) -> secrecy::SecretString
+pub fn wyrd_sql_core::resolve_external_dsns(app: core::option::Option<alloc::string::String>, migrator_password: core::option::Option<secrecy::SecretString>, platform_admin_password: core::option::Option<secrecy::SecretString>, catalog_app_password: core::option::Option<secrecy::SecretString>) -> core::result::Result<core::option::Option<wyrd_sql_core::dsn::ResolvedDsns>, wyrd_sql_core::dsn::DsnError>
+pub fn wyrd_sql_core::resolve_external_dsns_from_env() -> core::result::Result<core::option::Option<wyrd_sql_core::dsn::ResolvedDsns>, wyrd_sql_core::dsn::DsnError>
+pub fn wyrd_sql_core::role_dsn(base: &url::Url, role: &str, password: &secrecy::SecretString) -> secrecy::SecretString
+pub fn wyrd_sql_core::role_dsn_from_base(base: &secrecy::SecretString, role: &str, password: &secrecy::SecretString) -> core::result::Result<secrecy::SecretString, wyrd_sql_core::dsn::DsnError>
+pub async fn wyrd_sql_core::run_migrations(migrator_pool: &sqlx_postgres::PgPool, migrator: &sqlx_core::migrate::migrator::Migrator, options: &wyrd_sql_core::migration::MigrateOptions<'_>) -> core::result::Result<(), wyrd_sql_core::error::SqlError>
+pub fn wyrd_sql_core::with_catalog_options(dsn: &secrecy::SecretString) -> secrecy::SecretString

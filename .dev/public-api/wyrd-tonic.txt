@@ -1,0 +1,1109 @@
+    Checking tokio v1.53.1
+    Checking futures-util v0.3.33
+    Checking futures-channel v0.3.33
+    Checking security-framework-sys v2.17.0
+    Checking sync_wrapper v1.0.2
+    Checking schemars v0.8.22
+    Checking serde_jcs v0.1.0
+    Checking url v2.5.8
+    Checking security-framework v3.7.0
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking rustls-native-certs v0.8.4
+    Checking tokio-util v0.7.19
+    Checking tokio-stream v0.1.19
+    Checking tokio-rustls v0.26.4
+    Checking h2 v0.4.15
+    Checking tower v0.5.3
+    Checking hyper v1.11.0
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking hyper-util v0.1.20
+    Checking hyper-timeout v0.5.2
+    Checking tonic v0.14.6
+    Checking tonic-prost v0.14.6
+    Checking tonic-types v0.14.6
+ Documenting wyrd-tonic v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tonic)
+warning: unclosed HTML tag `Utc`
+   --> /Users/stevenforrester/Documents/GitHub/wyrd-foundation/target/debug/build/wyrd-tonic-9057d27bf05fa912/out/wyrd.v1.rs:338:34
+    |
+338 | /// mirror the wyrd-spec DateTime<Utc> wire form; limit is capped server-side.
+    |                                  ^^^^^
+    |
+    = note: `#[warn(rustdoc::invalid_html_tags)]` on by default
+help: try marking as source code
+    |
+338 | /// mirror the wyrd-spec `DateTime<Utc>` wire form; limit is capped server-side.
+    |                          +             +
+
+warning: `wyrd-tonic` (lib doc) generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.68s
+pub mod wyrd_tonic
+pub use wyrd_tonic::prost
+pub use wyrd_tonic::tonic
+pub use wyrd_tonic::tonic_types
+pub mod wyrd_tonic::error
+pub const wyrd_tonic::error::WYRD_ERROR_HEADER: &str
+pub const wyrd_tonic::error::WYRD_REQUEST_ID_HEADER: &str
+pub fn wyrd_tonic::error::wyrd_error_to_status(error: wyrd_spec::error::WyrdError, request_id: core::option::Option<&wyrd_spec::request_id::RequestId>) -> tonic::status::Status
+pub mod wyrd_tonic::frame_codec
+pub enum wyrd_tonic::frame_codec::FrameCodecError
+pub wyrd_tonic::frame_codec::FrameCodecError::Decode(prost::error::DecodeError)
+pub wyrd_tonic::frame_codec::FrameCodecError::Encode(prost::error::EncodeError)
+pub wyrd_tonic::frame_codec::FrameCodecError::MalformedLength
+pub wyrd_tonic::frame_codec::FrameCodecError::Oversize
+pub wyrd_tonic::frame_codec::FrameCodecError::Oversize::length: usize
+pub wyrd_tonic::frame_codec::FrameCodecError::Oversize::maximum: usize
+pub wyrd_tonic::frame_codec::FrameCodecError::Truncated
+pub struct wyrd_tonic::frame_codec::FrameDecoder
+impl wyrd_tonic::frame_codec::FrameDecoder
+pub fn wyrd_tonic::frame_codec::FrameDecoder::finish(&self) -> core::result::Result<(), wyrd_tonic::frame_codec::FrameCodecError>
+pub fn wyrd_tonic::frame_codec::FrameDecoder::new(maximum: usize) -> Self
+pub fn wyrd_tonic::frame_codec::FrameDecoder::push<M>(&mut self, chunk: &[u8]) -> core::result::Result<alloc::vec::Vec<M>, wyrd_tonic::frame_codec::FrameCodecError> where M: prost::message::Message + core::default::Default
+pub struct wyrd_tonic::frame_codec::FrameEncoder
+impl wyrd_tonic::frame_codec::FrameEncoder
+pub fn wyrd_tonic::frame_codec::FrameEncoder::encode<M: prost::message::Message>(message: &M) -> core::result::Result<alloc::vec::Vec<u8>, wyrd_tonic::frame_codec::FrameCodecError>
+pub mod wyrd_tonic::private_conversion
+pub enum wyrd_tonic::private_conversion::PrivateConversionError
+pub wyrd_tonic::private_conversion::PrivateConversionError::Invalid
+pub wyrd_tonic::private_conversion::PrivateConversionError::Invalid::field: &'static str
+pub wyrd_tonic::private_conversion::PrivateConversionError::InvalidUuid(&'static str)
+pub wyrd_tonic::private_conversion::PrivateConversionError::Missing(&'static str)
+pub wyrd_tonic::private_conversion::PrivateConversionError::RequiredEnum(&'static str)
+pub wyrd_tonic::private_conversion::PrivateConversionError::TooLarge
+pub wyrd_tonic::private_conversion::PrivateConversionError::TooLarge::field: &'static str
+pub mod wyrd_tonic::query_conversion
+pub enum wyrd_tonic::query_conversion::QueryConversionError
+pub wyrd_tonic::query_conversion::QueryConversionError::Contract(wyrd_spec::vala::api::QueryContractError)
+pub wyrd_tonic::query_conversion::QueryConversionError::FrameAfterTerminal
+pub wyrd_tonic::query_conversion::QueryConversionError::InvalidFrameOrder
+pub wyrd_tonic::query_conversion::QueryConversionError::MissingBatchRowCount
+pub wyrd_tonic::query_conversion::QueryConversionError::MissingFrame
+pub wyrd_tonic::query_conversion::QueryConversionError::RequiredEnum(&'static str)
+pub wyrd_tonic::query_conversion::QueryConversionError::RowCountOverflow
+pub wyrd_tonic::query_conversion::QueryConversionError::UnexpectedBatchRowCount
+pub struct wyrd_tonic::query_conversion::QueryStreamConverter
+impl wyrd_tonic::query_conversion::QueryStreamConverter
+pub fn wyrd_tonic::query_conversion::QueryStreamConverter::convert(&mut self, value: wyrd_tonic::wyrd::v1::QueryStreamFrame, batch_row_count: core::option::Option<u64>) -> core::result::Result<wyrd_spec::vala::api::QueryStreamFrame, wyrd_tonic::query_conversion::QueryConversionError>
+pub fn wyrd_tonic::query_conversion::QueryStreamConverter::new(visibility: wyrd_spec::vala::api::VisibilityMode) -> Self
+pub mod wyrd_tonic::transport
+pub enum wyrd_tonic::transport::EndpointBuildError
+pub wyrd_tonic::transport::EndpointBuildError::CryptoProvider(wyrd_tls::InstallError)
+pub wyrd_tonic::transport::EndpointBuildError::Transport(tonic::transport::error::Error)
+pub fn wyrd_tonic::transport::authenticated_tls_endpoint(address: alloc::string::String, ca_certificate_pem: &[u8], server_name: alloc::string::String) -> core::result::Result<tonic::transport::channel::endpoint::Endpoint, wyrd_tonic::transport::EndpointBuildError>
+pub fn wyrd_tonic::transport::plaintext_endpoint(address: alloc::string::String) -> core::result::Result<tonic::transport::channel::endpoint::Endpoint, wyrd_tonic::transport::EndpointBuildError>
+pub mod wyrd_tonic::wyrd
+pub mod wyrd_tonic::wyrd::v1
+pub mod wyrd_tonic::wyrd::v1::query_stream_frame
+pub enum wyrd_tonic::wyrd::v1::query_stream_frame::Frame
+pub wyrd_tonic::wyrd::v1::query_stream_frame::Frame::Batch(wyrd_tonic::wyrd::v1::QueryBatchFrame)
+pub wyrd_tonic::wyrd::v1::query_stream_frame::Frame::Schema(wyrd_tonic::wyrd::v1::QuerySchemaFrame)
+pub wyrd_tonic::wyrd::v1::query_stream_frame::Frame::Terminal(wyrd_tonic::wyrd::v1::QueryTerminalFrame)
+impl wyrd_tonic::wyrd::v1::query_stream_frame::Frame
+pub fn wyrd_tonic::wyrd::v1::query_stream_frame::Frame::encode(&self, buf: &mut impl bytes::buf::buf_mut::BufMut)
+pub fn wyrd_tonic::wyrd::v1::query_stream_frame::Frame::encoded_len(&self) -> usize
+pub fn wyrd_tonic::wyrd::v1::query_stream_frame::Frame::merge(field: &mut core::option::Option<wyrd_tonic::wyrd::v1::query_stream_frame::Frame>, tag: u32, wire_type: prost::encoding::wire_type::WireType, buf: &mut impl bytes::buf::buf_impl::Buf, ctx: prost::encoding::DecodeContext) -> core::result::Result<(), prost::error::DecodeError>
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::query_stream_frame::Frame
+pub fn wyrd_tonic::wyrd::v1::query_stream_frame::Frame::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_tonic::wyrd::v1::reserve_node_slots_response
+pub enum wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome
+pub wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome::Pending(wyrd_tonic::wyrd::v1::PendingNodeReservation)
+pub wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome::Rejected(wyrd_tonic::wyrd::v1::ReservationRejected)
+impl wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome
+pub fn wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome::encode(&self, buf: &mut impl bytes::buf::buf_mut::BufMut)
+pub fn wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome::encoded_len(&self) -> usize
+pub fn wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome::merge(field: &mut core::option::Option<wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome>, tag: u32, wire_type: prost::encoding::wire_type::WireType, buf: &mut impl bytes::buf::buf_impl::Buf, ctx: prost::encoding::DecodeContext) -> core::result::Result<(), prost::error::DecodeError>
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome
+pub fn wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_tonic::wyrd::v1::tail_page
+pub enum wyrd_tonic::wyrd::v1::tail_page::NextCursor
+pub wyrd_tonic::wyrd::v1::tail_page::NextCursor::Next(wyrd_tonic::wyrd::v1::TailCursor)
+impl wyrd_tonic::wyrd::v1::tail_page::NextCursor
+pub fn wyrd_tonic::wyrd::v1::tail_page::NextCursor::encode(&self, buf: &mut impl bytes::buf::buf_mut::BufMut)
+pub fn wyrd_tonic::wyrd::v1::tail_page::NextCursor::encoded_len(&self) -> usize
+pub fn wyrd_tonic::wyrd::v1::tail_page::NextCursor::merge(field: &mut core::option::Option<wyrd_tonic::wyrd::v1::tail_page::NextCursor>, tag: u32, wire_type: prost::encoding::wire_type::WireType, buf: &mut impl bytes::buf::buf_impl::Buf, ctx: prost::encoding::DecodeContext) -> core::result::Result<(), prost::error::DecodeError>
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::tail_page::NextCursor
+pub fn wyrd_tonic::wyrd::v1::tail_page::NextCursor::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_tonic::wyrd::v1::tail_page_request
+pub enum wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor
+pub wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor::After(wyrd_tonic::wyrd::v1::TailCursor)
+impl wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor
+pub fn wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor::encode(&self, buf: &mut impl bytes::buf::buf_mut::BufMut)
+pub fn wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor::encoded_len(&self) -> usize
+pub fn wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor::merge(field: &mut core::option::Option<wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor>, tag: u32, wire_type: prost::encoding::wire_type::WireType, buf: &mut impl bytes::buf::buf_impl::Buf, ctx: prost::encoding::DecodeContext) -> core::result::Result<(), prost::error::DecodeError>
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor
+pub fn wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_tonic::wyrd::v1::worker_attempt_frame
+pub enum wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame
+pub wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame::ArrowIpcBatch(alloc::vec::Vec<u8>)
+pub wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame::ArrowIpcSchema(alloc::vec::Vec<u8>)
+pub wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame::Footer(wyrd_tonic::wyrd::v1::WorkerFooter)
+impl wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame
+pub fn wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame::encode(&self, buf: &mut impl bytes::buf::buf_mut::BufMut)
+pub fn wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame::encoded_len(&self) -> usize
+pub fn wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame::merge(field: &mut core::option::Option<wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame>, tag: u32, wire_type: prost::encoding::wire_type::WireType, buf: &mut impl bytes::buf::buf_impl::Buf, ctx: prost::encoding::DecodeContext) -> core::result::Result<(), prost::error::DecodeError>
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame
+pub fn wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::FreshnessPolicy
+pub wyrd_tonic::wyrd::v1::FreshnessPolicy::AllowDegraded = 2
+pub wyrd_tonic::wyrd::v1::FreshnessPolicy::Strict = 1
+pub wyrd_tonic::wyrd::v1::FreshnessPolicy::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::FreshnessPolicy
+pub fn wyrd_tonic::wyrd::v1::FreshnessPolicy::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::FreshnessPolicy::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::FreshnessPolicy
+pub fn wyrd_tonic::wyrd::v1::FreshnessPolicy::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::FreshnessPolicy>
+pub const fn wyrd_tonic::wyrd::v1::FreshnessPolicy::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::FreshnessPolicy> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::FreshnessPolicy) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::FreshnessPolicy
+pub type wyrd_tonic::wyrd::v1::FreshnessPolicy::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::FreshnessPolicy::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::FreshnessPolicy, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::FreshnessPolicy
+pub fn wyrd_tonic::wyrd::v1::FreshnessPolicy::default() -> wyrd_tonic::wyrd::v1::FreshnessPolicy
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::QueryClass
+pub wyrd_tonic::wyrd::v1::QueryClass::Analytical = 2
+pub wyrd_tonic::wyrd::v1::QueryClass::Interactive = 1
+pub wyrd_tonic::wyrd::v1::QueryClass::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::QueryClass
+pub fn wyrd_tonic::wyrd::v1::QueryClass::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::QueryClass::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::QueryClass
+pub fn wyrd_tonic::wyrd::v1::QueryClass::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::QueryClass>
+pub const fn wyrd_tonic::wyrd::v1::QueryClass::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::QueryClass> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::QueryClass) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::QueryClass
+pub type wyrd_tonic::wyrd::v1::QueryClass::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::QueryClass::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::QueryClass, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryClass
+pub fn wyrd_tonic::wyrd::v1::QueryClass::default() -> wyrd_tonic::wyrd::v1::QueryClass
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::QueryFreshness
+pub wyrd_tonic::wyrd::v1::QueryFreshness::Complete = 1
+pub wyrd_tonic::wyrd::v1::QueryFreshness::Degraded = 2
+pub wyrd_tonic::wyrd::v1::QueryFreshness::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::QueryFreshness
+pub fn wyrd_tonic::wyrd::v1::QueryFreshness::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::QueryFreshness::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::QueryFreshness
+pub fn wyrd_tonic::wyrd::v1::QueryFreshness::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::QueryFreshness>
+pub const fn wyrd_tonic::wyrd::v1::QueryFreshness::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::QueryFreshness> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::QueryFreshness) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::QueryFreshness
+pub type wyrd_tonic::wyrd::v1::QueryFreshness::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::QueryFreshness::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::QueryFreshness, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryFreshness
+pub fn wyrd_tonic::wyrd::v1::QueryFreshness::default() -> wyrd_tonic::wyrd::v1::QueryFreshness
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::QuerySource
+pub wyrd_tonic::wyrd::v1::QuerySource::HotSealed = 2
+pub wyrd_tonic::wyrd::v1::QuerySource::Iceberg = 1
+pub wyrd_tonic::wyrd::v1::QuerySource::LiveTail = 3
+pub wyrd_tonic::wyrd::v1::QuerySource::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::QuerySource
+pub fn wyrd_tonic::wyrd::v1::QuerySource::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::QuerySource::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::QuerySource
+pub fn wyrd_tonic::wyrd::v1::QuerySource::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::QuerySource>
+pub const fn wyrd_tonic::wyrd::v1::QuerySource::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::QuerySource> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::QuerySource) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::QuerySource
+pub type wyrd_tonic::wyrd::v1::QuerySource::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::QuerySource::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::QuerySource, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QuerySource
+pub fn wyrd_tonic::wyrd::v1::QuerySource::default() -> wyrd_tonic::wyrd::v1::QuerySource
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::QueryTerminalErrorCode
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::CatalogUnreachable = 7
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::QueryAuditUnavailable = 6
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::QueryExecutionFailed = 9
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::QueryPeerSecurity = 5
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::QueryReconciliationInvariant = 4
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::QueryTenantInvariant = 3
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::QueryTimeout = 1
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::QueryVisibilityUnavailable = 2
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::StorageUnreachable = 8
+pub wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::QueryTerminalErrorCode
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::QueryTerminalErrorCode
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::QueryTerminalErrorCode>
+pub const fn wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::QueryTerminalErrorCode> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::QueryTerminalErrorCode) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::QueryTerminalErrorCode
+pub type wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::QueryTerminalErrorCode, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryTerminalErrorCode
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalErrorCode::default() -> wyrd_tonic::wyrd::v1::QueryTerminalErrorCode
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::QueryTerminalOutcome
+pub wyrd_tonic::wyrd::v1::QueryTerminalOutcome::Degraded = 2
+pub wyrd_tonic::wyrd::v1::QueryTerminalOutcome::Failed = 3
+pub wyrd_tonic::wyrd::v1::QueryTerminalOutcome::Success = 1
+pub wyrd_tonic::wyrd::v1::QueryTerminalOutcome::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::QueryTerminalOutcome
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalOutcome::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalOutcome::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::QueryTerminalOutcome
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalOutcome::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::QueryTerminalOutcome>
+pub const fn wyrd_tonic::wyrd::v1::QueryTerminalOutcome::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::QueryTerminalOutcome> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::QueryTerminalOutcome) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::QueryTerminalOutcome
+pub type wyrd_tonic::wyrd::v1::QueryTerminalOutcome::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalOutcome::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::QueryTerminalOutcome, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryTerminalOutcome
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalOutcome::default() -> wyrd_tonic::wyrd::v1::QueryTerminalOutcome
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::QueryWarning
+pub wyrd_tonic::wyrd::v1::QueryWarning::LiveTailUnavailable = 1
+pub wyrd_tonic::wyrd::v1::QueryWarning::StaleCutReplanned = 2
+pub wyrd_tonic::wyrd::v1::QueryWarning::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::QueryWarning
+pub fn wyrd_tonic::wyrd::v1::QueryWarning::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::QueryWarning::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::QueryWarning
+pub fn wyrd_tonic::wyrd::v1::QueryWarning::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::QueryWarning>
+pub const fn wyrd_tonic::wyrd::v1::QueryWarning::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::QueryWarning> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::QueryWarning) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::QueryWarning
+pub type wyrd_tonic::wyrd::v1::QueryWarning::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::QueryWarning::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::QueryWarning, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryWarning
+pub fn wyrd_tonic::wyrd::v1::QueryWarning::default() -> wyrd_tonic::wyrd::v1::QueryWarning
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::SourceCompletionOutcome
+pub wyrd_tonic::wyrd::v1::SourceCompletionOutcome::Complete = 1
+pub wyrd_tonic::wyrd::v1::SourceCompletionOutcome::Unavailable = 2
+pub wyrd_tonic::wyrd::v1::SourceCompletionOutcome::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::SourceCompletionOutcome
+pub fn wyrd_tonic::wyrd::v1::SourceCompletionOutcome::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::SourceCompletionOutcome::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::SourceCompletionOutcome
+pub fn wyrd_tonic::wyrd::v1::SourceCompletionOutcome::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::SourceCompletionOutcome>
+pub const fn wyrd_tonic::wyrd::v1::SourceCompletionOutcome::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::SourceCompletionOutcome> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::SourceCompletionOutcome) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::SourceCompletionOutcome
+pub type wyrd_tonic::wyrd::v1::SourceCompletionOutcome::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::SourceCompletionOutcome::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::SourceCompletionOutcome, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::SourceCompletionOutcome
+pub fn wyrd_tonic::wyrd::v1::SourceCompletionOutcome::default() -> wyrd_tonic::wyrd::v1::SourceCompletionOutcome
+#[repr(i32)] pub enum wyrd_tonic::wyrd::v1::VisibilityMode
+pub wyrd_tonic::wyrd::v1::VisibilityMode::Fused = 2
+pub wyrd_tonic::wyrd::v1::VisibilityMode::PublishedOnly = 1
+pub wyrd_tonic::wyrd::v1::VisibilityMode::Unspecified = 0
+impl wyrd_tonic::wyrd::v1::VisibilityMode
+pub fn wyrd_tonic::wyrd::v1::VisibilityMode::as_str_name(&self) -> &'static str
+pub fn wyrd_tonic::wyrd::v1::VisibilityMode::from_str_name(value: &str) -> core::option::Option<Self>
+impl wyrd_tonic::wyrd::v1::VisibilityMode
+pub fn wyrd_tonic::wyrd::v1::VisibilityMode::from_i32(value: i32) -> core::option::Option<wyrd_tonic::wyrd::v1::VisibilityMode>
+pub const fn wyrd_tonic::wyrd::v1::VisibilityMode::is_valid(value: i32) -> bool
+impl core::convert::From<wyrd_tonic::wyrd::v1::VisibilityMode> for i32
+pub fn i32::from(value: wyrd_tonic::wyrd::v1::VisibilityMode) -> i32
+impl core::convert::TryFrom<i32> for wyrd_tonic::wyrd::v1::VisibilityMode
+pub type wyrd_tonic::wyrd::v1::VisibilityMode::Error = prost::error::UnknownEnumValue
+pub fn wyrd_tonic::wyrd::v1::VisibilityMode::try_from(value: i32) -> core::result::Result<wyrd_tonic::wyrd::v1::VisibilityMode, prost::error::UnknownEnumValue>
+impl core::default::Default for wyrd_tonic::wyrd::v1::VisibilityMode
+pub fn wyrd_tonic::wyrd::v1::VisibilityMode::default() -> wyrd_tonic::wyrd::v1::VisibilityMode
+pub struct wyrd_tonic::wyrd::v1::AcquireTailFenceRequest
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::binding: core::option::Option<wyrd_tonic::wyrd::v1::TenantTableBinding>
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::deadline_unix_ms: u64
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::event_day: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::exclusive_sealed: core::option::Option<wyrd_tonic::wyrd::v1::TailCursor>
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::query_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::schema_fingerprint: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::tail_protocol_version: u32
+pub wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::tail_ticket: alloc::vec::Vec<u8>
+impl core::convert::From<wyrd_spec::vala::api::AcquireTailFenceRequest> for wyrd_tonic::wyrd::v1::AcquireTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::from(value: wyrd_spec::vala::api::AcquireTailFenceRequest) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::AcquireTailFenceRequest> for wyrd_spec::vala::api::AcquireTailFenceRequest
+pub type wyrd_spec::vala::api::AcquireTailFenceRequest::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::AcquireTailFenceRequest::try_from(value: wyrd_tonic::wyrd::v1::AcquireTailFenceRequest) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::AcquireTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::AcquireTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::AcquireTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::AcquireTailFenceRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ActiveTailStream
+pub wyrd_tonic::wyrd::v1::ActiveTailStream::event_day: alloc::string::String
+pub wyrd_tonic::wyrd::v1::ActiveTailStream::stream: core::option::Option<wyrd_tonic::wyrd::v1::TailStreamIdentity>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ActiveTailStream
+pub fn wyrd_tonic::wyrd::v1::ActiveTailStream::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ActiveTailStream
+pub fn wyrd_tonic::wyrd::v1::ActiveTailStream::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ActiveTailStream
+pub fn wyrd_tonic::wyrd::v1::ActiveTailStream::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ActiveTailStream::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::AgentTraceRow
+pub wyrd_tonic::wyrd::v1::AgentTraceRow::branch: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AgentTraceRow::commit_sha: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AgentTraceRow::dev_session_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AgentTraceRow::payload_json: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AgentTraceRow::repo: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AgentTraceRow::run_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::AgentTraceRow::started_at: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::AgentTraceRow
+pub fn wyrd_tonic::wyrd::v1::AgentTraceRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::AgentTraceRow
+pub fn wyrd_tonic::wyrd::v1::AgentTraceRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::AgentTraceRow
+pub fn wyrd_tonic::wyrd::v1::AgentTraceRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::AgentTraceRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::BifrostQueryRequest
+pub wyrd_tonic::wyrd::v1::BifrostQueryRequest::deadline_ms: core::option::Option<u64>
+pub wyrd_tonic::wyrd::v1::BifrostQueryRequest::freshness: i32
+pub wyrd_tonic::wyrd::v1::BifrostQueryRequest::sql: alloc::string::String
+pub wyrd_tonic::wyrd::v1::BifrostQueryRequest::visibility: i32
+impl wyrd_tonic::wyrd::v1::BifrostQueryRequest
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::deadline_ms(&self) -> u64
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::freshness(&self) -> wyrd_tonic::wyrd::v1::FreshnessPolicy
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::set_freshness(&mut self, value: wyrd_tonic::wyrd::v1::FreshnessPolicy)
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::set_visibility(&mut self, value: wyrd_tonic::wyrd::v1::VisibilityMode)
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::visibility(&self) -> wyrd_tonic::wyrd::v1::VisibilityMode
+impl core::convert::From<wyrd_spec::vala::api::BifrostQueryRequest> for wyrd_tonic::wyrd::v1::BifrostQueryRequest
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::from(value: wyrd_spec::vala::api::BifrostQueryRequest) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::BifrostQueryRequest> for wyrd_spec::vala::api::BifrostQueryRequest
+pub type wyrd_spec::vala::api::BifrostQueryRequest::Error = wyrd_tonic::query_conversion::QueryConversionError
+pub fn wyrd_spec::vala::api::BifrostQueryRequest::try_from(value: wyrd_tonic::wyrd::v1::BifrostQueryRequest) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::BifrostQueryRequest
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::BifrostQueryRequest
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::BifrostQueryRequest
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::BifrostQueryRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::DriftRow
+pub wyrd_tonic::wyrd::v1::DriftRow::computed_at: alloc::string::String
+pub wyrd_tonic::wyrd::v1::DriftRow::drift_score: f64
+pub wyrd_tonic::wyrd::v1::DriftRow::feature: alloc::string::String
+pub wyrd_tonic::wyrd::v1::DriftRow::run_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::DriftRow::threshold: f64
+impl core::default::Default for wyrd_tonic::wyrd::v1::DriftRow
+pub fn wyrd_tonic::wyrd::v1::DriftRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::DriftRow
+pub fn wyrd_tonic::wyrd::v1::DriftRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::DriftRow
+pub fn wyrd_tonic::wyrd::v1::DriftRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::DriftRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::EvalRow
+pub wyrd_tonic::wyrd::v1::EvalRow::eval_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::EvalRow::metric: alloc::string::String
+pub wyrd_tonic::wyrd::v1::EvalRow::run_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::EvalRow::score: f64
+pub wyrd_tonic::wyrd::v1::EvalRow::started_at: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::EvalRow
+pub fn wyrd_tonic::wyrd::v1::EvalRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::EvalRow
+pub fn wyrd_tonic::wyrd::v1::EvalRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::EvalRow
+pub fn wyrd_tonic::wyrd::v1::EvalRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::EvalRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ExecuteFragmentRequest
+pub wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::fragment_bytes: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::reservation_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::ticket: core::option::Option<wyrd_tonic::wyrd::v1::SignedPeerTicket>
+impl core::convert::From<wyrd_spec::vala::api::ExecuteFragmentRequest> for wyrd_tonic::wyrd::v1::ExecuteFragmentRequest
+pub fn wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::from(value: wyrd_spec::vala::api::ExecuteFragmentRequest) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::ExecuteFragmentRequest> for wyrd_spec::vala::api::ExecuteFragmentRequest
+pub type wyrd_spec::vala::api::ExecuteFragmentRequest::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::ExecuteFragmentRequest::try_from(value: wyrd_tonic::wyrd::v1::ExecuteFragmentRequest) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ExecuteFragmentRequest
+pub fn wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ExecuteFragmentRequest
+pub fn wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ExecuteFragmentRequest
+pub fn wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ExecuteFragmentRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::GenAiRow
+pub wyrd_tonic::wyrd::v1::GenAiRow::completion: alloc::string::String
+pub wyrd_tonic::wyrd::v1::GenAiRow::conversation_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::GenAiRow::cost_usd: f64
+pub wyrd_tonic::wyrd::v1::GenAiRow::input_tokens: i64
+pub wyrd_tonic::wyrd::v1::GenAiRow::model: alloc::string::String
+pub wyrd_tonic::wyrd::v1::GenAiRow::output_tokens: i64
+pub wyrd_tonic::wyrd::v1::GenAiRow::prompt: alloc::string::String
+pub wyrd_tonic::wyrd::v1::GenAiRow::provider: alloc::string::String
+pub wyrd_tonic::wyrd::v1::GenAiRow::started_at: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::GenAiRow
+pub fn wyrd_tonic::wyrd::v1::GenAiRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::GenAiRow
+pub fn wyrd_tonic::wyrd::v1::GenAiRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::GenAiRow
+pub fn wyrd_tonic::wyrd::v1::GenAiRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::GenAiRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::GetTraceRequest
+pub wyrd_tonic::wyrd::v1::GetTraceRequest::trace_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::GetTraceRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::GetTraceRequest
+pub fn wyrd_tonic::wyrd::v1::GetTraceRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::GetTraceRequest
+pub fn wyrd_tonic::wyrd::v1::GetTraceRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::GetTraceRequest
+pub fn wyrd_tonic::wyrd::v1::GetTraceRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::GetTraceRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::GetTraceResponse
+pub wyrd_tonic::wyrd::v1::GetTraceResponse::trace: core::option::Option<wyrd_tonic::wyrd::v1::TraceWaterfall>
+impl core::default::Default for wyrd_tonic::wyrd::v1::GetTraceResponse
+pub fn wyrd_tonic::wyrd::v1::GetTraceResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::GetTraceResponse
+pub fn wyrd_tonic::wyrd::v1::GetTraceResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::GetTraceResponse
+pub fn wyrd_tonic::wyrd::v1::GetTraceResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::GetTraceResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::InsertBatchRequest
+pub wyrd_tonic::wyrd::v1::InsertBatchRequest::arrow_ipc: bytes::bytes::Bytes
+pub wyrd_tonic::wyrd::v1::InsertBatchRequest::table: alloc::string::String
+pub wyrd_tonic::wyrd::v1::InsertBatchRequest::wyrd_batch_id: bytes::bytes::Bytes
+impl core::default::Default for wyrd_tonic::wyrd::v1::InsertBatchRequest
+pub fn wyrd_tonic::wyrd::v1::InsertBatchRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::InsertBatchRequest
+pub fn wyrd_tonic::wyrd::v1::InsertBatchRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::InsertBatchRequest
+pub fn wyrd_tonic::wyrd::v1::InsertBatchRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::InsertBatchRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::InsertBatchResponse
+pub wyrd_tonic::wyrd::v1::InsertBatchResponse::wyrd_batch_id: bytes::bytes::Bytes
+impl core::default::Default for wyrd_tonic::wyrd::v1::InsertBatchResponse
+pub fn wyrd_tonic::wyrd::v1::InsertBatchResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::InsertBatchResponse
+pub fn wyrd_tonic::wyrd::v1::InsertBatchResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::InsertBatchResponse
+pub fn wyrd_tonic::wyrd::v1::InsertBatchResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::InsertBatchResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ListActiveStreamsRequest
+pub wyrd_tonic::wyrd::v1::ListActiveStreamsRequest::binding: core::option::Option<wyrd_tonic::wyrd::v1::TenantTableBinding>
+pub wyrd_tonic::wyrd::v1::ListActiveStreamsRequest::query_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::ListActiveStreamsRequest::tail_ticket: alloc::vec::Vec<u8>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ListActiveStreamsRequest
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ListActiveStreamsRequest
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ListActiveStreamsRequest
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ListActiveStreamsResponse
+pub wyrd_tonic::wyrd::v1::ListActiveStreamsResponse::streams: alloc::vec::Vec<wyrd_tonic::wyrd::v1::ActiveTailStream>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ListActiveStreamsResponse
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ListActiveStreamsResponse
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ListActiveStreamsResponse
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ListActiveStreamsResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::LogRow
+pub wyrd_tonic::wyrd::v1::LogRow::body: alloc::string::String
+pub wyrd_tonic::wyrd::v1::LogRow::event_name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::LogRow::severity_number: i32
+pub wyrd_tonic::wyrd::v1::LogRow::severity_text: alloc::string::String
+pub wyrd_tonic::wyrd::v1::LogRow::span_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::LogRow::timestamp: alloc::string::String
+pub wyrd_tonic::wyrd::v1::LogRow::trace_id: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::LogRow
+pub fn wyrd_tonic::wyrd::v1::LogRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::LogRow
+pub fn wyrd_tonic::wyrd::v1::LogRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::LogRow
+pub fn wyrd_tonic::wyrd::v1::LogRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::LogRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::MetricRow
+pub wyrd_tonic::wyrd::v1::MetricRow::attributes_json: alloc::string::String
+pub wyrd_tonic::wyrd::v1::MetricRow::metric_name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::MetricRow::metric_type: alloc::string::String
+pub wyrd_tonic::wyrd::v1::MetricRow::timestamp: alloc::string::String
+pub wyrd_tonic::wyrd::v1::MetricRow::value: f64
+impl core::default::Default for wyrd_tonic::wyrd::v1::MetricRow
+pub fn wyrd_tonic::wyrd::v1::MetricRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::MetricRow
+pub fn wyrd_tonic::wyrd::v1::MetricRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::MetricRow
+pub fn wyrd_tonic::wyrd::v1::MetricRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::MetricRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::PendingNodeReservation
+pub wyrd_tonic::wyrd::v1::PendingNodeReservation::expires_at_unix_ms: u64
+pub wyrd_tonic::wyrd::v1::PendingNodeReservation::reservation_id: alloc::vec::Vec<u8>
+impl core::default::Default for wyrd_tonic::wyrd::v1::PendingNodeReservation
+pub fn wyrd_tonic::wyrd::v1::PendingNodeReservation::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::PendingNodeReservation
+pub fn wyrd_tonic::wyrd::v1::PendingNodeReservation::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::PendingNodeReservation
+pub fn wyrd_tonic::wyrd::v1::PendingNodeReservation::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::PendingNodeReservation::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryAgentTracesRequest
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::branch: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::commit_sha: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::dev_session_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::repo: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::run_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryAgentTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryAgentTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryAgentTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryAgentTracesResponse
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryAgentTracesResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::AgentTraceRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryAgentTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryAgentTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryAgentTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryAgentTracesResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryBatchFrame
+pub wyrd_tonic::wyrd::v1::QueryBatchFrame::arrow_ipc_batch: alloc::vec::Vec<u8>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryBatchFrame
+pub fn wyrd_tonic::wyrd::v1::QueryBatchFrame::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryBatchFrame
+pub fn wyrd_tonic::wyrd::v1::QueryBatchFrame::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryBatchFrame
+pub fn wyrd_tonic::wyrd::v1::QueryBatchFrame::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryBatchFrame::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryDriftRequest
+pub wyrd_tonic::wyrd::v1::QueryDriftRequest::feature: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryDriftRequest::run_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryDriftRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryDriftRequest
+pub fn wyrd_tonic::wyrd::v1::QueryDriftRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryDriftRequest
+pub fn wyrd_tonic::wyrd::v1::QueryDriftRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryDriftRequest
+pub fn wyrd_tonic::wyrd::v1::QueryDriftRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryDriftRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryDriftResponse
+pub wyrd_tonic::wyrd::v1::QueryDriftResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryDriftResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::DriftRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryDriftResponse
+pub fn wyrd_tonic::wyrd::v1::QueryDriftResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryDriftResponse
+pub fn wyrd_tonic::wyrd::v1::QueryDriftResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryDriftResponse
+pub fn wyrd_tonic::wyrd::v1::QueryDriftResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryDriftResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryEvalRequest
+pub wyrd_tonic::wyrd::v1::QueryEvalRequest::eval_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryEvalRequest::run_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryEvalRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryEvalRequest
+pub fn wyrd_tonic::wyrd::v1::QueryEvalRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryEvalRequest
+pub fn wyrd_tonic::wyrd::v1::QueryEvalRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryEvalRequest
+pub fn wyrd_tonic::wyrd::v1::QueryEvalRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryEvalRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryEvalResponse
+pub wyrd_tonic::wyrd::v1::QueryEvalResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryEvalResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::EvalRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryEvalResponse
+pub fn wyrd_tonic::wyrd::v1::QueryEvalResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryEvalResponse
+pub fn wyrd_tonic::wyrd::v1::QueryEvalResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryEvalResponse
+pub fn wyrd_tonic::wyrd::v1::QueryEvalResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryEvalResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryGenAiRequest
+pub wyrd_tonic::wyrd::v1::QueryGenAiRequest::conversation_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryGenAiRequest::model: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryGenAiRequest::provider: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryGenAiRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryGenAiRequest
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryGenAiRequest
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryGenAiRequest
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryGenAiResponse
+pub wyrd_tonic::wyrd::v1::QueryGenAiResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryGenAiResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::GenAiRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryGenAiResponse
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryGenAiResponse
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryGenAiResponse
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryGenAiResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryLogsRequest
+pub wyrd_tonic::wyrd::v1::QueryLogsRequest::event_name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryLogsRequest::severity_number_min: i32
+pub wyrd_tonic::wyrd::v1::QueryLogsRequest::trace_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryLogsRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryLogsRequest
+pub fn wyrd_tonic::wyrd::v1::QueryLogsRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryLogsRequest
+pub fn wyrd_tonic::wyrd::v1::QueryLogsRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryLogsRequest
+pub fn wyrd_tonic::wyrd::v1::QueryLogsRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryLogsRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryLogsResponse
+pub wyrd_tonic::wyrd::v1::QueryLogsResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryLogsResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::LogRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryLogsResponse
+pub fn wyrd_tonic::wyrd::v1::QueryLogsResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryLogsResponse
+pub fn wyrd_tonic::wyrd::v1::QueryLogsResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryLogsResponse
+pub fn wyrd_tonic::wyrd::v1::QueryLogsResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryLogsResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryMetricsRequest
+pub wyrd_tonic::wyrd::v1::QueryMetricsRequest::metric_name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryMetricsRequest::metric_type: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryMetricsRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryMetricsRequest
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryMetricsRequest
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryMetricsRequest
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryMetricsResponse
+pub wyrd_tonic::wyrd::v1::QueryMetricsResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryMetricsResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::MetricRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryMetricsResponse
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryMetricsResponse
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryMetricsResponse
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryMetricsResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryRecentTracesRequest
+pub wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::min_duration_ms: u32
+pub wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::service: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::status: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryRecentTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryRecentTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryRecentTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryRecentTracesResponse
+pub wyrd_tonic::wyrd::v1::QueryRecentTracesResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryRecentTracesResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::TraceSummaryRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryRecentTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryRecentTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryRecentTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryRecentTracesResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QuerySchemaFrame
+pub wyrd_tonic::wyrd::v1::QuerySchemaFrame::arrow_ipc_schema: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::QuerySchemaFrame::schema_fingerprint: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::QuerySchemaFrame
+pub fn wyrd_tonic::wyrd::v1::QuerySchemaFrame::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QuerySchemaFrame
+pub fn wyrd_tonic::wyrd::v1::QuerySchemaFrame::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QuerySchemaFrame
+pub fn wyrd_tonic::wyrd::v1::QuerySchemaFrame::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QuerySchemaFrame::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryStreamFrame
+pub wyrd_tonic::wyrd::v1::QueryStreamFrame::frame: core::option::Option<wyrd_tonic::wyrd::v1::query_stream_frame::Frame>
+impl core::convert::From<wyrd_spec::vala::api::QueryStreamFrame> for wyrd_tonic::wyrd::v1::QueryStreamFrame
+pub fn wyrd_tonic::wyrd::v1::QueryStreamFrame::from(value: wyrd_spec::vala::api::QueryStreamFrame) -> Self
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryStreamFrame
+pub fn wyrd_tonic::wyrd::v1::QueryStreamFrame::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryStreamFrame
+pub fn wyrd_tonic::wyrd::v1::QueryStreamFrame::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryStreamFrame
+pub fn wyrd_tonic::wyrd::v1::QueryStreamFrame::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryStreamFrame::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryTerminalError
+pub wyrd_tonic::wyrd::v1::QueryTerminalError::code: i32
+pub wyrd_tonic::wyrd::v1::QueryTerminalError::detail: core::option::Option<alloc::string::String>
+impl wyrd_tonic::wyrd::v1::QueryTerminalError
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalError::code(&self) -> wyrd_tonic::wyrd::v1::QueryTerminalErrorCode
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalError::detail(&self) -> &str
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalError::set_code(&mut self, value: wyrd_tonic::wyrd::v1::QueryTerminalErrorCode)
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryTerminalError
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalError::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryTerminalError
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalError::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryTerminalError
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalError::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalError::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryTerminalFrame
+pub wyrd_tonic::wyrd::v1::QueryTerminalFrame::error: core::option::Option<wyrd_tonic::wyrd::v1::QueryTerminalError>
+pub wyrd_tonic::wyrd::v1::QueryTerminalFrame::freshness: i32
+pub wyrd_tonic::wyrd::v1::QueryTerminalFrame::outcome: i32
+pub wyrd_tonic::wyrd::v1::QueryTerminalFrame::row_count: u64
+pub wyrd_tonic::wyrd::v1::QueryTerminalFrame::source_completion: alloc::vec::Vec<wyrd_tonic::wyrd::v1::SourceCompletion>
+pub wyrd_tonic::wyrd::v1::QueryTerminalFrame::warnings: alloc::vec::Vec<i32>
+impl wyrd_tonic::wyrd::v1::QueryTerminalFrame
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::freshness(&self) -> wyrd_tonic::wyrd::v1::QueryFreshness
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::outcome(&self) -> wyrd_tonic::wyrd::v1::QueryTerminalOutcome
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::push_warnings(&mut self, value: wyrd_tonic::wyrd::v1::QueryWarning)
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::set_freshness(&mut self, value: wyrd_tonic::wyrd::v1::QueryFreshness)
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::set_outcome(&mut self, value: wyrd_tonic::wyrd::v1::QueryTerminalOutcome)
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::warnings(&self) -> core::iter::adapters::filter_map::FilterMap<core::iter::adapters::cloned::Cloned<core::slice::iter::Iter<'_, i32>>, fn(i32) -> core::option::Option<wyrd_tonic::wyrd::v1::QueryWarning>>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryTerminalFrame
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryTerminalFrame
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryTerminalFrame
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryTerminalFrame::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryTracesRequest
+pub wyrd_tonic::wyrd::v1::QueryTracesRequest::min_duration_ms: u32
+pub wyrd_tonic::wyrd::v1::QueryTracesRequest::name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryTracesRequest::service: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryTracesRequest::status: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryTracesRequest::window: core::option::Option<wyrd_tonic::wyrd::v1::QueryWindow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryTracesRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryTracesRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryTracesRequest
+pub fn wyrd_tonic::wyrd::v1::QueryTracesRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryTracesRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryTracesResponse
+pub wyrd_tonic::wyrd::v1::QueryTracesResponse::next_page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryTracesResponse::rows: alloc::vec::Vec<wyrd_tonic::wyrd::v1::TraceSummaryRow>
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryTracesResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryTracesResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryTracesResponse
+pub fn wyrd_tonic::wyrd::v1::QueryTracesResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryTracesResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::QueryWindow
+pub wyrd_tonic::wyrd::v1::QueryWindow::limit: u32
+pub wyrd_tonic::wyrd::v1::QueryWindow::page_token: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryWindow::since: alloc::string::String
+pub wyrd_tonic::wyrd::v1::QueryWindow::until: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::QueryWindow
+pub fn wyrd_tonic::wyrd::v1::QueryWindow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::QueryWindow
+pub fn wyrd_tonic::wyrd::v1::QueryWindow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::QueryWindow
+pub fn wyrd_tonic::wyrd::v1::QueryWindow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::QueryWindow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest
+pub wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::leader_fencing_token: u64
+pub wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::leader_node_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::query_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::reservation_id: alloc::vec::Vec<u8>
+impl core::convert::From<wyrd_spec::vala::api::ReleaseNodeSlotsRequest> for wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::from(value: wyrd_spec::vala::api::ReleaseNodeSlotsRequest) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest> for wyrd_spec::vala::api::ReleaseNodeSlotsRequest
+pub type wyrd_spec::vala::api::ReleaseNodeSlotsRequest::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::ReleaseNodeSlotsRequest::try_from(value: wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse
+impl core::default::Default for wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ReleaseNodeSlotsResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest
+pub wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::fence_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::query_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::tail_capability: alloc::vec::Vec<u8>
+impl core::convert::From<wyrd_spec::vala::api::ReleaseTailFenceRequest> for wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::from(value: wyrd_spec::vala::api::ReleaseTailFenceRequest) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest> for wyrd_spec::vala::api::ReleaseTailFenceRequest
+pub type wyrd_spec::vala::api::ReleaseTailFenceRequest::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::ReleaseTailFenceRequest::try_from(value: wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse
+impl core::default::Default for wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ReleaseTailFenceResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ReservationRejected
+pub wyrd_tonic::wyrd::v1::ReservationRejected::retry_after_ms: u32
+impl core::default::Default for wyrd_tonic::wyrd::v1::ReservationRejected
+pub fn wyrd_tonic::wyrd::v1::ReservationRejected::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ReservationRejected
+pub fn wyrd_tonic::wyrd::v1::ReservationRejected::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ReservationRejected
+pub fn wyrd_tonic::wyrd::v1::ReservationRejected::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ReservationRejected::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest
+pub wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::expires_at_unix_ms: u64
+pub wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::leader_fencing_token: u64
+pub wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::leader_node_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::query_class: i32
+pub wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::query_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::slot_units: u32
+impl wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::query_class(&self) -> wyrd_tonic::wyrd::v1::QueryClass
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::set_query_class(&mut self, value: wyrd_tonic::wyrd::v1::QueryClass)
+impl core::convert::From<wyrd_spec::vala::api::ReserveNodeSlotsRequest> for wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::from(value: wyrd_spec::vala::api::ReserveNodeSlotsRequest) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest> for wyrd_spec::vala::api::ReserveNodeSlotsRequest
+pub type wyrd_spec::vala::api::ReserveNodeSlotsRequest::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::ReserveNodeSlotsRequest::try_from(value: wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse
+pub wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse::outcome: core::option::Option<wyrd_tonic::wyrd::v1::reserve_node_slots_response::Outcome>
+impl core::convert::From<wyrd_spec::vala::api::ReserveNodeSlotsResponse> for wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse::from(value: wyrd_spec::vala::api::ReserveNodeSlotsResponse) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse> for wyrd_spec::vala::api::ReserveNodeSlotsResponse
+pub type wyrd_spec::vala::api::ReserveNodeSlotsResponse::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::ReserveNodeSlotsResponse::try_from(value: wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::ReserveNodeSlotsResponse::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::SignedPeerTicket
+pub wyrd_tonic::wyrd::v1::SignedPeerTicket::claims_bytes: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::SignedPeerTicket::key_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SignedPeerTicket::signature: alloc::vec::Vec<u8>
+impl core::convert::From<wyrd_spec::vala::api::SignedPeerTicket> for wyrd_tonic::wyrd::v1::SignedPeerTicket
+pub fn wyrd_tonic::wyrd::v1::SignedPeerTicket::from(value: wyrd_spec::vala::api::SignedPeerTicket) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::SignedPeerTicket> for wyrd_spec::vala::api::SignedPeerTicket
+pub type wyrd_spec::vala::api::SignedPeerTicket::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::SignedPeerTicket::try_from(value: wyrd_tonic::wyrd::v1::SignedPeerTicket) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::SignedPeerTicket
+pub fn wyrd_tonic::wyrd::v1::SignedPeerTicket::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::SignedPeerTicket
+pub fn wyrd_tonic::wyrd::v1::SignedPeerTicket::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::SignedPeerTicket
+pub fn wyrd_tonic::wyrd::v1::SignedPeerTicket::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::SignedPeerTicket::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::SourceCompletion
+pub wyrd_tonic::wyrd::v1::SourceCompletion::outcome: i32
+pub wyrd_tonic::wyrd::v1::SourceCompletion::source: i32
+impl wyrd_tonic::wyrd::v1::SourceCompletion
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::outcome(&self) -> wyrd_tonic::wyrd::v1::SourceCompletionOutcome
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::set_outcome(&mut self, value: wyrd_tonic::wyrd::v1::SourceCompletionOutcome)
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::set_source(&mut self, value: wyrd_tonic::wyrd::v1::QuerySource)
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::source(&self) -> wyrd_tonic::wyrd::v1::QuerySource
+impl core::default::Default for wyrd_tonic::wyrd::v1::SourceCompletion
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::SourceCompletion
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::SourceCompletion
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::SourceCompletion::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::SpanEventRow
+pub wyrd_tonic::wyrd::v1::SpanEventRow::attributes_json: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanEventRow::name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanEventRow::timestamp: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::SpanEventRow
+pub fn wyrd_tonic::wyrd::v1::SpanEventRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::SpanEventRow
+pub fn wyrd_tonic::wyrd::v1::SpanEventRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::SpanEventRow
+pub fn wyrd_tonic::wyrd::v1::SpanEventRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::SpanEventRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::SpanLinkRow
+pub wyrd_tonic::wyrd::v1::SpanLinkRow::attributes_json: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanLinkRow::linked_span_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanLinkRow::linked_trace_id: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::SpanLinkRow
+pub fn wyrd_tonic::wyrd::v1::SpanLinkRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::SpanLinkRow
+pub fn wyrd_tonic::wyrd::v1::SpanLinkRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::SpanLinkRow
+pub fn wyrd_tonic::wyrd::v1::SpanLinkRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::SpanLinkRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::SpanRow
+pub wyrd_tonic::wyrd::v1::SpanRow::attributes_json: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanRow::duration_ms: f64
+pub wyrd_tonic::wyrd::v1::SpanRow::kind: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanRow::name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanRow::parent_span_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanRow::span_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanRow::started_at: alloc::string::String
+pub wyrd_tonic::wyrd::v1::SpanRow::status: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::SpanRow
+pub fn wyrd_tonic::wyrd::v1::SpanRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::SpanRow
+pub fn wyrd_tonic::wyrd::v1::SpanRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::SpanRow
+pub fn wyrd_tonic::wyrd::v1::SpanRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::SpanRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TailCursor
+pub wyrd_tonic::wyrd::v1::TailCursor::batch_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::TailCursor::row_ordinal: u32
+pub wyrd_tonic::wyrd::v1::TailCursor::wal_lsn: u64
+pub wyrd_tonic::wyrd::v1::TailCursor::writer_epoch: u64
+impl core::convert::From<wyrd_spec::vala::api::TailCursor> for wyrd_tonic::wyrd::v1::TailCursor
+pub fn wyrd_tonic::wyrd::v1::TailCursor::from(value: wyrd_spec::vala::api::TailCursor) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::TailCursor> for wyrd_spec::vala::api::TailCursor
+pub type wyrd_spec::vala::api::TailCursor::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::TailCursor::try_from(value: wyrd_tonic::wyrd::v1::TailCursor) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::TailCursor
+pub fn wyrd_tonic::wyrd::v1::TailCursor::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TailCursor
+pub fn wyrd_tonic::wyrd::v1::TailCursor::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TailCursor
+pub fn wyrd_tonic::wyrd::v1::TailCursor::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TailCursor::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TailPage
+pub wyrd_tonic::wyrd::v1::TailPage::arrow_ipc_batches: alloc::vec::Vec<alloc::vec::Vec<u8>>
+pub wyrd_tonic::wyrd::v1::TailPage::complete: bool
+pub wyrd_tonic::wyrd::v1::TailPage::next_cursor: core::option::Option<wyrd_tonic::wyrd::v1::tail_page::NextCursor>
+impl core::convert::From<wyrd_spec::vala::api::TailPage> for wyrd_tonic::wyrd::v1::TailPage
+pub fn wyrd_tonic::wyrd::v1::TailPage::from(value: wyrd_spec::vala::api::TailPage) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::TailPage> for wyrd_spec::vala::api::TailPage
+pub type wyrd_spec::vala::api::TailPage::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::TailPage::try_from(value: wyrd_tonic::wyrd::v1::TailPage) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::TailPage
+pub fn wyrd_tonic::wyrd::v1::TailPage::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TailPage
+pub fn wyrd_tonic::wyrd::v1::TailPage::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TailPage
+pub fn wyrd_tonic::wyrd::v1::TailPage::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TailPage::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TailPageRequest
+pub wyrd_tonic::wyrd::v1::TailPageRequest::after_cursor: core::option::Option<wyrd_tonic::wyrd::v1::tail_page_request::AfterCursor>
+pub wyrd_tonic::wyrd::v1::TailPageRequest::fence_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::TailPageRequest::max_encoded_bytes: u32
+pub wyrd_tonic::wyrd::v1::TailPageRequest::max_rows: u32
+pub wyrd_tonic::wyrd::v1::TailPageRequest::query_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::TailPageRequest::tail_capability: alloc::vec::Vec<u8>
+impl core::convert::From<wyrd_spec::vala::api::TailPageRequest> for wyrd_tonic::wyrd::v1::TailPageRequest
+pub fn wyrd_tonic::wyrd::v1::TailPageRequest::from(value: wyrd_spec::vala::api::TailPageRequest) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::TailPageRequest> for wyrd_spec::vala::api::TailPageRequest
+pub type wyrd_spec::vala::api::TailPageRequest::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::TailPageRequest::try_from(value: wyrd_tonic::wyrd::v1::TailPageRequest) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::TailPageRequest
+pub fn wyrd_tonic::wyrd::v1::TailPageRequest::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TailPageRequest
+pub fn wyrd_tonic::wyrd::v1::TailPageRequest::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TailPageRequest
+pub fn wyrd_tonic::wyrd::v1::TailPageRequest::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TailPageRequest::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TailReadFence
+pub wyrd_tonic::wyrd::v1::TailReadFence::binding: core::option::Option<wyrd_tonic::wyrd::v1::TenantTableBinding>
+pub wyrd_tonic::wyrd::v1::TailReadFence::capability: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::TailReadFence::event_day: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TailReadFence::exclusive_sealed: core::option::Option<wyrd_tonic::wyrd::v1::TailCursor>
+pub wyrd_tonic::wyrd::v1::TailReadFence::expires_at_unix_ms: u64
+pub wyrd_tonic::wyrd::v1::TailReadFence::fence_id: alloc::vec::Vec<u8>
+pub wyrd_tonic::wyrd::v1::TailReadFence::inclusive_live: core::option::Option<wyrd_tonic::wyrd::v1::TailCursor>
+pub wyrd_tonic::wyrd::v1::TailReadFence::schema_fingerprint: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TailReadFence::stream: core::option::Option<wyrd_tonic::wyrd::v1::TailStreamIdentity>
+pub wyrd_tonic::wyrd::v1::TailReadFence::tail_protocol_version: u32
+impl core::convert::From<wyrd_spec::vala::api::TailReadFence> for wyrd_tonic::wyrd::v1::TailReadFence
+pub fn wyrd_tonic::wyrd::v1::TailReadFence::from(value: wyrd_spec::vala::api::TailReadFence) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::TailReadFence> for wyrd_spec::vala::api::TailReadFence
+pub type wyrd_spec::vala::api::TailReadFence::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::TailReadFence::try_from(value: wyrd_tonic::wyrd::v1::TailReadFence) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::TailReadFence
+pub fn wyrd_tonic::wyrd::v1::TailReadFence::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TailReadFence
+pub fn wyrd_tonic::wyrd::v1::TailReadFence::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TailReadFence
+pub fn wyrd_tonic::wyrd::v1::TailReadFence::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TailReadFence::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TailStreamIdentity
+pub wyrd_tonic::wyrd::v1::TailStreamIdentity::node_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TailStreamIdentity::writer_epoch: u64
+impl core::convert::From<wyrd_spec::vala::api::TailStreamIdentity> for wyrd_tonic::wyrd::v1::TailStreamIdentity
+pub fn wyrd_tonic::wyrd::v1::TailStreamIdentity::from(value: wyrd_spec::vala::api::TailStreamIdentity) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::TailStreamIdentity> for wyrd_spec::vala::api::TailStreamIdentity
+pub type wyrd_spec::vala::api::TailStreamIdentity::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::TailStreamIdentity::try_from(value: wyrd_tonic::wyrd::v1::TailStreamIdentity) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::TailStreamIdentity
+pub fn wyrd_tonic::wyrd::v1::TailStreamIdentity::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TailStreamIdentity
+pub fn wyrd_tonic::wyrd::v1::TailStreamIdentity::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TailStreamIdentity
+pub fn wyrd_tonic::wyrd::v1::TailStreamIdentity::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TailStreamIdentity::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TenantTableBinding
+pub wyrd_tonic::wyrd::v1::TenantTableBinding::namespace: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TenantTableBinding::table: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TenantTableBinding::tenant_id: alloc::string::String
+impl core::convert::From<wyrd_spec::vala::api::TenantTableBinding> for wyrd_tonic::wyrd::v1::TenantTableBinding
+pub fn wyrd_tonic::wyrd::v1::TenantTableBinding::from(value: wyrd_spec::vala::api::TenantTableBinding) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::TenantTableBinding> for wyrd_spec::vala::api::TenantTableBinding
+pub type wyrd_spec::vala::api::TenantTableBinding::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::TenantTableBinding::try_from(value: wyrd_tonic::wyrd::v1::TenantTableBinding) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::TenantTableBinding
+pub fn wyrd_tonic::wyrd::v1::TenantTableBinding::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TenantTableBinding
+pub fn wyrd_tonic::wyrd::v1::TenantTableBinding::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TenantTableBinding
+pub fn wyrd_tonic::wyrd::v1::TenantTableBinding::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TenantTableBinding::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TraceSummaryRow
+pub wyrd_tonic::wyrd::v1::TraceSummaryRow::duration_ms: f64
+pub wyrd_tonic::wyrd::v1::TraceSummaryRow::error: bool
+pub wyrd_tonic::wyrd::v1::TraceSummaryRow::root_name: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TraceSummaryRow::service: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TraceSummaryRow::span_count: u32
+pub wyrd_tonic::wyrd::v1::TraceSummaryRow::started_at: alloc::string::String
+pub wyrd_tonic::wyrd::v1::TraceSummaryRow::trace_id: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::TraceSummaryRow
+pub fn wyrd_tonic::wyrd::v1::TraceSummaryRow::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TraceSummaryRow
+pub fn wyrd_tonic::wyrd::v1::TraceSummaryRow::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TraceSummaryRow
+pub fn wyrd_tonic::wyrd::v1::TraceSummaryRow::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TraceSummaryRow::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::TraceWaterfall
+pub wyrd_tonic::wyrd::v1::TraceWaterfall::events: alloc::vec::Vec<wyrd_tonic::wyrd::v1::SpanEventRow>
+pub wyrd_tonic::wyrd::v1::TraceWaterfall::links: alloc::vec::Vec<wyrd_tonic::wyrd::v1::SpanLinkRow>
+pub wyrd_tonic::wyrd::v1::TraceWaterfall::spans: alloc::vec::Vec<wyrd_tonic::wyrd::v1::SpanRow>
+pub wyrd_tonic::wyrd::v1::TraceWaterfall::trace_id: alloc::string::String
+impl core::default::Default for wyrd_tonic::wyrd::v1::TraceWaterfall
+pub fn wyrd_tonic::wyrd::v1::TraceWaterfall::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::TraceWaterfall
+pub fn wyrd_tonic::wyrd::v1::TraceWaterfall::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::TraceWaterfall
+pub fn wyrd_tonic::wyrd::v1::TraceWaterfall::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::TraceWaterfall::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::WorkerAttemptFrame
+pub wyrd_tonic::wyrd::v1::WorkerAttemptFrame::frame: core::option::Option<wyrd_tonic::wyrd::v1::worker_attempt_frame::Frame>
+impl core::convert::From<wyrd_spec::vala::api::WorkerAttemptFrame> for wyrd_tonic::wyrd::v1::WorkerAttemptFrame
+pub fn wyrd_tonic::wyrd::v1::WorkerAttemptFrame::from(value: wyrd_spec::vala::api::WorkerAttemptFrame) -> Self
+impl core::convert::TryFrom<wyrd_tonic::wyrd::v1::WorkerAttemptFrame> for wyrd_spec::vala::api::WorkerAttemptFrame
+pub type wyrd_spec::vala::api::WorkerAttemptFrame::Error = wyrd_tonic::private_conversion::PrivateConversionError
+pub fn wyrd_spec::vala::api::WorkerAttemptFrame::try_from(value: wyrd_tonic::wyrd::v1::WorkerAttemptFrame) -> core::result::Result<Self, Self::Error>
+impl core::default::Default for wyrd_tonic::wyrd::v1::WorkerAttemptFrame
+pub fn wyrd_tonic::wyrd::v1::WorkerAttemptFrame::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::WorkerAttemptFrame
+pub fn wyrd_tonic::wyrd::v1::WorkerAttemptFrame::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::WorkerAttemptFrame
+pub fn wyrd_tonic::wyrd::v1::WorkerAttemptFrame::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::WorkerAttemptFrame::encoded_len(&self) -> usize
+pub struct wyrd_tonic::wyrd::v1::WorkerFooter
+pub wyrd_tonic::wyrd::v1::WorkerFooter::completed: bool
+pub wyrd_tonic::wyrd::v1::WorkerFooter::encoded_bytes: u64
+pub wyrd_tonic::wyrd::v1::WorkerFooter::fragment_id: alloc::string::String
+pub wyrd_tonic::wyrd::v1::WorkerFooter::manifest_digest: alloc::string::String
+pub wyrd_tonic::wyrd::v1::WorkerFooter::payload_digest: alloc::string::String
+pub wyrd_tonic::wyrd::v1::WorkerFooter::row_count: u64
+impl core::default::Default for wyrd_tonic::wyrd::v1::WorkerFooter
+pub fn wyrd_tonic::wyrd::v1::WorkerFooter::default() -> Self
+impl core::fmt::Debug for wyrd_tonic::wyrd::v1::WorkerFooter
+pub fn wyrd_tonic::wyrd::v1::WorkerFooter::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl prost::message::Message for wyrd_tonic::wyrd::v1::WorkerFooter
+pub fn wyrd_tonic::wyrd::v1::WorkerFooter::clear(&mut self)
+pub fn wyrd_tonic::wyrd::v1::WorkerFooter::encoded_len(&self) -> usize

@@ -1,0 +1,397 @@
+    Checking slab v0.4.12
+   Compiling anyhow v1.0.104
+   Compiling either v1.17.0
+   Compiling rustls v0.23.43
+    Checking fnv v1.0.7
+   Compiling num-traits v0.2.19
+   Compiling bitflags v2.13.1
+   Compiling rustix v1.1.4
+   Compiling prettyplease v0.2.37
+   Compiling pulldown-cmark v0.13.4
+   Compiling errno v0.3.14
+   Compiling bytes v1.12.1
+    Checking futures-util v0.3.33
+   Compiling memchr v2.8.3
+   Compiling hashbrown v0.17.1
+   Compiling itertools v0.14.0
+   Compiling regex-syntax v0.8.11
+   Compiling foldhash v0.1.5
+   Compiling unicase v2.9.0
+   Compiling equivalent v1.0.2
+   Compiling cfg-if v1.0.4
+   Compiling hashbrown v0.15.5
+   Compiling indexmap v2.14.0
+   Compiling getrandom v0.4.3
+    Checking uuid v1.24.0
+    Checking chrono v0.4.45
+   Compiling zstd-sys v2.0.16+zstd.1.5.7
+   Compiling fixedbitset v0.5.7
+   Compiling fastrand v2.5.0
+   Compiling once_cell v1.21.4
+   Compiling petgraph v0.8.3
+   Compiling pin-project-internal v1.1.13
+   Compiling log v0.4.33
+   Compiling multimap v0.10.1
+   Compiling pulldown-cmark-to-cmark v22.0.0
+   Compiling prost-derive v0.14.4
+   Compiling regex-automata v0.4.18
+   Compiling tempfile v3.27.0
+    Checking schemars v0.8.22
+   Compiling tonic-build v0.14.6
+    Checking pin-project v1.1.13
+    Checking rustls-native-certs v0.8.4
+    Checking tokio-stream v0.1.19
+   Compiling zstd-safe v7.2.4
+    Checking toml_datetime v0.6.11
+    Checking serde_spanned v0.6.9
+    Checking same-file v1.0.6
+    Checking arc-swap v1.9.2
+    Checking toml_edit v0.22.27
+    Checking walkdir v2.5.0
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking tokio-util v0.7.19
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+   Compiling prost v0.14.4
+    Checking h2 v0.4.15
+    Checking tower v0.5.3
+   Compiling prost-types v0.14.4
+   Compiling regex v1.13.1
+    Checking tower-http v0.6.11
+    Checking tokio-rustls v0.26.4
+    Checking rustls-platform-verifier v0.7.0
+    Checking wyrd-tls v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tls)
+    Checking toml v0.8.23
+   Compiling prost-build v0.14.4
+   Compiling tonic-prost-build v0.14.6
+   Compiling wyrd-tonic v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tonic)
+    Checking hyper v1.11.0
+    Checking hyper-util v0.1.20
+    Checking zstd v0.13.3
+    Checking hyper-timeout v0.5.2
+    Checking hyper-rustls v0.27.9
+    Checking reqwest v0.13.4
+    Checking tonic v0.14.6
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking tonic-types v0.14.6
+    Checking tonic-prost v0.14.6
+    Checking wyrd-utils v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-utils)
+ Documenting wyrd-client v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-client)
+warning: public documentation for `http` links to private item `HttpTransport::authenticated_url`
+  --> crates/wyrd-client/src/transport/http.rs:18:47
+   |
+18 | //! All authenticated helpers route through [`HttpTransport::authenticated_url`],
+   |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this item is private
+   |
+   = note: this link will resolve properly if you pass `--document-private-items`
+   = note: `#[warn(rustdoc::private_intra_doc_links)]` on by default
+
+warning: `wyrd-client` (lib doc) generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 14.18s
+pub mod wyrd_client
+pub mod wyrd_client::auth
+pub enum wyrd_client::auth::AuthError
+pub wyrd_client::auth::AuthError::Client(wyrd_client::error::WyrdClientError)
+pub wyrd_client::auth::AuthError::Server(wyrd_spec::error::WyrdError)
+pub struct wyrd_client::auth::AuthMiddleware
+impl wyrd_client::auth::AuthMiddleware
+pub async fn wyrd_client::auth::AuthMiddleware::bearer(&self) -> core::result::Result<wyrd_spec::auth::secret_bearer::SecretBearer, wyrd_client::auth::AuthError>
+pub async fn wyrd_client::auth::AuthMiddleware::force_refresh(&self) -> core::result::Result<wyrd_spec::auth::secret_bearer::SecretBearer, wyrd_client::auth::AuthError>
+pub fn wyrd_client::auth::AuthMiddleware::new(config: &wyrd_client::config::ClientConfig, credential: wyrd_client::transport::credential::ResolvedCredential) -> core::result::Result<alloc::sync::Arc<Self>, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::auth::AuthMiddleware::request_id(&self, inbound: core::option::Option<&str>) -> alloc::string::String
+impl core::fmt::Debug for wyrd_client::auth::AuthMiddleware
+pub fn wyrd_client::auth::AuthMiddleware::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_client::client
+pub struct wyrd_client::client::WyrdClient
+impl wyrd_client::client::WyrdClient
+pub fn wyrd_client::client::WyrdClient::auth(&self) -> alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>
+pub async fn wyrd_client::client::WyrdClient::connect_grpc(&self) -> core::result::Result<wyrd_client::transport::grpc::GrpcConnection, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::client::WyrdClient::from_env() -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::client::WyrdClient::from_global() -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::client::WyrdClient::from_parts(auth: alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>, http: wyrd_client::transport::http::HttpTransport, grpc_config: wyrd_client::transport::config::GrpcConfig) -> Self
+pub fn wyrd_client::client::WyrdClient::http(&self) -> &wyrd_client::transport::http::HttpTransport
+pub async fn wyrd_client::client::WyrdClient::request_arrow<S>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<wyrd_client::transport::http::ArrowResponse, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::client::WyrdClient::request_external_stream(&self, method: http::method::Method, url: &str, body: core::option::Option<reqwest::async_impl::body::Body>, headers: &[(&str, &str)]) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::client::WyrdClient::request_json<S, D>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::client::WyrdClient::request_json_stream<S>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::client::WyrdClient::request_raw(&self, method: http::method::Method, path: &str) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::client::WyrdClient::request_stream(&self, method: http::method::Method, path: &str, body: reqwest::async_impl::body::Body) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::client::WyrdClient::submit_idempotent<S, D>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::client::WyrdClient::submit_with_idempotency_key<S, D>(&self, method: http::method::Method, path: &str, body: &S, key: &str) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub fn wyrd_client::client::WyrdClient::with_config(config: wyrd_client::config::ClientConfig) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub mod wyrd_client::config
+pub enum wyrd_client::config::TokenCacheMode
+pub wyrd_client::config::TokenCacheMode::Disk
+pub wyrd_client::config::TokenCacheMode::InMemory
+pub struct wyrd_client::config::ClientConfig
+pub wyrd_client::config::ClientConfig::api_key: core::option::Option<secrecy::SecretString>
+pub wyrd_client::config::ClientConfig::grpc: wyrd_client::transport::config::GrpcConfig
+pub wyrd_client::config::ClientConfig::http: wyrd_client::transport::config::HttpConfig
+pub wyrd_client::config::ClientConfig::tenant: core::option::Option<alloc::string::String>
+pub wyrd_client::config::ClientConfig::token_cache: wyrd_client::config::TokenCacheMode
+pub wyrd_client::config::ClientConfig::token_cache_path: core::option::Option<std::path::PathBuf>
+impl wyrd_client::config::ClientConfig
+pub fn wyrd_client::config::ClientConfig::from_env() -> Self
+pub fn wyrd_client::config::ClientConfig::from_global() -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::config::ClientConfig::from_global_with_env(global: &wyrd_client::global_config::GlobalConfig) -> Self
+pub fn wyrd_client::config::ClientConfig::resolve_credential(&self) -> core::result::Result<wyrd_client::transport::credential::ResolvedCredential, wyrd_client::error::WyrdClientError>
+impl core::fmt::Debug for wyrd_client::config::ClientConfig
+pub fn wyrd_client::config::ClientConfig::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_client::error
+pub enum wyrd_client::error::WyrdClientError
+pub wyrd_client::error::WyrdClientError::Config
+pub wyrd_client::error::WyrdClientError::Config::field: alloc::string::String
+pub wyrd_client::error::WyrdClientError::Config::reason: alloc::string::String
+pub wyrd_client::error::WyrdClientError::NoCredentials
+pub wyrd_client::error::WyrdClientError::TransportDown
+pub wyrd_client::error::WyrdClientError::TransportDown::message: alloc::string::String
+pub wyrd_client::error::WyrdClientError::TransportDown::transport: alloc::string::String
+impl wyrd_client::error::WyrdClientError
+pub fn wyrd_client::error::WyrdClientError::code(&self) -> &'static str
+pub fn wyrd_client::error::from_grpc_status(status: &tonic::status::Status) -> wyrd_spec::error::WyrdError
+pub fn wyrd_client::error::from_problem_json(body: &serde_json::value::Value) -> wyrd_spec::error::WyrdError
+pub mod wyrd_client::global_config
+pub enum wyrd_client::global_config::TokenCacheKind
+pub wyrd_client::global_config::TokenCacheKind::Disk
+pub wyrd_client::global_config::TokenCacheKind::InMemory
+pub struct wyrd_client::global_config::ClientSection
+pub wyrd_client::global_config::ClientSection::grpc_url: core::option::Option<alloc::string::String>
+pub wyrd_client::global_config::ClientSection::http_url: core::option::Option<alloc::string::String>
+pub wyrd_client::global_config::ClientSection::tenant: core::option::Option<alloc::string::String>
+pub wyrd_client::global_config::ClientSection::token_cache: core::option::Option<wyrd_client::global_config::TokenCacheSection>
+pub struct wyrd_client::global_config::GlobalConfig
+pub wyrd_client::global_config::GlobalConfig::client: wyrd_client::global_config::ClientSection
+impl wyrd_client::global_config::GlobalConfig
+pub fn wyrd_client::global_config::GlobalConfig::load() -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::global_config::GlobalConfig::load_from(path: &std::path::Path) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub struct wyrd_client::global_config::TokenCacheSection
+pub wyrd_client::global_config::TokenCacheSection::kind: core::option::Option<wyrd_client::global_config::TokenCacheKind>
+pub wyrd_client::global_config::TokenCacheSection::path: core::option::Option<std::path::PathBuf>
+pub mod wyrd_client::transport
+pub mod wyrd_client::transport::config
+pub enum wyrd_client::transport::config::TransportConfig
+pub wyrd_client::transport::config::TransportConfig::Grpc(wyrd_client::transport::config::GrpcConfig)
+pub wyrd_client::transport::config::TransportConfig::Http(wyrd_client::transport::config::HttpConfig)
+pub wyrd_client::transport::config::TransportConfig::Mock(wyrd_client::transport::config::MockConfig)
+impl wyrd_client::transport::config::TransportConfig
+pub fn wyrd_client::transport::config::TransportConfig::name(&self) -> &'static str
+pub fn wyrd_client::transport::config::TransportConfig::validate(&self) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+impl core::default::Default for wyrd_client::transport::config::TransportConfig
+pub fn wyrd_client::transport::config::TransportConfig::default() -> Self
+pub struct wyrd_client::transport::config::GrpcConfig
+pub wyrd_client::transport::config::GrpcConfig::connect_retries: u32
+pub wyrd_client::transport::config::GrpcConfig::endpoint: alloc::string::String
+pub wyrd_client::transport::config::GrpcConfig::keepalive_interval_ms: u64
+pub wyrd_client::transport::config::GrpcConfig::keepalive_timeout_ms: u64
+pub wyrd_client::transport::config::GrpcConfig::max_message_bytes: usize
+pub wyrd_client::transport::config::GrpcConfig::timeout_ms: u64
+pub wyrd_client::transport::config::GrpcConfig::tls: core::option::Option<wyrd_spec::security::tls::TlsConfig>
+impl wyrd_client::transport::config::GrpcConfig
+pub fn wyrd_client::transport::config::GrpcConfig::validate(&self) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+impl core::default::Default for wyrd_client::transport::config::GrpcConfig
+pub fn wyrd_client::transport::config::GrpcConfig::default() -> Self
+pub struct wyrd_client::transport::config::HttpConfig
+pub wyrd_client::transport::config::HttpConfig::base_url: alloc::string::String
+pub wyrd_client::transport::config::HttpConfig::compression: bool
+pub wyrd_client::transport::config::HttpConfig::timeout_ms: u64
+pub wyrd_client::transport::config::HttpConfig::tls: core::option::Option<wyrd_spec::security::tls::TlsConfig>
+impl wyrd_client::transport::config::HttpConfig
+pub fn wyrd_client::transport::config::HttpConfig::validate(&self) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+impl core::default::Default for wyrd_client::transport::config::HttpConfig
+pub fn wyrd_client::transport::config::HttpConfig::default() -> Self
+pub struct wyrd_client::transport::config::MockConfig
+pub wyrd_client::transport::config::MockConfig::fail_on_drain: core::option::Option<u32>
+pub wyrd_client::transport::config::MockConfig::label: alloc::string::String
+impl core::default::Default for wyrd_client::transport::config::MockConfig
+pub fn wyrd_client::transport::config::MockConfig::default() -> Self
+pub const wyrd_client::transport::config::GRPC_DEFAULT_CONNECT_RETRIES: u32
+pub const wyrd_client::transport::config::GRPC_DEFAULT_ENDPOINT: &str
+pub const wyrd_client::transport::config::GRPC_DEFAULT_KEEPALIVE_INTERVAL_MS: u64
+pub const wyrd_client::transport::config::GRPC_DEFAULT_KEEPALIVE_TIMEOUT_MS: u64
+pub const wyrd_client::transport::config::GRPC_DEFAULT_MAX_MESSAGE_BYTES: usize
+pub const wyrd_client::transport::config::GRPC_DEFAULT_TIMEOUT_MS: u64
+pub const wyrd_client::transport::config::HTTP_DEFAULT_BASE_URL: &str
+pub const wyrd_client::transport::config::HTTP_DEFAULT_TIMEOUT_MS: u64
+pub const wyrd_client::transport::config::MOCK_DEFAULT_LABEL: &str
+pub mod wyrd_client::transport::credential
+pub enum wyrd_client::transport::credential::CredentialSource
+pub wyrd_client::transport::credential::CredentialSource::ApiKey
+pub wyrd_client::transport::credential::CredentialSource::ApiKey::key: secrecy::SecretString
+pub wyrd_client::transport::credential::CredentialSource::ExplicitToken
+pub wyrd_client::transport::credential::CredentialSource::ExplicitToken::token: secrecy::SecretString
+pub wyrd_client::transport::credential::CredentialSource::WorkloadToken
+pub wyrd_client::transport::credential::CredentialSource::WorkloadToken::jwt: secrecy::SecretString
+pub wyrd_client::transport::credential::CredentialSource::WorkloadToken::tenant: alloc::string::String
+impl core::fmt::Debug for wyrd_client::transport::credential::CredentialSource
+pub fn wyrd_client::transport::credential::CredentialSource::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub enum wyrd_client::transport::credential::ResolvedCredential
+pub wyrd_client::transport::credential::ResolvedCredential::ApiKey(secrecy::SecretString)
+pub wyrd_client::transport::credential::ResolvedCredential::BearerToken(secrecy::SecretString)
+pub wyrd_client::transport::credential::ResolvedCredential::WorkloadJwt
+pub wyrd_client::transport::credential::ResolvedCredential::WorkloadJwt::jwt: secrecy::SecretString
+pub wyrd_client::transport::credential::ResolvedCredential::WorkloadJwt::tenant: alloc::string::String
+impl core::fmt::Debug for wyrd_client::transport::credential::ResolvedCredential
+pub fn wyrd_client::transport::credential::ResolvedCredential::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_client::transport::credential::CredentialChain
+impl wyrd_client::transport::credential::CredentialChain
+pub fn wyrd_client::transport::credential::CredentialChain::extend(&mut self, other: wyrd_client::transport::credential::CredentialChain)
+pub fn wyrd_client::transport::credential::CredentialChain::from_env() -> Self
+pub fn wyrd_client::transport::credential::CredentialChain::from_env_with_tenant(tenant_override: core::option::Option<&str>) -> Self
+pub fn wyrd_client::transport::credential::CredentialChain::is_empty(&self) -> bool
+pub fn wyrd_client::transport::credential::CredentialChain::push(&mut self, source: wyrd_client::transport::credential::CredentialSource)
+pub fn wyrd_client::transport::credential::CredentialChain::resolve(&self) -> core::result::Result<wyrd_client::transport::credential::ResolvedCredential, wyrd_client::error::WyrdClientError>
+pub mod wyrd_client::transport::grpc
+pub struct wyrd_client::transport::grpc::GrpcConnection
+impl wyrd_client::transport::grpc::GrpcConnection
+pub fn wyrd_client::transport::grpc::GrpcConnection::auth(&self) -> alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>
+pub fn wyrd_client::transport::grpc::GrpcConnection::channel(&self) -> tonic::transport::channel::Channel
+pub async fn wyrd_client::transport::grpc::GrpcConnection::connect(config: &wyrd_client::transport::config::GrpcConfig, auth: alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::transport::grpc::GrpcConnection::max_message_bytes(&self) -> usize
+impl core::fmt::Debug for wyrd_client::transport::grpc::GrpcConnection
+pub fn wyrd_client::transport::grpc::GrpcConnection::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_client::transport::http
+pub struct wyrd_client::transport::http::ArrowResponse
+pub wyrd_client::transport::http::ArrowResponse::frames: alloc::vec::Vec<u8>
+pub wyrd_client::transport::http::ArrowResponse::row_count: core::option::Option<u64>
+pub wyrd_client::transport::http::ArrowResponse::schema_fingerprint: core::option::Option<alloc::string::String>
+pub struct wyrd_client::transport::http::HttpTransport
+impl wyrd_client::transport::http::HttpTransport
+pub fn wyrd_client::transport::http::HttpTransport::client(&self) -> reqwest::async_impl::client::Client
+pub fn wyrd_client::transport::http::HttpTransport::new(config: &wyrd_client::transport::config::HttpConfig, auth: alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub async fn wyrd_client::transport::http::HttpTransport::request_arrow<S>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<wyrd_client::transport::http::ArrowResponse, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::transport::http::HttpTransport::request_external_stream(&self, method: http::method::Method, url: &str, body: core::option::Option<reqwest::async_impl::body::Body>, headers: &[(&str, &str)]) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::transport::http::HttpTransport::request_json<S, D>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::transport::http::HttpTransport::request_json_stream<S>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::transport::http::HttpTransport::request_raw(&self, method: http::method::Method, path: &str) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::transport::http::HttpTransport::request_stream(&self, method: http::method::Method, path: &str, body: reqwest::async_impl::body::Body) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::transport::http::HttpTransport::submit_idempotent<S, D>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::transport::http::HttpTransport::submit_with_idempotency_key<S, D>(&self, method: http::method::Method, path: &str, body: &S, key: &str) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+impl core::fmt::Debug for wyrd_client::transport::http::HttpTransport
+pub fn wyrd_client::transport::http::HttpTransport::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_client::transport::mock
+pub struct wyrd_client::transport::mock::MockRecord
+pub wyrd_client::transport::mock::MockRecord::payload: alloc::vec::Vec<u8>
+pub struct wyrd_client::transport::mock::MockTransport
+impl wyrd_client::transport::mock::MockTransport
+pub async fn wyrd_client::transport::mock::MockTransport::drain(&self, payload: alloc::vec::Vec<u8>) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::transport::mock::MockTransport::drain_count(&self) -> u32
+pub fn wyrd_client::transport::mock::MockTransport::label(&self) -> &str
+pub fn wyrd_client::transport::mock::MockTransport::new(config: &wyrd_client::transport::config::MockConfig) -> Self
+pub async fn wyrd_client::transport::mock::MockTransport::records(&self) -> alloc::vec::Vec<wyrd_client::transport::mock::MockRecord>
+pub enum wyrd_client::transport::CredentialSource
+pub wyrd_client::transport::CredentialSource::ApiKey
+pub wyrd_client::transport::CredentialSource::ApiKey::key: secrecy::SecretString
+pub wyrd_client::transport::CredentialSource::ExplicitToken
+pub wyrd_client::transport::CredentialSource::ExplicitToken::token: secrecy::SecretString
+pub wyrd_client::transport::CredentialSource::WorkloadToken
+pub wyrd_client::transport::CredentialSource::WorkloadToken::jwt: secrecy::SecretString
+pub wyrd_client::transport::CredentialSource::WorkloadToken::tenant: alloc::string::String
+impl core::fmt::Debug for wyrd_client::transport::credential::CredentialSource
+pub fn wyrd_client::transport::credential::CredentialSource::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub enum wyrd_client::transport::ResolvedCredential
+pub wyrd_client::transport::ResolvedCredential::ApiKey(secrecy::SecretString)
+pub wyrd_client::transport::ResolvedCredential::BearerToken(secrecy::SecretString)
+pub wyrd_client::transport::ResolvedCredential::WorkloadJwt
+pub wyrd_client::transport::ResolvedCredential::WorkloadJwt::jwt: secrecy::SecretString
+pub wyrd_client::transport::ResolvedCredential::WorkloadJwt::tenant: alloc::string::String
+impl core::fmt::Debug for wyrd_client::transport::credential::ResolvedCredential
+pub fn wyrd_client::transport::credential::ResolvedCredential::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub enum wyrd_client::transport::TransportConfig
+pub wyrd_client::transport::TransportConfig::Grpc(wyrd_client::transport::config::GrpcConfig)
+pub wyrd_client::transport::TransportConfig::Http(wyrd_client::transport::config::HttpConfig)
+pub wyrd_client::transport::TransportConfig::Mock(wyrd_client::transport::config::MockConfig)
+impl wyrd_client::transport::config::TransportConfig
+pub fn wyrd_client::transport::config::TransportConfig::name(&self) -> &'static str
+pub fn wyrd_client::transport::config::TransportConfig::validate(&self) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+impl core::default::Default for wyrd_client::transport::config::TransportConfig
+pub fn wyrd_client::transport::config::TransportConfig::default() -> Self
+pub struct wyrd_client::transport::ArrowResponse
+pub wyrd_client::transport::ArrowResponse::frames: alloc::vec::Vec<u8>
+pub wyrd_client::transport::ArrowResponse::row_count: core::option::Option<u64>
+pub wyrd_client::transport::ArrowResponse::schema_fingerprint: core::option::Option<alloc::string::String>
+pub struct wyrd_client::transport::CredentialChain
+impl wyrd_client::transport::credential::CredentialChain
+pub fn wyrd_client::transport::credential::CredentialChain::extend(&mut self, other: wyrd_client::transport::credential::CredentialChain)
+pub fn wyrd_client::transport::credential::CredentialChain::from_env() -> Self
+pub fn wyrd_client::transport::credential::CredentialChain::from_env_with_tenant(tenant_override: core::option::Option<&str>) -> Self
+pub fn wyrd_client::transport::credential::CredentialChain::is_empty(&self) -> bool
+pub fn wyrd_client::transport::credential::CredentialChain::push(&mut self, source: wyrd_client::transport::credential::CredentialSource)
+pub fn wyrd_client::transport::credential::CredentialChain::resolve(&self) -> core::result::Result<wyrd_client::transport::credential::ResolvedCredential, wyrd_client::error::WyrdClientError>
+pub struct wyrd_client::transport::GrpcConfig
+pub wyrd_client::transport::GrpcConfig::connect_retries: u32
+pub wyrd_client::transport::GrpcConfig::endpoint: alloc::string::String
+pub wyrd_client::transport::GrpcConfig::keepalive_interval_ms: u64
+pub wyrd_client::transport::GrpcConfig::keepalive_timeout_ms: u64
+pub wyrd_client::transport::GrpcConfig::max_message_bytes: usize
+pub wyrd_client::transport::GrpcConfig::timeout_ms: u64
+pub wyrd_client::transport::GrpcConfig::tls: core::option::Option<wyrd_spec::security::tls::TlsConfig>
+impl wyrd_client::transport::config::GrpcConfig
+pub fn wyrd_client::transport::config::GrpcConfig::validate(&self) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+impl core::default::Default for wyrd_client::transport::config::GrpcConfig
+pub fn wyrd_client::transport::config::GrpcConfig::default() -> Self
+pub struct wyrd_client::transport::GrpcConnection
+impl wyrd_client::transport::grpc::GrpcConnection
+pub fn wyrd_client::transport::grpc::GrpcConnection::auth(&self) -> alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>
+pub fn wyrd_client::transport::grpc::GrpcConnection::channel(&self) -> tonic::transport::channel::Channel
+pub async fn wyrd_client::transport::grpc::GrpcConnection::connect(config: &wyrd_client::transport::config::GrpcConfig, auth: alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::transport::grpc::GrpcConnection::max_message_bytes(&self) -> usize
+impl core::fmt::Debug for wyrd_client::transport::grpc::GrpcConnection
+pub fn wyrd_client::transport::grpc::GrpcConnection::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_client::transport::HttpConfig
+pub wyrd_client::transport::HttpConfig::base_url: alloc::string::String
+pub wyrd_client::transport::HttpConfig::compression: bool
+pub wyrd_client::transport::HttpConfig::timeout_ms: u64
+pub wyrd_client::transport::HttpConfig::tls: core::option::Option<wyrd_spec::security::tls::TlsConfig>
+impl wyrd_client::transport::config::HttpConfig
+pub fn wyrd_client::transport::config::HttpConfig::validate(&self) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+impl core::default::Default for wyrd_client::transport::config::HttpConfig
+pub fn wyrd_client::transport::config::HttpConfig::default() -> Self
+pub struct wyrd_client::transport::HttpTransport
+impl wyrd_client::transport::http::HttpTransport
+pub fn wyrd_client::transport::http::HttpTransport::client(&self) -> reqwest::async_impl::client::Client
+pub fn wyrd_client::transport::http::HttpTransport::new(config: &wyrd_client::transport::config::HttpConfig, auth: alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub async fn wyrd_client::transport::http::HttpTransport::request_arrow<S>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<wyrd_client::transport::http::ArrowResponse, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::transport::http::HttpTransport::request_external_stream(&self, method: http::method::Method, url: &str, body: core::option::Option<reqwest::async_impl::body::Body>, headers: &[(&str, &str)]) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::transport::http::HttpTransport::request_json<S, D>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::transport::http::HttpTransport::request_json_stream<S>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::transport::http::HttpTransport::request_raw(&self, method: http::method::Method, path: &str) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::transport::http::HttpTransport::request_stream(&self, method: http::method::Method, path: &str, body: reqwest::async_impl::body::Body) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::transport::http::HttpTransport::submit_idempotent<S, D>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::transport::http::HttpTransport::submit_with_idempotency_key<S, D>(&self, method: http::method::Method, path: &str, body: &S, key: &str) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+impl core::fmt::Debug for wyrd_client::transport::http::HttpTransport
+pub fn wyrd_client::transport::http::HttpTransport::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_client::transport::MockConfig
+pub wyrd_client::transport::MockConfig::fail_on_drain: core::option::Option<u32>
+pub wyrd_client::transport::MockConfig::label: alloc::string::String
+impl core::default::Default for wyrd_client::transport::config::MockConfig
+pub fn wyrd_client::transport::config::MockConfig::default() -> Self
+pub struct wyrd_client::transport::MockRecord
+pub wyrd_client::transport::MockRecord::payload: alloc::vec::Vec<u8>
+pub struct wyrd_client::transport::MockTransport
+impl wyrd_client::transport::mock::MockTransport
+pub async fn wyrd_client::transport::mock::MockTransport::drain(&self, payload: alloc::vec::Vec<u8>) -> core::result::Result<(), wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::transport::mock::MockTransport::drain_count(&self) -> u32
+pub fn wyrd_client::transport::mock::MockTransport::label(&self) -> &str
+pub fn wyrd_client::transport::mock::MockTransport::new(config: &wyrd_client::transport::config::MockConfig) -> Self
+pub async fn wyrd_client::transport::mock::MockTransport::records(&self) -> alloc::vec::Vec<wyrd_client::transport::mock::MockRecord>
+pub struct wyrd_client::GlobalConfig
+pub wyrd_client::GlobalConfig::client: wyrd_client::global_config::ClientSection
+impl wyrd_client::global_config::GlobalConfig
+pub fn wyrd_client::global_config::GlobalConfig::load() -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::global_config::GlobalConfig::load_from(path: &std::path::Path) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub struct wyrd_client::WyrdClient
+impl wyrd_client::client::WyrdClient
+pub fn wyrd_client::client::WyrdClient::auth(&self) -> alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>
+pub async fn wyrd_client::client::WyrdClient::connect_grpc(&self) -> core::result::Result<wyrd_client::transport::grpc::GrpcConnection, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::client::WyrdClient::from_env() -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::client::WyrdClient::from_global() -> core::result::Result<Self, wyrd_client::error::WyrdClientError>
+pub fn wyrd_client::client::WyrdClient::from_parts(auth: alloc::sync::Arc<wyrd_client::auth::AuthMiddleware>, http: wyrd_client::transport::http::HttpTransport, grpc_config: wyrd_client::transport::config::GrpcConfig) -> Self
+pub fn wyrd_client::client::WyrdClient::http(&self) -> &wyrd_client::transport::http::HttpTransport
+pub async fn wyrd_client::client::WyrdClient::request_arrow<S>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<wyrd_client::transport::http::ArrowResponse, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::client::WyrdClient::request_external_stream(&self, method: http::method::Method, url: &str, body: core::option::Option<reqwest::async_impl::body::Body>, headers: &[(&str, &str)]) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::client::WyrdClient::request_json<S, D>(&self, method: http::method::Method, path: &str, body: core::option::Option<&S>) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::client::WyrdClient::request_json_stream<S>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize
+pub async fn wyrd_client::client::WyrdClient::request_raw(&self, method: http::method::Method, path: &str) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::client::WyrdClient::request_stream(&self, method: http::method::Method, path: &str, body: reqwest::async_impl::body::Body) -> core::result::Result<reqwest::async_impl::response::Response, wyrd_spec::error::WyrdError>
+pub async fn wyrd_client::client::WyrdClient::submit_idempotent<S, D>(&self, method: http::method::Method, path: &str, body: &S) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub async fn wyrd_client::client::WyrdClient::submit_with_idempotency_key<S, D>(&self, method: http::method::Method, path: &str, body: &S, key: &str) -> core::result::Result<D, wyrd_spec::error::WyrdError> where S: serde_core::ser::Serialize, D: serde_core::de::DeserializeOwned
+pub fn wyrd_client::client::WyrdClient::with_config(config: wyrd_client::config::ClientConfig) -> core::result::Result<Self, wyrd_client::error::WyrdClientError>

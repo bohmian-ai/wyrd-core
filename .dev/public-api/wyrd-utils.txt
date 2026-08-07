@@ -1,0 +1,40 @@
+   Compiling zstd-sys v2.0.16+zstd.1.5.7
+   Compiling blake3 v1.8.6
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+   Compiling zstd-safe v7.2.4
+    Checking zstd v0.13.3
+ Documenting wyrd-utils v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-utils)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.87s
+pub mod wyrd_utils
+pub use wyrd_utils::uuid7
+pub mod wyrd_utils::codec
+pub fn wyrd_utils::codec::gzip_decode(bytes: &[u8]) -> wyrd_utils::WyrdUtilsResult<alloc::vec::Vec<u8>>
+pub fn wyrd_utils::codec::gzip_encode(bytes: &[u8]) -> wyrd_utils::WyrdUtilsResult<alloc::vec::Vec<u8>>
+pub fn wyrd_utils::codec::zstd_decode(bytes: &[u8]) -> wyrd_utils::WyrdUtilsResult<alloc::vec::Vec<u8>>
+pub fn wyrd_utils::codec::zstd_encode(bytes: &[u8]) -> wyrd_utils::WyrdUtilsResult<alloc::vec::Vec<u8>>
+pub mod wyrd_utils::config_dir
+pub enum wyrd_utils::config_dir::ConfigDirError
+pub wyrd_utils::config_dir::ConfigDirError::Unresolvable
+pub fn wyrd_utils::config_dir::wyrd_config_dir() -> core::option::Option<std::path::PathBuf>
+pub fn wyrd_utils::config_dir::wyrd_config_dir_required() -> core::result::Result<std::path::PathBuf, wyrd_utils::config_dir::ConfigDirError>
+pub mod wyrd_utils::fs
+pub fn wyrd_utils::fs::copy_manifest_files(source: &std::path::Path, dest: &std::path::Path) -> wyrd_utils::WyrdUtilsResult<()>
+pub fn wyrd_utils::fs::data_stats_for_file(path: &std::path::Path, schema: core::option::Option<&wyrd_spec::card::data::DataSchema>) -> wyrd_utils::WyrdUtilsResult<wyrd_spec::card::data::DataStats>
+pub fn wyrd_utils::fs::data_stats_for_path(path: &std::path::Path, schema: core::option::Option<&wyrd_spec::card::data::DataSchema>) -> wyrd_utils::WyrdUtilsResult<wyrd_spec::card::data::DataStats>
+pub fn wyrd_utils::fs::require_local_file(path: &std::path::Path) -> wyrd_utils::WyrdUtilsResult<()>
+pub fn wyrd_utils::fs::require_local_path(path: &std::path::Path) -> wyrd_utils::WyrdUtilsResult<()>
+pub mod wyrd_utils::json
+pub fn wyrd_utils::json::pretty_json_string<T: serde_core::ser::Serialize + ?core::marker::Sized>(value: &T) -> alloc::string::String
+pub fn wyrd_utils::json::write_json_sorted<T: serde_core::ser::Serialize>(path: impl core::convert::AsRef<std::path::Path>, value: &T) -> wyrd_utils::WyrdUtilsResult<()>
+pub enum wyrd_utils::WyrdUtilsError
+pub wyrd_utils::WyrdUtilsError::Io(core::io::error::Error)
+pub wyrd_utils::WyrdUtilsError::Json(serde_json::error::Error)
+pub wyrd_utils::WyrdUtilsError::LocalFileMissing(std::path::PathBuf)
+pub wyrd_utils::WyrdUtilsError::LocalPathMissing(std::path::PathBuf)
+pub wyrd_utils::WyrdUtilsError::StripPrefix(std::path::StripPrefixError)
+pub wyrd_utils::WyrdUtilsError::UnsupportedPath(std::path::PathBuf)
+pub wyrd_utils::WyrdUtilsError::Walk(walkdir::error::Error)
+pub fn wyrd_utils::clamp_score(value: f64) -> f64
+pub fn wyrd_utils::depythonize(value: &str) -> alloc::string::String
+pub fn wyrd_utils::normalize_version(value: &str) -> core::result::Result<alloc::string::String, semver::parse::Error>
+pub type wyrd_utils::WyrdUtilsResult<T> = core::result::Result<T, wyrd_utils::WyrdUtilsError>

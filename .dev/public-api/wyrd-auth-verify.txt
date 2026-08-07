@@ -1,0 +1,113 @@
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-auth-oidc v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-oidc)
+    Checking wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-runtime)
+ Documenting wyrd-auth-verify v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-verify)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.39s
+pub mod wyrd_auth_verify
+pub enum wyrd_auth_verify::AuthError
+pub wyrd_auth_verify::AuthError::BadTokenFormat
+pub wyrd_auth_verify::AuthError::CardScopeMissingRoot
+pub wyrd_auth_verify::AuthError::DelegationDepthExceeded
+pub wyrd_auth_verify::AuthError::InvalidCardRef
+pub wyrd_auth_verify::AuthError::InvalidToken
+pub wyrd_auth_verify::AuthError::Jwt(jsonwebtoken::errors::Error)
+pub wyrd_auth_verify::AuthError::PermissionsCorrupt
+pub wyrd_auth_verify::AuthError::Revoked
+pub wyrd_auth_verify::AuthError::TokenExpired
+pub wyrd_auth_verify::AuthError::VerifyUnavailable
+impl core::convert::From<jsonwebtoken::errors::Error> for wyrd_auth_verify::AuthError
+pub fn wyrd_auth_verify::AuthError::from(error: jsonwebtoken::errors::Error) -> Self
+pub enum wyrd_auth_verify::ResolveError
+pub wyrd_auth_verify::ResolveError::BadPermissionsJson
+pub wyrd_auth_verify::ResolveError::BadPermissionsJson::role: alloc::string::String
+pub wyrd_auth_verify::ResolveError::BadPermissionsJson::source: serde_json::error::Error
+pub wyrd_auth_verify::ResolveError::Unavailable(alloc::string::String)
+pub struct wyrd_auth_verify::AccessTokenClaims
+pub wyrd_auth_verify::AccessTokenClaims::act: core::option::Option<alloc::boxed::Box<wyrd_auth_verify::ActClaim>>
+pub wyrd_auth_verify::AccessTokenClaims::exp: usize
+pub wyrd_auth_verify::AccessTokenClaims::iat: usize
+pub wyrd_auth_verify::AccessTokenClaims::iss: alloc::string::String
+pub wyrd_auth_verify::AccessTokenClaims::jti: alloc::string::String
+pub wyrd_auth_verify::AccessTokenClaims::principal: wyrd_auth_verify::TokenPrincipalRef
+pub wyrd_auth_verify::AccessTokenClaims::roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>
+pub wyrd_auth_verify::AccessTokenClaims::sub: alloc::string::String
+impl wyrd_auth_verify::AccessTokenClaims
+pub async fn wyrd_auth_verify::AccessTokenClaims::into_verified<R: wyrd_auth_verify::PermissionResolver>(&self, resolver: &R) -> core::result::Result<wyrd_auth_verify::VerifiedToken, wyrd_auth_verify::AuthError>
+pub struct wyrd_auth_verify::ActClaim
+pub wyrd_auth_verify::ActClaim::act: core::option::Option<alloc::boxed::Box<wyrd_auth_verify::ActClaim>>
+pub wyrd_auth_verify::ActClaim::principal: wyrd_auth_verify::TokenPrincipalRef
+pub wyrd_auth_verify::ActClaim::sub: alloc::string::String
+pub struct wyrd_auth_verify::Kid(_)
+impl wyrd_auth_verify::Kid
+pub fn wyrd_auth_verify::Kid::as_str(&self) -> &str
+pub fn wyrd_auth_verify::Kid::new(value: impl core::convert::Into<alloc::string::String>) -> core::result::Result<Self, wyrd_auth_verify::KidError>
+impl core::fmt::Display for wyrd_auth_verify::Kid
+pub fn wyrd_auth_verify::Kid::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_auth_verify::KidError
+pub struct wyrd_auth_verify::NoRevocation
+impl wyrd_auth_verify::RevocationCheck for wyrd_auth_verify::NoRevocation
+pub fn wyrd_auth_verify::NoRevocation::epoch<'a>(&'a self, _tenant: &'a wyrd_spec::ids::DataTenantId, _principal: wyrd_spec::auth::principal_id::PrincipalId, _kind: wyrd_spec::auth::principal_kind::PrincipalKindTag) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<core::option::Option<chrono::datetime::DateTime<chrono::offset::utc::Utc>>, wyrd_auth_verify::ResolveError>> + core::marker::Send + 'a)>>
+pub struct wyrd_auth_verify::RefreshTokenClaims
+pub wyrd_auth_verify::RefreshTokenClaims::exp: usize
+pub wyrd_auth_verify::RefreshTokenClaims::iat: usize
+pub wyrd_auth_verify::RefreshTokenClaims::iss: alloc::string::String
+pub wyrd_auth_verify::RefreshTokenClaims::jti: alloc::string::String
+pub wyrd_auth_verify::RefreshTokenClaims::principal_id: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_auth_verify::RefreshTokenClaims::principal_kind: wyrd_spec::auth::principal_kind::PrincipalKindTag
+pub wyrd_auth_verify::RefreshTokenClaims::sub: alloc::string::String
+pub wyrd_auth_verify::RefreshTokenClaims::tenant_id: wyrd_spec::ids::DataTenantId
+pub struct wyrd_auth_verify::TokenHash(_)
+pub struct wyrd_auth_verify::TokenPrincipalRef
+pub wyrd_auth_verify::TokenPrincipalRef::card_ref: core::option::Option<wyrd_spec::reference::CardRef>
+pub wyrd_auth_verify::TokenPrincipalRef::card_ref_scope: wyrd_spec::reference::CardRefScope
+pub wyrd_auth_verify::TokenPrincipalRef::id: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_auth_verify::TokenPrincipalRef::kind: wyrd_spec::auth::principal_kind::PrincipalKindTag
+pub wyrd_auth_verify::TokenPrincipalRef::tenant_id: wyrd_spec::ids::DataTenantId
+impl core::convert::From<&wyrd_runtime::principal::Principal> for wyrd_auth_verify::TokenPrincipalRef
+pub fn wyrd_auth_verify::TokenPrincipalRef::from(principal: &wyrd_runtime::principal::Principal) -> Self
+impl core::convert::From<(&wyrd_runtime::principal::PrincipalRef, wyrd_spec::ids::DataTenantId)> for wyrd_auth_verify::TokenPrincipalRef
+pub fn wyrd_auth_verify::TokenPrincipalRef::from((ref_, tenant_id): (&wyrd_runtime::principal::PrincipalRef, wyrd_spec::ids::DataTenantId)) -> Self
+pub struct wyrd_auth_verify::TokenVerifier<R: wyrd_auth_verify::PermissionResolver, I: wyrd_auth_oidc::config::IssuerConfigResolver>
+impl<R: wyrd_auth_verify::PermissionResolver + 'static, I: wyrd_auth_oidc::config::IssuerConfigResolver + 'static> wyrd_auth_verify::TokenVerifier<R, I>
+pub async fn wyrd_auth_verify::TokenVerifier<R, I>::invalidate(&self, token: &secrecy::SecretString)
+pub async fn wyrd_auth_verify::TokenVerifier<R, I>::invalidate_principal(&self, principal_id: wyrd_spec::auth::principal_id::PrincipalId)
+pub fn wyrd_auth_verify::TokenVerifier<R, I>::new(decoding_keys: std::collections::hash::map::HashMap<wyrd_auth_verify::Kid, alloc::sync::Arc<jsonwebtoken::decoding::DecodingKey>>, issuer: impl core::convert::Into<alloc::string::String>, resolver: alloc::sync::Arc<R>, settings: wyrd_auth_verify::WyrdAuthVerifySettings) -> Self
+pub async fn wyrd_auth_verify::TokenVerifier<R, I>::verify(&self, token: &secrecy::SecretString, expected_tenant: &wyrd_spec::ids::DataTenantId) -> core::result::Result<alloc::sync::Arc<wyrd_auth_verify::VerifiedToken>, wyrd_auth_verify::AuthError>
+pub async fn wyrd_auth_verify::TokenVerifier<R, I>::verify_external(&self, tenant: &wyrd_spec::ids::DataTenantId, token: &str) -> core::result::Result<wyrd_auth_verify::VerifiedExternalIdentity, wyrd_auth_verify::AuthError>
+pub fn wyrd_auth_verify::TokenVerifier<R, I>::with_external(self, jwks: alloc::sync::Arc<wyrd_auth_oidc::jwks::JwksCache>, trusted: alloc::sync::Arc<I>) -> Self
+pub fn wyrd_auth_verify::TokenVerifier<R, I>::with_revocation(self, revocation: alloc::sync::Arc<dyn wyrd_auth_verify::RevocationCheck>) -> Self
+impl<R: wyrd_auth_verify::PermissionResolver, I: wyrd_auth_oidc::config::IssuerConfigResolver> core::clone::Clone for wyrd_auth_verify::TokenVerifier<R, I>
+pub fn wyrd_auth_verify::TokenVerifier<R, I>::clone(&self) -> Self
+pub struct wyrd_auth_verify::VerifiedExternalIdentity
+pub wyrd_auth_verify::VerifiedExternalIdentity::email: core::option::Option<alloc::string::String>
+pub wyrd_auth_verify::VerifiedExternalIdentity::expected_audience: alloc::string::String
+pub wyrd_auth_verify::VerifiedExternalIdentity::groups: alloc::vec::Vec<alloc::string::String>
+pub wyrd_auth_verify::VerifiedExternalIdentity::issuer: wyrd_spec::auth::oidc::IssuerUrl
+pub wyrd_auth_verify::VerifiedExternalIdentity::principal_kind: wyrd_spec::auth::admin::IssuerTokenPolicy
+pub wyrd_auth_verify::VerifiedExternalIdentity::raw_claims: serde_json::value::Value
+pub wyrd_auth_verify::VerifiedExternalIdentity::subject: alloc::string::String
+pub wyrd_auth_verify::VerifiedExternalIdentity::tenant_id: wyrd_spec::ids::DataTenantId
+pub struct wyrd_auth_verify::VerifiedToken
+pub wyrd_auth_verify::VerifiedToken::delegation_chain: alloc::vec::Vec<wyrd_runtime::request_context::DelegationStep>
+pub wyrd_auth_verify::VerifiedToken::exp: chrono::datetime::DateTime<chrono::offset::utc::Utc>
+pub wyrd_auth_verify::VerifiedToken::iat: chrono::datetime::DateTime<chrono::offset::utc::Utc>
+pub wyrd_auth_verify::VerifiedToken::principal: wyrd_runtime::principal::Principal
+pub struct wyrd_auth_verify::WyrdAuthVerifySettings
+pub wyrd_auth_verify::WyrdAuthVerifySettings::allowed_clock_skew: core::time::Duration
+pub wyrd_auth_verify::WyrdAuthVerifySettings::cache_ttl: core::time::Duration
+pub wyrd_auth_verify::WyrdAuthVerifySettings::max_cache_entries: u64
+impl core::default::Default for wyrd_auth_verify::WyrdAuthVerifySettings
+pub fn wyrd_auth_verify::WyrdAuthVerifySettings::default() -> Self
+pub const wyrd_auth_verify::MAX_BEARER_TOKEN_BYTES: usize
+pub const wyrd_auth_verify::MAX_DELEGATION_DEPTH: usize
+pub trait wyrd_auth_verify::PermissionResolver: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_auth_verify::PermissionResolver::resolve<'a>(&'a self, tenant_id: &'a wyrd_spec::ids::DataTenantId, roles: &'a [wyrd_runtime::principal::RoleRef]) -> impl core::future::future::Future<Output = core::result::Result<wyrd_runtime::permission::PermissionSet, wyrd_auth_verify::ResolveError>> + core::marker::Send + 'a
+pub trait wyrd_auth_verify::RevocationCheck: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_auth_verify::RevocationCheck::epoch<'a>(&'a self, tenant: &'a wyrd_spec::ids::DataTenantId, principal: wyrd_spec::auth::principal_id::PrincipalId, kind: wyrd_spec::auth::principal_kind::PrincipalKindTag) -> wyrd_auth_verify::RevocationEpochFuture<'a>
+impl wyrd_auth_verify::RevocationCheck for wyrd_auth_verify::NoRevocation
+pub fn wyrd_auth_verify::NoRevocation::epoch<'a>(&'a self, _tenant: &'a wyrd_spec::ids::DataTenantId, _principal: wyrd_spec::auth::principal_id::PrincipalId, _kind: wyrd_spec::auth::principal_kind::PrincipalKindTag) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<core::option::Option<chrono::datetime::DateTime<chrono::offset::utc::Utc>>, wyrd_auth_verify::ResolveError>> + core::marker::Send + 'a)>>
+pub fn wyrd_auth_verify::decode_kid(token: &str) -> core::result::Result<core::option::Option<alloc::string::String>, wyrd_auth_verify::AuthError>
+pub fn wyrd_auth_verify::public_key_from_pem(pem: &[u8]) -> core::result::Result<jsonwebtoken::decoding::DecodingKey, wyrd_auth_verify::AuthError>
+pub fn wyrd_auth_verify::verify_eddsa<C: serde_core::de::DeserializeOwned>(token: &str, public_key: &jsonwebtoken::decoding::DecodingKey, issuer: core::option::Option<&str>) -> core::result::Result<C, wyrd_auth_verify::AuthError>
+pub fn wyrd_auth_verify::verify_eddsa_with<C: serde_core::de::DeserializeOwned>(token: &str, public_key: &jsonwebtoken::decoding::DecodingKey, validation: jsonwebtoken::validation::Validation) -> core::result::Result<C, wyrd_auth_verify::AuthError>
+pub type wyrd_auth_verify::RevocationEpochFuture<'a> = core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<core::option::Option<chrono::datetime::DateTime<chrono::offset::utc::Utc>>, wyrd_auth_verify::ResolveError>> + core::marker::Send + 'a)>>

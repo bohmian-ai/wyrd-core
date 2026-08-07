@@ -1,0 +1,7 @@
+    Checking proc-macro2 v1.0.107
+    Checking quote v1.0.47
+    Checking syn v2.0.119
+ Documenting wyrd-test-contract-macros v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-test-contract-macros)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.34s
+pub mod wyrd_test_contract_macros
+pub proc macro wyrd_test_contract_macros::#[critical]

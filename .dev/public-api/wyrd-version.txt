@@ -1,0 +1,69 @@
+ Documenting wyrd-version v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-version)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+pub mod wyrd_version
+pub mod wyrd_version::error
+pub enum wyrd_version::error::WyrdVersionError
+pub wyrd_version::error::WyrdVersionError::EmptyVersion
+pub wyrd_version::error::WyrdVersionError::InvalidBuild(semver::parse::Error)
+pub wyrd_version::error::WyrdVersionError::InvalidPrerelease(semver::parse::Error)
+pub wyrd_version::error::WyrdVersionError::InvalidVersion(semver::parse::Error)
+pub mod wyrd_version::version
+pub enum wyrd_version::version::VersionBump<'a>
+pub wyrd_version::version::VersionBump::Build(&'a str)
+pub wyrd_version::version::VersionBump::Major
+pub wyrd_version::version::VersionBump::Minor
+pub wyrd_version::version::VersionBump::Patch
+pub wyrd_version::version::VersionBump::Pre(&'a str)
+pub struct wyrd_version::version::WyrdVersion(_)
+impl wyrd_version::version::WyrdVersion
+pub fn wyrd_version::version::WyrdVersion::build(&self) -> &semver::BuildMetadata
+pub fn wyrd_version::version::WyrdVersion::bump(&self, bump: wyrd_version::version::VersionBump<'_>) -> core::result::Result<Self, wyrd_version::error::WyrdVersionError>
+pub fn wyrd_version::version::WyrdVersion::current() -> Self
+pub fn wyrd_version::version::WyrdVersion::major(&self) -> u64
+pub fn wyrd_version::version::WyrdVersion::minor(&self) -> u64
+pub fn wyrd_version::version::WyrdVersion::new(major: u64, minor: u64, patch: u64) -> Self
+pub fn wyrd_version::version::WyrdVersion::parse(s: &str) -> core::result::Result<Self, wyrd_version::error::WyrdVersionError>
+pub fn wyrd_version::version::WyrdVersion::patch(&self) -> u64
+pub fn wyrd_version::version::WyrdVersion::pre(&self) -> &semver::Prerelease
+impl core::convert::From<wyrd_version::version::WyrdVersion> for alloc::string::String
+pub fn alloc::string::String::from(v: wyrd_version::version::WyrdVersion) -> Self
+impl core::convert::TryFrom<alloc::string::String> for wyrd_version::version::WyrdVersion
+pub type wyrd_version::version::WyrdVersion::Error = wyrd_version::error::WyrdVersionError
+pub fn wyrd_version::version::WyrdVersion::try_from(s: alloc::string::String) -> core::result::Result<Self, Self::Error>
+impl core::fmt::Display for wyrd_version::version::WyrdVersion
+pub fn wyrd_version::version::WyrdVersion::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::str::traits::FromStr for wyrd_version::version::WyrdVersion
+pub type wyrd_version::version::WyrdVersion::Err = wyrd_version::error::WyrdVersionError
+pub fn wyrd_version::version::WyrdVersion::from_str(s: &str) -> core::result::Result<Self, Self::Err>
+pub enum wyrd_version::VersionBump<'a>
+pub wyrd_version::VersionBump::Build(&'a str)
+pub wyrd_version::VersionBump::Major
+pub wyrd_version::VersionBump::Minor
+pub wyrd_version::VersionBump::Patch
+pub wyrd_version::VersionBump::Pre(&'a str)
+pub enum wyrd_version::WyrdVersionError
+pub wyrd_version::WyrdVersionError::EmptyVersion
+pub wyrd_version::WyrdVersionError::InvalidBuild(semver::parse::Error)
+pub wyrd_version::WyrdVersionError::InvalidPrerelease(semver::parse::Error)
+pub wyrd_version::WyrdVersionError::InvalidVersion(semver::parse::Error)
+pub struct wyrd_version::WyrdVersion(_)
+impl wyrd_version::version::WyrdVersion
+pub fn wyrd_version::version::WyrdVersion::build(&self) -> &semver::BuildMetadata
+pub fn wyrd_version::version::WyrdVersion::bump(&self, bump: wyrd_version::version::VersionBump<'_>) -> core::result::Result<Self, wyrd_version::error::WyrdVersionError>
+pub fn wyrd_version::version::WyrdVersion::current() -> Self
+pub fn wyrd_version::version::WyrdVersion::major(&self) -> u64
+pub fn wyrd_version::version::WyrdVersion::minor(&self) -> u64
+pub fn wyrd_version::version::WyrdVersion::new(major: u64, minor: u64, patch: u64) -> Self
+pub fn wyrd_version::version::WyrdVersion::parse(s: &str) -> core::result::Result<Self, wyrd_version::error::WyrdVersionError>
+pub fn wyrd_version::version::WyrdVersion::patch(&self) -> u64
+pub fn wyrd_version::version::WyrdVersion::pre(&self) -> &semver::Prerelease
+impl core::convert::From<wyrd_version::version::WyrdVersion> for alloc::string::String
+pub fn alloc::string::String::from(v: wyrd_version::version::WyrdVersion) -> Self
+impl core::convert::TryFrom<alloc::string::String> for wyrd_version::version::WyrdVersion
+pub type wyrd_version::version::WyrdVersion::Error = wyrd_version::error::WyrdVersionError
+pub fn wyrd_version::version::WyrdVersion::try_from(s: alloc::string::String) -> core::result::Result<Self, Self::Error>
+impl core::fmt::Display for wyrd_version::version::WyrdVersion
+pub fn wyrd_version::version::WyrdVersion::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::str::traits::FromStr for wyrd_version::version::WyrdVersion
+pub type wyrd_version::version::WyrdVersion::Err = wyrd_version::error::WyrdVersionError
+pub fn wyrd_version::version::WyrdVersion::from_str(s: &str) -> core::result::Result<Self, Self::Err>

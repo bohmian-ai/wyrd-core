@@ -1,0 +1,1747 @@
+ Documenting skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.85s
+pub mod skald_spec
+pub mod skald_spec::adapter
+pub struct skald_spec::adapter::ResponseAdapter<'a>
+impl<'a> skald_spec::adapter::ResponseAdapter<'a>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::finish_reason(&self) -> skald_spec::wire::common::FinishReason
+pub const fn skald_spec::adapter::ResponseAdapter<'a>::new(response: &'a skald_spec::response::ProviderResponse) -> Self
+pub fn skald_spec::adapter::ResponseAdapter<'a>::structured_output(&self) -> core::option::Option<alloc::boxed::Box<serde_json::raw::RawValue>>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::text(&self) -> core::option::Option<alloc::borrow::Cow<'a, str>>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::tool_calls(&self) -> alloc::vec::Vec<skald_spec::adapter::ToolCallView<'a>>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::usage(&self) -> core::option::Option<skald_spec::adapter::UsageView>
+pub struct skald_spec::adapter::ToolCallView<'a>
+pub skald_spec::adapter::ToolCallView::arguments: alloc::borrow::Cow<'a, str>
+pub skald_spec::adapter::ToolCallView::id: alloc::borrow::Cow<'a, str>
+pub skald_spec::adapter::ToolCallView::name: alloc::borrow::Cow<'a, str>
+pub struct skald_spec::adapter::UsageView
+pub skald_spec::adapter::UsageView::usage: skald_spec::wire::common::TokenUsage
+pub mod skald_spec::authoring
+pub enum skald_spec::authoring::DraftMessages
+pub skald_spec::authoring::DraftMessages::Many(alloc::vec::Vec<alloc::string::String>)
+pub skald_spec::authoring::DraftMessages::None
+pub skald_spec::authoring::DraftMessages::One(alloc::string::String)
+pub struct skald_spec::authoring::PromptDraft
+pub skald_spec::authoring::PromptDraft::messages: skald_spec::authoring::DraftMessages
+pub skald_spec::authoring::PromptDraft::model: alloc::string::String
+pub skald_spec::authoring::PromptDraft::model_settings: core::option::Option<serde_json::value::Value>
+pub skald_spec::authoring::PromptDraft::operation: core::option::Option<alloc::string::String>
+pub skald_spec::authoring::PromptDraft::provider: alloc::string::String
+pub skald_spec::authoring::PromptDraft::system: core::option::Option<alloc::string::String>
+pub skald_spec::authoring::PromptDraft::version: core::option::Option<alloc::string::String>
+impl skald_spec::authoring::PromptDraft
+pub fn skald_spec::authoring::PromptDraft::compile(self) -> skald_spec::error::SkaldResult<skald_spec::prompt::Prompt>
+pub mod skald_spec::convert
+pub trait skald_spec::convert::ProviderMessageConversion<Target>
+pub fn skald_spec::convert::ProviderMessageConversion::convert(&self) -> skald_spec::error::SkaldResult<Target>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub fn skald_spec::convert::convert_message_dyn(src: skald_spec::request::ProviderName, dst: skald_spec::request::ProviderName, msg: &skald_spec::message::MessageNum) -> skald_spec::error::SkaldResult<skald_spec::message::MessageNum>
+pub mod skald_spec::error
+pub enum skald_spec::error::SkaldError
+pub skald_spec::error::SkaldError::Deserialize(alloc::string::String)
+pub skald_spec::error::SkaldError::InvalidMediaType(alloc::string::String)
+pub skald_spec::error::SkaldError::MediaInSystemMessage
+pub skald_spec::error::SkaldError::MediaInSystemMessage::name: alloc::string::String
+pub skald_spec::error::SkaldError::MediaInvalidExtension
+pub skald_spec::error::SkaldError::MediaInvalidExtension::kind: skald_spec::media::MediaKind
+pub skald_spec::error::SkaldError::MediaInvalidExtension::path: alloc::string::String
+pub skald_spec::error::SkaldError::MediaIo(alloc::string::String)
+pub skald_spec::error::SkaldError::MediaNotRegularFile
+pub skald_spec::error::SkaldError::MediaNotRegularFile::path: alloc::string::String
+pub skald_spec::error::SkaldError::MediaPlaceholderNotFound
+pub skald_spec::error::SkaldError::MediaPlaceholderNotFound::name: alloc::string::String
+pub skald_spec::error::SkaldError::MediaPlaceholderNotIsolated
+pub skald_spec::error::SkaldError::MediaPlaceholderNotIsolated::name: alloc::string::String
+pub skald_spec::error::SkaldError::MediaTooLarge
+pub skald_spec::error::SkaldError::MediaTooLarge::limit: u64
+pub skald_spec::error::SkaldError::MediaTooLarge::path: alloc::string::String
+pub skald_spec::error::SkaldError::MediaTooLarge::size: u64
+pub skald_spec::error::SkaldError::MissingMediaVariable
+pub skald_spec::error::SkaldError::MissingMediaVariable::name: alloc::string::String
+pub skald_spec::error::SkaldError::MissingVariable(alloc::string::String)
+pub skald_spec::error::SkaldError::PromptDraftInvalid
+pub skald_spec::error::SkaldError::PromptDraftInvalid::message: alloc::string::String
+pub skald_spec::error::SkaldError::PromptDraftInvalid::provider: alloc::string::String
+pub skald_spec::error::SkaldError::ProviderUnsupported
+pub skald_spec::error::SkaldError::ProviderUnsupported::op: alloc::string::String
+pub skald_spec::error::SkaldError::ProviderUnsupported::provider: skald_spec::request::ProviderName
+pub skald_spec::error::SkaldError::Serialize(alloc::string::String)
+pub skald_spec::error::SkaldError::SettingsDecode
+pub skald_spec::error::SkaldError::SettingsDecode::message: alloc::string::String
+pub skald_spec::error::SkaldError::SettingsDecode::provider: skald_spec::request::ProviderName
+pub skald_spec::error::SkaldError::SettingsProviderMismatch
+pub skald_spec::error::SkaldError::SettingsProviderMismatch::expected: skald_spec::request::ProviderName
+pub skald_spec::error::SkaldError::SettingsProviderMismatch::got: skald_spec::request::ProviderName
+pub skald_spec::error::SkaldError::UnsupportedConversion
+pub skald_spec::error::SkaldError::UnsupportedConversion::dst: skald_spec::request::ProviderName
+pub skald_spec::error::SkaldError::UnsupportedConversion::src: skald_spec::request::ProviderName
+pub skald_spec::error::SkaldError::UnsupportedMediaForProvider
+pub skald_spec::error::SkaldError::UnsupportedMediaForProvider::kind: skald_spec::media::MediaKind
+pub skald_spec::error::SkaldError::UnsupportedMediaForProvider::provider: skald_spec::request::ProviderName
+impl skald_spec::error::SkaldError
+pub const fn skald_spec::error::SkaldError::code(&self) -> &'static str
+pub fn skald_spec::error::SkaldError::deserialize(error: impl core::fmt::Display) -> Self
+pub fn skald_spec::error::SkaldError::missing_variable(name: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::error::SkaldError::provider_unsupported(provider: skald_spec::request::ProviderName, op: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::error::SkaldError::serialize(error: impl core::fmt::Display) -> Self
+pub fn skald_spec::error::SkaldError::unsupported_conversion(src: skald_spec::request::ProviderName, dst: skald_spec::request::ProviderName) -> Self
+pub type skald_spec::error::SkaldResult<T> = core::result::Result<T, skald_spec::error::SkaldError>
+pub mod skald_spec::media
+pub enum skald_spec::media::MediaKind
+pub skald_spec::media::MediaKind::Document
+pub skald_spec::media::MediaKind::Image
+pub enum skald_spec::media::MediaSource
+pub skald_spec::media::MediaSource::Base64
+pub skald_spec::media::MediaSource::Base64::data: alloc::string::String
+pub skald_spec::media::MediaSource::Base64::mime_type: alloc::string::String
+pub skald_spec::media::MediaSource::File
+pub skald_spec::media::MediaSource::File::mime_type: core::option::Option<alloc::string::String>
+pub skald_spec::media::MediaSource::File::uri: alloc::string::String
+pub skald_spec::media::MediaSource::Url
+pub skald_spec::media::MediaSource::Url::mime_type: core::option::Option<alloc::string::String>
+pub skald_spec::media::MediaSource::Url::url: alloc::string::String
+pub struct skald_spec::media::MediaRef
+pub skald_spec::media::MediaRef::kind: skald_spec::media::MediaKind
+pub skald_spec::media::MediaRef::source: skald_spec::media::MediaSource
+impl skald_spec::media::MediaRef
+pub fn skald_spec::media::MediaRef::document_base64(mime_type: impl core::convert::Into<alloc::string::String>, data: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::document_file(uri: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::document_url(url: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::image_base64(mime_type: impl core::convert::Into<alloc::string::String>, data: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::image_file(uri: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::image_url(url: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub mod skald_spec::message
+#[non_exhaustive] pub enum skald_spec::message::MessageNum
+pub skald_spec::message::MessageNum::Anthropic(skald_spec::wire::anthropic_messages::AnthropicMessage)
+pub skald_spec::message::MessageNum::Gemini(skald_spec::wire::google_generate::GoogleContent)
+pub skald_spec::message::MessageNum::OpenAi(alloc::boxed::Box<skald_spec::wire::openai_chat::OpenAiChatMessage>)
+pub skald_spec::message::MessageNum::RawV1(alloc::boxed::Box<serde_json::raw::RawValue>)
+impl core::cmp::PartialEq for skald_spec::message::MessageNum
+pub fn skald_spec::message::MessageNum::eq(&self, other: &Self) -> bool
+impl<'de> serde_core::de::Deserialize<'de> for skald_spec::message::MessageNum
+pub fn skald_spec::message::MessageNum::deserialize<D>(deserializer: D) -> core::result::Result<Self, <D as serde_core::de::Deserializer>::Error> where D: serde_core::de::Deserializer<'de>
+pub mod skald_spec::prompt
+pub enum skald_spec::prompt::ProviderSettingsRef<'a>
+pub skald_spec::prompt::ProviderSettingsRef::Anthropic(&'a skald_spec::wire::anthropic_messages::AnthropicMessagesSettings)
+pub skald_spec::prompt::ProviderSettingsRef::Google(&'a skald_spec::wire::google_generate::GoogleGenerateSettings)
+pub skald_spec::prompt::ProviderSettingsRef::OpenAiChat(&'a skald_spec::wire::openai_chat::OpenAiChatSettings)
+pub skald_spec::prompt::ProviderSettingsRef::OpenAiResponses(&'a skald_spec::wire::openai_responses::OpenAiResponsesSettings)
+pub enum skald_spec::prompt::ResponseType
+pub skald_spec::prompt::ResponseType::JsonSchema
+pub skald_spec::prompt::ResponseType::JsonSchema::name: alloc::string::String
+pub skald_spec::prompt::ResponseType::JsonSchema::schema: serde_json::value::Value
+pub skald_spec::prompt::ResponseType::Text
+pub enum skald_spec::prompt::TextSegment
+pub skald_spec::prompt::TextSegment::Placeholder(alloc::string::String)
+pub skald_spec::prompt::TextSegment::Text(alloc::string::String)
+pub struct skald_spec::prompt::Prompt
+pub skald_spec::prompt::Prompt::media_variables: alloc::vec::Vec<alloc::string::String>
+pub skald_spec::prompt::Prompt::model: alloc::string::String
+pub skald_spec::prompt::Prompt::request: skald_spec::request::ProviderRequest
+pub skald_spec::prompt::Prompt::response_type: skald_spec::prompt::ResponseType
+pub skald_spec::prompt::Prompt::variables: alloc::vec::Vec<alloc::string::String>
+pub skald_spec::prompt::Prompt::version: core::option::Option<alloc::string::String>
+impl skald_spec::prompt::Prompt
+pub fn skald_spec::prompt::Prompt::bind(&self, vars: &[(&str, &str)]) -> skald_spec::error::SkaldResult<Self>
+pub fn skald_spec::prompt::Prompt::bind_media(&self, name: &str, media: &skald_spec::media::MediaRef) -> skald_spec::error::SkaldResult<Self>
+pub fn skald_spec::prompt::Prompt::bind_media_mut(&mut self, name: &str, media: &skald_spec::media::MediaRef) -> skald_spec::error::SkaldResult<()>
+pub fn skald_spec::prompt::Prompt::bind_mut(&mut self, vars: &[(&str, &str)]) -> skald_spec::error::SkaldResult<()>
+pub fn skald_spec::prompt::Prompt::new(request: skald_spec::request::ProviderRequest, model: impl core::convert::Into<alloc::string::String>, version: core::option::Option<alloc::string::String>, response_type: skald_spec::prompt::ResponseType) -> skald_spec::error::SkaldResult<Self>
+pub fn skald_spec::prompt::Prompt::normalize_media_placeholders_mut(&mut self) -> skald_spec::error::SkaldResult<()>
+pub fn skald_spec::prompt::Prompt::render(&self, vars: &[(&str, &str)]) -> skald_spec::error::SkaldResult<skald_spec::request::ProviderRequest>
+pub fn skald_spec::prompt::Prompt::settings_ref(&self) -> core::option::Option<skald_spec::prompt::ProviderSettingsRef<'_>>
+pub fn skald_spec::prompt::media_placeholder_regex() -> &'static regex::regex::string::Regex
+pub fn skald_spec::prompt::split_text_on_media(text: &str) -> alloc::vec::Vec<skald_spec::prompt::TextSegment>
+pub fn skald_spec::prompt::text_placeholder_regex() -> &'static regex::regex::string::Regex
+pub mod skald_spec::request
+pub enum skald_spec::request::ProviderName
+pub skald_spec::request::ProviderName::Anthropic
+pub skald_spec::request::ProviderName::Custom(alloc::string::String)
+pub skald_spec::request::ProviderName::Google
+pub skald_spec::request::ProviderName::OpenAi
+pub skald_spec::request::ProviderName::Vertex
+#[non_exhaustive] pub enum skald_spec::request::ProviderRequest
+pub skald_spec::request::ProviderRequest::AnthropicMessage(skald_spec::wire::anthropic_messages::AnthropicMessagesRequest)
+pub skald_spec::request::ProviderRequest::GeminiGenerateContent(skald_spec::wire::google_generate::GoogleGenerateContentRequest)
+pub skald_spec::request::ProviderRequest::GoogleBatchEmbed(skald_spec::wire::google_embeddings::GoogleBatchEmbedRequest)
+pub skald_spec::request::ProviderRequest::OpenAiChatCompatible
+pub skald_spec::request::ProviderRequest::OpenAiChatCompatible::provider: skald_spec::request::ProviderName
+pub skald_spec::request::ProviderRequest::OpenAiChatCompatible::request: skald_spec::wire::openai_chat::OpenAiChatRequest
+pub skald_spec::request::ProviderRequest::OpenAiChatCompletion(skald_spec::wire::openai_chat::OpenAiChatRequest)
+pub skald_spec::request::ProviderRequest::OpenAiEmbeddings(skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest)
+pub skald_spec::request::ProviderRequest::OpenAiResponses(skald_spec::wire::openai_responses::OpenAiResponsesRequest)
+pub skald_spec::request::ProviderRequest::RawV1
+pub skald_spec::request::ProviderRequest::RawV1::body: alloc::boxed::Box<serde_json::raw::RawValue>
+pub skald_spec::request::ProviderRequest::RawV1::provider: skald_spec::request::ProviderName
+pub skald_spec::request::ProviderRequest::Vertex(skald_spec::wire::vertex_generate::VertexGenerateContentRequest)
+pub skald_spec::request::ProviderRequest::VertexPredict(skald_spec::wire::vertex_predict::VertexPredictRequest)
+impl skald_spec::request::ProviderRequest
+pub fn skald_spec::request::ProviderRequest::provider(&self) -> skald_spec::request::ProviderName
+pub fn skald_spec::request::ProviderRequest::with_tools(self, tools: alloc::vec::Vec<skald_spec::request::ToolDescriptor>) -> Self
+impl core::cmp::PartialEq for skald_spec::request::ProviderRequest
+pub fn skald_spec::request::ProviderRequest::eq(&self, other: &Self) -> bool
+impl<'de> serde_core::de::Deserialize<'de> for skald_spec::request::ProviderRequest
+pub fn skald_spec::request::ProviderRequest::deserialize<D>(deserializer: D) -> core::result::Result<Self, <D as serde_core::de::Deserializer>::Error> where D: serde_core::de::Deserializer<'de>
+pub struct skald_spec::request::ToolDescriptor
+pub skald_spec::request::ToolDescriptor::description: alloc::string::String
+pub skald_spec::request::ToolDescriptor::name: alloc::string::String
+pub skald_spec::request::ToolDescriptor::parameters: serde_json::value::Value
+pub mod skald_spec::response
+#[non_exhaustive] pub enum skald_spec::response::ProviderResponse
+pub skald_spec::response::ProviderResponse::AnthropicMessage(skald_spec::wire::anthropic_messages::AnthropicMessagesResponse)
+pub skald_spec::response::ProviderResponse::GeminiGenerateContent(skald_spec::wire::google_generate::GoogleGenerateContentResponse)
+pub skald_spec::response::ProviderResponse::GoogleBatchEmbed(skald_spec::wire::google_embeddings::GoogleBatchEmbedResponse)
+pub skald_spec::response::ProviderResponse::OpenAiChatCompletion(skald_spec::wire::openai_chat::OpenAiChatResponse)
+pub skald_spec::response::ProviderResponse::OpenAiEmbeddings(skald_spec::wire::openai_embeddings::OpenAiEmbeddingsResponse)
+pub skald_spec::response::ProviderResponse::OpenAiResponses(skald_spec::wire::openai_responses::OpenAiResponsesResponse)
+pub skald_spec::response::ProviderResponse::RawV1(alloc::boxed::Box<serde_json::raw::RawValue>)
+pub skald_spec::response::ProviderResponse::VertexGenerateContent(skald_spec::wire::google_generate::GoogleGenerateContentResponse)
+pub skald_spec::response::ProviderResponse::VertexPredict(skald_spec::wire::vertex_predict::VertexPredictResponse)
+impl skald_spec::response::ProviderResponse
+pub const fn skald_spec::response::ProviderResponse::adapter(&self) -> skald_spec::adapter::ResponseAdapter<'_>
+pub fn skald_spec::response::ProviderResponse::provider(&self) -> skald_spec::request::ProviderName
+impl core::cmp::PartialEq for skald_spec::response::ProviderResponse
+pub fn skald_spec::response::ProviderResponse::eq(&self, other: &Self) -> bool
+impl<'de> serde_core::de::Deserialize<'de> for skald_spec::response::ProviderResponse
+pub fn skald_spec::response::ProviderResponse::deserialize<D>(deserializer: D) -> core::result::Result<Self, <D as serde_core::de::Deserializer>::Error> where D: serde_core::de::Deserializer<'de>
+pub mod skald_spec::wire
+pub mod skald_spec::wire::anthropic_citation
+pub enum skald_spec::wire::anthropic_citation::AnthropicCitationV1
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::CharLocation
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::CharLocation::cited_text: alloc::string::String
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::CharLocation::document_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::CharLocation::document_title: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::CharLocation::end_char_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::CharLocation::start_char_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::ContentBlockLocation
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::ContentBlockLocation::cited_text: alloc::string::String
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::ContentBlockLocation::document_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::ContentBlockLocation::document_title: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::ContentBlockLocation::end_block_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::ContentBlockLocation::start_block_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::PageLocation
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::PageLocation::cited_text: alloc::string::String
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::PageLocation::document_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::PageLocation::document_title: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::PageLocation::end_page_number: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::PageLocation::start_page_number: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::SearchResultLocation
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::SearchResultLocation::cited_text: alloc::string::String
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::SearchResultLocation::end_block_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::SearchResultLocation::search_result_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::SearchResultLocation::source: alloc::string::String
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::SearchResultLocation::start_block_index: u32
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::SearchResultLocation::title: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::WebSearchResultLocation
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::WebSearchResultLocation::cited_text: alloc::string::String
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::WebSearchResultLocation::encrypted_index: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::WebSearchResultLocation::title: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_citation::AnthropicCitationV1::WebSearchResultLocation::url: alloc::string::String
+pub mod skald_spec::wire::anthropic_messages
+pub enum skald_spec::wire::anthropic_messages::AnthropicContentBlock
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Document
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Document::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Document::citations: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCitationToggle>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Document::context: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Document::source: skald_spec::wire::anthropic_messages::AnthropicDocumentSource
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Document::title: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Image
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Image::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Image::source: skald_spec::wire::anthropic_messages::AnthropicImageSource
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::RedactedThinking
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::RedactedThinking::data: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Text
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Text::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Text::citations: core::option::Option<alloc::vec::Vec<skald_spec::wire::anthropic_citation::AnthropicCitationV1>>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Text::text: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Thinking
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Thinking::signature: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::Thinking::thinking: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolResult
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolResult::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolResult::content: skald_spec::wire::anthropic_messages::AnthropicToolResultContent
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolResult::is_error: core::option::Option<bool>
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolResult::tool_use_id: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolUse
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolUse::id: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolUse::input: serde_json::value::Value
+pub skald_spec::wire::anthropic_messages::AnthropicContentBlock::ToolUse::name: alloc::string::String
+pub enum skald_spec::wire::anthropic_messages::AnthropicDelta
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::InputJsonDelta
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::InputJsonDelta::partial_json: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::SignatureDelta
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::SignatureDelta::signature: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::TextDelta
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::TextDelta::text: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::ThinkingDelta
+pub skald_spec::wire::anthropic_messages::AnthropicDelta::ThinkingDelta::thinking: alloc::string::String
+pub enum skald_spec::wire::anthropic_messages::AnthropicDocumentSource
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Base64
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Base64::data: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Base64::media_type: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Content
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Content::content: alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicContentBlock>
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::FileId
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::FileId::file_id: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Text
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Text::data: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Text::media_type: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Url
+pub skald_spec::wire::anthropic_messages::AnthropicDocumentSource::Url::url: alloc::string::String
+pub enum skald_spec::wire::anthropic_messages::AnthropicImageSource
+pub skald_spec::wire::anthropic_messages::AnthropicImageSource::Base64
+pub skald_spec::wire::anthropic_messages::AnthropicImageSource::Base64::data: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicImageSource::Base64::media_type: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicImageSource::FileId
+pub skald_spec::wire::anthropic_messages::AnthropicImageSource::FileId::file_id: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicImageSource::Url
+pub skald_spec::wire::anthropic_messages::AnthropicImageSource::Url::url: alloc::string::String
+pub enum skald_spec::wire::anthropic_messages::AnthropicOutputFormat
+pub skald_spec::wire::anthropic_messages::AnthropicOutputFormat::JsonSchema
+pub skald_spec::wire::anthropic_messages::AnthropicOutputFormat::JsonSchema::schema: serde_json::value::Value
+pub enum skald_spec::wire::anthropic_messages::AnthropicStopReason
+pub skald_spec::wire::anthropic_messages::AnthropicStopReason::EndTurn
+pub skald_spec::wire::anthropic_messages::AnthropicStopReason::MaxTokens
+pub skald_spec::wire::anthropic_messages::AnthropicStopReason::PauseTurn
+pub skald_spec::wire::anthropic_messages::AnthropicStopReason::Refusal
+pub skald_spec::wire::anthropic_messages::AnthropicStopReason::StopSequence
+pub skald_spec::wire::anthropic_messages::AnthropicStopReason::ToolUse
+pub enum skald_spec::wire::anthropic_messages::AnthropicStreamEvent
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockDelta
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockDelta::delta: skald_spec::wire::anthropic_messages::AnthropicDelta
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockDelta::index: u32
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockStart
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockStart::content_block: skald_spec::wire::anthropic_messages::AnthropicContentBlock
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockStart::index: u32
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockStop
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::ContentBlockStop::index: u32
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::Error
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::Error::error: serde_json::value::Value
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::MessageDelta
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::MessageDelta::delta: skald_spec::wire::anthropic_messages::AnthropicMessageDeltaFields
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::MessageDelta::usage: skald_spec::wire::anthropic_messages::AnthropicUsage
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::MessageStart
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::MessageStart::message: skald_spec::wire::anthropic_messages::AnthropicMessagesResponse
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::MessageStop
+pub skald_spec::wire::anthropic_messages::AnthropicStreamEvent::Ping
+pub enum skald_spec::wire::anthropic_messages::AnthropicSystem
+pub skald_spec::wire::anthropic_messages::AnthropicSystem::Blocks(alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicSystemBlock>)
+pub skald_spec::wire::anthropic_messages::AnthropicSystem::Text(alloc::string::String)
+pub enum skald_spec::wire::anthropic_messages::AnthropicSystemBlock
+pub skald_spec::wire::anthropic_messages::AnthropicSystemBlock::Text
+pub skald_spec::wire::anthropic_messages::AnthropicSystemBlock::Text::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::wire::anthropic_messages::AnthropicSystemBlock::Text::text: alloc::string::String
+pub enum skald_spec::wire::anthropic_messages::AnthropicToolResultContent
+pub skald_spec::wire::anthropic_messages::AnthropicToolResultContent::Blocks(alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicContentBlock>)
+pub skald_spec::wire::anthropic_messages::AnthropicToolResultContent::Text(alloc::string::String)
+pub struct skald_spec::wire::anthropic_messages::AnthropicCacheControl
+pub skald_spec::wire::anthropic_messages::AnthropicCacheControl::kind: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicCacheControl::ttl: core::option::Option<alloc::string::String>
+pub struct skald_spec::wire::anthropic_messages::AnthropicCitationToggle
+pub skald_spec::wire::anthropic_messages::AnthropicCitationToggle::enabled: bool
+pub struct skald_spec::wire::anthropic_messages::AnthropicMessage
+pub skald_spec::wire::anthropic_messages::AnthropicMessage::content: alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicContentBlock>
+pub skald_spec::wire::anthropic_messages::AnthropicMessage::role: alloc::string::String
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub struct skald_spec::wire::anthropic_messages::AnthropicMessageDeltaFields
+pub skald_spec::wire::anthropic_messages::AnthropicMessageDeltaFields::stop_reason: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicStopReason>
+pub skald_spec::wire::anthropic_messages::AnthropicMessageDeltaFields::stop_sequence: core::option::Option<alloc::string::String>
+pub struct skald_spec::wire::anthropic_messages::AnthropicMessagesRequest
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::messages: alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicMessage>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::model: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::output_config: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicOutputConfig>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::settings: skald_spec::wire::anthropic_messages::AnthropicMessagesSettings
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::stream: core::option::Option<bool>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::system: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicSystem>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::tool_choice: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicTool>>
+pub struct skald_spec::wire::anthropic_messages::AnthropicMessagesResponse
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::content: alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicContentBlock>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::id: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::model: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::role: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::stop_reason: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicStopReason>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::stop_sequence: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::type: alloc::string::String
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesResponse::usage: skald_spec::wire::anthropic_messages::AnthropicUsage
+pub struct skald_spec::wire::anthropic_messages::AnthropicMessagesSettings
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::max_tokens: u32
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::metadata: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::stop_sequences: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::temperature: core::option::Option<f32>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::thinking: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicThinkingConfig>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::top_k: core::option::Option<u32>
+pub skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::top_p: core::option::Option<f32>
+impl core::default::Default for skald_spec::wire::anthropic_messages::AnthropicMessagesSettings
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::default() -> Self
+pub struct skald_spec::wire::anthropic_messages::AnthropicOutputConfig
+pub skald_spec::wire::anthropic_messages::AnthropicOutputConfig::format: skald_spec::wire::anthropic_messages::AnthropicOutputFormat
+pub struct skald_spec::wire::anthropic_messages::AnthropicThinkingConfig
+pub skald_spec::wire::anthropic_messages::AnthropicThinkingConfig::budget_tokens: core::option::Option<u32>
+pub skald_spec::wire::anthropic_messages::AnthropicThinkingConfig::kind: alloc::string::String
+pub struct skald_spec::wire::anthropic_messages::AnthropicTool
+pub skald_spec::wire::anthropic_messages::AnthropicTool::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::wire::anthropic_messages::AnthropicTool::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_messages::AnthropicTool::display_height_px: core::option::Option<u32>
+pub skald_spec::wire::anthropic_messages::AnthropicTool::display_number: core::option::Option<u32>
+pub skald_spec::wire::anthropic_messages::AnthropicTool::display_width_px: core::option::Option<u32>
+pub skald_spec::wire::anthropic_messages::AnthropicTool::input_schema: serde_json::value::Value
+pub skald_spec::wire::anthropic_messages::AnthropicTool::kind: core::option::Option<alloc::string::String>
+pub skald_spec::wire::anthropic_messages::AnthropicTool::name: alloc::string::String
+pub struct skald_spec::wire::anthropic_messages::AnthropicUsage
+pub skald_spec::wire::anthropic_messages::AnthropicUsage::cache_creation_input_tokens: u64
+pub skald_spec::wire::anthropic_messages::AnthropicUsage::cache_read_input_tokens: u64
+pub skald_spec::wire::anthropic_messages::AnthropicUsage::input_tokens: u64
+pub skald_spec::wire::anthropic_messages::AnthropicUsage::output_tokens: u64
+impl core::convert::From<skald_spec::wire::anthropic_messages::AnthropicUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::anthropic_messages::AnthropicUsage) -> Self
+pub mod skald_spec::wire::common
+pub enum skald_spec::wire::common::FinishReason
+pub skald_spec::wire::common::FinishReason::ContentFilter
+pub skald_spec::wire::common::FinishReason::Length
+pub skald_spec::wire::common::FinishReason::Other
+pub skald_spec::wire::common::FinishReason::Stop
+pub skald_spec::wire::common::FinishReason::ToolCalls
+pub struct skald_spec::wire::common::TokenUsage
+pub skald_spec::wire::common::TokenUsage::cache_creation_input_tokens: u64
+pub skald_spec::wire::common::TokenUsage::cache_read_input_tokens: u64
+pub skald_spec::wire::common::TokenUsage::input_tokens: u64
+pub skald_spec::wire::common::TokenUsage::output_tokens: u64
+pub skald_spec::wire::common::TokenUsage::reasoning_tokens: u64
+impl core::convert::From<skald_spec::wire::anthropic_messages::AnthropicUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::anthropic_messages::AnthropicUsage) -> Self
+impl core::convert::From<skald_spec::wire::google_generate::GoogleUsageMetadata> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::google_generate::GoogleUsageMetadata) -> Self
+impl core::convert::From<skald_spec::wire::openai_chat::OpenAiUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::openai_chat::OpenAiUsage) -> Self
+impl core::convert::From<skald_spec::wire::openai_responses::OpenAiResponsesUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::openai_responses::OpenAiResponsesUsage) -> Self
+pub mod skald_spec::wire::google_embeddings
+pub struct skald_spec::wire::google_embeddings::GoogleBatchEmbedRequest
+pub skald_spec::wire::google_embeddings::GoogleBatchEmbedRequest::requests: alloc::vec::Vec<skald_spec::wire::google_embeddings::GoogleEmbedRequest>
+pub struct skald_spec::wire::google_embeddings::GoogleBatchEmbedResponse
+pub skald_spec::wire::google_embeddings::GoogleBatchEmbedResponse::embeddings: alloc::vec::Vec<skald_spec::wire::google_embeddings::GoogleEmbedding>
+pub struct skald_spec::wire::google_embeddings::GoogleEmbedContent
+pub skald_spec::wire::google_embeddings::GoogleEmbedContent::parts: alloc::vec::Vec<skald_spec::wire::google_embeddings::GoogleEmbedPart>
+pub struct skald_spec::wire::google_embeddings::GoogleEmbedPart
+pub skald_spec::wire::google_embeddings::GoogleEmbedPart::text: alloc::string::String
+pub struct skald_spec::wire::google_embeddings::GoogleEmbedRequest
+pub skald_spec::wire::google_embeddings::GoogleEmbedRequest::content: skald_spec::wire::google_embeddings::GoogleEmbedContent
+pub skald_spec::wire::google_embeddings::GoogleEmbedRequest::model: alloc::string::String
+pub skald_spec::wire::google_embeddings::GoogleEmbedRequest::output_dimensionality: core::option::Option<u32>
+pub skald_spec::wire::google_embeddings::GoogleEmbedRequest::task_type: core::option::Option<alloc::string::String>
+pub skald_spec::wire::google_embeddings::GoogleEmbedRequest::title: core::option::Option<alloc::string::String>
+pub struct skald_spec::wire::google_embeddings::GoogleEmbedding
+pub skald_spec::wire::google_embeddings::GoogleEmbedding::values: alloc::vec::Vec<f32>
+pub mod skald_spec::wire::google_generate
+pub enum skald_spec::wire::google_generate::GoogleFinishReason
+pub skald_spec::wire::google_generate::GoogleFinishReason::Blocklist
+pub skald_spec::wire::google_generate::GoogleFinishReason::FinishReasonUnspecified
+pub skald_spec::wire::google_generate::GoogleFinishReason::Language
+pub skald_spec::wire::google_generate::GoogleFinishReason::MalformedFunctionCall
+pub skald_spec::wire::google_generate::GoogleFinishReason::MaxTokens
+pub skald_spec::wire::google_generate::GoogleFinishReason::Other
+pub skald_spec::wire::google_generate::GoogleFinishReason::ProhibitedContent
+pub skald_spec::wire::google_generate::GoogleFinishReason::Recitation
+pub skald_spec::wire::google_generate::GoogleFinishReason::Safety
+pub skald_spec::wire::google_generate::GoogleFinishReason::Spii
+pub skald_spec::wire::google_generate::GoogleFinishReason::Stop
+pub enum skald_spec::wire::google_generate::GooglePart
+pub skald_spec::wire::google_generate::GooglePart::CodeExecutionResult
+pub skald_spec::wire::google_generate::GooglePart::CodeExecutionResult::code_execution_result: skald_spec::wire::google_generate::GoogleCodeExecutionResult
+pub skald_spec::wire::google_generate::GooglePart::ExecutableCode
+pub skald_spec::wire::google_generate::GooglePart::ExecutableCode::executable_code: skald_spec::wire::google_generate::GoogleExecutableCode
+pub skald_spec::wire::google_generate::GooglePart::FileData
+pub skald_spec::wire::google_generate::GooglePart::FileData::file_data: skald_spec::wire::google_generate::GoogleFileData
+pub skald_spec::wire::google_generate::GooglePart::FunctionCall
+pub skald_spec::wire::google_generate::GooglePart::FunctionCall::function_call: skald_spec::wire::google_generate::GoogleFunctionCall
+pub skald_spec::wire::google_generate::GooglePart::FunctionResponse
+pub skald_spec::wire::google_generate::GooglePart::FunctionResponse::function_response: skald_spec::wire::google_generate::GoogleFunctionResponse
+pub skald_spec::wire::google_generate::GooglePart::InlineData
+pub skald_spec::wire::google_generate::GooglePart::InlineData::inline_data: skald_spec::wire::google_generate::GoogleInlineData
+pub skald_spec::wire::google_generate::GooglePart::Text
+pub skald_spec::wire::google_generate::GooglePart::Text::text: alloc::string::String
+pub skald_spec::wire::google_generate::GooglePart::Thought
+pub skald_spec::wire::google_generate::GooglePart::Thought::text: alloc::string::String
+pub skald_spec::wire::google_generate::GooglePart::Thought::thought: bool
+pub struct skald_spec::wire::google_generate::GoogleCandidate
+pub skald_spec::wire::google_generate::GoogleCandidate::avg_logprobs: core::option::Option<f64>
+pub skald_spec::wire::google_generate::GoogleCandidate::citation_metadata: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleCandidate::content: skald_spec::wire::google_generate::GoogleContent
+pub skald_spec::wire::google_generate::GoogleCandidate::finish_reason: core::option::Option<skald_spec::wire::google_generate::GoogleFinishReason>
+pub skald_spec::wire::google_generate::GoogleCandidate::grounding_metadata: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleCandidate::index: core::option::Option<u32>
+pub skald_spec::wire::google_generate::GoogleCandidate::safety_ratings: alloc::vec::Vec<skald_spec::wire::google_generate::GoogleSafetyRating>
+pub struct skald_spec::wire::google_generate::GoogleCodeExecutionResult
+pub skald_spec::wire::google_generate::GoogleCodeExecutionResult::outcome: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleCodeExecutionResult::output: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleContent
+pub skald_spec::wire::google_generate::GoogleContent::parts: alloc::vec::Vec<skald_spec::wire::google_generate::GooglePart>
+pub skald_spec::wire::google_generate::GoogleContent::role: alloc::string::String
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub struct skald_spec::wire::google_generate::GoogleExecutableCode
+pub skald_spec::wire::google_generate::GoogleExecutableCode::code: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleExecutableCode::language: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleFileData
+pub skald_spec::wire::google_generate::GoogleFileData::file_uri: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleFileData::mime_type: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleFunctionCall
+pub skald_spec::wire::google_generate::GoogleFunctionCall::args: serde_json::value::Value
+pub skald_spec::wire::google_generate::GoogleFunctionCall::name: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleFunctionCallingConfig
+pub skald_spec::wire::google_generate::GoogleFunctionCallingConfig::allowed_function_names: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::wire::google_generate::GoogleFunctionCallingConfig::mode: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleFunctionDeclaration
+pub skald_spec::wire::google_generate::GoogleFunctionDeclaration::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::google_generate::GoogleFunctionDeclaration::name: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleFunctionDeclaration::parameters: serde_json::value::Value
+pub struct skald_spec::wire::google_generate::GoogleFunctionResponse
+pub skald_spec::wire::google_generate::GoogleFunctionResponse::name: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleFunctionResponse::response: serde_json::value::Value
+pub struct skald_spec::wire::google_generate::GoogleGenerateContentRequest
+pub skald_spec::wire::google_generate::GoogleGenerateContentRequest::contents: alloc::vec::Vec<skald_spec::wire::google_generate::GoogleContent>
+pub skald_spec::wire::google_generate::GoogleGenerateContentRequest::settings: skald_spec::wire::google_generate::GoogleGenerateSettings
+pub skald_spec::wire::google_generate::GoogleGenerateContentRequest::system_instruction: core::option::Option<skald_spec::wire::google_generate::GoogleContent>
+pub skald_spec::wire::google_generate::GoogleGenerateContentRequest::tool_config: core::option::Option<skald_spec::wire::google_generate::GoogleToolConfig>
+pub skald_spec::wire::google_generate::GoogleGenerateContentRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::google_generate::GoogleTool>>
+pub struct skald_spec::wire::google_generate::GoogleGenerateContentResponse
+pub skald_spec::wire::google_generate::GoogleGenerateContentResponse::candidates: alloc::vec::Vec<skald_spec::wire::google_generate::GoogleCandidate>
+pub skald_spec::wire::google_generate::GoogleGenerateContentResponse::model_version: core::option::Option<alloc::string::String>
+pub skald_spec::wire::google_generate::GoogleGenerateContentResponse::prompt_feedback: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleGenerateContentResponse::usage_metadata: core::option::Option<skald_spec::wire::google_generate::GoogleUsageMetadata>
+pub struct skald_spec::wire::google_generate::GoogleGenerateSettings
+pub skald_spec::wire::google_generate::GoogleGenerateSettings::cached_content: core::option::Option<alloc::string::String>
+pub skald_spec::wire::google_generate::GoogleGenerateSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleGenerateSettings::generation_config: core::option::Option<skald_spec::wire::google_generate::GoogleGenerationConfig>
+pub skald_spec::wire::google_generate::GoogleGenerateSettings::labels: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::google_generate::GoogleGenerateSettings::safety_settings: core::option::Option<alloc::vec::Vec<skald_spec::wire::google_generate::GoogleSafetySetting>>
+pub struct skald_spec::wire::google_generate::GoogleGenerationConfig
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::candidate_count: core::option::Option<u32>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::frequency_penalty: core::option::Option<f32>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::max_output_tokens: core::option::Option<u32>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::presence_penalty: core::option::Option<f32>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::response_mime_type: core::option::Option<alloc::string::String>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::response_modalities: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::response_schema: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::seed: core::option::Option<i64>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::speech_config: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::stop_sequences: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::temperature: core::option::Option<f32>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::thinking_config: core::option::Option<skald_spec::wire::google_generate::GoogleThinkingConfig>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::top_k: core::option::Option<u32>
+pub skald_spec::wire::google_generate::GoogleGenerationConfig::top_p: core::option::Option<f32>
+pub struct skald_spec::wire::google_generate::GoogleInlineData
+pub skald_spec::wire::google_generate::GoogleInlineData::data: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleInlineData::mime_type: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleSafetyRating
+pub skald_spec::wire::google_generate::GoogleSafetyRating::blocked: core::option::Option<bool>
+pub skald_spec::wire::google_generate::GoogleSafetyRating::category: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleSafetyRating::probability: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleSafetySetting
+pub skald_spec::wire::google_generate::GoogleSafetySetting::category: alloc::string::String
+pub skald_spec::wire::google_generate::GoogleSafetySetting::threshold: alloc::string::String
+pub struct skald_spec::wire::google_generate::GoogleThinkingConfig
+pub skald_spec::wire::google_generate::GoogleThinkingConfig::include_thoughts: core::option::Option<bool>
+pub skald_spec::wire::google_generate::GoogleThinkingConfig::thinking_budget: core::option::Option<i32>
+pub struct skald_spec::wire::google_generate::GoogleTool
+pub skald_spec::wire::google_generate::GoogleTool::code_execution: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleTool::function_declarations: core::option::Option<alloc::vec::Vec<skald_spec::wire::google_generate::GoogleFunctionDeclaration>>
+pub skald_spec::wire::google_generate::GoogleTool::google_search: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleTool::google_search_retrieval: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::google_generate::GoogleTool::url_context: core::option::Option<serde_json::value::Value>
+pub struct skald_spec::wire::google_generate::GoogleToolConfig
+pub skald_spec::wire::google_generate::GoogleToolConfig::function_calling_config: skald_spec::wire::google_generate::GoogleFunctionCallingConfig
+pub struct skald_spec::wire::google_generate::GoogleUsageMetadata
+pub skald_spec::wire::google_generate::GoogleUsageMetadata::cached_content_token_count: u64
+pub skald_spec::wire::google_generate::GoogleUsageMetadata::candidates_token_count: u64
+pub skald_spec::wire::google_generate::GoogleUsageMetadata::prompt_token_count: u64
+pub skald_spec::wire::google_generate::GoogleUsageMetadata::thoughts_token_count: u64
+pub skald_spec::wire::google_generate::GoogleUsageMetadata::total_token_count: u64
+impl core::convert::From<skald_spec::wire::google_generate::GoogleUsageMetadata> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::google_generate::GoogleUsageMetadata) -> Self
+pub mod skald_spec::wire::openai_chat
+pub enum skald_spec::wire::openai_chat::OpenAiAllowedToolsKind
+pub skald_spec::wire::openai_chat::OpenAiAllowedToolsKind::AllowedTools
+pub enum skald_spec::wire::openai_chat::OpenAiAllowedToolsMode
+pub skald_spec::wire::openai_chat::OpenAiAllowedToolsMode::Auto
+pub skald_spec::wire::openai_chat::OpenAiAllowedToolsMode::Required
+pub enum skald_spec::wire::openai_chat::OpenAiAudioFormat
+pub skald_spec::wire::openai_chat::OpenAiAudioFormat::Aac
+pub skald_spec::wire::openai_chat::OpenAiAudioFormat::Flac
+pub skald_spec::wire::openai_chat::OpenAiAudioFormat::Mp3
+pub skald_spec::wire::openai_chat::OpenAiAudioFormat::Opus
+pub skald_spec::wire::openai_chat::OpenAiAudioFormat::Pcm16
+pub skald_spec::wire::openai_chat::OpenAiAudioFormat::Wav
+pub enum skald_spec::wire::openai_chat::OpenAiBuiltInVoice
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Alloy
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Ash
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Ballad
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Cedar
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Coral
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Echo
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Fable
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Marin
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Nova
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Onyx
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Sage
+pub skald_spec::wire::openai_chat::OpenAiBuiltInVoice::Shimmer
+pub enum skald_spec::wire::openai_chat::OpenAiChatToolChoice
+pub skald_spec::wire::openai_chat::OpenAiChatToolChoice::Allowed(skald_spec::wire::openai_chat::OpenAiAllowedToolsChoice)
+pub skald_spec::wire::openai_chat::OpenAiChatToolChoice::Custom(skald_spec::wire::openai_chat::OpenAiNamedCustomToolChoice)
+pub skald_spec::wire::openai_chat::OpenAiChatToolChoice::Function(skald_spec::wire::openai_chat::OpenAiNamedFunctionToolChoice)
+pub skald_spec::wire::openai_chat::OpenAiChatToolChoice::Mode(skald_spec::wire::openai_chat::OpenAiToolChoiceMode)
+pub enum skald_spec::wire::openai_chat::OpenAiContentPart
+pub skald_spec::wire::openai_chat::OpenAiContentPart::File
+pub skald_spec::wire::openai_chat::OpenAiContentPart::File::file: skald_spec::wire::openai_chat::OpenAiFilePart
+pub skald_spec::wire::openai_chat::OpenAiContentPart::ImageUrl
+pub skald_spec::wire::openai_chat::OpenAiContentPart::ImageUrl::image_url: skald_spec::wire::openai_chat::OpenAiImageUrl
+pub skald_spec::wire::openai_chat::OpenAiContentPart::InputAudio
+pub skald_spec::wire::openai_chat::OpenAiContentPart::InputAudio::input_audio: skald_spec::wire::openai_chat::OpenAiInputAudio
+pub skald_spec::wire::openai_chat::OpenAiContentPart::Text
+pub skald_spec::wire::openai_chat::OpenAiContentPart::Text::text: alloc::string::String
+pub enum skald_spec::wire::openai_chat::OpenAiCustomToolFormat
+pub skald_spec::wire::openai_chat::OpenAiCustomToolFormat::Grammar
+pub skald_spec::wire::openai_chat::OpenAiCustomToolFormat::Grammar::grammar: skald_spec::wire::openai_chat::OpenAiGrammar
+pub skald_spec::wire::openai_chat::OpenAiCustomToolFormat::Text
+pub enum skald_spec::wire::openai_chat::OpenAiGrammarSyntax
+pub skald_spec::wire::openai_chat::OpenAiGrammarSyntax::Lark
+pub skald_spec::wire::openai_chat::OpenAiGrammarSyntax::Regex
+pub enum skald_spec::wire::openai_chat::OpenAiMessageContent
+pub skald_spec::wire::openai_chat::OpenAiMessageContent::Parts(alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiContentPart>)
+pub skald_spec::wire::openai_chat::OpenAiMessageContent::Text(alloc::string::String)
+pub enum skald_spec::wire::openai_chat::OpenAiNamedCustomToolChoiceKind
+pub skald_spec::wire::openai_chat::OpenAiNamedCustomToolChoiceKind::Custom
+pub enum skald_spec::wire::openai_chat::OpenAiNamedFunctionToolChoiceKind
+pub skald_spec::wire::openai_chat::OpenAiNamedFunctionToolChoiceKind::Function
+pub enum skald_spec::wire::openai_chat::OpenAiPredictionContentPart
+pub skald_spec::wire::openai_chat::OpenAiPredictionContentPart::Text
+pub skald_spec::wire::openai_chat::OpenAiPredictionContentPart::Text::text: alloc::string::String
+pub enum skald_spec::wire::openai_chat::OpenAiPredictionKind
+pub skald_spec::wire::openai_chat::OpenAiPredictionKind::Content
+pub enum skald_spec::wire::openai_chat::OpenAiPredictionPayload
+pub skald_spec::wire::openai_chat::OpenAiPredictionPayload::Parts(alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiPredictionContentPart>)
+pub skald_spec::wire::openai_chat::OpenAiPredictionPayload::Text(alloc::string::String)
+pub enum skald_spec::wire::openai_chat::OpenAiReasoningEffort
+pub skald_spec::wire::openai_chat::OpenAiReasoningEffort::High
+pub skald_spec::wire::openai_chat::OpenAiReasoningEffort::Low
+pub skald_spec::wire::openai_chat::OpenAiReasoningEffort::Medium
+pub skald_spec::wire::openai_chat::OpenAiReasoningEffort::Minimal
+pub skald_spec::wire::openai_chat::OpenAiReasoningEffort::None
+pub skald_spec::wire::openai_chat::OpenAiReasoningEffort::Xhigh
+pub enum skald_spec::wire::openai_chat::OpenAiResponseFormat
+pub skald_spec::wire::openai_chat::OpenAiResponseFormat::JsonObject
+pub skald_spec::wire::openai_chat::OpenAiResponseFormat::JsonSchema
+pub skald_spec::wire::openai_chat::OpenAiResponseFormat::JsonSchema::json_schema: skald_spec::wire::openai_chat::OpenAiJsonSchema
+pub skald_spec::wire::openai_chat::OpenAiResponseFormat::Text
+pub enum skald_spec::wire::openai_chat::OpenAiResponseModality
+pub skald_spec::wire::openai_chat::OpenAiResponseModality::Audio
+pub skald_spec::wire::openai_chat::OpenAiResponseModality::Text
+pub enum skald_spec::wire::openai_chat::OpenAiStop
+pub skald_spec::wire::openai_chat::OpenAiStop::Many(alloc::vec::Vec<alloc::string::String>)
+pub skald_spec::wire::openai_chat::OpenAiStop::One(alloc::string::String)
+pub enum skald_spec::wire::openai_chat::OpenAiTool
+pub skald_spec::wire::openai_chat::OpenAiTool::Custom
+pub skald_spec::wire::openai_chat::OpenAiTool::Custom::custom: skald_spec::wire::openai_chat::OpenAiCustomTool
+pub skald_spec::wire::openai_chat::OpenAiTool::Function
+pub skald_spec::wire::openai_chat::OpenAiTool::Function::function: skald_spec::wire::openai_chat::OpenAiFunction
+pub enum skald_spec::wire::openai_chat::OpenAiToolChoiceMode
+pub skald_spec::wire::openai_chat::OpenAiToolChoiceMode::Auto
+pub skald_spec::wire::openai_chat::OpenAiToolChoiceMode::None
+pub skald_spec::wire::openai_chat::OpenAiToolChoiceMode::Required
+pub enum skald_spec::wire::openai_chat::OpenAiVoice
+pub skald_spec::wire::openai_chat::OpenAiVoice::BuiltIn(skald_spec::wire::openai_chat::OpenAiBuiltInVoice)
+pub skald_spec::wire::openai_chat::OpenAiVoice::Custom(skald_spec::wire::openai_chat::OpenAiCustomVoice)
+pub struct skald_spec::wire::openai_chat::OpenAiAllowedTools
+pub skald_spec::wire::openai_chat::OpenAiAllowedTools::mode: skald_spec::wire::openai_chat::OpenAiAllowedToolsMode
+pub skald_spec::wire::openai_chat::OpenAiAllowedTools::tools: alloc::vec::Vec<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub struct skald_spec::wire::openai_chat::OpenAiAllowedToolsChoice
+pub skald_spec::wire::openai_chat::OpenAiAllowedToolsChoice::allowed_tools: skald_spec::wire::openai_chat::OpenAiAllowedTools
+pub skald_spec::wire::openai_chat::OpenAiAllowedToolsChoice::kind: skald_spec::wire::openai_chat::OpenAiAllowedToolsKind
+pub struct skald_spec::wire::openai_chat::OpenAiChatAudio
+pub skald_spec::wire::openai_chat::OpenAiChatAudio::format: skald_spec::wire::openai_chat::OpenAiAudioFormat
+pub skald_spec::wire::openai_chat::OpenAiChatAudio::voice: skald_spec::wire::openai_chat::OpenAiVoice
+pub struct skald_spec::wire::openai_chat::OpenAiChatChoice
+pub skald_spec::wire::openai_chat::OpenAiChatChoice::finish_reason: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatChoice::index: u32
+pub skald_spec::wire::openai_chat::OpenAiChatChoice::logprobs: core::option::Option<skald_spec::wire::openai_chat::OpenAiChatLogprobs>
+pub skald_spec::wire::openai_chat::OpenAiChatChoice::message: skald_spec::wire::openai_chat::OpenAiChatMessage
+pub struct skald_spec::wire::openai_chat::OpenAiChatChoiceDelta
+pub skald_spec::wire::openai_chat::OpenAiChatChoiceDelta::content: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatChoiceDelta::refusal: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatChoiceDelta::role: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatChoiceDelta::tool_calls: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiToolCall>>
+pub struct skald_spec::wire::openai_chat::OpenAiChatLogprobs
+pub skald_spec::wire::openai_chat::OpenAiChatLogprobs::content: alloc::vec::Vec<serde_json::value::Value>
+pub skald_spec::wire::openai_chat::OpenAiChatLogprobs::refusal: alloc::vec::Vec<serde_json::value::Value>
+pub struct skald_spec::wire::openai_chat::OpenAiChatMessage
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::annotations: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiMessageAnnotation>
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::audio: core::option::Option<skald_spec::wire::openai_chat::OpenAiMessageAudio>
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::content: core::option::Option<skald_spec::wire::openai_chat::OpenAiMessageContent>
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::name: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::refusal: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::role: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::tool_call_id: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatMessage::tool_calls: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiToolCall>>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub struct skald_spec::wire::openai_chat::OpenAiChatRequest
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::messages: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::model: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::parallel_tool_calls: core::option::Option<bool>
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::response_format: core::option::Option<skald_spec::wire::openai_chat::OpenAiResponseFormat>
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::settings: skald_spec::wire::openai_chat::OpenAiChatSettings
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::stream: core::option::Option<bool>
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::stream_options: core::option::Option<skald_spec::wire::openai_chat::OpenAiStreamOptions>
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::tool_choice: core::option::Option<skald_spec::wire::openai_chat::OpenAiChatToolChoice>
+pub skald_spec::wire::openai_chat::OpenAiChatRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiTool>>
+pub struct skald_spec::wire::openai_chat::OpenAiChatResponse
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::choices: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiChatChoice>
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::created: u64
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::id: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::model: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::object: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::service_tier: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::system_fingerprint: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatResponse::usage: core::option::Option<skald_spec::wire::openai_chat::OpenAiUsage>
+pub struct skald_spec::wire::openai_chat::OpenAiChatSettings
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::audio: core::option::Option<skald_spec::wire::openai_chat::OpenAiChatAudio>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::frequency_penalty: core::option::Option<f32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::logit_bias: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::logprobs: core::option::Option<bool>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::max_completion_tokens: core::option::Option<u32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::max_tokens: core::option::Option<u32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::metadata: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::modalities: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiResponseModality>>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::n: core::option::Option<u32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::prediction: core::option::Option<skald_spec::wire::openai_chat::OpenAiPredictionContent>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::presence_penalty: core::option::Option<f32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::prompt_cache_key: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::reasoning_effort: core::option::Option<skald_spec::wire::openai_chat::OpenAiReasoningEffort>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::safety_identifier: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::seed: core::option::Option<i64>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::service_tier: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::stop: core::option::Option<skald_spec::wire::openai_chat::OpenAiStop>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::store: core::option::Option<bool>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::temperature: core::option::Option<f32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::top_logprobs: core::option::Option<u32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::top_p: core::option::Option<f32>
+pub skald_spec::wire::openai_chat::OpenAiChatSettings::user: core::option::Option<alloc::string::String>
+pub struct skald_spec::wire::openai_chat::OpenAiChatStreamChoice
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChoice::delta: skald_spec::wire::openai_chat::OpenAiChatChoiceDelta
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChoice::finish_reason: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChoice::index: u32
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChoice::logprobs: core::option::Option<skald_spec::wire::openai_chat::OpenAiChatLogprobs>
+pub struct skald_spec::wire::openai_chat::OpenAiChatStreamChunk
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChunk::choices: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiChatStreamChoice>
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChunk::created: u64
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChunk::id: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChunk::model: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChunk::object: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiChatStreamChunk::usage: core::option::Option<skald_spec::wire::openai_chat::OpenAiUsage>
+pub struct skald_spec::wire::openai_chat::OpenAiCompletionTokensDetails
+pub skald_spec::wire::openai_chat::OpenAiCompletionTokensDetails::accepted_prediction_tokens: u64
+pub skald_spec::wire::openai_chat::OpenAiCompletionTokensDetails::audio_tokens: u64
+pub skald_spec::wire::openai_chat::OpenAiCompletionTokensDetails::reasoning_tokens: u64
+pub skald_spec::wire::openai_chat::OpenAiCompletionTokensDetails::rejected_prediction_tokens: u64
+pub struct skald_spec::wire::openai_chat::OpenAiCustomChoice
+pub skald_spec::wire::openai_chat::OpenAiCustomChoice::name: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiCustomTool
+pub skald_spec::wire::openai_chat::OpenAiCustomTool::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiCustomTool::format: core::option::Option<skald_spec::wire::openai_chat::OpenAiCustomToolFormat>
+pub skald_spec::wire::openai_chat::OpenAiCustomTool::name: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiCustomVoice
+pub skald_spec::wire::openai_chat::OpenAiCustomVoice::id: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiFilePart
+pub skald_spec::wire::openai_chat::OpenAiFilePart::file_data: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiFilePart::file_id: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiFilePart::filename: core::option::Option<alloc::string::String>
+pub struct skald_spec::wire::openai_chat::OpenAiFunction
+pub skald_spec::wire::openai_chat::OpenAiFunction::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiFunction::name: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiFunction::parameters: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::openai_chat::OpenAiFunction::strict: core::option::Option<bool>
+pub struct skald_spec::wire::openai_chat::OpenAiFunctionChoice
+pub skald_spec::wire::openai_chat::OpenAiFunctionChoice::name: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiGrammar
+pub skald_spec::wire::openai_chat::OpenAiGrammar::definition: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiGrammar::syntax: skald_spec::wire::openai_chat::OpenAiGrammarSyntax
+pub struct skald_spec::wire::openai_chat::OpenAiImageUrl
+pub skald_spec::wire::openai_chat::OpenAiImageUrl::detail: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiImageUrl::url: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiInputAudio
+pub skald_spec::wire::openai_chat::OpenAiInputAudio::data: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiInputAudio::format: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiJsonSchema
+pub skald_spec::wire::openai_chat::OpenAiJsonSchema::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_chat::OpenAiJsonSchema::name: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiJsonSchema::schema: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::openai_chat::OpenAiJsonSchema::strict: core::option::Option<bool>
+pub struct skald_spec::wire::openai_chat::OpenAiMessageAnnotation
+pub skald_spec::wire::openai_chat::OpenAiMessageAnnotation::kind: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiMessageAnnotation::url_citation: skald_spec::wire::openai_chat::OpenAiUrlCitation
+pub struct skald_spec::wire::openai_chat::OpenAiMessageAudio
+pub skald_spec::wire::openai_chat::OpenAiMessageAudio::data: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiMessageAudio::expires_at: u64
+pub skald_spec::wire::openai_chat::OpenAiMessageAudio::id: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiMessageAudio::transcript: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiNamedCustomToolChoice
+pub skald_spec::wire::openai_chat::OpenAiNamedCustomToolChoice::custom: skald_spec::wire::openai_chat::OpenAiCustomChoice
+pub skald_spec::wire::openai_chat::OpenAiNamedCustomToolChoice::kind: skald_spec::wire::openai_chat::OpenAiNamedCustomToolChoiceKind
+pub struct skald_spec::wire::openai_chat::OpenAiNamedFunctionToolChoice
+pub skald_spec::wire::openai_chat::OpenAiNamedFunctionToolChoice::function: skald_spec::wire::openai_chat::OpenAiFunctionChoice
+pub skald_spec::wire::openai_chat::OpenAiNamedFunctionToolChoice::kind: skald_spec::wire::openai_chat::OpenAiNamedFunctionToolChoiceKind
+pub struct skald_spec::wire::openai_chat::OpenAiPredictionContent
+pub skald_spec::wire::openai_chat::OpenAiPredictionContent::content: skald_spec::wire::openai_chat::OpenAiPredictionPayload
+pub skald_spec::wire::openai_chat::OpenAiPredictionContent::kind: skald_spec::wire::openai_chat::OpenAiPredictionKind
+pub struct skald_spec::wire::openai_chat::OpenAiPromptTokensDetails
+pub skald_spec::wire::openai_chat::OpenAiPromptTokensDetails::audio_tokens: u64
+pub skald_spec::wire::openai_chat::OpenAiPromptTokensDetails::cached_tokens: u64
+pub struct skald_spec::wire::openai_chat::OpenAiStreamOptions
+pub skald_spec::wire::openai_chat::OpenAiStreamOptions::include_obfuscation: core::option::Option<bool>
+pub skald_spec::wire::openai_chat::OpenAiStreamOptions::include_usage: core::option::Option<bool>
+pub struct skald_spec::wire::openai_chat::OpenAiToolCall
+pub skald_spec::wire::openai_chat::OpenAiToolCall::function: skald_spec::wire::openai_chat::OpenAiToolFunctionCall
+pub skald_spec::wire::openai_chat::OpenAiToolCall::id: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiToolCall::kind: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiToolFunctionCall
+pub skald_spec::wire::openai_chat::OpenAiToolFunctionCall::arguments: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiToolFunctionCall::name: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiUrlCitation
+pub skald_spec::wire::openai_chat::OpenAiUrlCitation::end_index: u32
+pub skald_spec::wire::openai_chat::OpenAiUrlCitation::start_index: u32
+pub skald_spec::wire::openai_chat::OpenAiUrlCitation::title: alloc::string::String
+pub skald_spec::wire::openai_chat::OpenAiUrlCitation::url: alloc::string::String
+pub struct skald_spec::wire::openai_chat::OpenAiUsage
+pub skald_spec::wire::openai_chat::OpenAiUsage::completion_tokens: u64
+pub skald_spec::wire::openai_chat::OpenAiUsage::completion_tokens_details: core::option::Option<skald_spec::wire::openai_chat::OpenAiCompletionTokensDetails>
+pub skald_spec::wire::openai_chat::OpenAiUsage::prompt_tokens: u64
+pub skald_spec::wire::openai_chat::OpenAiUsage::prompt_tokens_details: core::option::Option<skald_spec::wire::openai_chat::OpenAiPromptTokensDetails>
+pub skald_spec::wire::openai_chat::OpenAiUsage::total_tokens: u64
+impl core::convert::From<skald_spec::wire::openai_chat::OpenAiUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::openai_chat::OpenAiUsage) -> Self
+pub mod skald_spec::wire::openai_embeddings
+pub enum skald_spec::wire::openai_embeddings::OpenAiEmbeddingsInput
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsInput::Many(alloc::vec::Vec<alloc::string::String>)
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsInput::One(alloc::string::String)
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsInput::TokenBatches(alloc::vec::Vec<alloc::vec::Vec<u32>>)
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsInput::Tokens(alloc::vec::Vec<u32>)
+pub struct skald_spec::wire::openai_embeddings::OpenAiEmbeddingUsage
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingUsage::prompt_tokens: u64
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingUsage::total_tokens: u64
+pub struct skald_spec::wire::openai_embeddings::OpenAiEmbeddingVector
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingVector::embedding: alloc::vec::Vec<f32>
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingVector::index: u32
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingVector::object: alloc::string::String
+pub struct skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest::dimensions: core::option::Option<u32>
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest::encoding_format: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest::input: skald_spec::wire::openai_embeddings::OpenAiEmbeddingsInput
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest::model: alloc::string::String
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest::user: core::option::Option<alloc::string::String>
+pub struct skald_spec::wire::openai_embeddings::OpenAiEmbeddingsResponse
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsResponse::data: alloc::vec::Vec<skald_spec::wire::openai_embeddings::OpenAiEmbeddingVector>
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsResponse::model: alloc::string::String
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsResponse::object: alloc::string::String
+pub skald_spec::wire::openai_embeddings::OpenAiEmbeddingsResponse::usage: skald_spec::wire::openai_embeddings::OpenAiEmbeddingUsage
+pub mod skald_spec::wire::openai_responses
+pub enum skald_spec::wire::openai_responses::OpenAiReasoningEffort
+pub skald_spec::wire::openai_responses::OpenAiReasoningEffort::High
+pub skald_spec::wire::openai_responses::OpenAiReasoningEffort::Low
+pub skald_spec::wire::openai_responses::OpenAiReasoningEffort::Medium
+pub skald_spec::wire::openai_responses::OpenAiReasoningEffort::Minimal
+pub skald_spec::wire::openai_responses::OpenAiReasoningEffort::None
+pub skald_spec::wire::openai_responses::OpenAiReasoningEffort::Xhigh
+pub enum skald_spec::wire::openai_responses::OpenAiReasoningSummary
+pub skald_spec::wire::openai_responses::OpenAiReasoningSummary::Auto
+pub skald_spec::wire::openai_responses::OpenAiReasoningSummary::Concise
+pub skald_spec::wire::openai_responses::OpenAiReasoningSummary::Detailed
+pub enum skald_spec::wire::openai_responses::OpenAiResponseContentPart
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::InputFile
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::InputFile::file_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::InputImage
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::InputImage::detail: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::InputImage::image_url: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::InputText
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::InputText::text: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::OutputText
+pub skald_spec::wire::openai_responses::OpenAiResponseContentPart::OutputText::text: alloc::string::String
+pub enum skald_spec::wire::openai_responses::OpenAiResponseItem
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::FunctionCall
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::FunctionCall::arguments: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::FunctionCall::call_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::FunctionCall::name: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::FunctionCallOutput
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::FunctionCallOutput::call_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::FunctionCallOutput::output: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::InputFile
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::InputFile::file_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::InputImage
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::InputImage::detail: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::InputImage::image_url: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::Message
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::Message::content: alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponseContentPart>
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::Message::role: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::Reasoning
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::Reasoning::encrypted_content: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponseItem::Reasoning::summary: core::option::Option<alloc::string::String>
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsKind::AllowedTools
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsMode
+pub skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsMode::Auto
+pub skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsMode::Required
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesApplyPatchToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesApplyPatchToolKind::ApplyPatch
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesCustomToolFormat
+pub skald_spec::wire::openai_responses::OpenAiResponsesCustomToolFormat::Grammar
+pub skald_spec::wire::openai_responses::OpenAiResponsesCustomToolFormat::Grammar::grammar: skald_spec::wire::openai_responses::OpenAiResponsesGrammar
+pub skald_spec::wire::openai_responses::OpenAiResponsesCustomToolFormat::Text
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesCustomToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesCustomToolKind::Custom
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesFunctionToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesFunctionToolKind::Function
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesGrammarSyntax
+pub skald_spec::wire::openai_responses::OpenAiResponsesGrammarSyntax::Lark
+pub skald_spec::wire::openai_responses::OpenAiResponsesGrammarSyntax::Regex
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::CodeInterpreter
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::Computer
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::ComputerUse
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::ComputerUsePreview
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::FileSearch
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::ImageGeneration
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::WebSearchPreview
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind::WebSearchPreview20250311
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesMcpToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesMcpToolKind::Mcp
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesShellToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesShellToolKind::Shell
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::FunctionCallArgumentsDelta
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::FunctionCallArgumentsDelta::delta: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::FunctionCallArgumentsDelta::item_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::FunctionCallArgumentsDone
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::FunctionCallArgumentsDone::arguments: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::FunctionCallArgumentsDone::item_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputItemAdded
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputItemAdded::item: skald_spec::wire::openai_responses::OpenAiResponseItem
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputItemAdded::output_index: u32
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDelta
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDelta::delta: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDelta::item_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDelta::output_index: u32
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDone
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDone::item_id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDone::output_index: u32
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::OutputTextDone::text: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseCompleted
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseCompleted::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseCreated
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseCreated::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseFailed
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseFailed::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseInProgress
+pub skald_spec::wire::openai_responses::OpenAiResponsesStreamEvent::ResponseInProgress::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesTool
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::CodeInterpreter
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Custom
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Custom::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Custom::format: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesCustomToolFormat>
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Custom::name: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::FileSearch
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::FileSearch::vector_store_ids: alloc::vec::Vec<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Function
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Function::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Function::name: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Function::parameters: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Function::strict: core::option::Option<bool>
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::ImageGeneration
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Mcp
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Mcp::allowed_tools: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Mcp::server_label: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::Mcp::server_url: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesTool::WebSearchPreview
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesToolChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::Allowed(skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsChoice)
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::ApplyPatch(skald_spec::wire::openai_responses::OpenAiResponsesApplyPatchToolChoice)
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::Custom(skald_spec::wire::openai_responses::OpenAiResponsesCustomToolChoice)
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::Function(skald_spec::wire::openai_responses::OpenAiResponsesFunctionToolChoice)
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::Hosted(skald_spec::wire::openai_responses::OpenAiResponsesHostedToolChoice)
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::Mcp(skald_spec::wire::openai_responses::OpenAiResponsesMcpToolChoice)
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::Mode(skald_spec::wire::openai_responses::OpenAiResponsesToolChoiceMode)
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoice::Shell(skald_spec::wire::openai_responses::OpenAiResponsesShellToolChoice)
+pub enum skald_spec::wire::openai_responses::OpenAiResponsesToolChoiceMode
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoiceMode::Auto
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoiceMode::None
+pub skald_spec::wire::openai_responses::OpenAiResponsesToolChoiceMode::Required
+pub enum skald_spec::wire::openai_responses::OpenAiTextResponseFormat
+pub skald_spec::wire::openai_responses::OpenAiTextResponseFormat::JsonObject
+pub skald_spec::wire::openai_responses::OpenAiTextResponseFormat::JsonSchema
+pub skald_spec::wire::openai_responses::OpenAiTextResponseFormat::JsonSchema::description: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiTextResponseFormat::JsonSchema::name: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiTextResponseFormat::JsonSchema::schema: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::openai_responses::OpenAiTextResponseFormat::JsonSchema::strict: core::option::Option<bool>
+pub skald_spec::wire::openai_responses::OpenAiTextResponseFormat::Text
+pub struct skald_spec::wire::openai_responses::OpenAiReasoning
+pub skald_spec::wire::openai_responses::OpenAiReasoning::effort: core::option::Option<skald_spec::wire::openai_responses::OpenAiReasoningEffort>
+pub skald_spec::wire::openai_responses::OpenAiReasoning::generate_summary: core::option::Option<skald_spec::wire::openai_responses::OpenAiReasoningSummary>
+pub skald_spec::wire::openai_responses::OpenAiReasoning::summary: core::option::Option<skald_spec::wire::openai_responses::OpenAiReasoningSummary>
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsChoice::kind: skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsChoice::mode: skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsMode
+pub skald_spec::wire::openai_responses::OpenAiResponsesAllowedToolsChoice::tools: alloc::vec::Vec<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesApplyPatchToolChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesApplyPatchToolChoice::kind: skald_spec::wire::openai_responses::OpenAiResponsesApplyPatchToolKind
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesCustomToolChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesCustomToolChoice::kind: skald_spec::wire::openai_responses::OpenAiResponsesCustomToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesCustomToolChoice::name: alloc::string::String
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesFunctionToolChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesFunctionToolChoice::kind: skald_spec::wire::openai_responses::OpenAiResponsesFunctionToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesFunctionToolChoice::name: alloc::string::String
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesGrammar
+pub skald_spec::wire::openai_responses::OpenAiResponsesGrammar::definition: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesGrammar::syntax: skald_spec::wire::openai_responses::OpenAiResponsesGrammarSyntax
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesHostedToolChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesHostedToolChoice::kind: skald_spec::wire::openai_responses::OpenAiResponsesHostedToolKind
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesInputTokensDetails
+pub skald_spec::wire::openai_responses::OpenAiResponsesInputTokensDetails::cached_tokens: u64
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesMcpToolChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesMcpToolChoice::kind: skald_spec::wire::openai_responses::OpenAiResponsesMcpToolKind
+pub skald_spec::wire::openai_responses::OpenAiResponsesMcpToolChoice::name: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponsesMcpToolChoice::server_label: alloc::string::String
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesOutputTokensDetails
+pub skald_spec::wire::openai_responses::OpenAiResponsesOutputTokensDetails::reasoning_tokens: u64
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesRequest
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::input: alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponseItem>
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::instructions: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::model: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::parallel_tool_calls: core::option::Option<bool>
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::previous_response_id: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::settings: skald_spec::wire::openai_responses::OpenAiResponsesSettings
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::stream: core::option::Option<bool>
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::text: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesText>
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::tool_choice: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesToolChoice>
+pub skald_spec::wire::openai_responses::OpenAiResponsesRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponsesTool>>
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::created_at: u64
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::id: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::model: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::object: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::output: alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponseItem>
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::previous_response_id: core::option::Option<alloc::string::String>
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::status: alloc::string::String
+pub skald_spec::wire::openai_responses::OpenAiResponsesResponse::usage: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesUsage>
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesSettings
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::include: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::max_output_tokens: core::option::Option<u32>
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::metadata: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::reasoning: core::option::Option<skald_spec::wire::openai_responses::OpenAiReasoning>
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::store: core::option::Option<bool>
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::temperature: core::option::Option<f32>
+pub skald_spec::wire::openai_responses::OpenAiResponsesSettings::top_p: core::option::Option<f32>
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesShellToolChoice
+pub skald_spec::wire::openai_responses::OpenAiResponsesShellToolChoice::kind: skald_spec::wire::openai_responses::OpenAiResponsesShellToolKind
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesText
+pub skald_spec::wire::openai_responses::OpenAiResponsesText::format: core::option::Option<skald_spec::wire::openai_responses::OpenAiTextResponseFormat>
+pub struct skald_spec::wire::openai_responses::OpenAiResponsesUsage
+pub skald_spec::wire::openai_responses::OpenAiResponsesUsage::input_tokens: u64
+pub skald_spec::wire::openai_responses::OpenAiResponsesUsage::input_tokens_details: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesInputTokensDetails>
+pub skald_spec::wire::openai_responses::OpenAiResponsesUsage::output_tokens: u64
+pub skald_spec::wire::openai_responses::OpenAiResponsesUsage::output_tokens_details: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesOutputTokensDetails>
+pub skald_spec::wire::openai_responses::OpenAiResponsesUsage::total_tokens: u64
+impl core::convert::From<skald_spec::wire::openai_responses::OpenAiResponsesUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::openai_responses::OpenAiResponsesUsage) -> Self
+pub mod skald_spec::wire::vertex_generate
+pub struct skald_spec::wire::vertex_generate::VertexGenerateContentRequest(pub skald_spec::wire::google_generate::GoogleGenerateContentRequest)
+pub mod skald_spec::wire::vertex_predict
+pub struct skald_spec::wire::vertex_predict::VertexEmbedInstance
+pub skald_spec::wire::vertex_predict::VertexEmbedInstance::content: alloc::string::String
+pub skald_spec::wire::vertex_predict::VertexEmbedInstance::task_type: core::option::Option<alloc::string::String>
+pub skald_spec::wire::vertex_predict::VertexEmbedInstance::title: core::option::Option<alloc::string::String>
+pub struct skald_spec::wire::vertex_predict::VertexEmbedParameters
+pub skald_spec::wire::vertex_predict::VertexEmbedParameters::auto_truncate: core::option::Option<bool>
+pub skald_spec::wire::vertex_predict::VertexEmbedParameters::output_dimensionality: core::option::Option<u32>
+pub struct skald_spec::wire::vertex_predict::VertexEmbeddingPayload
+pub skald_spec::wire::vertex_predict::VertexEmbeddingPayload::statistics: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::vertex_predict::VertexEmbeddingPayload::values: alloc::vec::Vec<f32>
+pub struct skald_spec::wire::vertex_predict::VertexPredictRequest
+pub skald_spec::wire::vertex_predict::VertexPredictRequest::instances: alloc::vec::Vec<skald_spec::wire::vertex_predict::VertexEmbedInstance>
+pub skald_spec::wire::vertex_predict::VertexPredictRequest::parameters: core::option::Option<skald_spec::wire::vertex_predict::VertexEmbedParameters>
+pub struct skald_spec::wire::vertex_predict::VertexPredictResponse
+pub skald_spec::wire::vertex_predict::VertexPredictResponse::metadata: core::option::Option<serde_json::value::Value>
+pub skald_spec::wire::vertex_predict::VertexPredictResponse::predictions: alloc::vec::Vec<skald_spec::wire::vertex_predict::VertexPrediction>
+pub struct skald_spec::wire::vertex_predict::VertexPrediction
+pub skald_spec::wire::vertex_predict::VertexPrediction::embeddings: skald_spec::wire::vertex_predict::VertexEmbeddingPayload
+pub enum skald_spec::AnthropicCitationV1
+pub skald_spec::AnthropicCitationV1::CharLocation
+pub skald_spec::AnthropicCitationV1::CharLocation::cited_text: alloc::string::String
+pub skald_spec::AnthropicCitationV1::CharLocation::document_index: u32
+pub skald_spec::AnthropicCitationV1::CharLocation::document_title: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicCitationV1::CharLocation::end_char_index: u32
+pub skald_spec::AnthropicCitationV1::CharLocation::start_char_index: u32
+pub skald_spec::AnthropicCitationV1::ContentBlockLocation
+pub skald_spec::AnthropicCitationV1::ContentBlockLocation::cited_text: alloc::string::String
+pub skald_spec::AnthropicCitationV1::ContentBlockLocation::document_index: u32
+pub skald_spec::AnthropicCitationV1::ContentBlockLocation::document_title: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicCitationV1::ContentBlockLocation::end_block_index: u32
+pub skald_spec::AnthropicCitationV1::ContentBlockLocation::start_block_index: u32
+pub skald_spec::AnthropicCitationV1::PageLocation
+pub skald_spec::AnthropicCitationV1::PageLocation::cited_text: alloc::string::String
+pub skald_spec::AnthropicCitationV1::PageLocation::document_index: u32
+pub skald_spec::AnthropicCitationV1::PageLocation::document_title: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicCitationV1::PageLocation::end_page_number: u32
+pub skald_spec::AnthropicCitationV1::PageLocation::start_page_number: u32
+pub skald_spec::AnthropicCitationV1::SearchResultLocation
+pub skald_spec::AnthropicCitationV1::SearchResultLocation::cited_text: alloc::string::String
+pub skald_spec::AnthropicCitationV1::SearchResultLocation::end_block_index: u32
+pub skald_spec::AnthropicCitationV1::SearchResultLocation::search_result_index: u32
+pub skald_spec::AnthropicCitationV1::SearchResultLocation::source: alloc::string::String
+pub skald_spec::AnthropicCitationV1::SearchResultLocation::start_block_index: u32
+pub skald_spec::AnthropicCitationV1::SearchResultLocation::title: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicCitationV1::WebSearchResultLocation
+pub skald_spec::AnthropicCitationV1::WebSearchResultLocation::cited_text: alloc::string::String
+pub skald_spec::AnthropicCitationV1::WebSearchResultLocation::encrypted_index: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicCitationV1::WebSearchResultLocation::title: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicCitationV1::WebSearchResultLocation::url: alloc::string::String
+pub enum skald_spec::AnthropicContentBlock
+pub skald_spec::AnthropicContentBlock::Document
+pub skald_spec::AnthropicContentBlock::Document::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::AnthropicContentBlock::Document::citations: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCitationToggle>
+pub skald_spec::AnthropicContentBlock::Document::context: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicContentBlock::Document::source: skald_spec::wire::anthropic_messages::AnthropicDocumentSource
+pub skald_spec::AnthropicContentBlock::Document::title: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicContentBlock::Image
+pub skald_spec::AnthropicContentBlock::Image::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::AnthropicContentBlock::Image::source: skald_spec::wire::anthropic_messages::AnthropicImageSource
+pub skald_spec::AnthropicContentBlock::RedactedThinking
+pub skald_spec::AnthropicContentBlock::RedactedThinking::data: alloc::string::String
+pub skald_spec::AnthropicContentBlock::Text
+pub skald_spec::AnthropicContentBlock::Text::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::AnthropicContentBlock::Text::citations: core::option::Option<alloc::vec::Vec<skald_spec::wire::anthropic_citation::AnthropicCitationV1>>
+pub skald_spec::AnthropicContentBlock::Text::text: alloc::string::String
+pub skald_spec::AnthropicContentBlock::Thinking
+pub skald_spec::AnthropicContentBlock::Thinking::signature: alloc::string::String
+pub skald_spec::AnthropicContentBlock::Thinking::thinking: alloc::string::String
+pub skald_spec::AnthropicContentBlock::ToolResult
+pub skald_spec::AnthropicContentBlock::ToolResult::cache_control: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicCacheControl>
+pub skald_spec::AnthropicContentBlock::ToolResult::content: skald_spec::wire::anthropic_messages::AnthropicToolResultContent
+pub skald_spec::AnthropicContentBlock::ToolResult::is_error: core::option::Option<bool>
+pub skald_spec::AnthropicContentBlock::ToolResult::tool_use_id: alloc::string::String
+pub skald_spec::AnthropicContentBlock::ToolUse
+pub skald_spec::AnthropicContentBlock::ToolUse::id: alloc::string::String
+pub skald_spec::AnthropicContentBlock::ToolUse::input: serde_json::value::Value
+pub skald_spec::AnthropicContentBlock::ToolUse::name: alloc::string::String
+pub enum skald_spec::AnthropicStopReason
+pub skald_spec::AnthropicStopReason::EndTurn
+pub skald_spec::AnthropicStopReason::MaxTokens
+pub skald_spec::AnthropicStopReason::PauseTurn
+pub skald_spec::AnthropicStopReason::Refusal
+pub skald_spec::AnthropicStopReason::StopSequence
+pub skald_spec::AnthropicStopReason::ToolUse
+pub enum skald_spec::AnthropicStreamEvent
+pub skald_spec::AnthropicStreamEvent::ContentBlockDelta
+pub skald_spec::AnthropicStreamEvent::ContentBlockDelta::delta: skald_spec::wire::anthropic_messages::AnthropicDelta
+pub skald_spec::AnthropicStreamEvent::ContentBlockDelta::index: u32
+pub skald_spec::AnthropicStreamEvent::ContentBlockStart
+pub skald_spec::AnthropicStreamEvent::ContentBlockStart::content_block: skald_spec::wire::anthropic_messages::AnthropicContentBlock
+pub skald_spec::AnthropicStreamEvent::ContentBlockStart::index: u32
+pub skald_spec::AnthropicStreamEvent::ContentBlockStop
+pub skald_spec::AnthropicStreamEvent::ContentBlockStop::index: u32
+pub skald_spec::AnthropicStreamEvent::Error
+pub skald_spec::AnthropicStreamEvent::Error::error: serde_json::value::Value
+pub skald_spec::AnthropicStreamEvent::MessageDelta
+pub skald_spec::AnthropicStreamEvent::MessageDelta::delta: skald_spec::wire::anthropic_messages::AnthropicMessageDeltaFields
+pub skald_spec::AnthropicStreamEvent::MessageDelta::usage: skald_spec::wire::anthropic_messages::AnthropicUsage
+pub skald_spec::AnthropicStreamEvent::MessageStart
+pub skald_spec::AnthropicStreamEvent::MessageStart::message: skald_spec::wire::anthropic_messages::AnthropicMessagesResponse
+pub skald_spec::AnthropicStreamEvent::MessageStop
+pub skald_spec::AnthropicStreamEvent::Ping
+pub enum skald_spec::DraftMessages
+pub skald_spec::DraftMessages::Many(alloc::vec::Vec<alloc::string::String>)
+pub skald_spec::DraftMessages::None
+pub skald_spec::DraftMessages::One(alloc::string::String)
+pub enum skald_spec::FinishReason
+pub skald_spec::FinishReason::ContentFilter
+pub skald_spec::FinishReason::Length
+pub skald_spec::FinishReason::Other
+pub skald_spec::FinishReason::Stop
+pub skald_spec::FinishReason::ToolCalls
+pub enum skald_spec::GoogleFinishReason
+pub skald_spec::GoogleFinishReason::Blocklist
+pub skald_spec::GoogleFinishReason::FinishReasonUnspecified
+pub skald_spec::GoogleFinishReason::Language
+pub skald_spec::GoogleFinishReason::MalformedFunctionCall
+pub skald_spec::GoogleFinishReason::MaxTokens
+pub skald_spec::GoogleFinishReason::Other
+pub skald_spec::GoogleFinishReason::ProhibitedContent
+pub skald_spec::GoogleFinishReason::Recitation
+pub skald_spec::GoogleFinishReason::Safety
+pub skald_spec::GoogleFinishReason::Spii
+pub skald_spec::GoogleFinishReason::Stop
+pub enum skald_spec::GooglePart
+pub skald_spec::GooglePart::CodeExecutionResult
+pub skald_spec::GooglePart::CodeExecutionResult::code_execution_result: skald_spec::wire::google_generate::GoogleCodeExecutionResult
+pub skald_spec::GooglePart::ExecutableCode
+pub skald_spec::GooglePart::ExecutableCode::executable_code: skald_spec::wire::google_generate::GoogleExecutableCode
+pub skald_spec::GooglePart::FileData
+pub skald_spec::GooglePart::FileData::file_data: skald_spec::wire::google_generate::GoogleFileData
+pub skald_spec::GooglePart::FunctionCall
+pub skald_spec::GooglePart::FunctionCall::function_call: skald_spec::wire::google_generate::GoogleFunctionCall
+pub skald_spec::GooglePart::FunctionResponse
+pub skald_spec::GooglePart::FunctionResponse::function_response: skald_spec::wire::google_generate::GoogleFunctionResponse
+pub skald_spec::GooglePart::InlineData
+pub skald_spec::GooglePart::InlineData::inline_data: skald_spec::wire::google_generate::GoogleInlineData
+pub skald_spec::GooglePart::Text
+pub skald_spec::GooglePart::Text::text: alloc::string::String
+pub skald_spec::GooglePart::Thought
+pub skald_spec::GooglePart::Thought::text: alloc::string::String
+pub skald_spec::GooglePart::Thought::thought: bool
+pub enum skald_spec::MediaKind
+pub skald_spec::MediaKind::Document
+pub skald_spec::MediaKind::Image
+pub enum skald_spec::MediaSource
+pub skald_spec::MediaSource::Base64
+pub skald_spec::MediaSource::Base64::data: alloc::string::String
+pub skald_spec::MediaSource::Base64::mime_type: alloc::string::String
+pub skald_spec::MediaSource::File
+pub skald_spec::MediaSource::File::mime_type: core::option::Option<alloc::string::String>
+pub skald_spec::MediaSource::File::uri: alloc::string::String
+pub skald_spec::MediaSource::Url
+pub skald_spec::MediaSource::Url::mime_type: core::option::Option<alloc::string::String>
+pub skald_spec::MediaSource::Url::url: alloc::string::String
+#[non_exhaustive] pub enum skald_spec::MessageNum
+pub skald_spec::MessageNum::Anthropic(skald_spec::wire::anthropic_messages::AnthropicMessage)
+pub skald_spec::MessageNum::Gemini(skald_spec::wire::google_generate::GoogleContent)
+pub skald_spec::MessageNum::OpenAi(alloc::boxed::Box<skald_spec::wire::openai_chat::OpenAiChatMessage>)
+pub skald_spec::MessageNum::RawV1(alloc::boxed::Box<serde_json::raw::RawValue>)
+impl core::cmp::PartialEq for skald_spec::message::MessageNum
+pub fn skald_spec::message::MessageNum::eq(&self, other: &Self) -> bool
+impl<'de> serde_core::de::Deserialize<'de> for skald_spec::message::MessageNum
+pub fn skald_spec::message::MessageNum::deserialize<D>(deserializer: D) -> core::result::Result<Self, <D as serde_core::de::Deserializer>::Error> where D: serde_core::de::Deserializer<'de>
+pub enum skald_spec::OpenAiEmbeddingsInput
+pub skald_spec::OpenAiEmbeddingsInput::Many(alloc::vec::Vec<alloc::string::String>)
+pub skald_spec::OpenAiEmbeddingsInput::One(alloc::string::String)
+pub skald_spec::OpenAiEmbeddingsInput::TokenBatches(alloc::vec::Vec<alloc::vec::Vec<u32>>)
+pub skald_spec::OpenAiEmbeddingsInput::Tokens(alloc::vec::Vec<u32>)
+pub enum skald_spec::OpenAiResponseItem
+pub skald_spec::OpenAiResponseItem::FunctionCall
+pub skald_spec::OpenAiResponseItem::FunctionCall::arguments: alloc::string::String
+pub skald_spec::OpenAiResponseItem::FunctionCall::call_id: alloc::string::String
+pub skald_spec::OpenAiResponseItem::FunctionCall::name: alloc::string::String
+pub skald_spec::OpenAiResponseItem::FunctionCallOutput
+pub skald_spec::OpenAiResponseItem::FunctionCallOutput::call_id: alloc::string::String
+pub skald_spec::OpenAiResponseItem::FunctionCallOutput::output: alloc::string::String
+pub skald_spec::OpenAiResponseItem::InputFile
+pub skald_spec::OpenAiResponseItem::InputFile::file_id: alloc::string::String
+pub skald_spec::OpenAiResponseItem::InputImage
+pub skald_spec::OpenAiResponseItem::InputImage::detail: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiResponseItem::InputImage::image_url: alloc::string::String
+pub skald_spec::OpenAiResponseItem::Message
+pub skald_spec::OpenAiResponseItem::Message::content: alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponseContentPart>
+pub skald_spec::OpenAiResponseItem::Message::role: alloc::string::String
+pub skald_spec::OpenAiResponseItem::Reasoning
+pub skald_spec::OpenAiResponseItem::Reasoning::encrypted_content: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiResponseItem::Reasoning::summary: core::option::Option<alloc::string::String>
+pub enum skald_spec::OpenAiResponsesStreamEvent
+pub skald_spec::OpenAiResponsesStreamEvent::FunctionCallArgumentsDelta
+pub skald_spec::OpenAiResponsesStreamEvent::FunctionCallArgumentsDelta::delta: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::FunctionCallArgumentsDelta::item_id: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::FunctionCallArgumentsDone
+pub skald_spec::OpenAiResponsesStreamEvent::FunctionCallArgumentsDone::arguments: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::FunctionCallArgumentsDone::item_id: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::OutputItemAdded
+pub skald_spec::OpenAiResponsesStreamEvent::OutputItemAdded::item: skald_spec::wire::openai_responses::OpenAiResponseItem
+pub skald_spec::OpenAiResponsesStreamEvent::OutputItemAdded::output_index: u32
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDelta
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDelta::delta: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDelta::item_id: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDelta::output_index: u32
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDone
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDone::item_id: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDone::output_index: u32
+pub skald_spec::OpenAiResponsesStreamEvent::OutputTextDone::text: alloc::string::String
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseCompleted
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseCompleted::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseCreated
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseCreated::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseFailed
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseFailed::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseInProgress
+pub skald_spec::OpenAiResponsesStreamEvent::ResponseInProgress::response: skald_spec::wire::openai_responses::OpenAiResponsesResponse
+pub enum skald_spec::ProviderName
+pub skald_spec::ProviderName::Anthropic
+pub skald_spec::ProviderName::Custom(alloc::string::String)
+pub skald_spec::ProviderName::Google
+pub skald_spec::ProviderName::OpenAi
+pub skald_spec::ProviderName::Vertex
+#[non_exhaustive] pub enum skald_spec::ProviderRequest
+pub skald_spec::ProviderRequest::AnthropicMessage(skald_spec::wire::anthropic_messages::AnthropicMessagesRequest)
+pub skald_spec::ProviderRequest::GeminiGenerateContent(skald_spec::wire::google_generate::GoogleGenerateContentRequest)
+pub skald_spec::ProviderRequest::GoogleBatchEmbed(skald_spec::wire::google_embeddings::GoogleBatchEmbedRequest)
+pub skald_spec::ProviderRequest::OpenAiChatCompatible
+pub skald_spec::ProviderRequest::OpenAiChatCompatible::provider: skald_spec::request::ProviderName
+pub skald_spec::ProviderRequest::OpenAiChatCompatible::request: skald_spec::wire::openai_chat::OpenAiChatRequest
+pub skald_spec::ProviderRequest::OpenAiChatCompletion(skald_spec::wire::openai_chat::OpenAiChatRequest)
+pub skald_spec::ProviderRequest::OpenAiEmbeddings(skald_spec::wire::openai_embeddings::OpenAiEmbeddingsRequest)
+pub skald_spec::ProviderRequest::OpenAiResponses(skald_spec::wire::openai_responses::OpenAiResponsesRequest)
+pub skald_spec::ProviderRequest::RawV1
+pub skald_spec::ProviderRequest::RawV1::body: alloc::boxed::Box<serde_json::raw::RawValue>
+pub skald_spec::ProviderRequest::RawV1::provider: skald_spec::request::ProviderName
+pub skald_spec::ProviderRequest::Vertex(skald_spec::wire::vertex_generate::VertexGenerateContentRequest)
+pub skald_spec::ProviderRequest::VertexPredict(skald_spec::wire::vertex_predict::VertexPredictRequest)
+impl skald_spec::request::ProviderRequest
+pub fn skald_spec::request::ProviderRequest::provider(&self) -> skald_spec::request::ProviderName
+pub fn skald_spec::request::ProviderRequest::with_tools(self, tools: alloc::vec::Vec<skald_spec::request::ToolDescriptor>) -> Self
+impl core::cmp::PartialEq for skald_spec::request::ProviderRequest
+pub fn skald_spec::request::ProviderRequest::eq(&self, other: &Self) -> bool
+impl<'de> serde_core::de::Deserialize<'de> for skald_spec::request::ProviderRequest
+pub fn skald_spec::request::ProviderRequest::deserialize<D>(deserializer: D) -> core::result::Result<Self, <D as serde_core::de::Deserializer>::Error> where D: serde_core::de::Deserializer<'de>
+#[non_exhaustive] pub enum skald_spec::ProviderResponse
+pub skald_spec::ProviderResponse::AnthropicMessage(skald_spec::wire::anthropic_messages::AnthropicMessagesResponse)
+pub skald_spec::ProviderResponse::GeminiGenerateContent(skald_spec::wire::google_generate::GoogleGenerateContentResponse)
+pub skald_spec::ProviderResponse::GoogleBatchEmbed(skald_spec::wire::google_embeddings::GoogleBatchEmbedResponse)
+pub skald_spec::ProviderResponse::OpenAiChatCompletion(skald_spec::wire::openai_chat::OpenAiChatResponse)
+pub skald_spec::ProviderResponse::OpenAiEmbeddings(skald_spec::wire::openai_embeddings::OpenAiEmbeddingsResponse)
+pub skald_spec::ProviderResponse::OpenAiResponses(skald_spec::wire::openai_responses::OpenAiResponsesResponse)
+pub skald_spec::ProviderResponse::RawV1(alloc::boxed::Box<serde_json::raw::RawValue>)
+pub skald_spec::ProviderResponse::VertexGenerateContent(skald_spec::wire::google_generate::GoogleGenerateContentResponse)
+pub skald_spec::ProviderResponse::VertexPredict(skald_spec::wire::vertex_predict::VertexPredictResponse)
+impl skald_spec::response::ProviderResponse
+pub const fn skald_spec::response::ProviderResponse::adapter(&self) -> skald_spec::adapter::ResponseAdapter<'_>
+pub fn skald_spec::response::ProviderResponse::provider(&self) -> skald_spec::request::ProviderName
+impl core::cmp::PartialEq for skald_spec::response::ProviderResponse
+pub fn skald_spec::response::ProviderResponse::eq(&self, other: &Self) -> bool
+impl<'de> serde_core::de::Deserialize<'de> for skald_spec::response::ProviderResponse
+pub fn skald_spec::response::ProviderResponse::deserialize<D>(deserializer: D) -> core::result::Result<Self, <D as serde_core::de::Deserializer>::Error> where D: serde_core::de::Deserializer<'de>
+pub enum skald_spec::ProviderSettingsRef<'a>
+pub skald_spec::ProviderSettingsRef::Anthropic(&'a skald_spec::wire::anthropic_messages::AnthropicMessagesSettings)
+pub skald_spec::ProviderSettingsRef::Google(&'a skald_spec::wire::google_generate::GoogleGenerateSettings)
+pub skald_spec::ProviderSettingsRef::OpenAiChat(&'a skald_spec::wire::openai_chat::OpenAiChatSettings)
+pub skald_spec::ProviderSettingsRef::OpenAiResponses(&'a skald_spec::wire::openai_responses::OpenAiResponsesSettings)
+pub enum skald_spec::ResponseType
+pub skald_spec::ResponseType::JsonSchema
+pub skald_spec::ResponseType::JsonSchema::name: alloc::string::String
+pub skald_spec::ResponseType::JsonSchema::schema: serde_json::value::Value
+pub skald_spec::ResponseType::Text
+pub enum skald_spec::SkaldError
+pub skald_spec::SkaldError::Deserialize(alloc::string::String)
+pub skald_spec::SkaldError::InvalidMediaType(alloc::string::String)
+pub skald_spec::SkaldError::MediaInSystemMessage
+pub skald_spec::SkaldError::MediaInSystemMessage::name: alloc::string::String
+pub skald_spec::SkaldError::MediaInvalidExtension
+pub skald_spec::SkaldError::MediaInvalidExtension::kind: skald_spec::media::MediaKind
+pub skald_spec::SkaldError::MediaInvalidExtension::path: alloc::string::String
+pub skald_spec::SkaldError::MediaIo(alloc::string::String)
+pub skald_spec::SkaldError::MediaNotRegularFile
+pub skald_spec::SkaldError::MediaNotRegularFile::path: alloc::string::String
+pub skald_spec::SkaldError::MediaPlaceholderNotFound
+pub skald_spec::SkaldError::MediaPlaceholderNotFound::name: alloc::string::String
+pub skald_spec::SkaldError::MediaPlaceholderNotIsolated
+pub skald_spec::SkaldError::MediaPlaceholderNotIsolated::name: alloc::string::String
+pub skald_spec::SkaldError::MediaTooLarge
+pub skald_spec::SkaldError::MediaTooLarge::limit: u64
+pub skald_spec::SkaldError::MediaTooLarge::path: alloc::string::String
+pub skald_spec::SkaldError::MediaTooLarge::size: u64
+pub skald_spec::SkaldError::MissingMediaVariable
+pub skald_spec::SkaldError::MissingMediaVariable::name: alloc::string::String
+pub skald_spec::SkaldError::MissingVariable(alloc::string::String)
+pub skald_spec::SkaldError::PromptDraftInvalid
+pub skald_spec::SkaldError::PromptDraftInvalid::message: alloc::string::String
+pub skald_spec::SkaldError::PromptDraftInvalid::provider: alloc::string::String
+pub skald_spec::SkaldError::ProviderUnsupported
+pub skald_spec::SkaldError::ProviderUnsupported::op: alloc::string::String
+pub skald_spec::SkaldError::ProviderUnsupported::provider: skald_spec::request::ProviderName
+pub skald_spec::SkaldError::Serialize(alloc::string::String)
+pub skald_spec::SkaldError::SettingsDecode
+pub skald_spec::SkaldError::SettingsDecode::message: alloc::string::String
+pub skald_spec::SkaldError::SettingsDecode::provider: skald_spec::request::ProviderName
+pub skald_spec::SkaldError::SettingsProviderMismatch
+pub skald_spec::SkaldError::SettingsProviderMismatch::expected: skald_spec::request::ProviderName
+pub skald_spec::SkaldError::SettingsProviderMismatch::got: skald_spec::request::ProviderName
+pub skald_spec::SkaldError::UnsupportedConversion
+pub skald_spec::SkaldError::UnsupportedConversion::dst: skald_spec::request::ProviderName
+pub skald_spec::SkaldError::UnsupportedConversion::src: skald_spec::request::ProviderName
+pub skald_spec::SkaldError::UnsupportedMediaForProvider
+pub skald_spec::SkaldError::UnsupportedMediaForProvider::kind: skald_spec::media::MediaKind
+pub skald_spec::SkaldError::UnsupportedMediaForProvider::provider: skald_spec::request::ProviderName
+impl skald_spec::error::SkaldError
+pub const fn skald_spec::error::SkaldError::code(&self) -> &'static str
+pub fn skald_spec::error::SkaldError::deserialize(error: impl core::fmt::Display) -> Self
+pub fn skald_spec::error::SkaldError::missing_variable(name: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::error::SkaldError::provider_unsupported(provider: skald_spec::request::ProviderName, op: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::error::SkaldError::serialize(error: impl core::fmt::Display) -> Self
+pub fn skald_spec::error::SkaldError::unsupported_conversion(src: skald_spec::request::ProviderName, dst: skald_spec::request::ProviderName) -> Self
+pub struct skald_spec::AnthropicMessage
+pub skald_spec::AnthropicMessage::content: alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicContentBlock>
+pub skald_spec::AnthropicMessage::role: alloc::string::String
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub struct skald_spec::AnthropicMessagesRequest
+pub skald_spec::AnthropicMessagesRequest::messages: alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicMessage>
+pub skald_spec::AnthropicMessagesRequest::model: alloc::string::String
+pub skald_spec::AnthropicMessagesRequest::output_config: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicOutputConfig>
+pub skald_spec::AnthropicMessagesRequest::settings: skald_spec::wire::anthropic_messages::AnthropicMessagesSettings
+pub skald_spec::AnthropicMessagesRequest::stream: core::option::Option<bool>
+pub skald_spec::AnthropicMessagesRequest::system: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicSystem>
+pub skald_spec::AnthropicMessagesRequest::tool_choice: core::option::Option<serde_json::value::Value>
+pub skald_spec::AnthropicMessagesRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicTool>>
+pub struct skald_spec::AnthropicMessagesResponse
+pub skald_spec::AnthropicMessagesResponse::content: alloc::vec::Vec<skald_spec::wire::anthropic_messages::AnthropicContentBlock>
+pub skald_spec::AnthropicMessagesResponse::id: alloc::string::String
+pub skald_spec::AnthropicMessagesResponse::model: alloc::string::String
+pub skald_spec::AnthropicMessagesResponse::role: alloc::string::String
+pub skald_spec::AnthropicMessagesResponse::stop_reason: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicStopReason>
+pub skald_spec::AnthropicMessagesResponse::stop_sequence: core::option::Option<alloc::string::String>
+pub skald_spec::AnthropicMessagesResponse::type: alloc::string::String
+pub skald_spec::AnthropicMessagesResponse::usage: skald_spec::wire::anthropic_messages::AnthropicUsage
+pub struct skald_spec::AnthropicMessagesSettings
+pub skald_spec::AnthropicMessagesSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::AnthropicMessagesSettings::max_tokens: u32
+pub skald_spec::AnthropicMessagesSettings::metadata: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::AnthropicMessagesSettings::stop_sequences: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::AnthropicMessagesSettings::temperature: core::option::Option<f32>
+pub skald_spec::AnthropicMessagesSettings::thinking: core::option::Option<skald_spec::wire::anthropic_messages::AnthropicThinkingConfig>
+pub skald_spec::AnthropicMessagesSettings::top_k: core::option::Option<u32>
+pub skald_spec::AnthropicMessagesSettings::top_p: core::option::Option<f32>
+impl core::default::Default for skald_spec::wire::anthropic_messages::AnthropicMessagesSettings
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessagesSettings::default() -> Self
+pub struct skald_spec::AnthropicUsage
+pub skald_spec::AnthropicUsage::cache_creation_input_tokens: u64
+pub skald_spec::AnthropicUsage::cache_read_input_tokens: u64
+pub skald_spec::AnthropicUsage::input_tokens: u64
+pub skald_spec::AnthropicUsage::output_tokens: u64
+impl core::convert::From<skald_spec::wire::anthropic_messages::AnthropicUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::anthropic_messages::AnthropicUsage) -> Self
+pub struct skald_spec::GoogleBatchEmbedRequest
+pub skald_spec::GoogleBatchEmbedRequest::requests: alloc::vec::Vec<skald_spec::wire::google_embeddings::GoogleEmbedRequest>
+pub struct skald_spec::GoogleBatchEmbedResponse
+pub skald_spec::GoogleBatchEmbedResponse::embeddings: alloc::vec::Vec<skald_spec::wire::google_embeddings::GoogleEmbedding>
+pub struct skald_spec::GoogleCandidate
+pub skald_spec::GoogleCandidate::avg_logprobs: core::option::Option<f64>
+pub skald_spec::GoogleCandidate::citation_metadata: core::option::Option<serde_json::value::Value>
+pub skald_spec::GoogleCandidate::content: skald_spec::wire::google_generate::GoogleContent
+pub skald_spec::GoogleCandidate::finish_reason: core::option::Option<skald_spec::wire::google_generate::GoogleFinishReason>
+pub skald_spec::GoogleCandidate::grounding_metadata: core::option::Option<serde_json::value::Value>
+pub skald_spec::GoogleCandidate::index: core::option::Option<u32>
+pub skald_spec::GoogleCandidate::safety_ratings: alloc::vec::Vec<skald_spec::wire::google_generate::GoogleSafetyRating>
+pub struct skald_spec::GoogleContent
+pub skald_spec::GoogleContent::parts: alloc::vec::Vec<skald_spec::wire::google_generate::GooglePart>
+pub skald_spec::GoogleContent::role: alloc::string::String
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub struct skald_spec::GoogleEmbedContent
+pub skald_spec::GoogleEmbedContent::parts: alloc::vec::Vec<skald_spec::wire::google_embeddings::GoogleEmbedPart>
+pub struct skald_spec::GoogleEmbedPart
+pub skald_spec::GoogleEmbedPart::text: alloc::string::String
+pub struct skald_spec::GoogleEmbedRequest
+pub skald_spec::GoogleEmbedRequest::content: skald_spec::wire::google_embeddings::GoogleEmbedContent
+pub skald_spec::GoogleEmbedRequest::model: alloc::string::String
+pub skald_spec::GoogleEmbedRequest::output_dimensionality: core::option::Option<u32>
+pub skald_spec::GoogleEmbedRequest::task_type: core::option::Option<alloc::string::String>
+pub skald_spec::GoogleEmbedRequest::title: core::option::Option<alloc::string::String>
+pub struct skald_spec::GoogleEmbedding
+pub skald_spec::GoogleEmbedding::values: alloc::vec::Vec<f32>
+pub struct skald_spec::GoogleGenerateContentRequest
+pub skald_spec::GoogleGenerateContentRequest::contents: alloc::vec::Vec<skald_spec::wire::google_generate::GoogleContent>
+pub skald_spec::GoogleGenerateContentRequest::settings: skald_spec::wire::google_generate::GoogleGenerateSettings
+pub skald_spec::GoogleGenerateContentRequest::system_instruction: core::option::Option<skald_spec::wire::google_generate::GoogleContent>
+pub skald_spec::GoogleGenerateContentRequest::tool_config: core::option::Option<skald_spec::wire::google_generate::GoogleToolConfig>
+pub skald_spec::GoogleGenerateContentRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::google_generate::GoogleTool>>
+pub struct skald_spec::GoogleGenerateContentResponse
+pub skald_spec::GoogleGenerateContentResponse::candidates: alloc::vec::Vec<skald_spec::wire::google_generate::GoogleCandidate>
+pub skald_spec::GoogleGenerateContentResponse::model_version: core::option::Option<alloc::string::String>
+pub skald_spec::GoogleGenerateContentResponse::prompt_feedback: core::option::Option<serde_json::value::Value>
+pub skald_spec::GoogleGenerateContentResponse::usage_metadata: core::option::Option<skald_spec::wire::google_generate::GoogleUsageMetadata>
+pub struct skald_spec::GoogleGenerateSettings
+pub skald_spec::GoogleGenerateSettings::cached_content: core::option::Option<alloc::string::String>
+pub skald_spec::GoogleGenerateSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::GoogleGenerateSettings::generation_config: core::option::Option<skald_spec::wire::google_generate::GoogleGenerationConfig>
+pub skald_spec::GoogleGenerateSettings::labels: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::GoogleGenerateSettings::safety_settings: core::option::Option<alloc::vec::Vec<skald_spec::wire::google_generate::GoogleSafetySetting>>
+pub struct skald_spec::GoogleSafetyRating
+pub skald_spec::GoogleSafetyRating::blocked: core::option::Option<bool>
+pub skald_spec::GoogleSafetyRating::category: alloc::string::String
+pub skald_spec::GoogleSafetyRating::probability: alloc::string::String
+pub struct skald_spec::GoogleUsageMetadata
+pub skald_spec::GoogleUsageMetadata::cached_content_token_count: u64
+pub skald_spec::GoogleUsageMetadata::candidates_token_count: u64
+pub skald_spec::GoogleUsageMetadata::prompt_token_count: u64
+pub skald_spec::GoogleUsageMetadata::thoughts_token_count: u64
+pub skald_spec::GoogleUsageMetadata::total_token_count: u64
+impl core::convert::From<skald_spec::wire::google_generate::GoogleUsageMetadata> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::google_generate::GoogleUsageMetadata) -> Self
+pub struct skald_spec::MediaRef
+pub skald_spec::MediaRef::kind: skald_spec::media::MediaKind
+pub skald_spec::MediaRef::source: skald_spec::media::MediaSource
+impl skald_spec::media::MediaRef
+pub fn skald_spec::media::MediaRef::document_base64(mime_type: impl core::convert::Into<alloc::string::String>, data: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::document_file(uri: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::document_url(url: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::image_base64(mime_type: impl core::convert::Into<alloc::string::String>, data: impl core::convert::Into<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::image_file(uri: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub fn skald_spec::media::MediaRef::image_url(url: impl core::convert::Into<alloc::string::String>, mime_type: core::option::Option<alloc::string::String>) -> Self
+pub struct skald_spec::OpenAiChatChoice
+pub skald_spec::OpenAiChatChoice::finish_reason: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatChoice::index: u32
+pub skald_spec::OpenAiChatChoice::logprobs: core::option::Option<skald_spec::wire::openai_chat::OpenAiChatLogprobs>
+pub skald_spec::OpenAiChatChoice::message: skald_spec::wire::openai_chat::OpenAiChatMessage
+pub struct skald_spec::OpenAiChatChoiceDelta
+pub skald_spec::OpenAiChatChoiceDelta::content: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatChoiceDelta::refusal: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatChoiceDelta::role: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatChoiceDelta::tool_calls: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiToolCall>>
+pub struct skald_spec::OpenAiChatLogprobs
+pub skald_spec::OpenAiChatLogprobs::content: alloc::vec::Vec<serde_json::value::Value>
+pub skald_spec::OpenAiChatLogprobs::refusal: alloc::vec::Vec<serde_json::value::Value>
+pub struct skald_spec::OpenAiChatMessage
+pub skald_spec::OpenAiChatMessage::annotations: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiMessageAnnotation>
+pub skald_spec::OpenAiChatMessage::audio: core::option::Option<skald_spec::wire::openai_chat::OpenAiMessageAudio>
+pub skald_spec::OpenAiChatMessage::content: core::option::Option<skald_spec::wire::openai_chat::OpenAiMessageContent>
+pub skald_spec::OpenAiChatMessage::name: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatMessage::refusal: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatMessage::role: alloc::string::String
+pub skald_spec::OpenAiChatMessage::tool_call_id: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatMessage::tool_calls: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiToolCall>>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub struct skald_spec::OpenAiChatRequest
+pub skald_spec::OpenAiChatRequest::messages: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub skald_spec::OpenAiChatRequest::model: alloc::string::String
+pub skald_spec::OpenAiChatRequest::parallel_tool_calls: core::option::Option<bool>
+pub skald_spec::OpenAiChatRequest::response_format: core::option::Option<skald_spec::wire::openai_chat::OpenAiResponseFormat>
+pub skald_spec::OpenAiChatRequest::settings: skald_spec::wire::openai_chat::OpenAiChatSettings
+pub skald_spec::OpenAiChatRequest::stream: core::option::Option<bool>
+pub skald_spec::OpenAiChatRequest::stream_options: core::option::Option<skald_spec::wire::openai_chat::OpenAiStreamOptions>
+pub skald_spec::OpenAiChatRequest::tool_choice: core::option::Option<skald_spec::wire::openai_chat::OpenAiChatToolChoice>
+pub skald_spec::OpenAiChatRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiTool>>
+pub struct skald_spec::OpenAiChatResponse
+pub skald_spec::OpenAiChatResponse::choices: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiChatChoice>
+pub skald_spec::OpenAiChatResponse::created: u64
+pub skald_spec::OpenAiChatResponse::id: alloc::string::String
+pub skald_spec::OpenAiChatResponse::model: alloc::string::String
+pub skald_spec::OpenAiChatResponse::object: alloc::string::String
+pub skald_spec::OpenAiChatResponse::service_tier: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatResponse::system_fingerprint: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatResponse::usage: core::option::Option<skald_spec::wire::openai_chat::OpenAiUsage>
+pub struct skald_spec::OpenAiChatSettings
+pub skald_spec::OpenAiChatSettings::audio: core::option::Option<skald_spec::wire::openai_chat::OpenAiChatAudio>
+pub skald_spec::OpenAiChatSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::OpenAiChatSettings::frequency_penalty: core::option::Option<f32>
+pub skald_spec::OpenAiChatSettings::logit_bias: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::OpenAiChatSettings::logprobs: core::option::Option<bool>
+pub skald_spec::OpenAiChatSettings::max_completion_tokens: core::option::Option<u32>
+pub skald_spec::OpenAiChatSettings::max_tokens: core::option::Option<u32>
+pub skald_spec::OpenAiChatSettings::metadata: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::OpenAiChatSettings::modalities: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiResponseModality>>
+pub skald_spec::OpenAiChatSettings::n: core::option::Option<u32>
+pub skald_spec::OpenAiChatSettings::prediction: core::option::Option<skald_spec::wire::openai_chat::OpenAiPredictionContent>
+pub skald_spec::OpenAiChatSettings::presence_penalty: core::option::Option<f32>
+pub skald_spec::OpenAiChatSettings::prompt_cache_key: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatSettings::reasoning_effort: core::option::Option<skald_spec::wire::openai_chat::OpenAiReasoningEffort>
+pub skald_spec::OpenAiChatSettings::safety_identifier: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatSettings::seed: core::option::Option<i64>
+pub skald_spec::OpenAiChatSettings::service_tier: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiChatSettings::stop: core::option::Option<skald_spec::wire::openai_chat::OpenAiStop>
+pub skald_spec::OpenAiChatSettings::store: core::option::Option<bool>
+pub skald_spec::OpenAiChatSettings::temperature: core::option::Option<f32>
+pub skald_spec::OpenAiChatSettings::top_logprobs: core::option::Option<u32>
+pub skald_spec::OpenAiChatSettings::top_p: core::option::Option<f32>
+pub skald_spec::OpenAiChatSettings::user: core::option::Option<alloc::string::String>
+pub struct skald_spec::OpenAiChatStreamChunk
+pub skald_spec::OpenAiChatStreamChunk::choices: alloc::vec::Vec<skald_spec::wire::openai_chat::OpenAiChatStreamChoice>
+pub skald_spec::OpenAiChatStreamChunk::created: u64
+pub skald_spec::OpenAiChatStreamChunk::id: alloc::string::String
+pub skald_spec::OpenAiChatStreamChunk::model: alloc::string::String
+pub skald_spec::OpenAiChatStreamChunk::object: alloc::string::String
+pub skald_spec::OpenAiChatStreamChunk::usage: core::option::Option<skald_spec::wire::openai_chat::OpenAiUsage>
+pub struct skald_spec::OpenAiEmbeddingVector
+pub skald_spec::OpenAiEmbeddingVector::embedding: alloc::vec::Vec<f32>
+pub skald_spec::OpenAiEmbeddingVector::index: u32
+pub skald_spec::OpenAiEmbeddingVector::object: alloc::string::String
+pub struct skald_spec::OpenAiEmbeddingsRequest
+pub skald_spec::OpenAiEmbeddingsRequest::dimensions: core::option::Option<u32>
+pub skald_spec::OpenAiEmbeddingsRequest::encoding_format: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiEmbeddingsRequest::input: skald_spec::wire::openai_embeddings::OpenAiEmbeddingsInput
+pub skald_spec::OpenAiEmbeddingsRequest::model: alloc::string::String
+pub skald_spec::OpenAiEmbeddingsRequest::user: core::option::Option<alloc::string::String>
+pub struct skald_spec::OpenAiEmbeddingsResponse
+pub skald_spec::OpenAiEmbeddingsResponse::data: alloc::vec::Vec<skald_spec::wire::openai_embeddings::OpenAiEmbeddingVector>
+pub skald_spec::OpenAiEmbeddingsResponse::model: alloc::string::String
+pub skald_spec::OpenAiEmbeddingsResponse::object: alloc::string::String
+pub skald_spec::OpenAiEmbeddingsResponse::usage: skald_spec::wire::openai_embeddings::OpenAiEmbeddingUsage
+pub struct skald_spec::OpenAiResponsesRequest
+pub skald_spec::OpenAiResponsesRequest::input: alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponseItem>
+pub skald_spec::OpenAiResponsesRequest::instructions: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiResponsesRequest::model: alloc::string::String
+pub skald_spec::OpenAiResponsesRequest::parallel_tool_calls: core::option::Option<bool>
+pub skald_spec::OpenAiResponsesRequest::previous_response_id: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiResponsesRequest::settings: skald_spec::wire::openai_responses::OpenAiResponsesSettings
+pub skald_spec::OpenAiResponsesRequest::stream: core::option::Option<bool>
+pub skald_spec::OpenAiResponsesRequest::text: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesText>
+pub skald_spec::OpenAiResponsesRequest::tool_choice: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesToolChoice>
+pub skald_spec::OpenAiResponsesRequest::tools: core::option::Option<alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponsesTool>>
+pub struct skald_spec::OpenAiResponsesResponse
+pub skald_spec::OpenAiResponsesResponse::created_at: u64
+pub skald_spec::OpenAiResponsesResponse::id: alloc::string::String
+pub skald_spec::OpenAiResponsesResponse::model: alloc::string::String
+pub skald_spec::OpenAiResponsesResponse::object: alloc::string::String
+pub skald_spec::OpenAiResponsesResponse::output: alloc::vec::Vec<skald_spec::wire::openai_responses::OpenAiResponseItem>
+pub skald_spec::OpenAiResponsesResponse::previous_response_id: core::option::Option<alloc::string::String>
+pub skald_spec::OpenAiResponsesResponse::status: alloc::string::String
+pub skald_spec::OpenAiResponsesResponse::usage: core::option::Option<skald_spec::wire::openai_responses::OpenAiResponsesUsage>
+pub struct skald_spec::OpenAiResponsesSettings
+pub skald_spec::OpenAiResponsesSettings::extra: serde_json::map::Map<alloc::string::String, serde_json::value::Value>
+pub skald_spec::OpenAiResponsesSettings::include: core::option::Option<alloc::vec::Vec<alloc::string::String>>
+pub skald_spec::OpenAiResponsesSettings::max_output_tokens: core::option::Option<u32>
+pub skald_spec::OpenAiResponsesSettings::metadata: core::option::Option<serde_json::map::Map<alloc::string::String, serde_json::value::Value>>
+pub skald_spec::OpenAiResponsesSettings::reasoning: core::option::Option<skald_spec::wire::openai_responses::OpenAiReasoning>
+pub skald_spec::OpenAiResponsesSettings::store: core::option::Option<bool>
+pub skald_spec::OpenAiResponsesSettings::temperature: core::option::Option<f32>
+pub skald_spec::OpenAiResponsesSettings::top_p: core::option::Option<f32>
+pub struct skald_spec::OpenAiToolCall
+pub skald_spec::OpenAiToolCall::function: skald_spec::wire::openai_chat::OpenAiToolFunctionCall
+pub skald_spec::OpenAiToolCall::id: alloc::string::String
+pub skald_spec::OpenAiToolCall::kind: alloc::string::String
+pub struct skald_spec::OpenAiUsage
+pub skald_spec::OpenAiUsage::completion_tokens: u64
+pub skald_spec::OpenAiUsage::completion_tokens_details: core::option::Option<skald_spec::wire::openai_chat::OpenAiCompletionTokensDetails>
+pub skald_spec::OpenAiUsage::prompt_tokens: u64
+pub skald_spec::OpenAiUsage::prompt_tokens_details: core::option::Option<skald_spec::wire::openai_chat::OpenAiPromptTokensDetails>
+pub skald_spec::OpenAiUsage::total_tokens: u64
+impl core::convert::From<skald_spec::wire::openai_chat::OpenAiUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::openai_chat::OpenAiUsage) -> Self
+pub struct skald_spec::Prompt
+pub skald_spec::Prompt::media_variables: alloc::vec::Vec<alloc::string::String>
+pub skald_spec::Prompt::model: alloc::string::String
+pub skald_spec::Prompt::request: skald_spec::request::ProviderRequest
+pub skald_spec::Prompt::response_type: skald_spec::prompt::ResponseType
+pub skald_spec::Prompt::variables: alloc::vec::Vec<alloc::string::String>
+pub skald_spec::Prompt::version: core::option::Option<alloc::string::String>
+impl skald_spec::prompt::Prompt
+pub fn skald_spec::prompt::Prompt::bind(&self, vars: &[(&str, &str)]) -> skald_spec::error::SkaldResult<Self>
+pub fn skald_spec::prompt::Prompt::bind_media(&self, name: &str, media: &skald_spec::media::MediaRef) -> skald_spec::error::SkaldResult<Self>
+pub fn skald_spec::prompt::Prompt::bind_media_mut(&mut self, name: &str, media: &skald_spec::media::MediaRef) -> skald_spec::error::SkaldResult<()>
+pub fn skald_spec::prompt::Prompt::bind_mut(&mut self, vars: &[(&str, &str)]) -> skald_spec::error::SkaldResult<()>
+pub fn skald_spec::prompt::Prompt::new(request: skald_spec::request::ProviderRequest, model: impl core::convert::Into<alloc::string::String>, version: core::option::Option<alloc::string::String>, response_type: skald_spec::prompt::ResponseType) -> skald_spec::error::SkaldResult<Self>
+pub fn skald_spec::prompt::Prompt::normalize_media_placeholders_mut(&mut self) -> skald_spec::error::SkaldResult<()>
+pub fn skald_spec::prompt::Prompt::render(&self, vars: &[(&str, &str)]) -> skald_spec::error::SkaldResult<skald_spec::request::ProviderRequest>
+pub fn skald_spec::prompt::Prompt::settings_ref(&self) -> core::option::Option<skald_spec::prompt::ProviderSettingsRef<'_>>
+pub struct skald_spec::PromptDraft
+pub skald_spec::PromptDraft::messages: skald_spec::authoring::DraftMessages
+pub skald_spec::PromptDraft::model: alloc::string::String
+pub skald_spec::PromptDraft::model_settings: core::option::Option<serde_json::value::Value>
+pub skald_spec::PromptDraft::operation: core::option::Option<alloc::string::String>
+pub skald_spec::PromptDraft::provider: alloc::string::String
+pub skald_spec::PromptDraft::system: core::option::Option<alloc::string::String>
+pub skald_spec::PromptDraft::version: core::option::Option<alloc::string::String>
+impl skald_spec::authoring::PromptDraft
+pub fn skald_spec::authoring::PromptDraft::compile(self) -> skald_spec::error::SkaldResult<skald_spec::prompt::Prompt>
+pub struct skald_spec::ResponseAdapter<'a>
+impl<'a> skald_spec::adapter::ResponseAdapter<'a>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::finish_reason(&self) -> skald_spec::wire::common::FinishReason
+pub const fn skald_spec::adapter::ResponseAdapter<'a>::new(response: &'a skald_spec::response::ProviderResponse) -> Self
+pub fn skald_spec::adapter::ResponseAdapter<'a>::structured_output(&self) -> core::option::Option<alloc::boxed::Box<serde_json::raw::RawValue>>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::text(&self) -> core::option::Option<alloc::borrow::Cow<'a, str>>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::tool_calls(&self) -> alloc::vec::Vec<skald_spec::adapter::ToolCallView<'a>>
+pub fn skald_spec::adapter::ResponseAdapter<'a>::usage(&self) -> core::option::Option<skald_spec::adapter::UsageView>
+pub struct skald_spec::TokenUsage
+pub skald_spec::TokenUsage::cache_creation_input_tokens: u64
+pub skald_spec::TokenUsage::cache_read_input_tokens: u64
+pub skald_spec::TokenUsage::input_tokens: u64
+pub skald_spec::TokenUsage::output_tokens: u64
+pub skald_spec::TokenUsage::reasoning_tokens: u64
+impl core::convert::From<skald_spec::wire::anthropic_messages::AnthropicUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::anthropic_messages::AnthropicUsage) -> Self
+impl core::convert::From<skald_spec::wire::google_generate::GoogleUsageMetadata> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::google_generate::GoogleUsageMetadata) -> Self
+impl core::convert::From<skald_spec::wire::openai_chat::OpenAiUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::openai_chat::OpenAiUsage) -> Self
+impl core::convert::From<skald_spec::wire::openai_responses::OpenAiResponsesUsage> for skald_spec::wire::common::TokenUsage
+pub fn skald_spec::wire::common::TokenUsage::from(u: skald_spec::wire::openai_responses::OpenAiResponsesUsage) -> Self
+pub struct skald_spec::ToolCallView<'a>
+pub skald_spec::ToolCallView::arguments: alloc::borrow::Cow<'a, str>
+pub skald_spec::ToolCallView::id: alloc::borrow::Cow<'a, str>
+pub skald_spec::ToolCallView::name: alloc::borrow::Cow<'a, str>
+pub struct skald_spec::ToolDescriptor
+pub skald_spec::ToolDescriptor::description: alloc::string::String
+pub skald_spec::ToolDescriptor::name: alloc::string::String
+pub skald_spec::ToolDescriptor::parameters: serde_json::value::Value
+pub struct skald_spec::UsageView
+pub skald_spec::UsageView::usage: skald_spec::wire::common::TokenUsage
+pub struct skald_spec::VertexGenerateContentRequest(pub skald_spec::wire::google_generate::GoogleGenerateContentRequest)
+pub struct skald_spec::VertexPredictRequest
+pub skald_spec::VertexPredictRequest::instances: alloc::vec::Vec<skald_spec::wire::vertex_predict::VertexEmbedInstance>
+pub skald_spec::VertexPredictRequest::parameters: core::option::Option<skald_spec::wire::vertex_predict::VertexEmbedParameters>
+pub struct skald_spec::VertexPredictResponse
+pub skald_spec::VertexPredictResponse::metadata: core::option::Option<serde_json::value::Value>
+pub skald_spec::VertexPredictResponse::predictions: alloc::vec::Vec<skald_spec::wire::vertex_predict::VertexPrediction>
+pub struct skald_spec::VertexPrediction
+pub skald_spec::VertexPrediction::embeddings: skald_spec::wire::vertex_predict::VertexEmbeddingPayload
+pub trait skald_spec::ProviderMessageConversion<Target>
+pub fn skald_spec::ProviderMessageConversion::convert(&self) -> skald_spec::error::SkaldResult<Target>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::anthropic_messages::AnthropicMessage> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::anthropic_messages::AnthropicMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::google_generate::GoogleContent> for skald_spec::wire::openai_chat::OpenAiChatMessage
+pub fn skald_spec::wire::openai_chat::OpenAiChatMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::google_generate::GoogleContent>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::anthropic_messages::AnthropicMessage
+pub fn skald_spec::wire::anthropic_messages::AnthropicMessage::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+impl skald_spec::convert::ProviderMessageConversion<skald_spec::wire::openai_chat::OpenAiChatMessage> for skald_spec::wire::google_generate::GoogleContent
+pub fn skald_spec::wire::google_generate::GoogleContent::convert(&self) -> skald_spec::error::SkaldResult<skald_spec::wire::openai_chat::OpenAiChatMessage>
+pub fn skald_spec::convert_message_dyn(src: skald_spec::request::ProviderName, dst: skald_spec::request::ProviderName, msg: &skald_spec::message::MessageNum) -> skald_spec::error::SkaldResult<skald_spec::message::MessageNum>
+pub type skald_spec::SkaldResult<T> = core::result::Result<T, skald_spec::error::SkaldError>
