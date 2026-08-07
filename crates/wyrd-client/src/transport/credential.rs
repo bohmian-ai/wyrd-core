@@ -420,6 +420,11 @@ mod tests {
         // SAFETY: ENV_MUTEX (held for this test) serializes env mutation in this binary.
         unsafe {
             std::env::set_var("HOME", &tmp);
+            // Clear the higher-precedence config-dir vars so the resolver uses the
+            // `$HOME/.config/wyrd` floor deterministically. CI runners set
+            // XDG_CONFIG_HOME, which would otherwise shadow the HOME fallback.
+            std::env::remove_var("WYRD_CONFIG_HOME");
+            std::env::remove_var("XDG_CONFIG_HOME");
             std::env::remove_var("WYRD_API_KEY");
             std::env::remove_var("WYRD_ACCESS_TOKEN");
             std::env::remove_var("WYRD_WORKLOAD_TOKEN");
