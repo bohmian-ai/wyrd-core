@@ -1,0 +1,77 @@
+name: lints-test
+on:
+  pull_request:
+  push:
+    branches: [main]
+concurrency:
+  group: lints-test-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+env:
+  MISE_LOCKED: "true"
+jobs:
+  ci:                                   # authoritative required check
+    name: ci
+    runs-on: ubuntu-24.04               # docker is available -> test:pg wrapper works
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jlumbroso/free-disk-space@main
+      - uses: jdx/mise-action@v3
+        with: { install: true, cache: true }
+      - uses: Swatinem/rust-cache@v2
+      # Explicit enumerated gates (D9). This ordered list MUST equal
+      # `pre-pr`'s dependency set (T8); do NOT collapse to `mise run pre-pr`.
+      - run: mise run fmt:check
+      - run: mise run lints
+      - run: mise run check:no-plane-deps
+      - run: mise run check:sqlx-scope
+      - run: mise run check:client-tier
+      - run: mise run check:pyo3-scope
+      - run: mise run check:sql-core-seam
+      - run: mise run check:mocks-scope
+      - run: mise run check:proto-drift
+      - run: mise run check:rustls-provider
+      - run: mise run check:unwrap-audit
+      - run: mise run check:clippy-allow-audit
+      - run: mise run check:ci-parity   # D9 mechanical parity gate (T8 script)
+      - run: mise run codegen:check
+      - run: mise run test:unit
+      - run: mise run test:pg           # wrapper owns compose up/roles/DSN/teardown (D10)
+  rust-compat:                          # cross-OS non-PG smoke
+    name: rust compat (${{ matrix.os }})
+    if: github.event_name == 'push'
+    strategy:
+      matrix: { os: [macos-15, windows-latest] }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v3
+        with: { install: true, cache: true }
+      - uses: Swatinem/rust-cache@v2
+      - run: mise run test:unit
+  semver:                               # scaffolded; skips until a baseline tag exists
+    name: semver
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: jdx/mise-action@v3
+        with: { install: true, cache: true }
+      - run: |
+          if git tag --list 'wyrd-*-v0.1.0' | grep -q .; then
+            cargo semver-checks check-release --workspace
+          else
+            echo "no 0.1.0 baseline tag yet; semver baseline inactive (expected pre-publish)"
+          fi
+  ci-complete:                          # stable aggregate required-check name
+    name: ci complete
+    needs: [ci, rust-compat, semver]
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - run: |
+          [ "${{ needs.ci.result }}" = "success" ] || exit 1
+          for r in "${{ needs.rust-compat.result }}" "${{ needs.semver.result }}"; do
+            case "$r" in success|skipped) ;; *) exit 1;; esac
+          done

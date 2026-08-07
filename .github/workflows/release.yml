@@ -1,0 +1,25 @@
+name: release
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pull-requests: write
+env:
+  MISE_LOCKED: "true"
+jobs:
+  release-plz-pr:                       # opens version/changelog PRs; never publishes
+    name: release-plz
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: MarcoIeni/release-plz-action@v0.5
+        with: { command: release-pr }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+  # NOTE: the `command: release` publish job (crates.io) is intentionally
+  # NOT defined in this plan. It is added by the future publication plan
+  # once the 0.1.0 baseline is authorized. The secret contract
+  # (CRATES_IO_TOKEN -> CARGO_REGISTRY_TOKEN) is established here.

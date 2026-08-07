@@ -5,6 +5,13 @@ cmake   = "3.26.4"
 
 [settings]
 experimental = true
+# Force sequential task execution so cargo-backed gates in pre-pr never race
+# the shared Cargo target directory (AGENTS.md §11: "Run all Cargo-backed
+# commands sequentially … overlapping Cargo builds, tests, lints, docs, or
+# codegen are not [allowed]"). Setting jobs = 1 serializes the depends graph
+# while preserving its flattened shape so check:ci-parity can still resolve
+# the pre-pr dependency list element-for-element.
+jobs = 1
 
 # ---------------------------------------------------------------------------
 # Format
