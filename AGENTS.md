@@ -8,11 +8,13 @@ This document is **Wyrd-native**. Do not import legacy names, package names,
 module names, compatibility shims, or migration shorthand into this repository.
 Reproduce useful patterns under Wyrd vocabulary and Wyrd paths.
 
-`wyrd-core` contains the 20 published foundation crates — pure contracts,
-shared primitives, auth, telemetry, crypto, transport, SQL migration core, and
-test fixtures. It does not contain the server, UI, Python package, Skald
-plane, or Vala/Bifrost plane. Cross-plane doctrine is included as explanatory
-context; runnable commands reference only paths that exist here.
+`wyrd-core` is a standalone, independently published repository of 20
+foundation crates — pure contracts, shared primitives, auth, telemetry, crypto,
+transport, SQL migration core, and test fixtures. It does not contain the
+server, UI, client SDKs, or the Skald and Vala/Bifrost planes; those are
+separate repositories that consume these crates. Cross-plane doctrine is
+included only as explanatory context so the boundary rules here make sense;
+every runnable command references paths that exist in this repository.
 
 ## 1. First Pass Before Editing
 
@@ -116,18 +118,17 @@ Within `wyrd-core`:
 - `crates/wyrd-error-derive`: `WyrdError` derive macro.
 - `crates/wyrd-test-contract-macros`: contract test macros.
 
-Not present in this repo (live in the `wyrd` monorepo):
+Out of scope for this repository (owned by separate consuming repositories):
 
-- `crates/shared/wyrd-registry` — server-tier registry handle and engine
-- `crates/wyrd/*` — server, CLI, MCP, UI host
-- `crates/skald/*` — Skald runtime plane
-- `crates/vala/*` — Vala/Bifrost plane
-- `crates/bindings/*` — TypeScript/Node surface
-- `python/py-wyrd` — PyO3 module root and Python package
+- the server-tier registry handle and engine
+- the server, CLI, MCP, and UI host
+- the Skald runtime plane
+- the Vala/Bifrost plane
+- the language SDK surfaces (Rust, Python, TypeScript, and planned Go)
 
 When behavior crosses boundaries, put the durable contract in `wyrd-spec`,
 expose the API through language-agnostic wire contracts, and implement client
-surfaces in the appropriate SDK.
+surfaces in the appropriate SDK repository.
 
 ## 4. Rust Core Rules
 
@@ -233,15 +234,16 @@ PyO3 is **not present** in `wyrd-core`. All foundation crates are
 strictly PyO3-free. `wyrd-spec` is IO-free, async-free, and foundational.
 
 Do not add a `python` feature or PyO3 imports to any crate in this repository.
-Python-visible behavior lives in the `wyrd` monorepo behind optional `python`
-features in approved owner crates, and in `python/py-wyrd` as a thin aggregator.
+Python-visible behavior belongs to the Python SDK repository behind optional
+`python` features in approved owner crates, with a thin aggregator module at its
+root.
 
-The rules below are included as cross-plane doctrine for contributors who work
-across both repositories:
+The rules below are included as cross-plane doctrine for contributors who also
+work in the Python SDK repository:
 
 - PyO3 belongs in crates that own Python-visible behavior, behind an optional
   `python` feature.
-- `python/py-wyrd` stays a thin aggregator: no duplicated validation, lifecycle,
+- The Python aggregator module stays thin: no duplicated validation, lifecycle,
   registry, storage, or runtime logic.
 - Keep `Python<'py>`, `Bound<'py, T>`, `Py<T>`, and `PyErr` out of crates that
   did not opt into a `python` feature.
@@ -256,8 +258,9 @@ across both repositories:
 
 ## 8. Server And Contract Rules
 
-The server, CLI, MCP, and audit surfaces live in the `wyrd` monorepo. The rules
-below govern contract and API work done in this repository:
+The server, CLI, MCP, and audit surfaces are owned by separate consuming
+repositories. The rules below govern contract and API work done in this
+repository:
 
 - Public request/response bodies are typed structs.
 - Wire types derive schema support where required by the feature gate.
@@ -282,7 +285,7 @@ prove a part works. A lower tier never substitutes for a missing higher one.
    mapping, and negative branches that are cleaner to force in-process.
 
 User-journey tests (full client → server → client paths) are not present in
-this repo; they live in the `wyrd` monorepo where the server runs.
+this repo; they live in the consuming repository where the server runs.
 
 ### Verification Scope
 
@@ -338,8 +341,9 @@ A change is not done until:
 
 ## 12. Planning
 
-Planning for this repository lives in the `wyrd` monorepo under
-`.dev/plan/wyrd-foundation-extraction/`.
+Planning artifacts for this repository are kept under this repository's own
+planning workspace and are not tracked in version control (`/.dev/` is
+git-ignored).
 
 ### Agent skill bindings
 

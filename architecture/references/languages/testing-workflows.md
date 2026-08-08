@@ -9,11 +9,11 @@ defaults.
 
 > **Scope note:** `wyrd-core` contains pure contracts, shared primitives,
 > auth, telemetry, transport, and SQL migration core. It has no server, UI,
-> Python package, TypeScript SDK, `WyrdTestServer`, Skald runtime, or
-> Vala/Bifrost plane. The Three Tiers below are narrowed accordingly. Cross-plane
-> boundary checks are included as **annotated context** for contributors who also
-> work in the `wyrd` monorepo; the foundation-applicable gates are called out
-> explicitly.
+> Python SDK, TypeScript SDK, `WyrdTestServer`, Skald runtime, or
+> Vala/Bifrost plane; those are separate consuming repositories. The Three Tiers
+> below are narrowed accordingly. Cross-plane boundary checks are included as
+> **annotated context** for contributors who also work in the consuming
+> repositories; the foundation-applicable gates are called out explicitly.
 
 ## Two Tiers (Priority Order For This Repository)
 
@@ -33,9 +33,9 @@ Wyrd ranks proof:
    cleaner to force in-process.
 
 Full user-journey tests (real SDK → real server → real SDK) are not present
-in this repository. They live in the `wyrd` monorepo where `WyrdTestServer`
+in this repository. They live in the consuming repository where `WyrdTestServer`
 and the full server run. A capability contributed here may still require a
-journey test upstream — coordinate via the plan that lands the server-side
+journey test downstream — coordinate via the plan that lands the server-side
 consumer.
 
 Rule: every new user- or agent-facing contract change in `wyrd-spec` should
@@ -132,9 +132,9 @@ The following gates apply directly to this repository and are enforced in CI:
 | `check:no-tonic-outside-wyrd-tonic` | Reject tonic-family deps outside `wyrd-tonic` + workspace pins | APPLIES |
 | `check:proto-drift` | `wyrd.v1` FileDescriptorSet matches `.proto` | APPLIES — `wyrd-tonic` owns proto |
 
-The following gates apply to the `wyrd` monorepo server/plane crates only —
-included as **cross-plane doctrine** for contributors who work across both
-repositories, not as runnable local checks:
+The following gates apply to the server/plane crates in their own repositories
+only — included as **cross-plane doctrine** for contributors who work across
+those repositories, not as runnable local checks:
 
 | Gate | Cross-plane context only |
 |---|---|
