@@ -130,6 +130,7 @@ tonic-prost-build = "0.14"
 prost = "0.14"
 opentelemetry-proto = { version = "0.31", default-features = false, features = ["gen-tonic", "gen-tonic-messages", "trace", "metrics", "logs", "with-serde"] }
 tokio-stream = "0.1"
+tempfile = "3"
 
 [workspace.lints.rust]
 unsafe_code = "deny"
