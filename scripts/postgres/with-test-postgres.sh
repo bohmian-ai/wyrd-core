@@ -15,7 +15,6 @@ readonly admin_password="${WYRD_TEST_POSTGRES_ADMIN_PASSWORD:-wyrd_test_admin_pw
 readonly migrator_password="${WYRD_TEST_POSTGRES_MIGRATOR_PASSWORD:-wyrd_migrator_pw}"
 readonly app_password="${WYRD_TEST_POSTGRES_APP_PASSWORD:-wyrd_app_pw}"
 readonly platform_admin_password="${WYRD_TEST_POSTGRES_PLATFORM_ADMIN_PASSWORD:-wyrd_platform_admin_pw}"
-readonly catalog_app_password="${WYRD_TEST_POSTGRES_CATALOG_APP_PASSWORD:-wyrd_catalog_app_pw}"
 readonly compose=(docker compose --project-name "$compose_project" --file "$compose_file")
 
 cleanup() {
@@ -59,7 +58,6 @@ export WYRD_DATABASE_URL="postgres://wyrd_app:${app_password}@${host}:${port}/wy
 export WYRD_TEST_DATABASE_ADMIN_URL="$admin_dsn"
 export WYRD_DATABASE_MIGRATOR_PASSWORD="$migrator_password"
 export WYRD_DATABASE_PLATFORM_ADMIN_PASSWORD="$platform_admin_password"
-export WYRD_DATABASE_CATALOG_APP_PASSWORD="$catalog_app_password"
 export WYRD_MIGRATOR_DSN="$DATABASE_URL"
 
 PGPASSWORD="$admin_password" psql "$admin_dsn" \
