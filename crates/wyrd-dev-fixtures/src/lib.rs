@@ -1,8 +1,9 @@
-//! Development fixture crate.
+//! Plane-neutral Postgres fixture primitives for Wyrd SQL integration tests.
 //!
-//! SQL fixtures are feature-gated so non-Postgres fixture users do not pull in
-//! embedded database dependencies.
-//!
-//! The `pg` feature and its supporting modules (`pg`, `cards`) are rebuilt in T3
-//! with `wyrd-sql-core` to remove plane-specific dependencies. This stub is the
-//! T1 snapshot placeholder.
+//! The `pg` feature gates the [`pg`] module, which provides [`pg::PgFixture`]:
+//! an isolated per-test database with configurable ordered migration sets.
+//! All seed logic, plane handles, and tenant insertion live in the callers,
+//! not in this crate.
+
+#[cfg(feature = "pg")]
+pub mod pg;
