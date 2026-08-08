@@ -77,7 +77,7 @@ TASK_METADATA = (
 
 PLAN_METADATA_VALUES = {
     "Status": re.compile(r"Draft|Review Required|Approved"),
-    "Repository": re.compile(r"wyrd"),
+    "Repository": re.compile(r"wyrd-core"),
     "Planner": re.compile(r"Sol"),
     "Implementation models": re.compile(
         r"(?:Luna|Terra|Sol)(?:, (?:Luna|Terra|Sol)){0,2}"
