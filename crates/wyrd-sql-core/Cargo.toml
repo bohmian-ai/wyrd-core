@@ -18,5 +18,12 @@ wyrd-semver = { workspace = true }
 wyrd-spec = { workspace = true }
 wyrd-tls = { workspace = true }
 
+[features]
+default = []
+# pg gates the live Postgres integration tests under tests/pg_migration.rs.
+# Requires the with-test-postgres.sh wrapper to supply DSN environment variables.
+pg = []
+
 [dev-dependencies]
 tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
+wyrd-dev-fixtures = { workspace = true, features = ["pg"] }
