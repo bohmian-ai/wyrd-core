@@ -1,7 +1,10 @@
 [package]
 name = "wyrd-tonic"
 version = { workspace = true }
-edition = { workspace = true }
+# Pinned to 2021 to match the source crate (wyrd-bifrost-oracle and surfaces both
+# keep wyrd-tonic on edition 2021). The extraction preserves source editions
+# rather than migrating code to edition 2024, keeping the port behavior-faithful.
+edition = "2021"
 license = { workspace = true }
 rust-version = { workspace = true }
 repository = { workspace = true }
