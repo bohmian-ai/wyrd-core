@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 /// A validated relative path inside a card's artifact manifest.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, schemars::JsonSchema)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, schemars::JsonSchema)]
 #[cfg_attr(feature = "server", derive(utoipa::ToSchema))]
 #[serde(transparent)]
 pub struct RelativeArtifactPath(String);
@@ -102,7 +102,7 @@ pub enum PathValidationError {
 
 impl From<PathValidationError> for crate::error::WyrdError {
     fn from(error: PathValidationError) -> Self {
-        Self::RegistryInvalidArtifactPath {
+        Self::RegistryUnresolvedPathRef {
             message: error.to_string(),
             details: serde_json::json!({}),
         }
@@ -175,7 +175,7 @@ mod tests {
     #[test]
     fn path_error_maps_to_registry_error_catalog() {
         let error: WyrdError = PathValidationError::Absolute.into();
-        assert_eq!(error.code(), "WYRD_REGISTRY_400_INVALID_ARTIFACT_PATH");
+        assert_eq!(error.code(), "WYRD_REGISTRY_400_UNRESOLVED_PATH_REF");
         assert_eq!(error.status(), 400);
     }
 }

@@ -15,6 +15,7 @@ pub mod card;
 pub mod envelope;
 pub mod error;
 pub mod format;
+pub mod graph;
 pub mod ids;
 pub mod intel;
 pub mod metadata;
@@ -22,6 +23,7 @@ pub mod origin;
 pub mod query;
 pub mod redaction;
 pub mod reference;
+pub mod refs;
 pub mod registry;
 pub mod request_id;
 pub mod run;
@@ -31,7 +33,7 @@ pub mod storage;
 pub mod trace;
 pub mod vala;
 
-pub use card::agent::{AgentCard, AgentCardError, AgentRunConfigSpec, AgentSpec};
+pub use card::agent::{AgentCard, AgentRunConfigSpec, AgentSpec};
 pub use card::data::{
     ArrowFormat, ArrowMeta, ColValue, ColorMode, CustomDataMeta, DataInterface, DataSchema,
     DataSpec, DataSplit, DataStats, HuggingfaceMeta, ImageFormat, ImageMeta, Inequality,
@@ -56,7 +58,6 @@ pub use metadata::{
 };
 pub use origin::{CommitSha, Origin, OriginValidationError};
 pub use query::{FieldRef, MetadataQuery, Operator, Predicate, QueryFieldErrorDetail, Value};
-pub use reference::AgentRef;
 #[cfg(any(test, feature = "test-utils"))]
 pub use security::InlineSecret;
 pub use security::{SecretRef, SecretRefError, TlsConfig};
