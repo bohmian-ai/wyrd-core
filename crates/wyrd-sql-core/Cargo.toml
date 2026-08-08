@@ -1,0 +1,22 @@
+[package]
+name = "wyrd-sql-core"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+authors = { workspace = true }
+description = "Plane-neutral Postgres primitives: DSN resolution, pool construction, advisory-lock migration runner, OperatorPool, TenantConn, and SqlError."
+
+[dependencies]
+secrecy = { workspace = true }
+sqlx = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+wyrd-semver = { workspace = true }
+wyrd-spec = { workspace = true }
+wyrd-tls = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
