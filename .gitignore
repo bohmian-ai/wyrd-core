@@ -6,3 +6,5 @@
 *.key
 /.dev
 .DS_Store
+/.dev
+.dev/public-api/wyrd-sql-core.txt

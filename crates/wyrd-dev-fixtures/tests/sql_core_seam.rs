@@ -63,18 +63,10 @@ fn sql_core_seam_dsn_constants_accessible() {
         "PLATFORM_ADMIN_PASSWORD_ENV must be non-empty"
     );
     assert!(
-        !CATALOG_APP_PASSWORD_ENV.is_empty(),
-        "CATALOG_APP_PASSWORD_ENV must be non-empty"
-    );
-    assert!(
         !WYRD_MIGRATOR_ROLE.is_empty(),
         "WYRD_MIGRATOR_ROLE must be non-empty"
     );
     assert!(!WYRD_APP_ROLE.is_empty(), "WYRD_APP_ROLE must be non-empty");
-    assert!(
-        !WYRD_CATALOG_APP_ROLE.is_empty(),
-        "WYRD_CATALOG_APP_ROLE must be non-empty"
-    );
     assert!(
         !WYRD_PLATFORM_ADMIN_ROLE.is_empty(),
         "WYRD_PLATFORM_ADMIN_ROLE must be non-empty"
@@ -190,8 +182,6 @@ fn _verify_imports_compile() {
         let _ = resolve_external_dsns;
         let _ = role_dsn;
         let _ = role_dsn_from_base;
-        let _ = catalog_role_dsn;
-        let _ = with_catalog_options;
         let _ = build_pool;
         let _ = build_app_pool;
         let _ = build_migrator_pool;
