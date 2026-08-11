@@ -17,8 +17,8 @@ review expectations for this repository.
 
 ## Environment Setup
 
-This repository is a Rust workspace. No SvelteKit frontend, Python package, or
-server plane is included — those live in the `wyrd` monorepo.
+This repository is a standalone Rust workspace. No SvelteKit frontend, Python
+SDK, or server plane is included — those are separate consuming repositories.
 
 Ensure Rust is installed at the toolchain version pinned in `rust-toolchain.toml`
 (the toolchain file installs it automatically via `rustup`).

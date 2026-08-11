@@ -1,5 +1,5 @@
 [tools]
-rust    = "1.95.0"
+rust    = "1.97.1"
 protoc  = "33.2"
 cmake   = "3.26.4"
 
@@ -60,6 +60,13 @@ run = "cargo test --locked --workspace -- --nocapture"
 [tasks."test:integration"]
 description = "PG integration tests for wyrd-sql-core and wyrd-dev-fixtures; the wrapper owns compose-up, role bootstrap (as wyrd_test_admin), DSN env, and teardown"
 run = "bash scripts/postgres/with-test-postgres.sh -- cargo test --locked -p wyrd-sql-core -p wyrd-dev-fixtures --features pg -- --test-threads=1"
+
+[tasks."test:pg-journeys"]
+description = "Docker-gated journeys for with-test-postgres.sh: proves per-invocation isolation under real concurrency (test-concurrency.sh) and role/privilege convergence (test-roles.sh). Requires a running Docker daemon; not part of pre-pr"
+run = """
+bash scripts/postgres/test-concurrency.sh
+bash scripts/postgres/test-roles.sh
+"""
 
 # ---------------------------------------------------------------------------
 # Codegen
@@ -154,6 +161,10 @@ run = "python scripts/check_clippy_allow.py"
 description = "D9 parity gate: pre-pr dependency list must match the mise run steps in .github/workflows/lints-test.yml"
 run = "bash scripts/checks/ci-parity.sh"
 
+[tasks."check:pg-wrapper-contract"]
+description = "Hermetic contract test for with-test-postgres.sh (fake docker/psql shims): honest exit-code propagation, role bootstrap, fail-fast, and teardown on signal — no Docker required"
+run = "bash scripts/postgres/test-contract.sh"
+
 
 # ---------------------------------------------------------------------------
 # Aggregate CI checks - for GH Actions workflow
@@ -172,6 +183,7 @@ depends = [
     "check:unwrap-audit",
     "check:clippy-allow-audit",
     "check:ci-parity",
+    "check:pg-wrapper-contract",
 ]
 
 # ---------------------------------------------------------------------------

@@ -8,7 +8,8 @@ to ensure consistent and efficient operation.
 > auth, telemetry, transport, and SQL migration core. Rules below that reference
 > `TenantConn`, `OperatorPool`, Vala, Bifrost, `wyrd-server`, or other plane
 > components are included as **cross-plane doctrine** for contributors who work
-> across both repositories. Commands reference only paths that exist here.
+> across the consuming repositories. Commands reference only paths that exist
+> here.
 
 - Cargo features must be earned. Creating new cargo features can invalidate
   compilation caches. Cargo features are designed around minimizing

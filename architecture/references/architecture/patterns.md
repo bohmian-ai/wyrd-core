@@ -21,8 +21,8 @@ Keep ownership at the narrowest Wyrd layer that has the behavior and its
 dependency cost. `wyrd-spec` owns pure wire contracts and validation;
 `wyrd-server` owns serving, tenancy, policy, audit, and durable orchestration;
 Vala owns observations, evaluation, drift, and analytical engines; Skald owns
-provider, prompt, tool, agent, and workflow primitives. `python/py-wyrd` and
-the TypeScript surface project approved owner-crate behavior and do not create
+provider, prompt, tool, agent, and workflow primitives. The Python and
+TypeScript SDK surfaces project approved owner-crate behavior and do not create
 parallel durable state.
 
 Vala and Bifrost crates are engines/data-plane libraries, never network
@@ -54,8 +54,8 @@ Keep `wyrd-spec` free of:
 - telemetry SDK implementation dependencies
 
 Python-visible wrappers around `wyrd-spec` contracts live in owner crates
-(e.g. `wyrd-interfaces`, `wyrd-cards`) behind optional `python` features.
-`python/py-wyrd` registers those wrappers; it does not reimplement logic.
+behind optional `python` features. The Python SDK aggregator registers those
+wrappers; it does not reimplement logic.
 
 `wyrd-spec` is foundational but not a dumping ground for all contracts.
 If it is not spec-related, find another place for it.

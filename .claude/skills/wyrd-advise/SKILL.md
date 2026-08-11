@@ -64,7 +64,7 @@ This section constrains reasoning, not format.
   ground truth is a specific rule.
 - When an idea conflicts with a locked decision — for example a `Tool`, `Skill`,
   or `SubAgent` Card kind, a client-tier `sqlx`/cloud/DataFusion/Delta
-  dependency, PyO3 in `wyrd-spec`, or business logic moved into `python/py-wyrd`
+  dependency, PyO3 in `wyrd-spec`, or business logic moved into the Python SDK aggregator
   — surface the conflict and the governing rule instead of going along with it.
   Distinguish a locked decision from a genuinely open one.
 - Flag when a decision is *material* (public, wire, or persisted contract;

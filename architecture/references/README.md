@@ -7,12 +7,12 @@ and load only the slices required by the question or change.
 
 > **Scope note:** `wyrd-core` contains pure contracts, shared primitives,
 > auth, telemetry, transport, and SQL migration core. It does not include the
-> server, UI, Python package, Skald runtime plane, or Vala/Bifrost plane. The
-> doctrine and language references below are included verbatim from the Wyrd
-> monorepo because they govern cross-plane design decisions this foundation must
-> honor. References to plane-specific paths (`crates/shared/wyrd-registry`,
-> `crates/skald/`, `python/py-wyrd`, etc.) are **explanatory cross-plane
-> doctrine** — read them as design context, not as runnable local paths.
+> server, UI, client SDKs, Skald runtime plane, or Vala/Bifrost plane; those are
+> separate consuming repositories. The doctrine and language references below
+> govern cross-plane design decisions this foundation must honor. References to
+> plane-specific concepts (the server-tier registry, the Skald and Vala planes,
+> the Python SDK aggregator, etc.) are **explanatory cross-plane doctrine** —
+> read them as design context, not as runnable local paths.
 
 ## Layout
 
