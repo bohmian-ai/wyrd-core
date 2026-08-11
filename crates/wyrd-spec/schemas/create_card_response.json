@@ -1,115 +1,35 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "CreateCardResponse",
-  "description": "Server response to card creation.",
+  "description": "Composite registration response.",
   "type": "object",
   "required": [
-    "card_uid",
-    "created_at",
-    "kind",
-    "name",
-    "outcome",
-    "space",
-    "spec_hash",
-    "status",
-    "version"
+    "outcomes",
+    "root",
+    "upload_plans"
   ],
   "properties": {
-    "artifact_hash": {
-      "description": "BLAKE3-hex hash of the JCS canonical manifest.",
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "card_uid": {
-      "description": "Resolved card UID.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CardUid"
-        }
-      ]
-    },
-    "created_at": {
-      "description": "Creation timestamp.",
-      "type": "string",
-      "format": "date-time"
-    },
-    "kind": {
-      "description": "Resolved kind.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CardKind"
-        }
-      ]
-    },
-    "name": {
-      "description": "Resolved name.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CardName"
-        }
-      ]
-    },
-    "operation_id": {
-      "description": "Pending operation id.",
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "uuid"
-    },
-    "outcome": {
-      "description": "Registration result.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegisterOutcome"
-        }
-      ]
-    },
-    "principal_id": {
-      "description": "Principal attributed to the operation.",
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "uuid"
-    },
-    "space": {
-      "description": "Resolved workspace.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SpaceName"
-        }
-      ]
-    },
-    "spec_hash": {
-      "description": "BLAKE3-hex hash of JCS canonical spec bytes.",
-      "type": "string"
-    },
-    "status": {
-      "description": "Server-managed lifecycle status.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CardLifecycleStatus"
-        }
-      ]
-    },
-    "uploads": {
-      "description": "Upload plans for artifacts that still need bytes.",
-      "default": [],
+    "outcomes": {
+      "description": "Per-submission outcomes in server topo order.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/UploadInitResponse"
+        "$ref": "#/definitions/CardRegistrationOutcome"
       }
     },
-    "version": {
-      "description": "Resolved version.",
+    "root": {
+      "description": "Server-derived graph root.",
       "allOf": [
         {
-          "$ref": "#/definitions/VersionBlock"
+          "$ref": "#/definitions/CardRef"
         }
       ]
+    },
+    "upload_plans": {
+      "description": "Upload plans for artifact-bearing submissions.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CardUploadPlan"
+      }
     }
   },
   "additionalProperties": false,
@@ -188,9 +108,175 @@
       "description": "Human-visible Card name.",
       "type": "string"
     },
+    "CardRef": {
+      "description": "Reference to a registered Card by kind, name, version, optional space, and optional UID.",
+      "type": "object",
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ],
+      "properties": {
+        "kind": {
+          "description": "Referenced Card kind.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardKind"
+            }
+          ]
+        },
+        "name": {
+          "description": "Referenced Card name.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardName"
+            }
+          ]
+        },
+        "space": {
+          "description": "Space pinning identity together with `name` and `version`.\n\nAuthors may omit it; the loader inherits the enclosing card's resolved metadata space before the reference crosses a wire boundary.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SpaceName"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "uid": {
+          "description": "Optional server-resolved durable UID.\n\nAuthors identify a dependency with `(kind, space, name, version)` and may omit this field. The server resolves that reference to a [`CardUid`] before registration; the UID is then used for durable authorization and lineage without changing the authored reference identity.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/CardUid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "version": {
+          "description": "Exact referenced Card version.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VersionBlock"
+            }
+          ]
+        }
+      }
+    },
+    "CardRegistrationOutcome": {
+      "description": "Outcome for one submission in a composite registration.",
+      "type": "object",
+      "required": [
+        "card_ref",
+        "outcome",
+        "spec_hash",
+        "status"
+      ],
+      "properties": {
+        "artifact_hash": {
+          "description": "BLAKE3 hex hash of the sorted artifact manifest, when present.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "card_blob_uri": {
+          "description": "URI of the durable card blob once written.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "card_ref": {
+          "description": "Server-resolved card identity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardRef"
+            }
+          ]
+        },
+        "outcome": {
+          "description": "Registration result for this submission.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RegistrationOutcomeKind"
+            }
+          ]
+        },
+        "spec_hash": {
+          "description": "BLAKE3 hex hash of the JCS-canonical resolved spec.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Server-managed lifecycle state.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardLifecycleStatus"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
     "CardUid": {
       "description": "Resolved immutable Card UID.",
       "type": "string"
+    },
+    "CardUploadEntry": {
+      "description": "One tenant-scoped, server-minted upload for a card artifact.",
+      "type": "object",
+      "required": [
+        "plan",
+        "relative_path",
+        "upload_id"
+      ],
+      "properties": {
+        "plan": {
+          "description": "Backend-specific transfer protocol minted by the storage service.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UploadPlan"
+            }
+          ]
+        },
+        "relative_path": {
+          "description": "Manifest path this upload accepts.",
+          "type": "string"
+        },
+        "upload_id": {
+          "description": "Durable storage upload identifier used for part URLs and completion.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CardUploadPlan": {
+      "description": "Upload plan group keyed by the resolved card reference.",
+      "type": "object",
+      "required": [
+        "card_ref",
+        "entries"
+      ],
+      "properties": {
+        "card_ref": {
+          "description": "Card whose submission declared the artifact manifest.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CardRef"
+            }
+          ]
+        },
+        "entries": {
+          "description": "One server-minted upload per manifest entry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CardUploadEntry"
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "HeaderPair": {
       "description": "Required HTTP header for a client upload request.",
@@ -211,14 +297,14 @@
       },
       "additionalProperties": false
     },
-    "RegisterOutcome": {
+    "RegistrationOutcomeKind": {
       "description": "Result of a registration write.",
       "oneOf": [
         {
           "description": "A new registration row was created.",
           "type": "string",
           "enum": [
-            "created"
+            "registered"
           ]
         },
         {
@@ -240,76 +326,6 @@
     "SpaceName": {
       "description": "Human-visible namespace for Cards and Runs.",
       "type": "string"
-    },
-    "StorageBackendKind": {
-      "description": "Object-storage backend configured for artifact bytes.",
-      "oneOf": [
-        {
-          "description": "Local filesystem storage.",
-          "type": "string",
-          "enum": [
-            "local"
-          ]
-        },
-        {
-          "description": "AWS S3 or compatible object storage.",
-          "type": "string",
-          "enum": [
-            "s3"
-          ]
-        },
-        {
-          "description": "Google Cloud Storage.",
-          "type": "string",
-          "enum": [
-            "gcs"
-          ]
-        },
-        {
-          "description": "Azure Blob Storage.",
-          "type": "string",
-          "enum": [
-            "azure"
-          ]
-        }
-      ]
-    },
-    "UploadInitResponse": {
-      "description": "Server response to an upload-init request.",
-      "type": "object",
-      "required": [
-        "backend",
-        "plan",
-        "storage_path",
-        "upload_id"
-      ],
-      "properties": {
-        "backend": {
-          "description": "Configured storage backend.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/StorageBackendKind"
-            }
-          ]
-        },
-        "plan": {
-          "description": "Backend-specific upload plan.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/UploadPlan"
-            }
-          ]
-        },
-        "storage_path": {
-          "description": "Full tenant-scoped storage path.",
-          "type": "string"
-        },
-        "upload_id": {
-          "description": "Durable upload identifier.",
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
     },
     "UploadPlan": {
       "description": "Tagged union describing how the client uploads bytes.",
@@ -358,7 +374,7 @@
           }
         },
         {
-          "description": "Local filesystem auth-gated upload.\n\nSignals that the upload URL is an auth-gated server route, not a presigned PUT. SDK clients must include `Authorization: Bearer` and `x-wyrd-data-tenant-id` on the PUT request.",
+          "description": "Local filesystem auth-gated upload.\n\nSignals that the upload URL is an auth-gated server route for one server-minted upload capability, not a caller-selected storage path.",
           "type": "object",
           "required": [
             "data",
