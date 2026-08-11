@@ -680,10 +680,9 @@ fn same_origin(configured_origin: &str, candidate: &str) -> bool {
 fn split_origin(url: &str) -> Option<(&str, &str)> {
     let (scheme, rest) = if let Some(rest) = url.strip_prefix("https://") {
         ("https", rest)
-    } else if let Some(rest) = url.strip_prefix("http://") {
-        ("http", rest)
     } else {
-        return None;
+        let rest = url.strip_prefix("http://")?;
+        ("http", rest)
     };
     let authority = rest.split('/').next().unwrap_or("");
     if authority.is_empty() {
