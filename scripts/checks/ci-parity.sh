@@ -95,7 +95,9 @@ with open(workflow_path) as f:
 # or:              run: mise -C ... run <task-name>
 # or multi-line:   run: |
 #                    mise run <task-name>
-pattern = re.compile(r'mise(?:\s+-C\s+\S+)?\s+run\s+([\w:]+)', re.MULTILINE)
+# Task names may contain word chars, colons, and hyphens (e.g. check:no-plane-deps).
+# Only match non-comment lines (lines not starting with optional whitespace + '#').
+pattern = re.compile(r'^(?!\s*#).*mise(?:\s+-C\s+\S+)?\s+run\s+([\w:][a-zA-Z0-9_:.-]*)', re.MULTILINE)
 matches = pattern.findall(content)
 
 seen = set()

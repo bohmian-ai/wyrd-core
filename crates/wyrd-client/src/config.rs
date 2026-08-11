@@ -299,7 +299,11 @@ mod tests {
             std::env::remove_var("WYRD_WORKLOAD_TOKEN");
             std::env::remove_var("WYRD_TENANT");
             std::env::remove_var("WYRD_API_KEY");
-            // Redirect HOME so no credentials.toml is found.
+            // Redirect HOME and clear higher-precedence config-dir vars so no
+            // credentials.toml is found (CI runners set XDG_CONFIG_HOME, which
+            // would otherwise point the resolver at a real config dir).
+            std::env::remove_var("WYRD_CONFIG_HOME");
+            std::env::remove_var("XDG_CONFIG_HOME");
             std::env::set_var("HOME", std::env::temp_dir());
         }
 

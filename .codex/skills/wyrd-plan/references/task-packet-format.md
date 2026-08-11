@@ -122,7 +122,7 @@ Select execution skills from the write set:
 
 - `$wyrd-implement` for all foundation implementation work.
 
-Note: `wyrd-foundation` has no UI surface. Do not assign `$wyrd-ui`.
+Note: `wyrd-core` has no UI surface. Do not assign `$wyrd-ui`.
 
 Do not assign a skill whose trigger or exclusions reject part of the write set.
 

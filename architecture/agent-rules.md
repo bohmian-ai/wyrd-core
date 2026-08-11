@@ -4,7 +4,7 @@ The following rules are explicitly defined for agents working in this
 repository. These rules govern behavior, interactions, and responsibilities
 to ensure consistent and efficient operation.
 
-> **Scope note:** `wyrd-foundation` contains pure contracts, shared primitives,
+> **Scope note:** `wyrd-core` contains pure contracts, shared primitives,
 > auth, telemetry, transport, and SQL migration core. Rules below that reference
 > `TenantConn`, `OperatorPool`, Vala, Bifrost, `wyrd-server`, or other plane
 > components are included as **cross-plane doctrine** for contributors who work
@@ -53,7 +53,7 @@ to ensure consistent and efficient operation.
   `// justification: <one-line reason>` comment naming why the lint is wrong
   for that specific site.
 - Never hand-edit generated artifacts: OpenAPI/JSON schemas, golden files under
-  `tests/schemas/`. Change the source or generator, regenerate, and let
+  each crate's `schemas/`. Change the source or generator, regenerate, and let
   `codegen:check` verify.
 - Build scripts (`build.rs`) write generated output to `OUT_DIR`, never into
   the source tree.

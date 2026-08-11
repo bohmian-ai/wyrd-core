@@ -7,7 +7,7 @@ milestone or phase may add the default-feature workspace gate. Treat
 all-feature workspace checks as whole-plan closeout gates, not per-task
 defaults.
 
-> **Scope note:** `wyrd-foundation` contains pure contracts, shared primitives,
+> **Scope note:** `wyrd-core` contains pure contracts, shared primitives,
 > auth, telemetry, transport, and SQL migration core. It has no server, UI,
 > Python package, TypeScript SDK, `WyrdTestServer`, Skald runtime, or
 > Vala/Bifrost plane. The Three Tiers below are narrowed accordingly. Cross-plane
@@ -87,7 +87,7 @@ cargo test --locked -p wyrd-dev-fixtures --features wyrd-dev-fixtures/pg -- --no
 
 # Or via mise (once installed by T8):
 # mise run test:sql
-# mise run test:pg
+# mise run test:integration
 ```
 
 Use `--test-threads=1` for Postgres-gated tests to avoid port and schema
