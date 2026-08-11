@@ -1,0 +1,8 @@
+title = "wyrd-core gitleaks configuration"
+
+[[allowlists]]
+description = "Deterministic Ed25519 PEM fixtures used only by auth unit tests."
+paths = [
+  '''^crates/wyrd-auth-issue/src/lib\.rs$''',
+  '''^crates/wyrd-auth-verify/src/lib\.rs$''',
+]
