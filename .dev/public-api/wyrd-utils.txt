@@ -1,9 +1,9 @@
    Compiling zstd-sys v2.0.16+zstd.1.5.7
    Compiling blake3 v1.8.6
-    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
    Compiling zstd-safe v7.2.4
     Checking zstd v0.13.3
- Documenting wyrd-utils v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-utils)
+ Documenting wyrd-utils v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-utils)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.87s
 pub mod wyrd_utils
 pub use wyrd_utils::uuid7

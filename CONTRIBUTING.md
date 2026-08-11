@@ -1,4 +1,4 @@
-# Contributing to wyrd-foundation
+# Contributing to wyrd-core
 
 ## Welcome
 
@@ -7,7 +7,7 @@ review expectations for this repository.
 
 ## Table of Contents
 
-- [Contributing to wyrd-foundation](#contributing-to-wyrd-foundation)
+- [Contributing to wyrd-core](#contributing-to-wyrd-core)
   - [Welcome](#welcome)
   - [Table of Contents](#table-of-contents)
   - [Environment Setup](#environment-setup)

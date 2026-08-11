@@ -1,4 +1,4 @@
-# wyrd-foundation
+# wyrd-core
 
 Foundation crates for the [Wyrd](https://github.com/mitari-ai/wyrd) AI platform.
 Includes pure contracts (`wyrd-spec`, `skald-spec`), shared primitives

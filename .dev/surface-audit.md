@@ -1,4 +1,4 @@
-# wyrd-foundation public-API surface audit
+# wyrd-core public-API surface audit
 
 Generated: 2026-08-06
 Task: T6 — Regenerate and baseline public surface

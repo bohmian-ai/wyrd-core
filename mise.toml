@@ -5,6 +5,13 @@ cmake   = "3.26.4"
 
 [settings]
 experimental = true
+# Force sequential task execution so cargo-backed gates in pre-pr never race
+# the shared Cargo target directory (AGENTS.md §11: "Run all Cargo-backed
+# commands sequentially … overlapping Cargo builds, tests, lints, docs, or
+# codegen are not [allowed]"). Setting jobs = 1 serializes the depends graph
+# while preserving its flattened shape so check:ci-parity can still resolve
+# the pre-pr dependency list element-for-element.
+jobs = 1
 
 # ---------------------------------------------------------------------------
 # Format
@@ -50,7 +57,7 @@ depends = ["fmt:check", "lints"]
 description = "All non-PG tests across the 20 crates (pg feature excluded, so pg-gated code is not compiled here)"
 run = "cargo test --locked --workspace -- --nocapture"
 
-[tasks."test:pg"]
+[tasks."test:integration"]
 description = "PG integration tests for wyrd-sql-core and wyrd-dev-fixtures; the wrapper owns compose-up, role bootstrap (as wyrd_test_admin), DSN env, and teardown"
 run = "bash scripts/postgres/with-test-postgres.sh -- cargo test --locked -p wyrd-sql-core -p wyrd-dev-fixtures --features pg -- --test-threads=1"
 
@@ -67,6 +74,9 @@ cargo run --locked -p wyrd-client --example gen_schemas
 
 [tasks."codegen:check"]
 description = "Fail if generated schema goldens drift from source"
+# Runs under bash: the script uses `set -o pipefail`, which the default sh
+# (dash on Linux CI runners) rejects. Local sh happened to be bash.
+shell = "bash -c"
 run = """
 set -euo pipefail
 # Capture pre-regen state and post-regen state; fail on any diff.
@@ -144,17 +154,13 @@ run = "python scripts/check_clippy_allow.py"
 description = "D9 parity gate: pre-pr dependency list must match the mise run steps in .github/workflows/lints-test.yml"
 run = "bash scripts/checks/ci-parity.sh"
 
-# ---------------------------------------------------------------------------
-# Local aggregate (D9 / pre-PR developer gate)
-# Depends DIRECTLY on the flattened gate list — NOT on the check aggregate —
-# so the dependency set compares element-for-element with the ci job steps.
-# ---------------------------------------------------------------------------
 
-[tasks."pre-pr"]
-description = "Local developer aggregate over the complete gate set (identical to the CI job's ordered step list per D9)"
+# ---------------------------------------------------------------------------
+# Aggregate CI checks - for GH Actions workflow
+# ---------------------------------------------------------------------------
+[tasks."checks"]
+description = "Aggregate all checks for CI workflow"
 depends = [
-    "fmt:check",
-    "lints",
     "check:no-plane-deps",
     "check:sqlx-scope",
     "check:client-tier",
@@ -166,7 +172,21 @@ depends = [
     "check:unwrap-audit",
     "check:clippy-allow-audit",
     "check:ci-parity",
+]
+
+# ---------------------------------------------------------------------------
+# Local aggregate (D9 / pre-PR developer gate)
+# Depends DIRECTLY on the flattened gate list — NOT on the check aggregate —
+# so the dependency set compares element-for-element with the ci job steps.
+# ---------------------------------------------------------------------------
+
+[tasks."pre-pr"]
+description = "Local developer aggregate over the complete gate set (identical to the CI job's ordered step list per D9; boundary gates are grouped under the checks aggregate on both sides)"
+depends = [
+    "fmt:check",
+    "lints",
+    "checks",
     "codegen:check",
     "test:unit",
-    "test:pg",
+    "test:integration",
 ]

@@ -1,4 +1,4 @@
- Documenting skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+ Documenting skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.85s
 pub mod skald_spec
 pub mod skald_spec::adapter

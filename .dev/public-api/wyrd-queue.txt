@@ -43,8 +43,8 @@
     Checking serde_yaml v0.9.34+deprecated
     Checking serde_jcs v0.1.0
     Checking schemars v0.8.22
-    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
-    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-semver)
     Checking half v2.7.1
     Checking arrow-buffer v58.4.0
     Checking arrow-data v58.4.0
@@ -55,13 +55,13 @@
     Checking arrow-ord v58.4.0
     Checking arrow-ipc v58.4.0
     Checking arrow-string v58.4.0
-    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
     Checking arrow-cast v58.4.0
     Checking arrow-csv v58.4.0
     Checking arrow-json v58.4.0
     Checking arrow v58.4.0
-    Checking wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-runtime)
- Documenting wyrd-queue v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-queue)
+    Checking wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-runtime)
+ Documenting wyrd-queue v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-queue)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 15.09s
 pub mod wyrd_queue
 pub mod wyrd_queue::batch_builder

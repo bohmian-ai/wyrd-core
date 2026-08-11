@@ -2,7 +2,7 @@
     Checking unicode-ident v1.0.24
     Checking quote v1.0.47
     Checking syn v2.0.119
- Documenting wyrd-error-derive v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-error-derive)
+ Documenting wyrd-error-derive v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-error-derive)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.67s
 pub mod wyrd_error_derive
 pub proc macro wyrd_error_derive::#[derive(WyrdError)]

@@ -145,7 +145,7 @@
    Compiling strum_macros v0.27.2
     Checking futures-util v0.3.33
     Checking zerofrom v0.1.8
-   Compiling wyrd-error-derive v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-error-derive)
+   Compiling wyrd-error-derive v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-error-derive)
     Checking simple_asn1 v0.6.4
     Checking tracing v0.1.44
     Checking yoke v0.8.3
@@ -171,23 +171,23 @@
     Checking tower v0.5.3
     Checking moka v0.12.15
     Checking hyper-util v0.1.20
-    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
-    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
     Checking idna_adapter v1.2.2
     Checking idna v1.1.0
     Checking url v2.5.8
     Checking tower-http v0.6.11
-    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
     Checking rustls-webpki v0.103.13
     Checking tokio-rustls v0.26.4
     Checking rustls-platform-verifier v0.7.0
-    Checking wyrd-tls v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tls)
+    Checking wyrd-tls v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-tls)
     Checking hyper-rustls v0.27.9
     Checking reqwest v0.13.4
-    Checking wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-runtime)
-    Checking wyrd-auth-oidc v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-oidc)
-    Checking wyrd-auth-verify v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-verify)
- Documenting wyrd-auth-check v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-check)
+    Checking wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-runtime)
+    Checking wyrd-auth-oidc v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-auth-oidc)
+    Checking wyrd-auth-verify v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-auth-verify)
+ Documenting wyrd-auth-check v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-auth-check)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 22.66s
 pub mod wyrd_auth_check
 pub mod wyrd_auth_check::context

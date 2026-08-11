@@ -9,12 +9,12 @@
     Checking schemars v0.8.22
     Checking icu_properties v2.2.0
     Checking icu_normalizer v2.2.0
-    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
-    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-semver)
     Checking idna_adapter v1.2.2
     Checking idna v1.1.0
     Checking url v2.5.8
- Documenting wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+ Documenting wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-core/crates/wyrd-spec)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.42s
 pub mod wyrd_spec
 pub use wyrd_spec::MessageNum

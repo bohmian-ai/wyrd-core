@@ -8,7 +8,7 @@ This document is **Wyrd-native**. Do not import legacy names, package names,
 module names, compatibility shims, or migration shorthand into this repository.
 Reproduce useful patterns under Wyrd vocabulary and Wyrd paths.
 
-`wyrd-foundation` contains the 20 published foundation crates — pure contracts,
+`wyrd-core` contains the 20 published foundation crates — pure contracts,
 shared primitives, auth, telemetry, crypto, transport, SQL migration core, and
 test fixtures. It does not contain the server, UI, Python package, Skald
 plane, or Vala/Bifrost plane. Cross-plane doctrine is included as explanatory
@@ -92,7 +92,7 @@ Locked cross-cutting decisions that any contributor must honor:
 
 ## 3. Ownership Boundaries
 
-Within `wyrd-foundation`:
+Within `wyrd-core`:
 
 - `crates/wyrd-spec`: pure contracts, ids, cards/specs, schema generation,
   request/response shapes, validation, stable error catalog.
@@ -229,7 +229,7 @@ behavior with the wrong structural shape is incomplete.
 
 ## 7. PyO3 Boundary Rules
 
-PyO3 is **not present** in `wyrd-foundation`. All foundation crates are
+PyO3 is **not present** in `wyrd-core`. All foundation crates are
 strictly PyO3-free. `wyrd-spec` is IO-free, async-free, and foundational.
 
 Do not add a `python` feature or PyO3 imports to any crate in this repository.
