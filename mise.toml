@@ -1,0 +1,172 @@
+[tools]
+rust    = "1.95.0"
+protoc  = "33.2"
+cmake   = "3.26.4"
+
+[settings]
+experimental = true
+
+# ---------------------------------------------------------------------------
+# Format
+# ---------------------------------------------------------------------------
+
+[tasks.fmt]
+description = "Format all Rust source files"
+run = "cargo fmt --all"
+
+[tasks."fmt:check"]
+description = "Verify Rust formatting without rewriting (CI-safe)"
+run = "cargo fmt --all -- --check"
+
+# ---------------------------------------------------------------------------
+# Clippy / lint
+# ---------------------------------------------------------------------------
+
+[tasks."lints:default"]
+description = "Workspace Clippy with default features — milestone/phase gate"
+run = "cargo clippy --locked --workspace --all-targets -- -D warnings"
+
+[tasks.lints]
+description = "Workspace Clippy with all features — closeout gate"
+run = "cargo clippy --locked --workspace --all-features --all-targets -- -D warnings"
+
+# ---------------------------------------------------------------------------
+# Composite lint gates
+# ---------------------------------------------------------------------------
+
+[tasks."check:default"]
+description = "Milestone/phase gate: fmt:check + default-feature Clippy"
+depends = ["fmt:check", "lints:default"]
+
+[tasks.check]
+description = "Closeout gate: fmt:check + all-feature Clippy"
+depends = ["fmt:check", "lints"]
+
+# ---------------------------------------------------------------------------
+# Tests
+# ---------------------------------------------------------------------------
+
+[tasks."test:unit"]
+description = "All non-PG tests across the 21 crates (pg feature excluded, so pg-gated code is not compiled here)"
+run = "cargo test --locked --workspace -- --nocapture"
+
+[tasks."test:pg"]
+description = "PG integration tests for wyrd-sql-core and wyrd-dev-fixtures; the wrapper owns compose-up, role bootstrap (as wyrd_test_admin), DSN env, and teardown"
+run = "bash scripts/postgres/with-test-postgres.sh -- cargo test --locked -p wyrd-sql-core -p wyrd-dev-fixtures --features pg -- --test-threads=1"
+
+# ---------------------------------------------------------------------------
+# Codegen
+# ---------------------------------------------------------------------------
+
+[tasks."codegen:regen"]
+description = "Regenerate schema goldens from wyrd-spec and wyrd-client generators"
+run = """
+cargo run --locked -p wyrd-spec --example gen_schemas --features server
+cargo run --locked -p wyrd-client --example gen_schemas
+"""
+
+[tasks."codegen:check"]
+description = "Fail if generated schema goldens drift from source"
+run = """
+set -euo pipefail
+# Capture pre-regen state and post-regen state; fail on any diff.
+git stash --include-untracked --quiet 2>/dev/null || true
+TMP_BEFORE=$(mktemp -d)
+cp -r crates/wyrd-spec/schemas/. "$TMP_BEFORE/spec"
+cp -r crates/wyrd-client/schemas/. "$TMP_BEFORE/client" 2>/dev/null || mkdir -p "$TMP_BEFORE/client"
+git stash pop --quiet 2>/dev/null || true
+
+cargo run --locked -p wyrd-spec --example gen_schemas --features server 2>/dev/null
+cargo run --locked -p wyrd-client --example gen_schemas 2>/dev/null
+
+TMP_AFTER=$(mktemp -d)
+cp -r crates/wyrd-spec/schemas/. "$TMP_AFTER/spec"
+cp -r crates/wyrd-client/schemas/. "$TMP_AFTER/client" 2>/dev/null || mkdir -p "$TMP_AFTER/client"
+
+if ! diff -rq "$TMP_BEFORE/spec" "$TMP_AFTER/spec" > /dev/null 2>&1 || \
+   ! diff -rq "$TMP_BEFORE/client" "$TMP_AFTER/client" > /dev/null 2>&1; then
+    echo "codegen:check FAILED — generated schema goldens are out of date; run mise run codegen:regen and commit"
+    diff -ru "$TMP_BEFORE/spec" "$TMP_AFTER/spec" || true
+    diff -ru "$TMP_BEFORE/client" "$TMP_AFTER/client" || true
+    rm -rf "$TMP_BEFORE" "$TMP_AFTER"
+    exit 1
+fi
+
+rm -rf "$TMP_BEFORE" "$TMP_AFTER"
+echo "codegen:check passed — all schema goldens are current"
+"""
+
+# ---------------------------------------------------------------------------
+# Boundary checks
+# ---------------------------------------------------------------------------
+
+[tasks."check:no-plane-deps"]
+description = "Metadata: no path/workspace dep outside D1 foundation set; no wyrd-testing in normal/dev/build; no cloud SDK"
+run = "bash scripts/checks/no-plane-deps.sh"
+
+[tasks."check:sqlx-scope"]
+description = "SQLx reverse-dep roots are exactly wyrd-sql-core and wyrd-dev-fixtures"
+run = "bash scripts/checks/sqlx-scope.sh"
+
+[tasks."check:client-tier"]
+description = "No server-tier or cloud crates in the foundation client cone"
+run = "bash scripts/checks/client-tier.sh"
+
+[tasks."check:pyo3-scope"]
+description = "Optional PyO3 only from wyrd-utils (python feature); default tree PyO3-free"
+run = "bash scripts/checks/pyo3-scope.sh"
+
+[tasks."check:sql-core-seam"]
+description = "Compile seam target that imports all wyrd-sql-core public exports; bans excluded modules"
+run = "bash scripts/checks/sql-core-seam.sh"
+
+[tasks."check:mocks-scope"]
+description = "Mock helpers (mockall, wiremock, mockito) must not appear in production source"
+run = "bash scripts/checks/mocks-scope.sh"
+
+[tasks."check:proto-drift"]
+description = "Checked-in wyrd.v1.bin FileDescriptorSet matches the .proto source"
+run = "bash scripts/checks/proto-drift.sh"
+
+[tasks."check:rustls-provider"]
+description = "Single rustls provider (AWS-LC) in the production dep graph"
+run = "bash scripts/checks/rustls-provider.sh"
+
+[tasks."check:unwrap-audit"]
+description = "Audit .unwrap() and unlabelled .expect() outside tests and examples"
+run = "python scripts/check_unwrap_audit.py"
+
+[tasks."check:clippy-allow-audit"]
+description = "Ensure every #[allow(clippy::...)] in production code has a justification comment"
+run = "python scripts/check_clippy_allow.py"
+
+[tasks."check:ci-parity"]
+description = "D9 parity gate: pre-pr dependency list must match the mise run steps in .github/workflows/lints-test.yml"
+run = "bash scripts/checks/ci-parity.sh"
+
+# ---------------------------------------------------------------------------
+# Local aggregate (D9 / pre-PR developer gate)
+# Depends DIRECTLY on the flattened gate list — NOT on the check aggregate —
+# so the dependency set compares element-for-element with the ci job steps.
+# ---------------------------------------------------------------------------
+
+[tasks."pre-pr"]
+description = "Local developer aggregate over the complete gate set (identical to the CI job's ordered step list per D9)"
+depends = [
+    "fmt:check",
+    "lints",
+    "check:no-plane-deps",
+    "check:sqlx-scope",
+    "check:client-tier",
+    "check:pyo3-scope",
+    "check:sql-core-seam",
+    "check:mocks-scope",
+    "check:proto-drift",
+    "check:rustls-provider",
+    "check:unwrap-audit",
+    "check:clippy-allow-audit",
+    "check:ci-parity",
+    "codegen:check",
+    "test:unit",
+    "test:pg",
+]

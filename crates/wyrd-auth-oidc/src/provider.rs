@@ -169,6 +169,12 @@ mod tests {
 
     use super::*;
 
+    /// Install the AWS-LC rustls provider before constructing any reqwest
+    /// client; idempotent across concurrent test threads.
+    fn install_provider() {
+        wyrd_tls::install_crypto_provider().expect("AWS-LC provider installs in test process");
+    }
+
     fn asymmetric_discovery_body(issuer: &str) -> serde_json::Value {
         serde_json::json!({
             "issuer": issuer,
@@ -191,6 +197,7 @@ mod tests {
             .mount(&server)
             .await;
 
+        install_provider();
         let issuer_url: Url = issuer.parse().expect("server uri is valid url");
         let provider = OidcProvider::discover(issuer_url, reqwest::Client::new())
             .await
@@ -223,6 +230,7 @@ mod tests {
             .mount(&server)
             .await;
 
+        install_provider();
         let issuer_url: Url = issuer.parse().expect("server uri is valid url");
         let err = OidcProvider::discover(issuer_url, reqwest::Client::new())
             .await
@@ -250,6 +258,7 @@ mod tests {
             .mount(&server)
             .await;
 
+        install_provider();
         let issuer_url: Url = issuer.parse().expect("server uri is valid url");
         let err = OidcProvider::discover(issuer_url, reqwest::Client::new())
             .await
@@ -270,6 +279,7 @@ mod tests {
             .mount(&server)
             .await;
 
+        install_provider();
         let issuer_url: Url = server.uri().parse().expect("server uri is valid url");
         let err = OidcProvider::discover(issuer_url, reqwest::Client::new())
             .await
@@ -296,6 +306,7 @@ mod tests {
 
         // Request URL has a trailing slash.
         let with_slash = format!("{issuer}/");
+        install_provider();
         let issuer_url: Url = with_slash.parse().expect("url is valid");
         let provider = OidcProvider::discover(issuer_url, reqwest::Client::new())
             .await
