@@ -29,9 +29,8 @@ Repository URL: `https://github.com/mitari-ai/wyrd-foundation`
 | `wyrd-auth-check` | `crates/shared/wyrd-auth-check` | `crates/wyrd-auth-check` |
 | `wyrd-auth-oidc` | `crates/shared/wyrd-auth-oidc` | `crates/wyrd-auth-oidc` |
 | `wyrd-tls` | `crates/shared/wyrd-tls` | `crates/wyrd-tls` |
-| `wyrd-bench` | `crates/shared/wyrd-bench` | `crates/wyrd-bench` |
 
-**Note:** `wyrd-sql-core` (the 21st D1 member) is reserved for T2 and not present in this snapshot.
+**Note:** `wyrd-sql-core` (the 21st D1 member) is reserved for T2 and not present in this snapshot. `wyrd-bench` was removed by T13 (D14 — Bifrost-only, no foundation consumer).
 
 ## Crate Descriptions Added
 
@@ -111,5 +110,4 @@ These will be replaced in T2 (`wyrd-sql-core`) and T3 (`wyrd-dev-fixtures` rebui
 | `wyrd-tls` | `edition` | `"2021"` (hardcoded) | `{ workspace = true }` |
 | `wyrd-tls` | `license/rust-version/repository` | absent | `{ workspace = true }` |
 | `wyrd-client` | `publish = false` | present | removed |
-| `wyrd-bench` | `publish = false` | present | removed |
 | `wyrd-queue` | `publish = false` | present | removed |

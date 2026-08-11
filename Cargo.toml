@@ -21,7 +21,6 @@ members = [
     "crates/wyrd-auth-check",
     "crates/wyrd-auth-oidc",
     "crates/wyrd-tls",
-    "crates/wyrd-bench",
 ]
 exclude = []
 default-members = []
@@ -56,7 +55,6 @@ wyrd-auth-issue = { path = "crates/wyrd-auth-issue", version = "0.1.0" }
 wyrd-auth-check = { path = "crates/wyrd-auth-check", version = "0.1.0" }
 wyrd-auth-oidc = { path = "crates/wyrd-auth-oidc", version = "0.1.0" }
 wyrd-tls = { path = "crates/wyrd-tls", version = "0.1.0" }
-wyrd-bench = { path = "crates/wyrd-bench", version = "0.1.0" }
 
 # Registry dependencies (only those actually referenced by the 20 crates above)
 tokio = { version = "1.49", features = ["macros", "rt-multi-thread"] }
@@ -75,9 +73,6 @@ schemars = { version = "0.8", features = ["chrono", "uuid1"] }
 utoipa = { version = "5", features = ["chrono", "uuid", "yaml"] }
 thiserror = "2.0"
 base64 = "0.22"
-criterion = { version = "0.5", features = ["async_tokio"] }
-hdrhistogram = "7.5"
-num-traits = "0.2"
 blake3 = "1"
 insta = { version = "1.43", features = ["json"] }
 wiremock = "0.6"
@@ -90,7 +85,6 @@ sha2 = "0.10"
 uuid = { version = "1", default-features = false, features = ["serde"] }
 semver = { version = "1", features = ["serde"] }
 hex = { version = "0.4", default-features = false, features = ["alloc"] }
-metrics = { version = "0.24", default-features = false }
 proptest = "1"
 aes-gcm = "0.10"
 argon2 = "0.5"

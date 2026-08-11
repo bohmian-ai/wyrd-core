@@ -5,7 +5,7 @@ wyrd-auth-check                 7    5     0     0  DIVERGES
 wyrd-auth-issue                 2    2     0     0  DIVERGES
 wyrd-auth-oidc                  8    1     0     0  DIVERGES
 wyrd-auth-verify                2    2     0     0  DIVERGES
-wyrd-bench                      -    -     -     9  oracle-only crate (no surfaces source!)
+wyrd-bench                      -    -     -     9  oracle-only crate (no surfaces source!) — REMOVED (D14/T13)
 wyrd-client                    30   11     3     0  DIVERGES
 wyrd-crypt                      2    1     0     0  DIVERGES
 wyrd-dev-fixtures               4    3     1     2  DIVERGES
