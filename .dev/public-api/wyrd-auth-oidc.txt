@@ -1,0 +1,228 @@
+   Compiling displaydoc v0.2.7
+    Checking tokio v1.53.1
+    Checking uuid v1.24.0
+    Checking chrono v0.4.45
+    Checking serde_yaml v0.9.34+deprecated
+    Checking serde_jcs v0.1.0
+    Checking simple_asn1 v0.6.4
+    Checking serde_urlencoded v0.7.1
+    Checking wyrd-tls v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tls)
+    Checking jsonwebtoken v9.3.1
+    Checking moka v0.12.15
+    Checking tinystr v0.8.3
+    Checking zerotrie v0.2.4
+    Checking icu_collections v2.2.0
+    Checking icu_locale_core v2.2.0
+    Checking schemars v0.8.22
+    Checking icu_provider v2.2.0
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking icu_normalizer v2.2.0
+    Checking icu_properties v2.2.0
+    Checking idna_adapter v1.2.2
+    Checking idna v1.1.0
+    Checking hyper v1.11.0
+    Checking tower v0.5.3
+    Checking async-compression v0.4.43
+    Checking tokio-rustls v0.26.4
+    Checking tokio-util v0.7.19
+    Checking url v2.5.8
+    Checking tower-http v0.6.11
+    Checking hyper-util v0.1.20
+    Checking hyper-rustls v0.27.9
+    Checking reqwest v0.13.4
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+ Documenting wyrd-auth-oidc v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-oidc)
+warning: unresolved link to `wyrd_spec::auth::oidc::IssuerUrl`
+  --> crates/wyrd-auth-oidc/src/provider.rs:99:59
+   |
+99 |     /// The function accepts a [`url::Url`] rather than [`wyrd_spec::auth::oidc::IssuerUrl`]
+   |                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ no item named `oidc` in module `auth`
+   |
+   = note: `#[warn(rustdoc::broken_intra_doc_links)]` on by default
+
+warning: `wyrd-auth-oidc` (lib doc) generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 11.10s
+pub mod wyrd_auth_oidc
+pub mod wyrd_auth_oidc::claims
+pub struct wyrd_auth_oidc::claims::MappedClaims
+pub wyrd_auth_oidc::claims::MappedClaims::email: core::option::Option<alloc::string::String>
+pub wyrd_auth_oidc::claims::MappedClaims::groups: alloc::vec::Vec<alloc::string::String>
+pub wyrd_auth_oidc::claims::MappedClaims::subject: alloc::string::String
+pub fn wyrd_auth_oidc::claims::map_claims(mapping: &wyrd_auth_oidc::registry::ClaimMapping, claims: &serde_json::value::Value) -> core::result::Result<wyrd_auth_oidc::claims::MappedClaims, wyrd_auth_oidc::error::OidcError>
+pub mod wyrd_auth_oidc::config
+pub trait wyrd_auth_oidc::config::IssuerConfigResolver: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_auth_oidc::config::IssuerConfigResolver::trusted_issuers(&self, tenant: &wyrd_spec::ids::DataTenantId) -> impl core::future::future::Future<Output = core::result::Result<alloc::vec::Vec<wyrd_auth_oidc::registry::TrustedIssuer>, wyrd_auth_oidc::error::OidcError>> + core::marker::Send
+pub mod wyrd_auth_oidc::error
+pub enum wyrd_auth_oidc::error::OidcError
+pub wyrd_auth_oidc::error::OidcError::ClaimMissing
+pub wyrd_auth_oidc::error::OidcError::ClaimMissing::path: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::Discovery
+pub wyrd_auth_oidc::error::OidcError::Discovery::issuer: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::Discovery::message: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::IssuerMismatch
+pub wyrd_auth_oidc::error::OidcError::IssuerMismatch::expected: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::IssuerMismatch::found: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::JwksUnavailable
+pub wyrd_auth_oidc::error::OidcError::JwksUnavailable::issuer: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::JwksUnavailable::message: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::NoAsymmetricAlg
+pub wyrd_auth_oidc::error::OidcError::NoAsymmetricAlg::issuer: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::UnknownKid
+pub wyrd_auth_oidc::error::OidcError::UnknownKid::issuer: alloc::string::String
+pub wyrd_auth_oidc::error::OidcError::UnknownKid::kid: alloc::string::String
+pub mod wyrd_auth_oidc::jwks
+pub struct wyrd_auth_oidc::jwks::JwksCache
+impl wyrd_auth_oidc::jwks::JwksCache
+pub async fn wyrd_auth_oidc::jwks::JwksCache::key(&self, issuer: &str, jwks_uri: &url::Url, kid: &wyrd_auth_oidc::jwks::OidcKid) -> core::result::Result<alloc::sync::Arc<jsonwebtoken::decoding::DecodingKey>, wyrd_auth_oidc::error::OidcError>
+pub fn wyrd_auth_oidc::jwks::JwksCache::new(http: reqwest::async_impl::client::Client, ttl: core::time::Duration, fetch_timeout: core::time::Duration) -> Self
+pub struct wyrd_auth_oidc::jwks::OidcKid(_)
+impl wyrd_auth_oidc::jwks::OidcKid
+pub fn wyrd_auth_oidc::jwks::OidcKid::as_str(&self) -> &str
+pub fn wyrd_auth_oidc::jwks::OidcKid::new(value: impl core::convert::Into<alloc::string::String>) -> Self
+impl core::fmt::Display for wyrd_auth_oidc::jwks::OidcKid
+pub fn wyrd_auth_oidc::jwks::OidcKid::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub mod wyrd_auth_oidc::provider
+pub struct wyrd_auth_oidc::provider::OidcProvider
+pub wyrd_auth_oidc::provider::OidcProvider::metadata: wyrd_auth_oidc::provider::ProviderMetadata
+impl wyrd_auth_oidc::provider::OidcProvider
+pub async fn wyrd_auth_oidc::provider::OidcProvider::discover(issuer_url: url::Url, http: reqwest::async_impl::client::Client) -> core::result::Result<Self, wyrd_auth_oidc::error::OidcError>
+pub fn wyrd_auth_oidc::provider::OidcProvider::http(&self) -> &reqwest::async_impl::client::Client
+pub struct wyrd_auth_oidc::provider::ProviderMetadata
+pub wyrd_auth_oidc::provider::ProviderMetadata::authorization_endpoint: url::Url
+pub wyrd_auth_oidc::provider::ProviderMetadata::id_token_signing_alg_values_supported: alloc::vec::Vec<alloc::string::String>
+pub wyrd_auth_oidc::provider::ProviderMetadata::issuer: alloc::string::String
+pub wyrd_auth_oidc::provider::ProviderMetadata::jwks_uri: url::Url
+pub wyrd_auth_oidc::provider::ProviderMetadata::token_endpoint: core::option::Option<url::Url>
+pub mod wyrd_auth_oidc::registry
+pub enum wyrd_auth_oidc::registry::ClientAuth
+pub wyrd_auth_oidc::registry::ClientAuth::PrivateKeyJwt
+pub wyrd_auth_oidc::registry::ClientAuth::Public
+pub wyrd_auth_oidc::registry::ClientAuth::SecretBasic(secrecy::SecretString)
+pub wyrd_auth_oidc::registry::ClientAuth::SecretPost(secrecy::SecretString)
+pub struct wyrd_auth_oidc::registry::ClaimMapping
+pub wyrd_auth_oidc::registry::ClaimMapping::email: core::option::Option<wyrd_auth_oidc::registry::ClaimPath>
+pub wyrd_auth_oidc::registry::ClaimMapping::groups: core::option::Option<wyrd_auth_oidc::registry::ClaimPath>
+pub wyrd_auth_oidc::registry::ClaimMapping::subject: wyrd_auth_oidc::registry::ClaimPath
+pub struct wyrd_auth_oidc::registry::ClaimPath(_)
+impl wyrd_auth_oidc::registry::ClaimPath
+pub fn wyrd_auth_oidc::registry::ClaimPath::as_str(&self) -> &str
+pub fn wyrd_auth_oidc::registry::ClaimPath::new(path: impl core::convert::Into<alloc::string::String>) -> Self
+impl core::fmt::Display for wyrd_auth_oidc::registry::ClaimPath
+pub fn wyrd_auth_oidc::registry::ClaimPath::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_auth_oidc::registry::TrustedIssuer
+pub wyrd_auth_oidc::registry::TrustedIssuer::claim_mapping: wyrd_auth_oidc::registry::ClaimMapping
+pub wyrd_auth_oidc::registry::TrustedIssuer::client_auth: wyrd_auth_oidc::registry::ClientAuth
+pub wyrd_auth_oidc::registry::TrustedIssuer::client_id: alloc::string::String
+pub wyrd_auth_oidc::registry::TrustedIssuer::default_roles: alloc::vec::Vec<alloc::string::String>
+pub wyrd_auth_oidc::registry::TrustedIssuer::expected_audience: alloc::string::String
+pub wyrd_auth_oidc::registry::TrustedIssuer::group_role_map: std::collections::hash::map::HashMap<alloc::string::String, alloc::vec::Vec<alloc::string::String>>
+pub wyrd_auth_oidc::registry::TrustedIssuer::issuer: wyrd_spec::auth::oidc::IssuerUrl
+pub wyrd_auth_oidc::registry::TrustedIssuer::jwks_ttl: core::time::Duration
+pub wyrd_auth_oidc::registry::TrustedIssuer::jwks_uri: url::Url
+pub wyrd_auth_oidc::registry::TrustedIssuer::principal_kind: wyrd_spec::auth::admin::IssuerTokenPolicy
+pub wyrd_auth_oidc::registry::TrustedIssuer::tenant_id: wyrd_spec::ids::DataTenantId
+impl core::iter::traits::collect::FromIterator<wyrd_auth_oidc::registry::TrustedIssuer> for wyrd_auth_oidc::registry::TrustedIssuerRegistry
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_auth_oidc::registry::TrustedIssuer>>(issuers: T) -> Self
+pub struct wyrd_auth_oidc::registry::TrustedIssuerRegistry
+impl wyrd_auth_oidc::registry::TrustedIssuerRegistry
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::from_issuers(issuers: impl core::iter::traits::collect::IntoIterator<Item = wyrd_auth_oidc::registry::TrustedIssuer>) -> Self
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::get(&self, tenant: &wyrd_spec::ids::DataTenantId, iss: &wyrd_spec::auth::oidc::IssuerUrl) -> core::option::Option<&wyrd_auth_oidc::registry::TrustedIssuer>
+impl core::iter::traits::collect::FromIterator<wyrd_auth_oidc::registry::TrustedIssuer> for wyrd_auth_oidc::registry::TrustedIssuerRegistry
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_auth_oidc::registry::TrustedIssuer>>(issuers: T) -> Self
+pub struct wyrd_auth_oidc::registry::WorkloadBinding
+pub wyrd_auth_oidc::registry::WorkloadBinding::audience: core::option::Option<alloc::string::String>
+pub wyrd_auth_oidc::registry::WorkloadBinding::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_auth_oidc::registry::WorkloadBinding::issuer: wyrd_spec::auth::oidc::IssuerUrl
+pub wyrd_auth_oidc::registry::WorkloadBinding::subject: alloc::string::String
+pub wyrd_auth_oidc::registry::WorkloadBinding::tenant_id: wyrd_spec::ids::DataTenantId
+pub trait wyrd_auth_oidc::registry::WorkloadBindingResolver: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_auth_oidc::registry::WorkloadBindingResolver::binding(&self, tenant: &wyrd_spec::ids::DataTenantId, issuer: &wyrd_spec::auth::oidc::IssuerUrl, subject: &str, audience: core::option::Option<&str>) -> impl core::future::future::Future<Output = core::result::Result<core::option::Option<wyrd_spec::reference::CardRef>, wyrd_auth_oidc::error::OidcError>> + core::marker::Send
+pub enum wyrd_auth_oidc::ClientAuth
+pub wyrd_auth_oidc::ClientAuth::PrivateKeyJwt
+pub wyrd_auth_oidc::ClientAuth::Public
+pub wyrd_auth_oidc::ClientAuth::SecretBasic(secrecy::SecretString)
+pub wyrd_auth_oidc::ClientAuth::SecretPost(secrecy::SecretString)
+pub enum wyrd_auth_oidc::OidcError
+pub wyrd_auth_oidc::OidcError::ClaimMissing
+pub wyrd_auth_oidc::OidcError::ClaimMissing::path: alloc::string::String
+pub wyrd_auth_oidc::OidcError::Discovery
+pub wyrd_auth_oidc::OidcError::Discovery::issuer: alloc::string::String
+pub wyrd_auth_oidc::OidcError::Discovery::message: alloc::string::String
+pub wyrd_auth_oidc::OidcError::IssuerMismatch
+pub wyrd_auth_oidc::OidcError::IssuerMismatch::expected: alloc::string::String
+pub wyrd_auth_oidc::OidcError::IssuerMismatch::found: alloc::string::String
+pub wyrd_auth_oidc::OidcError::JwksUnavailable
+pub wyrd_auth_oidc::OidcError::JwksUnavailable::issuer: alloc::string::String
+pub wyrd_auth_oidc::OidcError::JwksUnavailable::message: alloc::string::String
+pub wyrd_auth_oidc::OidcError::NoAsymmetricAlg
+pub wyrd_auth_oidc::OidcError::NoAsymmetricAlg::issuer: alloc::string::String
+pub wyrd_auth_oidc::OidcError::UnknownKid
+pub wyrd_auth_oidc::OidcError::UnknownKid::issuer: alloc::string::String
+pub wyrd_auth_oidc::OidcError::UnknownKid::kid: alloc::string::String
+pub struct wyrd_auth_oidc::ClaimMapping
+pub wyrd_auth_oidc::ClaimMapping::email: core::option::Option<wyrd_auth_oidc::registry::ClaimPath>
+pub wyrd_auth_oidc::ClaimMapping::groups: core::option::Option<wyrd_auth_oidc::registry::ClaimPath>
+pub wyrd_auth_oidc::ClaimMapping::subject: wyrd_auth_oidc::registry::ClaimPath
+pub struct wyrd_auth_oidc::ClaimPath(_)
+impl wyrd_auth_oidc::registry::ClaimPath
+pub fn wyrd_auth_oidc::registry::ClaimPath::as_str(&self) -> &str
+pub fn wyrd_auth_oidc::registry::ClaimPath::new(path: impl core::convert::Into<alloc::string::String>) -> Self
+impl core::fmt::Display for wyrd_auth_oidc::registry::ClaimPath
+pub fn wyrd_auth_oidc::registry::ClaimPath::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_auth_oidc::JwksCache
+impl wyrd_auth_oidc::jwks::JwksCache
+pub async fn wyrd_auth_oidc::jwks::JwksCache::key(&self, issuer: &str, jwks_uri: &url::Url, kid: &wyrd_auth_oidc::jwks::OidcKid) -> core::result::Result<alloc::sync::Arc<jsonwebtoken::decoding::DecodingKey>, wyrd_auth_oidc::error::OidcError>
+pub fn wyrd_auth_oidc::jwks::JwksCache::new(http: reqwest::async_impl::client::Client, ttl: core::time::Duration, fetch_timeout: core::time::Duration) -> Self
+pub struct wyrd_auth_oidc::MappedClaims
+pub wyrd_auth_oidc::MappedClaims::email: core::option::Option<alloc::string::String>
+pub wyrd_auth_oidc::MappedClaims::groups: alloc::vec::Vec<alloc::string::String>
+pub wyrd_auth_oidc::MappedClaims::subject: alloc::string::String
+pub struct wyrd_auth_oidc::OidcKid(_)
+impl wyrd_auth_oidc::jwks::OidcKid
+pub fn wyrd_auth_oidc::jwks::OidcKid::as_str(&self) -> &str
+pub fn wyrd_auth_oidc::jwks::OidcKid::new(value: impl core::convert::Into<alloc::string::String>) -> Self
+impl core::fmt::Display for wyrd_auth_oidc::jwks::OidcKid
+pub fn wyrd_auth_oidc::jwks::OidcKid::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_auth_oidc::OidcProvider
+pub wyrd_auth_oidc::OidcProvider::metadata: wyrd_auth_oidc::provider::ProviderMetadata
+impl wyrd_auth_oidc::provider::OidcProvider
+pub async fn wyrd_auth_oidc::provider::OidcProvider::discover(issuer_url: url::Url, http: reqwest::async_impl::client::Client) -> core::result::Result<Self, wyrd_auth_oidc::error::OidcError>
+pub fn wyrd_auth_oidc::provider::OidcProvider::http(&self) -> &reqwest::async_impl::client::Client
+pub struct wyrd_auth_oidc::ProviderMetadata
+pub wyrd_auth_oidc::ProviderMetadata::authorization_endpoint: url::Url
+pub wyrd_auth_oidc::ProviderMetadata::id_token_signing_alg_values_supported: alloc::vec::Vec<alloc::string::String>
+pub wyrd_auth_oidc::ProviderMetadata::issuer: alloc::string::String
+pub wyrd_auth_oidc::ProviderMetadata::jwks_uri: url::Url
+pub wyrd_auth_oidc::ProviderMetadata::token_endpoint: core::option::Option<url::Url>
+pub struct wyrd_auth_oidc::TrustedIssuer
+pub wyrd_auth_oidc::TrustedIssuer::claim_mapping: wyrd_auth_oidc::registry::ClaimMapping
+pub wyrd_auth_oidc::TrustedIssuer::client_auth: wyrd_auth_oidc::registry::ClientAuth
+pub wyrd_auth_oidc::TrustedIssuer::client_id: alloc::string::String
+pub wyrd_auth_oidc::TrustedIssuer::default_roles: alloc::vec::Vec<alloc::string::String>
+pub wyrd_auth_oidc::TrustedIssuer::expected_audience: alloc::string::String
+pub wyrd_auth_oidc::TrustedIssuer::group_role_map: std::collections::hash::map::HashMap<alloc::string::String, alloc::vec::Vec<alloc::string::String>>
+pub wyrd_auth_oidc::TrustedIssuer::issuer: wyrd_spec::auth::oidc::IssuerUrl
+pub wyrd_auth_oidc::TrustedIssuer::jwks_ttl: core::time::Duration
+pub wyrd_auth_oidc::TrustedIssuer::jwks_uri: url::Url
+pub wyrd_auth_oidc::TrustedIssuer::principal_kind: wyrd_spec::auth::admin::IssuerTokenPolicy
+pub wyrd_auth_oidc::TrustedIssuer::tenant_id: wyrd_spec::ids::DataTenantId
+impl core::iter::traits::collect::FromIterator<wyrd_auth_oidc::registry::TrustedIssuer> for wyrd_auth_oidc::registry::TrustedIssuerRegistry
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_auth_oidc::registry::TrustedIssuer>>(issuers: T) -> Self
+pub struct wyrd_auth_oidc::TrustedIssuerRegistry
+impl wyrd_auth_oidc::registry::TrustedIssuerRegistry
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::from_issuers(issuers: impl core::iter::traits::collect::IntoIterator<Item = wyrd_auth_oidc::registry::TrustedIssuer>) -> Self
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::get(&self, tenant: &wyrd_spec::ids::DataTenantId, iss: &wyrd_spec::auth::oidc::IssuerUrl) -> core::option::Option<&wyrd_auth_oidc::registry::TrustedIssuer>
+impl core::iter::traits::collect::FromIterator<wyrd_auth_oidc::registry::TrustedIssuer> for wyrd_auth_oidc::registry::TrustedIssuerRegistry
+pub fn wyrd_auth_oidc::registry::TrustedIssuerRegistry::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_auth_oidc::registry::TrustedIssuer>>(issuers: T) -> Self
+pub struct wyrd_auth_oidc::WorkloadBinding
+pub wyrd_auth_oidc::WorkloadBinding::audience: core::option::Option<alloc::string::String>
+pub wyrd_auth_oidc::WorkloadBinding::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_auth_oidc::WorkloadBinding::issuer: wyrd_spec::auth::oidc::IssuerUrl
+pub wyrd_auth_oidc::WorkloadBinding::subject: alloc::string::String
+pub wyrd_auth_oidc::WorkloadBinding::tenant_id: wyrd_spec::ids::DataTenantId
+pub trait wyrd_auth_oidc::IssuerConfigResolver: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_auth_oidc::IssuerConfigResolver::trusted_issuers(&self, tenant: &wyrd_spec::ids::DataTenantId) -> impl core::future::future::Future<Output = core::result::Result<alloc::vec::Vec<wyrd_auth_oidc::registry::TrustedIssuer>, wyrd_auth_oidc::error::OidcError>> + core::marker::Send
+pub trait wyrd_auth_oidc::WorkloadBindingResolver: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_auth_oidc::WorkloadBindingResolver::binding(&self, tenant: &wyrd_spec::ids::DataTenantId, issuer: &wyrd_spec::auth::oidc::IssuerUrl, subject: &str, audience: core::option::Option<&str>) -> impl core::future::future::Future<Output = core::result::Result<core::option::Option<wyrd_spec::reference::CardRef>, wyrd_auth_oidc::error::OidcError>> + core::marker::Send
+pub fn wyrd_auth_oidc::map_claims(mapping: &wyrd_auth_oidc::registry::ClaimMapping, claims: &serde_json::value::Value) -> core::result::Result<wyrd_auth_oidc::claims::MappedClaims, wyrd_auth_oidc::error::OidcError>

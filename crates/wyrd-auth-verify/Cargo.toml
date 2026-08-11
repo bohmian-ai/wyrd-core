@@ -30,3 +30,4 @@ reqwest = { workspace = true }
 tokio = { workspace = true }
 wiremock = { workspace = true }
 wyrd-semver = { workspace = true }
+wyrd-tls = { workspace = true }

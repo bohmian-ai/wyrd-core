@@ -1,0 +1,400 @@
+   Compiling syn v2.0.119
+    Checking serde_json v1.0.151
+    Checking uuid v1.24.0
+    Checking chrono v0.4.45
+    Checking tokio v1.53.1
+    Checking serde_jcs v0.1.0
+   Compiling synstructure v0.13.2
+   Compiling serde_derive_internals v0.29.1
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling zerovec-derive v0.11.3
+   Compiling strum_macros v0.27.2
+   Compiling wyrd-error-derive v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-error-derive)
+   Compiling schemars_derive v0.8.22
+    Checking zerofrom v0.1.8
+    Checking schemars v0.8.22
+    Checking yoke v0.8.3
+    Checking strum v0.27.2
+    Checking zerovec v0.11.6
+    Checking zerotrie v0.2.4
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking tinystr v0.8.3
+    Checking potential_utf v0.1.5
+    Checking icu_collections v2.2.0
+    Checking icu_locale_core v2.2.0
+    Checking icu_provider v2.2.0
+    Checking icu_normalizer v2.2.0
+    Checking icu_properties v2.2.0
+    Checking idna_adapter v1.2.2
+    Checking idna v1.1.0
+    Checking url v2.5.8
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+ Documenting wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-runtime)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 13.86s
+pub mod wyrd_runtime
+pub use wyrd_runtime::CardRefScope
+pub use wyrd_runtime::PrincipalId
+pub mod wyrd_runtime::audit
+pub struct wyrd_runtime::audit::AuditEnvelopeDraft
+pub wyrd_runtime::audit::AuditEnvelopeDraft::actor: wyrd_spec::actor::Actor
+pub wyrd_runtime::audit::AuditEnvelopeDraft::operation: alloc::string::String
+pub wyrd_runtime::audit::AuditEnvelopeDraft::redaction_policy: wyrd_spec::redaction::RedactionPolicy
+pub wyrd_runtime::audit::AuditEnvelopeDraft::request_id: wyrd_spec::request_id::RequestId
+pub wyrd_runtime::audit::AuditEnvelopeDraft::subject: core::option::Option<alloc::string::String>
+pub wyrd_runtime::audit::AuditEnvelopeDraft::trace_context: core::option::Option<wyrd_spec::trace::TraceContext>
+pub struct wyrd_runtime::audit::AuditEnvelopeSeed
+pub wyrd_runtime::audit::AuditEnvelopeSeed::actor: wyrd_spec::actor::Actor
+pub wyrd_runtime::audit::AuditEnvelopeSeed::operation: alloc::string::String
+pub wyrd_runtime::audit::AuditEnvelopeSeed::redaction_policy: wyrd_spec::redaction::RedactionPolicy
+pub wyrd_runtime::audit::AuditEnvelopeSeed::request_id: wyrd_spec::request_id::RequestId
+pub wyrd_runtime::audit::AuditEnvelopeSeed::subject: core::option::Option<alloc::string::String>
+pub wyrd_runtime::audit::AuditEnvelopeSeed::trace_context: core::option::Option<wyrd_spec::trace::TraceContext>
+pub fn wyrd_runtime::audit::prepare(seed: wyrd_runtime::audit::AuditEnvelopeSeed) -> wyrd_runtime::audit::AuditEnvelopeDraft
+pub mod wyrd_runtime::builtin_roles
+pub struct wyrd_runtime::builtin_roles::BuiltinRole
+pub wyrd_runtime::builtin_roles::BuiltinRole::name: &'static str
+pub wyrd_runtime::builtin_roles::BuiltinRole::permissions: &'static [wyrd_runtime::permission::Permission]
+pub const wyrd_runtime::builtin_roles::BUILTIN_ROLES: &[wyrd_runtime::builtin_roles::BuiltinRole]
+pub const wyrd_runtime::builtin_roles::NS_BUILTIN_ROLE: uuid::Uuid
+pub fn wyrd_runtime::builtin_roles::builtin_role_uuid(data_tenant_id: wyrd_spec::ids::DataTenantId, role_name: &str) -> uuid::Uuid
+pub mod wyrd_runtime::otel
+pub struct wyrd_runtime::otel::SpanSeed
+pub wyrd_runtime::otel::SpanSeed::name: alloc::string::String
+pub wyrd_runtime::otel::SpanSeed::trace_context: core::option::Option<wyrd_spec::trace::TraceContext>
+pub struct wyrd_runtime::otel::TelemetryConfig
+pub wyrd_runtime::otel::TelemetryConfig::endpoint: core::option::Option<alloc::string::String>
+pub fn wyrd_runtime::otel::attach(_context: &wyrd_spec::trace::TraceContext)
+pub fn wyrd_runtime::otel::install(_config: wyrd_runtime::otel::TelemetryConfig)
+pub fn wyrd_runtime::otel::prepare_span(name: impl core::convert::Into<alloc::string::String>, trace_context: core::option::Option<wyrd_spec::trace::TraceContext>) -> wyrd_runtime::otel::SpanSeed
+pub mod wyrd_runtime::permission
+pub enum wyrd_runtime::permission::Action
+pub wyrd_runtime::permission::Action::AnyOf(alloc::vec::Vec<wyrd_runtime::permission::Action>)
+pub wyrd_runtime::permission::Action::Delete
+pub wyrd_runtime::permission::Action::Install
+pub wyrd_runtime::permission::Action::Invoke
+pub wyrd_runtime::permission::Action::Issue
+pub wyrd_runtime::permission::Action::Lock
+pub wyrd_runtime::permission::Action::Read
+pub wyrd_runtime::permission::Action::Run
+pub wyrd_runtime::permission::Action::Wildcard
+pub wyrd_runtime::permission::Action::Write
+impl wyrd_runtime::permission::Action
+pub fn wyrd_runtime::permission::Action::covers(&self, other: &wyrd_runtime::permission::Action) -> bool
+pub enum wyrd_runtime::permission::Resource
+pub wyrd_runtime::permission::Resource::AnyOf(alloc::vec::Vec<wyrd_runtime::permission::Resource>)
+pub wyrd_runtime::permission::Resource::Artifacts
+pub wyrd_runtime::permission::Resource::Audit
+pub wyrd_runtime::permission::Resource::BifrostAgentTracePayload
+pub wyrd_runtime::permission::Resource::BifrostGenAiPayload
+pub wyrd_runtime::permission::Resource::BifrostLogPayload
+pub wyrd_runtime::permission::Resource::BifrostOraclePeer
+pub wyrd_runtime::permission::Resource::BifrostQuery
+pub wyrd_runtime::permission::Resource::BifrostRecord
+pub wyrd_runtime::permission::Resource::BifrostTable
+pub wyrd_runtime::permission::Resource::BifrostTracePayload
+pub wyrd_runtime::permission::Resource::Cards
+pub wyrd_runtime::permission::Resource::Delegation
+pub wyrd_runtime::permission::Resource::Drift
+pub wyrd_runtime::permission::Resource::Evals
+pub wyrd_runtime::permission::Resource::Operators
+pub wyrd_runtime::permission::Resource::Policy
+pub wyrd_runtime::permission::Resource::ServiceAccounts
+pub wyrd_runtime::permission::Resource::Services
+pub wyrd_runtime::permission::Resource::Triggers
+pub wyrd_runtime::permission::Resource::Users
+pub wyrd_runtime::permission::Resource::Wildcard
+impl wyrd_runtime::permission::Resource
+pub fn wyrd_runtime::permission::Resource::covers(&self, other: &wyrd_runtime::permission::Resource) -> bool
+pub struct wyrd_runtime::permission::Permission
+pub wyrd_runtime::permission::Permission::action: wyrd_runtime::permission::Action
+pub wyrd_runtime::permission::Permission::resource: wyrd_runtime::permission::Resource
+impl wyrd_runtime::permission::Permission
+pub const fn wyrd_runtime::permission::Permission::artifact_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::artifact_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::audit_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_oracle_peer_invoke() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_query_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_record_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_table_install() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_table_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_table_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::card_delete() -> Self
+pub const fn wyrd_runtime::permission::Permission::card_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::card_write() -> Self
+pub fn wyrd_runtime::permission::Permission::covers(&self, required: &wyrd_runtime::permission::Permission) -> bool
+pub const fn wyrd_runtime::permission::Permission::delegation_issue() -> Self
+pub const fn wyrd_runtime::permission::Permission::eval_run() -> Self
+pub const fn wyrd_runtime::permission::Permission::operator_invoke() -> Self
+pub const fn wyrd_runtime::permission::Permission::policy_lock() -> Self
+pub const fn wyrd_runtime::permission::Permission::service_accounts_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::service_install() -> Self
+pub const fn wyrd_runtime::permission::Permission::trigger_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::users_manage() -> Self
+pub const fn wyrd_runtime::permission::Permission::wildcard() -> Self
+impl core::fmt::Display for wyrd_runtime::permission::Permission
+pub fn wyrd_runtime::permission::Permission::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::iter::traits::collect::FromIterator<wyrd_runtime::permission::Permission> for wyrd_runtime::permission::PermissionSet
+pub fn wyrd_runtime::permission::PermissionSet::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_runtime::permission::Permission>>(iter: T) -> Self
+impl core::str::traits::FromStr for wyrd_runtime::permission::Permission
+pub type wyrd_runtime::permission::Permission::Err = wyrd_runtime::permission::PermissionParseError
+pub fn wyrd_runtime::permission::Permission::from_str(value: &str) -> core::result::Result<Self, Self::Err>
+pub struct wyrd_runtime::permission::PermissionParseError
+pub struct wyrd_runtime::permission::PermissionSet(_)
+impl wyrd_runtime::permission::PermissionSet
+pub fn wyrd_runtime::permission::PermissionSet::contains(&self, required: &wyrd_runtime::permission::Permission) -> bool
+pub fn wyrd_runtime::permission::PermissionSet::insert(&mut self, permission: wyrd_runtime::permission::Permission)
+pub fn wyrd_runtime::permission::PermissionSet::is_empty(&self) -> bool
+pub fn wyrd_runtime::permission::PermissionSet::iter(&self) -> impl core::iter::traits::iterator::Iterator<Item = &wyrd_runtime::permission::Permission>
+pub fn wyrd_runtime::permission::PermissionSet::len(&self) -> usize
+pub fn wyrd_runtime::permission::PermissionSet::new() -> Self
+impl core::iter::traits::collect::FromIterator<wyrd_runtime::permission::Permission> for wyrd_runtime::permission::PermissionSet
+pub fn wyrd_runtime::permission::PermissionSet::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_runtime::permission::Permission>>(iter: T) -> Self
+pub mod wyrd_runtime::permission_check
+pub enum wyrd_runtime::permission_check::PermissionDenyReason
+pub wyrd_runtime::permission_check::PermissionDenyReason::Rbac
+pub wyrd_runtime::permission_check::PermissionDenyReason::Rbac::principal: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_runtime::permission_check::PermissionDenyReason::Rbac::required: wyrd_runtime::permission::Permission
+pub enum wyrd_runtime::permission_check::PermissionVerdict
+pub wyrd_runtime::permission_check::PermissionVerdict::Allow
+pub wyrd_runtime::permission_check::PermissionVerdict::Deny
+pub wyrd_runtime::permission_check::PermissionVerdict::Deny::reason: wyrd_runtime::permission_check::PermissionDenyReason
+impl wyrd_runtime::permission_check::PermissionVerdict
+pub fn wyrd_runtime::permission_check::PermissionVerdict::into_result(self) -> core::result::Result<(), wyrd_runtime::permission_check::PermissionDenyReason>
+pub struct wyrd_runtime::permission_check::RbacCheck
+impl wyrd_runtime::permission_check::PermissionCheck for wyrd_runtime::permission_check::RbacCheck
+pub fn wyrd_runtime::permission_check::RbacCheck::check(&self, principal: &wyrd_runtime::principal::Principal, permission: &wyrd_runtime::permission::Permission) -> wyrd_runtime::permission_check::PermissionVerdict
+pub trait wyrd_runtime::permission_check::PermissionCheck: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_runtime::permission_check::PermissionCheck::check(&self, principal: &wyrd_runtime::principal::Principal, permission: &wyrd_runtime::permission::Permission) -> wyrd_runtime::permission_check::PermissionVerdict
+impl wyrd_runtime::permission_check::PermissionCheck for wyrd_runtime::permission_check::RbacCheck
+pub fn wyrd_runtime::permission_check::RbacCheck::check(&self, principal: &wyrd_runtime::principal::Principal, permission: &wyrd_runtime::permission::Permission) -> wyrd_runtime::permission_check::PermissionVerdict
+pub mod wyrd_runtime::principal
+pub use wyrd_runtime::principal::PrincipalId
+pub enum wyrd_runtime::principal::PrincipalKind
+pub wyrd_runtime::principal::PrincipalKind::Agent
+pub wyrd_runtime::principal::PrincipalKind::Agent::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_runtime::principal::PrincipalKind::Agent::card_ref_scope: wyrd_spec::reference::CardRefScope
+pub wyrd_runtime::principal::PrincipalKind::Service
+pub wyrd_runtime::principal::PrincipalKind::Service::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_runtime::principal::PrincipalKind::Service::card_ref_scope: wyrd_spec::reference::CardRefScope
+pub wyrd_runtime::principal::PrincipalKind::User
+impl wyrd_runtime::principal::PrincipalKind
+pub fn wyrd_runtime::principal::PrincipalKind::tag(&self) -> wyrd_spec::auth::principal_kind::PrincipalKindTag
+pub struct wyrd_runtime::principal::InvalidRoleName
+pub struct wyrd_runtime::principal::Principal
+pub wyrd_runtime::principal::Principal::effective_permissions: wyrd_runtime::permission::PermissionSet
+pub wyrd_runtime::principal::Principal::id: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_runtime::principal::Principal::kind: wyrd_runtime::principal::PrincipalKind
+pub wyrd_runtime::principal::Principal::roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>
+pub wyrd_runtime::principal::Principal::tenant_id: wyrd_spec::ids::DataTenantId
+impl wyrd_runtime::principal::Principal
+pub fn wyrd_runtime::principal::Principal::authorizes_card(&self, card: &wyrd_spec::reference::CardRef) -> bool
+pub fn wyrd_runtime::principal::Principal::card_ref(&self) -> core::option::Option<&wyrd_spec::reference::CardRef>
+pub fn wyrd_runtime::principal::Principal::card_ref_scope(&self) -> core::option::Option<&wyrd_spec::reference::CardRefScope>
+pub fn wyrd_runtime::principal::Principal::new(id: wyrd_spec::auth::principal_id::PrincipalId, kind: wyrd_runtime::principal::PrincipalKind, tenant_id: wyrd_spec::ids::DataTenantId, roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>, effective_permissions: wyrd_runtime::permission::PermissionSet) -> Self
+pub struct wyrd_runtime::principal::PrincipalRef
+pub wyrd_runtime::principal::PrincipalRef::id: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_runtime::principal::PrincipalRef::kind: wyrd_runtime::principal::PrincipalKind
+impl wyrd_runtime::principal::PrincipalRef
+pub fn wyrd_runtime::principal::PrincipalRef::card_ref(&self) -> core::option::Option<&wyrd_spec::reference::CardRef>
+pub fn wyrd_runtime::principal::PrincipalRef::card_ref_scope(&self) -> core::option::Option<&wyrd_spec::reference::CardRefScope>
+pub fn wyrd_runtime::principal::PrincipalRef::from_principal(principal: &wyrd_runtime::principal::Principal) -> Self
+pub struct wyrd_runtime::principal::RoleRef(_)
+impl wyrd_runtime::principal::RoleRef
+pub fn wyrd_runtime::principal::RoleRef::as_str(&self) -> &str
+pub fn wyrd_runtime::principal::RoleRef::new(value: &str) -> core::result::Result<Self, wyrd_runtime::principal::InvalidRoleName>
+impl core::fmt::Display for wyrd_runtime::principal::RoleRef
+pub fn wyrd_runtime::principal::RoleRef::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::str::traits::FromStr for wyrd_runtime::principal::RoleRef
+pub type wyrd_runtime::principal::RoleRef::Err = wyrd_runtime::principal::InvalidRoleName
+pub fn wyrd_runtime::principal::RoleRef::from_str(value: &str) -> core::result::Result<Self, Self::Err>
+pub mod wyrd_runtime::redaction
+pub struct wyrd_runtime::redaction::RedactionSinkPlan
+pub wyrd_runtime::redaction::RedactionSinkPlan::field_pattern_count: usize
+pub wyrd_runtime::redaction::RedactionSinkPlan::json_path_count: usize
+pub fn wyrd_runtime::redaction::redact<T: wyrd_spec::redaction::Redactable>(value: &mut T, policy: &wyrd_spec::redaction::RedactionPolicy)
+pub fn wyrd_runtime::redaction::sink(policy: &wyrd_spec::redaction::RedactionPolicy) -> wyrd_runtime::redaction::RedactionSinkPlan
+pub mod wyrd_runtime::request_context
+pub struct wyrd_runtime::request_context::DelegationStep
+pub wyrd_runtime::request_context::DelegationStep::principal: wyrd_runtime::principal::PrincipalRef
+pub struct wyrd_runtime::request_context::RequestContext
+pub wyrd_runtime::request_context::RequestContext::delegation_chain: alloc::vec::Vec<wyrd_runtime::request_context::DelegationStep>
+pub wyrd_runtime::request_context::RequestContext::idempotency_key: core::option::Option<wyrd_spec::ids::IdempotencyKey>
+pub wyrd_runtime::request_context::RequestContext::principal: core::option::Option<wyrd_runtime::principal::Principal>
+pub wyrd_runtime::request_context::RequestContext::request_id: wyrd_spec::request_id::RequestId
+pub wyrd_runtime::request_context::RequestContext::started_at: chrono::datetime::DateTime<chrono::offset::utc::Utc>
+pub wyrd_runtime::request_context::RequestContext::traceparent: core::option::Option<wyrd_runtime::request_context::TraceParent>
+impl wyrd_runtime::request_context::RequestContext
+pub fn wyrd_runtime::request_context::RequestContext::is_delegated(&self) -> bool
+pub fn wyrd_runtime::request_context::RequestContext::new(request_id: wyrd_spec::request_id::RequestId, started_at: chrono::datetime::DateTime<chrono::offset::utc::Utc>) -> Self
+pub fn wyrd_runtime::request_context::RequestContext::principal(&self) -> core::option::Option<&wyrd_runtime::principal::Principal>
+impl core::fmt::Debug for wyrd_runtime::request_context::RequestContext
+pub fn wyrd_runtime::request_context::RequestContext::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_runtime::request_context::TraceParent(_)
+impl wyrd_runtime::request_context::TraceParent
+pub fn wyrd_runtime::request_context::TraceParent::as_str(&self) -> &str
+pub fn wyrd_runtime::request_context::TraceParent::new(value: impl core::convert::Into<alloc::string::String>) -> Self
+pub mod wyrd_runtime::request_id
+pub struct wyrd_runtime::request_id::RequestIdPropagation
+pub wyrd_runtime::request_id::RequestIdPropagation::request_id: core::option::Option<wyrd_spec::request_id::RequestId>
+pub wyrd_runtime::request_id::RequestIdPropagation::should_generate: bool
+pub const wyrd_runtime::request_id::REQUEST_ID_HEADER: &str
+pub fn wyrd_runtime::request_id::inspect_header(value: core::option::Option<&str>) -> wyrd_runtime::request_id::RequestIdPropagation
+pub fn wyrd_runtime::request_id::mint() -> wyrd_spec::request_id::RequestId
+pub enum wyrd_runtime::Action
+pub wyrd_runtime::Action::AnyOf(alloc::vec::Vec<wyrd_runtime::permission::Action>)
+pub wyrd_runtime::Action::Delete
+pub wyrd_runtime::Action::Install
+pub wyrd_runtime::Action::Invoke
+pub wyrd_runtime::Action::Issue
+pub wyrd_runtime::Action::Lock
+pub wyrd_runtime::Action::Read
+pub wyrd_runtime::Action::Run
+pub wyrd_runtime::Action::Wildcard
+pub wyrd_runtime::Action::Write
+impl wyrd_runtime::permission::Action
+pub fn wyrd_runtime::permission::Action::covers(&self, other: &wyrd_runtime::permission::Action) -> bool
+pub enum wyrd_runtime::PermissionDenyReason
+pub wyrd_runtime::PermissionDenyReason::Rbac
+pub wyrd_runtime::PermissionDenyReason::Rbac::principal: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_runtime::PermissionDenyReason::Rbac::required: wyrd_runtime::permission::Permission
+pub enum wyrd_runtime::PermissionVerdict
+pub wyrd_runtime::PermissionVerdict::Allow
+pub wyrd_runtime::PermissionVerdict::Deny
+pub wyrd_runtime::PermissionVerdict::Deny::reason: wyrd_runtime::permission_check::PermissionDenyReason
+impl wyrd_runtime::permission_check::PermissionVerdict
+pub fn wyrd_runtime::permission_check::PermissionVerdict::into_result(self) -> core::result::Result<(), wyrd_runtime::permission_check::PermissionDenyReason>
+pub enum wyrd_runtime::PrincipalKind
+pub wyrd_runtime::PrincipalKind::Agent
+pub wyrd_runtime::PrincipalKind::Agent::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_runtime::PrincipalKind::Agent::card_ref_scope: wyrd_spec::reference::CardRefScope
+pub wyrd_runtime::PrincipalKind::Service
+pub wyrd_runtime::PrincipalKind::Service::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_runtime::PrincipalKind::Service::card_ref_scope: wyrd_spec::reference::CardRefScope
+pub wyrd_runtime::PrincipalKind::User
+impl wyrd_runtime::principal::PrincipalKind
+pub fn wyrd_runtime::principal::PrincipalKind::tag(&self) -> wyrd_spec::auth::principal_kind::PrincipalKindTag
+pub enum wyrd_runtime::Resource
+pub wyrd_runtime::Resource::AnyOf(alloc::vec::Vec<wyrd_runtime::permission::Resource>)
+pub wyrd_runtime::Resource::Artifacts
+pub wyrd_runtime::Resource::Audit
+pub wyrd_runtime::Resource::BifrostAgentTracePayload
+pub wyrd_runtime::Resource::BifrostGenAiPayload
+pub wyrd_runtime::Resource::BifrostLogPayload
+pub wyrd_runtime::Resource::BifrostOraclePeer
+pub wyrd_runtime::Resource::BifrostQuery
+pub wyrd_runtime::Resource::BifrostRecord
+pub wyrd_runtime::Resource::BifrostTable
+pub wyrd_runtime::Resource::BifrostTracePayload
+pub wyrd_runtime::Resource::Cards
+pub wyrd_runtime::Resource::Delegation
+pub wyrd_runtime::Resource::Drift
+pub wyrd_runtime::Resource::Evals
+pub wyrd_runtime::Resource::Operators
+pub wyrd_runtime::Resource::Policy
+pub wyrd_runtime::Resource::ServiceAccounts
+pub wyrd_runtime::Resource::Services
+pub wyrd_runtime::Resource::Triggers
+pub wyrd_runtime::Resource::Users
+pub wyrd_runtime::Resource::Wildcard
+impl wyrd_runtime::permission::Resource
+pub fn wyrd_runtime::permission::Resource::covers(&self, other: &wyrd_runtime::permission::Resource) -> bool
+pub struct wyrd_runtime::DelegationStep
+pub wyrd_runtime::DelegationStep::principal: wyrd_runtime::principal::PrincipalRef
+pub struct wyrd_runtime::InvalidRoleName
+pub struct wyrd_runtime::Permission
+pub wyrd_runtime::Permission::action: wyrd_runtime::permission::Action
+pub wyrd_runtime::Permission::resource: wyrd_runtime::permission::Resource
+impl wyrd_runtime::permission::Permission
+pub const fn wyrd_runtime::permission::Permission::artifact_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::artifact_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::audit_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_oracle_peer_invoke() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_query_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_record_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_table_install() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_table_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::bifrost_table_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::card_delete() -> Self
+pub const fn wyrd_runtime::permission::Permission::card_read() -> Self
+pub const fn wyrd_runtime::permission::Permission::card_write() -> Self
+pub fn wyrd_runtime::permission::Permission::covers(&self, required: &wyrd_runtime::permission::Permission) -> bool
+pub const fn wyrd_runtime::permission::Permission::delegation_issue() -> Self
+pub const fn wyrd_runtime::permission::Permission::eval_run() -> Self
+pub const fn wyrd_runtime::permission::Permission::operator_invoke() -> Self
+pub const fn wyrd_runtime::permission::Permission::policy_lock() -> Self
+pub const fn wyrd_runtime::permission::Permission::service_accounts_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::service_install() -> Self
+pub const fn wyrd_runtime::permission::Permission::trigger_write() -> Self
+pub const fn wyrd_runtime::permission::Permission::users_manage() -> Self
+pub const fn wyrd_runtime::permission::Permission::wildcard() -> Self
+impl core::fmt::Display for wyrd_runtime::permission::Permission
+pub fn wyrd_runtime::permission::Permission::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::iter::traits::collect::FromIterator<wyrd_runtime::permission::Permission> for wyrd_runtime::permission::PermissionSet
+pub fn wyrd_runtime::permission::PermissionSet::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_runtime::permission::Permission>>(iter: T) -> Self
+impl core::str::traits::FromStr for wyrd_runtime::permission::Permission
+pub type wyrd_runtime::permission::Permission::Err = wyrd_runtime::permission::PermissionParseError
+pub fn wyrd_runtime::permission::Permission::from_str(value: &str) -> core::result::Result<Self, Self::Err>
+pub struct wyrd_runtime::PermissionSet(_)
+impl wyrd_runtime::permission::PermissionSet
+pub fn wyrd_runtime::permission::PermissionSet::contains(&self, required: &wyrd_runtime::permission::Permission) -> bool
+pub fn wyrd_runtime::permission::PermissionSet::insert(&mut self, permission: wyrd_runtime::permission::Permission)
+pub fn wyrd_runtime::permission::PermissionSet::is_empty(&self) -> bool
+pub fn wyrd_runtime::permission::PermissionSet::iter(&self) -> impl core::iter::traits::iterator::Iterator<Item = &wyrd_runtime::permission::Permission>
+pub fn wyrd_runtime::permission::PermissionSet::len(&self) -> usize
+pub fn wyrd_runtime::permission::PermissionSet::new() -> Self
+impl core::iter::traits::collect::FromIterator<wyrd_runtime::permission::Permission> for wyrd_runtime::permission::PermissionSet
+pub fn wyrd_runtime::permission::PermissionSet::from_iter<T: core::iter::traits::collect::IntoIterator<Item = wyrd_runtime::permission::Permission>>(iter: T) -> Self
+pub struct wyrd_runtime::Principal
+pub wyrd_runtime::Principal::effective_permissions: wyrd_runtime::permission::PermissionSet
+pub wyrd_runtime::Principal::id: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_runtime::Principal::kind: wyrd_runtime::principal::PrincipalKind
+pub wyrd_runtime::Principal::roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>
+pub wyrd_runtime::Principal::tenant_id: wyrd_spec::ids::DataTenantId
+impl wyrd_runtime::principal::Principal
+pub fn wyrd_runtime::principal::Principal::authorizes_card(&self, card: &wyrd_spec::reference::CardRef) -> bool
+pub fn wyrd_runtime::principal::Principal::card_ref(&self) -> core::option::Option<&wyrd_spec::reference::CardRef>
+pub fn wyrd_runtime::principal::Principal::card_ref_scope(&self) -> core::option::Option<&wyrd_spec::reference::CardRefScope>
+pub fn wyrd_runtime::principal::Principal::new(id: wyrd_spec::auth::principal_id::PrincipalId, kind: wyrd_runtime::principal::PrincipalKind, tenant_id: wyrd_spec::ids::DataTenantId, roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>, effective_permissions: wyrd_runtime::permission::PermissionSet) -> Self
+pub struct wyrd_runtime::PrincipalRef
+pub wyrd_runtime::PrincipalRef::id: wyrd_spec::auth::principal_id::PrincipalId
+pub wyrd_runtime::PrincipalRef::kind: wyrd_runtime::principal::PrincipalKind
+impl wyrd_runtime::principal::PrincipalRef
+pub fn wyrd_runtime::principal::PrincipalRef::card_ref(&self) -> core::option::Option<&wyrd_spec::reference::CardRef>
+pub fn wyrd_runtime::principal::PrincipalRef::card_ref_scope(&self) -> core::option::Option<&wyrd_spec::reference::CardRefScope>
+pub fn wyrd_runtime::principal::PrincipalRef::from_principal(principal: &wyrd_runtime::principal::Principal) -> Self
+pub struct wyrd_runtime::RbacCheck
+impl wyrd_runtime::permission_check::PermissionCheck for wyrd_runtime::permission_check::RbacCheck
+pub fn wyrd_runtime::permission_check::RbacCheck::check(&self, principal: &wyrd_runtime::principal::Principal, permission: &wyrd_runtime::permission::Permission) -> wyrd_runtime::permission_check::PermissionVerdict
+pub struct wyrd_runtime::RequestContext
+pub wyrd_runtime::RequestContext::delegation_chain: alloc::vec::Vec<wyrd_runtime::request_context::DelegationStep>
+pub wyrd_runtime::RequestContext::idempotency_key: core::option::Option<wyrd_spec::ids::IdempotencyKey>
+pub wyrd_runtime::RequestContext::principal: core::option::Option<wyrd_runtime::principal::Principal>
+pub wyrd_runtime::RequestContext::request_id: wyrd_spec::request_id::RequestId
+pub wyrd_runtime::RequestContext::started_at: chrono::datetime::DateTime<chrono::offset::utc::Utc>
+pub wyrd_runtime::RequestContext::traceparent: core::option::Option<wyrd_runtime::request_context::TraceParent>
+impl wyrd_runtime::request_context::RequestContext
+pub fn wyrd_runtime::request_context::RequestContext::is_delegated(&self) -> bool
+pub fn wyrd_runtime::request_context::RequestContext::new(request_id: wyrd_spec::request_id::RequestId, started_at: chrono::datetime::DateTime<chrono::offset::utc::Utc>) -> Self
+pub fn wyrd_runtime::request_context::RequestContext::principal(&self) -> core::option::Option<&wyrd_runtime::principal::Principal>
+impl core::fmt::Debug for wyrd_runtime::request_context::RequestContext
+pub fn wyrd_runtime::request_context::RequestContext::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+pub struct wyrd_runtime::RoleRef(_)
+impl wyrd_runtime::principal::RoleRef
+pub fn wyrd_runtime::principal::RoleRef::as_str(&self) -> &str
+pub fn wyrd_runtime::principal::RoleRef::new(value: &str) -> core::result::Result<Self, wyrd_runtime::principal::InvalidRoleName>
+impl core::fmt::Display for wyrd_runtime::principal::RoleRef
+pub fn wyrd_runtime::principal::RoleRef::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::str::traits::FromStr for wyrd_runtime::principal::RoleRef
+pub type wyrd_runtime::principal::RoleRef::Err = wyrd_runtime::principal::InvalidRoleName
+pub fn wyrd_runtime::principal::RoleRef::from_str(value: &str) -> core::result::Result<Self, Self::Err>
+pub struct wyrd_runtime::TraceParent(_)
+impl wyrd_runtime::request_context::TraceParent
+pub fn wyrd_runtime::request_context::TraceParent::as_str(&self) -> &str
+pub fn wyrd_runtime::request_context::TraceParent::new(value: impl core::convert::Into<alloc::string::String>) -> Self
+pub trait wyrd_runtime::PermissionCheck: core::marker::Send + core::marker::Sync + core::fmt::Debug
+pub fn wyrd_runtime::PermissionCheck::check(&self, principal: &wyrd_runtime::principal::Principal, permission: &wyrd_runtime::permission::Permission) -> wyrd_runtime::permission_check::PermissionVerdict
+impl wyrd_runtime::permission_check::PermissionCheck for wyrd_runtime::permission_check::RbacCheck
+pub fn wyrd_runtime::permission_check::RbacCheck::check(&self, principal: &wyrd_runtime::principal::Principal, permission: &wyrd_runtime::permission::Permission) -> wyrd_runtime::permission_check::PermissionVerdict
+pub fn wyrd_runtime::runtime() -> &'static tokio::runtime::runtime::Runtime

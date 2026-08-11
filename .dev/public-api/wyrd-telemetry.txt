@@ -1,0 +1,57 @@
+    Checking tracing-core v0.1.36
+    Checking tokio v1.53.1
+    Checking futures-util v0.3.33
+    Checking regex-automata v0.4.18
+    Checking log v0.4.33
+    Checking lazy_static v1.5.0
+    Checking thread_local v1.1.10
+    Checking nu-ansi-term v0.50.3
+    Checking sharded-slab v0.1.7
+    Checking tracing v0.1.44
+    Checking tracing-log v0.2.0
+    Checking opentelemetry v0.31.0
+    Checking futures-executor v0.3.33
+    Checking matchers v0.2.0
+    Checking regex v1.13.1
+    Checking tracing-subscriber v0.3.23
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking tokio-util v0.7.19
+    Checking tokio-stream v0.1.19
+    Checking tracing-opentelemetry v0.32.1
+    Checking opentelemetry_sdk v0.31.0
+    Checking h2 v0.4.15
+    Checking tower v0.5.3
+    Checking tower-http v0.6.11
+    Checking hyper v1.11.0
+    Checking hyper-util v0.1.20
+    Checking hyper-timeout v0.5.2
+    Checking reqwest v0.12.28
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking tonic v0.14.6
+    Checking opentelemetry-http v0.31.0
+    Checking tonic-prost v0.14.6
+    Checking opentelemetry-proto v0.31.0
+    Checking opentelemetry-otlp v0.31.1
+ Documenting wyrd-telemetry v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-telemetry)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 12.77s
+pub mod wyrd_telemetry
+pub enum wyrd_telemetry::OtlpProtocol
+pub wyrd_telemetry::OtlpProtocol::Grpc
+pub wyrd_telemetry::OtlpProtocol::HttpProtobuf
+pub struct wyrd_telemetry::TelemetryConfig
+pub wyrd_telemetry::TelemetryConfig::endpoint: core::option::Option<alloc::string::String>
+pub wyrd_telemetry::TelemetryConfig::export_timeout_ms: core::option::Option<u64>
+pub wyrd_telemetry::TelemetryConfig::filter: alloc::string::String
+pub wyrd_telemetry::TelemetryConfig::protocol: wyrd_telemetry::OtlpProtocol
+pub wyrd_telemetry::TelemetryConfig::sample_ratio: core::option::Option<f64>
+pub wyrd_telemetry::TelemetryConfig::service_name: core::option::Option<alloc::string::String>
+impl core::default::Default for wyrd_telemetry::TelemetryConfig
+pub fn wyrd_telemetry::TelemetryConfig::default() -> Self
+pub struct wyrd_telemetry::TelemetryGuard
+impl wyrd_telemetry::TelemetryGuard
+pub const fn wyrd_telemetry::TelemetryGuard::config(&self) -> &wyrd_telemetry::TelemetryConfig
+pub fn wyrd_telemetry::TelemetryGuard::force_flush(&self)
+pub fn wyrd_telemetry::TelemetryGuard::shutdown(self)
+pub fn wyrd_telemetry::init(config: wyrd_telemetry::TelemetryConfig) -> core::result::Result<wyrd_telemetry::TelemetryGuard, wyrd_spec::error::WyrdError>
+pub fn wyrd_telemetry::init_test_only_no_global(config: wyrd_telemetry::TelemetryConfig) -> wyrd_telemetry::TelemetryGuard
+pub fn wyrd_telemetry::resolve_filter(config: &wyrd_telemetry::TelemetryConfig) -> tracing_subscriber::filter::env::EnvFilter

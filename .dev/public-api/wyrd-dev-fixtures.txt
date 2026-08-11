@@ -1,0 +1,19 @@
+ Documenting wyrd-dev-fixtures v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-dev-fixtures)
+warning: unresolved link to `pg`
+ --> crates/wyrd-dev-fixtures/src/lib.rs:3:34
+  |
+3 | //! The `pg` feature gates the [`pg`] module, which provides [`pg::PgFixture`]:
+  |                                  ^^ no item named `pg` in scope
+  |
+  = help: to escape `[` and `]` characters, add '\' before them like `\[` or `\]`
+  = note: `#[warn(rustdoc::broken_intra_doc_links)]` on by default
+
+warning: unresolved link to `pg::PgFixture`
+ --> crates/wyrd-dev-fixtures/src/lib.rs:3:64
+  |
+3 | //! The `pg` feature gates the [`pg`] module, which provides [`pg::PgFixture`]:
+  |                                                                ^^^^^^^^^^^^^ no item named `pg` in scope
+
+warning: `wyrd-dev-fixtures` (lib doc) generated 2 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s
+pub mod wyrd_dev_fixtures

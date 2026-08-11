@@ -1,0 +1,119 @@
+   Compiling syn v3.0.3
+    Checking digest v0.10.7
+    Checking base64ct v1.8.3
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.56
+    Checking const-oid v0.9.6
+   Compiling semver v1.0.28
+    Checking rand_core v0.6.4
+    Checking signature v2.2.0
+    Checking sha2 v0.10.9
+    Checking blake2 v0.10.6
+    Checking pem-rfc7468 v0.7.0
+    Checking password-hash v0.5.0
+   Compiling rustc_version v0.4.1
+    Checking der v0.7.10
+    Checking argon2 v0.5.3
+   Compiling curve25519-dalek v4.1.3
+    Checking rand_core v0.9.5
+    Checking spki v0.7.3
+    Checking pkcs8 v0.10.2
+    Checking ed25519 v2.2.3
+    Checking ed25519-dalek v2.2.0
+   Compiling displaydoc v0.2.7
+   Compiling serde_derive v1.0.229
+   Compiling tokio-macros v2.7.2
+   Compiling thiserror-impl v2.0.19
+    Checking tokio v1.53.1
+    Checking tinystr v0.8.3
+    Checking zerotrie v0.2.4
+    Checking icu_collections v2.2.0
+    Checking thiserror v2.0.19
+    Checking icu_locale_core v2.2.0
+    Checking ppv-lite86 v0.2.21
+    Checking simple_asn1 v0.6.4
+    Checking wyrd-tls v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-tls)
+    Checking rand_chacha v0.9.0
+    Checking icu_provider v2.2.0
+    Checking rand v0.9.5
+    Checking icu_normalizer v2.2.0
+    Checking icu_properties v2.2.0
+    Checking serde v1.0.229
+    Checking ulid v1.2.1
+    Checking idna_adapter v1.2.2
+    Checking idna v1.1.0
+    Checking chrono v0.4.45
+    Checking serde_yaml v0.9.34+deprecated
+    Checking serde_jcs v0.1.0
+    Checking serde_urlencoded v0.7.1
+    Checking jsonwebtoken v9.3.1
+    Checking url v2.5.8
+    Checking schemars v0.8.22
+    Checking hyper v1.11.0
+    Checking tower v0.5.3
+    Checking async-compression v0.4.43
+    Checking tokio-util v0.7.19
+    Checking tokio-rustls v0.26.4
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking tower-http v0.6.11
+    Checking hyper-util v0.1.20
+    Checking hyper-rustls v0.27.9
+    Checking reqwest v0.13.4
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking wyrd-auth-oidc v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-oidc)
+    Checking wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-runtime)
+    Checking wyrd-auth-verify v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-verify)
+ Documenting wyrd-auth-issue v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-auth-issue)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 15.23s
+pub mod wyrd_auth_issue
+pub use wyrd_auth_issue::MAX_BEARER_TOKEN_BYTES
+pub use wyrd_auth_issue::MAX_DELEGATION_DEPTH
+pub enum wyrd_auth_issue::AuditSealError
+pub wyrd_auth_issue::AuditSealError::InvalidKey(alloc::string::String)
+pub wyrd_auth_issue::AuditSealError::InvalidSignature
+pub enum wyrd_auth_issue::IssueError
+pub wyrd_auth_issue::IssueError::CardScopeTooLarge
+pub wyrd_auth_issue::IssueError::CardScopeTooLarge::encoded_len: usize
+pub wyrd_auth_issue::IssueError::CardScopeTooLarge::limit: usize
+pub wyrd_auth_issue::IssueError::DelegationDepthExceeded
+pub wyrd_auth_issue::IssueError::DelegationDepthExceeded::max: usize
+pub wyrd_auth_issue::IssueError::Hashing(password_hash::errors::Error)
+pub wyrd_auth_issue::IssueError::InvalidCardRef
+pub wyrd_auth_issue::IssueError::InvalidKid
+pub wyrd_auth_issue::IssueError::InvalidPrincipalKind
+pub wyrd_auth_issue::IssueError::InvalidTtl
+pub wyrd_auth_issue::IssueError::PublicKeyDerivation(alloc::string::String)
+pub wyrd_auth_issue::IssueError::Signing(jsonwebtoken::errors::Error)
+pub struct wyrd_auth_issue::AuditSealKey
+impl wyrd_auth_issue::AuditSealKey
+pub fn wyrd_auth_issue::AuditSealKey::from_pkcs8_pem(pem: &str) -> core::result::Result<Self, wyrd_auth_issue::AuditSealError>
+pub fn wyrd_auth_issue::AuditSealKey::generate() -> core::result::Result<Self, wyrd_auth_issue::AuditSealError>
+pub fn wyrd_auth_issue::AuditSealKey::sign(&self, msg: &[u8]) -> alloc::vec::Vec<u8>
+pub fn wyrd_auth_issue::AuditSealKey::verify(&self, msg: &[u8], sig_bytes: &[u8]) -> core::result::Result<(), wyrd_auth_issue::AuditSealError>
+pub struct wyrd_auth_issue::DelegationCaller
+pub wyrd_auth_issue::DelegationCaller::act: core::option::Option<alloc::boxed::Box<wyrd_auth_verify::ActClaim>>
+pub wyrd_auth_issue::DelegationCaller::principal: wyrd_auth_verify::TokenPrincipalRef
+pub wyrd_auth_issue::DelegationCaller::sub: alloc::string::String
+pub struct wyrd_auth_issue::IssuedTokenPair
+pub wyrd_auth_issue::IssuedTokenPair::access_expires_at: chrono::datetime::DateTime<chrono::offset::utc::Utc>
+pub wyrd_auth_issue::IssuedTokenPair::access_token: secrecy::SecretString
+pub wyrd_auth_issue::IssuedTokenPair::jti: alloc::string::String
+pub wyrd_auth_issue::IssuedTokenPair::refresh_expires_at: chrono::datetime::DateTime<chrono::offset::utc::Utc>
+pub wyrd_auth_issue::IssuedTokenPair::refresh_token: secrecy::SecretString
+pub struct wyrd_auth_issue::IssuingKey
+impl wyrd_auth_issue::IssuingKey
+pub fn wyrd_auth_issue::IssuingKey::from_ed_pem(pem: secrecy::SecretString, kid: wyrd_auth_verify::Kid, issuer: impl core::convert::Into<alloc::string::String>) -> core::result::Result<Self, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::IssuingKey::generate_ephemeral_pem() -> core::result::Result<secrecy::SecretString, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::IssuingKey::issue_agent_access_token(&self, agent_id: wyrd_spec::auth::principal_id::PrincipalId, tenant_id: wyrd_spec::ids::DataTenantId, card_ref: wyrd_spec::reference::CardRef, card_ref_scope: wyrd_spec::reference::CardRefScope, roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>, ttl: chrono::Duration) -> core::result::Result<alloc::string::String, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::IssuingKey::issue_delegated_access_token(&self, caller: &wyrd_auth_issue::DelegationCaller, requested_subject: wyrd_auth_verify::TokenPrincipalRef, requested_roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>, ttl: chrono::Duration) -> core::result::Result<alloc::string::String, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::IssuingKey::issue_refresh_token(&self, principal_kind: wyrd_spec::auth::principal_kind::PrincipalKindTag, principal_id: wyrd_spec::auth::principal_id::PrincipalId, tenant_id: wyrd_spec::ids::DataTenantId, ttl: chrono::Duration) -> core::result::Result<alloc::string::String, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::IssuingKey::issue_service_access_token(&self, sa_id: wyrd_spec::auth::principal_id::PrincipalId, tenant_id: wyrd_spec::ids::DataTenantId, card_ref: wyrd_spec::reference::CardRef, card_ref_scope: wyrd_spec::reference::CardRefScope, roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>, ttl: chrono::Duration) -> core::result::Result<alloc::string::String, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::IssuingKey::issue_user_access_token(&self, principal: wyrd_auth_verify::TokenPrincipalRef, roles: alloc::vec::Vec<wyrd_runtime::principal::RoleRef>, ttl: chrono::Duration) -> core::result::Result<alloc::string::String, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::IssuingKey::verifying_key_pem(&self) -> core::result::Result<alloc::string::String, wyrd_auth_issue::IssueError>
+pub const wyrd_auth_issue::ARGON2_M_COST_KIB: u32
+pub const wyrd_auth_issue::ARGON2_P_COST: u32
+pub const wyrd_auth_issue::ARGON2_T_COST: u32
+pub const wyrd_auth_issue::AUDIT_SEAL_DOMAIN: &[u8]
+pub fn wyrd_auth_issue::hash_api_key(raw: &secrecy::SecretString) -> core::result::Result<alloc::string::String, wyrd_auth_issue::IssueError>
+pub fn wyrd_auth_issue::verify_api_key(raw: &secrecy::SecretString, stored_hash: &str) -> bool

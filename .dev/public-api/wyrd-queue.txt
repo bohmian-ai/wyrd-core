@@ -1,0 +1,237 @@
+   Compiling serde_core v1.0.229
+   Compiling libm v0.2.16
+   Compiling num-traits v0.2.19
+   Compiling zerocopy v0.8.56
+   Compiling getrandom v0.3.4
+   Compiling ahash v0.8.12
+    Checking arrow-schema v58.4.0
+   Compiling zerocopy-derive v0.8.56
+    Checking lexical-util v1.0.7
+    Checking getrandom v0.4.3
+    Checking smallvec v1.15.2
+   Compiling cc v1.4.0
+    Checking icu_normalizer v2.2.0
+    Checking idna_adapter v1.2.2
+    Checking lexical-parse-integer v1.0.6
+    Checking lexical-write-integer v1.0.6
+   Compiling flatbuffers v25.12.19
+    Checking percent-encoding v2.3.2
+    Checking idna v1.1.0
+    Checking lexical-parse-float v1.0.6
+    Checking form_urlencoded v1.2.2
+    Checking lexical-write-float v1.0.6
+    Checking csv-core v0.1.13
+    Checking zeroize v1.9.0
+    Checking secrecy v0.10.3
+    Checking sha2 v0.10.9
+    Checking simdutf8 v0.1.5
+    Checking tokio v1.53.1
+    Checking crossbeam-queue v0.3.13
+    Checking lexical-core v1.0.6
+   Compiling blake3 v1.8.6
+    Checking num-integer v0.1.46
+    Checking num-complex v0.4.6
+    Checking atoi v2.0.0
+    Checking num-bigint v0.4.8
+    Checking serde v1.0.229
+    Checking serde_json v1.0.151
+    Checking uuid v1.24.0
+    Checking semver v1.0.28
+    Checking csv v1.4.0
+    Checking chrono v0.4.45
+    Checking url v2.5.8
+    Checking serde_yaml v0.9.34+deprecated
+    Checking serde_jcs v0.1.0
+    Checking schemars v0.8.22
+    Checking skald-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/skald-spec)
+    Checking wyrd-semver v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-semver)
+    Checking half v2.7.1
+    Checking arrow-buffer v58.4.0
+    Checking arrow-data v58.4.0
+    Checking arrow-array v58.4.0
+    Checking arrow-select v58.4.0
+    Checking arrow-row v58.4.0
+    Checking arrow-arith v58.4.0
+    Checking arrow-ord v58.4.0
+    Checking arrow-ipc v58.4.0
+    Checking arrow-string v58.4.0
+    Checking wyrd-spec v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-spec)
+    Checking arrow-cast v58.4.0
+    Checking arrow-csv v58.4.0
+    Checking arrow-json v58.4.0
+    Checking arrow v58.4.0
+    Checking wyrd-runtime v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-runtime)
+ Documenting wyrd-queue v0.1.0 (/Users/stevenforrester/Documents/GitHub/wyrd-foundation/crates/wyrd-queue)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 15.09s
+pub mod wyrd_queue
+pub mod wyrd_queue::batch_builder
+pub struct wyrd_queue::batch_builder::BatchBuilder
+impl wyrd_queue::batch_builder::BatchBuilder
+pub fn wyrd_queue::batch_builder::BatchBuilder::append_json_row(&mut self, json: &str, card_ref: &wyrd_spec::reference::CardRef, run_id: core::option::Option<&wyrd_spec::vala::ids::RunId>) -> core::result::Result<(), wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::batch_builder::BatchBuilder::finish(&self) -> core::result::Result<arrow_array::record_batch::RecordBatch, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::batch_builder::BatchBuilder::finish_ipc(&self) -> core::result::Result<alloc::vec::Vec<u8>, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::batch_builder::BatchBuilder::is_empty(&self) -> bool
+pub fn wyrd_queue::batch_builder::BatchBuilder::len(&self) -> usize
+pub fn wyrd_queue::batch_builder::BatchBuilder::new(schema: arrow_schema::schema::SchemaRef) -> Self
+pub fn wyrd_queue::batch_builder::BatchBuilder::output_schema(&self) -> arrow_schema::schema::SchemaRef
+pub const wyrd_queue::batch_builder::CARD_REF_COLUMN: &str
+pub const wyrd_queue::batch_builder::RUN_ID_COLUMN: &str
+pub fn wyrd_queue::batch_builder::is_reserved_column(name: &str) -> bool
+pub mod wyrd_queue::config
+pub struct wyrd_queue::config::QueueConfig
+pub wyrd_queue::config::QueueConfig::channel_capacity: usize
+pub wyrd_queue::config::QueueConfig::flush_interval_ms: u64
+pub wyrd_queue::config::QueueConfig::flush_max_rows: usize
+pub wyrd_queue::config::QueueConfig::flush_timeout_ms: u64
+pub wyrd_queue::config::QueueConfig::max_message_bytes: usize
+pub wyrd_queue::config::QueueConfig::staging_capacity: usize
+impl core::default::Default for wyrd_queue::config::QueueConfig
+pub fn wyrd_queue::config::QueueConfig::default() -> Self
+pub mod wyrd_queue::error
+pub enum wyrd_queue::error::WyrdQueueError
+pub wyrd_queue::error::WyrdQueueError::FlushTimeout
+pub wyrd_queue::error::WyrdQueueError::PayloadTooLarge
+pub wyrd_queue::error::WyrdQueueError::QueueFull
+pub wyrd_queue::error::WyrdQueueError::ReservedColumn(alloc::string::String)
+pub wyrd_queue::error::WyrdQueueError::SchemaParse(alloc::string::String)
+pub wyrd_queue::error::WyrdQueueError::Sink(wyrd_spec::error::WyrdError)
+impl wyrd_queue::error::WyrdQueueError
+pub fn wyrd_queue::error::WyrdQueueError::code(&self) -> &'static str
+impl core::convert::From<wyrd_queue::error::WyrdQueueError> for wyrd_spec::error::WyrdError
+pub fn wyrd_spec::error::WyrdError::from(err: wyrd_queue::error::WyrdQueueError) -> Self
+pub mod wyrd_queue::producer
+pub struct wyrd_queue::producer::Producer
+impl wyrd_queue::producer::Producer
+pub fn wyrd_queue::producer::Producer::enqueue(&self, json: alloc::vec::Vec<u8>, card_ref: wyrd_spec::reference::CardRef, run_id: core::option::Option<wyrd_spec::vala::ids::RunId>) -> core::result::Result<(), wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::producer::Producer::flush(&self) -> core::result::Result<alloc::vec::Vec<[u8; 16]>, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::producer::Producer::metrics(&self) -> wyrd_queue::producer::ProducerMetrics
+pub fn wyrd_queue::producer::Producer::new(table: alloc::string::String, schema: arrow_schema::schema::SchemaRef, sink: alloc::sync::Arc<dyn wyrd_queue::sink::BatchSink>, config: wyrd_queue::config::QueueConfig) -> Self
+pub fn wyrd_queue::producer::Producer::shutdown(&self) -> core::result::Result<(), wyrd_queue::error::WyrdQueueError>
+pub struct wyrd_queue::producer::ProducerMetrics
+pub wyrd_queue::producer::ProducerMetrics::accepted: u64
+pub wyrd_queue::producer::ProducerMetrics::dropped: u64
+pub wyrd_queue::producer::ProducerMetrics::queue_depth: usize
+pub mod wyrd_queue::queue
+pub struct wyrd_queue::queue::FlushOutcome
+pub wyrd_queue::queue::FlushOutcome::batch_ids: alloc::vec::Vec<[u8; 16]>
+pub wyrd_queue::queue::FlushOutcome::rows_flushed: usize
+pub struct wyrd_queue::queue::RecordQueue
+impl wyrd_queue::queue::RecordQueue
+pub async fn wyrd_queue::queue::RecordQueue::seal_and_send(&self) -> core::result::Result<wyrd_queue::queue::FlushOutcome, wyrd_queue::error::WyrdQueueError>
+impl wyrd_queue::queue::Flushable for wyrd_queue::queue::RecordQueue
+pub fn wyrd_queue::queue::RecordQueue::flush<'life0, 'async_trait>(&'life0 self) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<usize, wyrd_queue::error::WyrdQueueError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub fn wyrd_queue::queue::RecordQueue::is_empty(&self) -> bool
+pub fn wyrd_queue::queue::RecordQueue::len(&self) -> usize
+pub struct wyrd_queue::queue::Row
+pub wyrd_queue::queue::Row::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_queue::queue::Row::json: alloc::vec::Vec<u8>
+pub wyrd_queue::queue::Row::run_id: core::option::Option<wyrd_spec::vala::ids::RunId>
+pub trait wyrd_queue::queue::Flushable: core::marker::Send + core::marker::Sync
+pub fn wyrd_queue::queue::Flushable::flush<'life0, 'async_trait>(&'life0 self) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<usize, wyrd_queue::error::WyrdQueueError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub fn wyrd_queue::queue::Flushable::is_empty(&self) -> bool
+pub fn wyrd_queue::queue::Flushable::len(&self) -> usize
+impl wyrd_queue::queue::Flushable for wyrd_queue::queue::RecordQueue
+pub fn wyrd_queue::queue::RecordQueue::flush<'life0, 'async_trait>(&'life0 self) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<usize, wyrd_queue::error::WyrdQueueError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub fn wyrd_queue::queue::RecordQueue::is_empty(&self) -> bool
+pub fn wyrd_queue::queue::RecordQueue::len(&self) -> usize
+pub mod wyrd_queue::schema
+pub fn wyrd_queue::schema::arrow_schema_to_fieldspec(schema: &arrow_schema::schema::Schema) -> alloc::vec::Vec<wyrd_spec::vala::api::FieldSpec>
+pub fn wyrd_queue::schema::fieldspec_to_arrow(fields: &[wyrd_spec::vala::api::FieldSpec]) -> core::result::Result<arrow_schema::schema::Schema, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::schema::json_schema_to_arrow(schema: &serde_json::value::Value) -> core::result::Result<arrow_schema::schema::Schema, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::schema::json_schema_to_fieldspec(schema: &serde_json::value::Value) -> core::result::Result<alloc::vec::Vec<wyrd_spec::vala::api::FieldSpec>, wyrd_queue::error::WyrdQueueError>
+pub mod wyrd_queue::sink
+pub struct wyrd_queue::sink::MockSink
+impl wyrd_queue::sink::MockSink
+pub fn wyrd_queue::sink::MockSink::fail_next(&self, n: usize)
+pub fn wyrd_queue::sink::MockSink::new() -> Self
+pub fn wyrd_queue::sink::MockSink::received(&self) -> alloc::vec::Vec<wyrd_queue::sink::SealedBatch>
+impl wyrd_queue::sink::BatchSink for wyrd_queue::sink::MockSink
+pub fn wyrd_queue::sink::MockSink::send<'life0, 'async_trait>(&'life0 self, batch: wyrd_queue::sink::SealedBatch) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<u64, wyrd_spec::error::WyrdError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub struct wyrd_queue::sink::SealedBatch
+pub wyrd_queue::sink::SealedBatch::batch_id: [u8; 16]
+pub wyrd_queue::sink::SealedBatch::frames: alloc::vec::Vec<u8>
+pub wyrd_queue::sink::SealedBatch::rows: u64
+pub wyrd_queue::sink::SealedBatch::table: alloc::string::String
+pub trait wyrd_queue::sink::BatchSink: core::marker::Send + core::marker::Sync + 'static
+pub fn wyrd_queue::sink::BatchSink::send<'life0, 'async_trait>(&'life0 self, batch: wyrd_queue::sink::SealedBatch) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<u64, wyrd_spec::error::WyrdError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+impl wyrd_queue::sink::BatchSink for wyrd_queue::sink::MockSink
+pub fn wyrd_queue::sink::MockSink::send<'life0, 'async_trait>(&'life0 self, batch: wyrd_queue::sink::SealedBatch) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<u64, wyrd_spec::error::WyrdError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub enum wyrd_queue::WyrdQueueError
+pub wyrd_queue::WyrdQueueError::FlushTimeout
+pub wyrd_queue::WyrdQueueError::PayloadTooLarge
+pub wyrd_queue::WyrdQueueError::QueueFull
+pub wyrd_queue::WyrdQueueError::ReservedColumn(alloc::string::String)
+pub wyrd_queue::WyrdQueueError::SchemaParse(alloc::string::String)
+pub wyrd_queue::WyrdQueueError::Sink(wyrd_spec::error::WyrdError)
+impl wyrd_queue::error::WyrdQueueError
+pub fn wyrd_queue::error::WyrdQueueError::code(&self) -> &'static str
+impl core::convert::From<wyrd_queue::error::WyrdQueueError> for wyrd_spec::error::WyrdError
+pub fn wyrd_spec::error::WyrdError::from(err: wyrd_queue::error::WyrdQueueError) -> Self
+pub struct wyrd_queue::BatchBuilder
+impl wyrd_queue::batch_builder::BatchBuilder
+pub fn wyrd_queue::batch_builder::BatchBuilder::append_json_row(&mut self, json: &str, card_ref: &wyrd_spec::reference::CardRef, run_id: core::option::Option<&wyrd_spec::vala::ids::RunId>) -> core::result::Result<(), wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::batch_builder::BatchBuilder::finish(&self) -> core::result::Result<arrow_array::record_batch::RecordBatch, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::batch_builder::BatchBuilder::finish_ipc(&self) -> core::result::Result<alloc::vec::Vec<u8>, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::batch_builder::BatchBuilder::is_empty(&self) -> bool
+pub fn wyrd_queue::batch_builder::BatchBuilder::len(&self) -> usize
+pub fn wyrd_queue::batch_builder::BatchBuilder::new(schema: arrow_schema::schema::SchemaRef) -> Self
+pub fn wyrd_queue::batch_builder::BatchBuilder::output_schema(&self) -> arrow_schema::schema::SchemaRef
+pub struct wyrd_queue::MockSink
+impl wyrd_queue::sink::MockSink
+pub fn wyrd_queue::sink::MockSink::fail_next(&self, n: usize)
+pub fn wyrd_queue::sink::MockSink::new() -> Self
+pub fn wyrd_queue::sink::MockSink::received(&self) -> alloc::vec::Vec<wyrd_queue::sink::SealedBatch>
+impl wyrd_queue::sink::BatchSink for wyrd_queue::sink::MockSink
+pub fn wyrd_queue::sink::MockSink::send<'life0, 'async_trait>(&'life0 self, batch: wyrd_queue::sink::SealedBatch) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<u64, wyrd_spec::error::WyrdError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub struct wyrd_queue::Producer
+impl wyrd_queue::producer::Producer
+pub fn wyrd_queue::producer::Producer::enqueue(&self, json: alloc::vec::Vec<u8>, card_ref: wyrd_spec::reference::CardRef, run_id: core::option::Option<wyrd_spec::vala::ids::RunId>) -> core::result::Result<(), wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::producer::Producer::flush(&self) -> core::result::Result<alloc::vec::Vec<[u8; 16]>, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::producer::Producer::metrics(&self) -> wyrd_queue::producer::ProducerMetrics
+pub fn wyrd_queue::producer::Producer::new(table: alloc::string::String, schema: arrow_schema::schema::SchemaRef, sink: alloc::sync::Arc<dyn wyrd_queue::sink::BatchSink>, config: wyrd_queue::config::QueueConfig) -> Self
+pub fn wyrd_queue::producer::Producer::shutdown(&self) -> core::result::Result<(), wyrd_queue::error::WyrdQueueError>
+pub struct wyrd_queue::ProducerMetrics
+pub wyrd_queue::ProducerMetrics::accepted: u64
+pub wyrd_queue::ProducerMetrics::dropped: u64
+pub wyrd_queue::ProducerMetrics::queue_depth: usize
+pub struct wyrd_queue::QueueConfig
+pub wyrd_queue::QueueConfig::channel_capacity: usize
+pub wyrd_queue::QueueConfig::flush_interval_ms: u64
+pub wyrd_queue::QueueConfig::flush_max_rows: usize
+pub wyrd_queue::QueueConfig::flush_timeout_ms: u64
+pub wyrd_queue::QueueConfig::max_message_bytes: usize
+pub wyrd_queue::QueueConfig::staging_capacity: usize
+impl core::default::Default for wyrd_queue::config::QueueConfig
+pub fn wyrd_queue::config::QueueConfig::default() -> Self
+pub struct wyrd_queue::RecordQueue
+impl wyrd_queue::queue::RecordQueue
+pub async fn wyrd_queue::queue::RecordQueue::seal_and_send(&self) -> core::result::Result<wyrd_queue::queue::FlushOutcome, wyrd_queue::error::WyrdQueueError>
+impl wyrd_queue::queue::Flushable for wyrd_queue::queue::RecordQueue
+pub fn wyrd_queue::queue::RecordQueue::flush<'life0, 'async_trait>(&'life0 self) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<usize, wyrd_queue::error::WyrdQueueError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub fn wyrd_queue::queue::RecordQueue::is_empty(&self) -> bool
+pub fn wyrd_queue::queue::RecordQueue::len(&self) -> usize
+pub struct wyrd_queue::Row
+pub wyrd_queue::Row::card_ref: wyrd_spec::reference::CardRef
+pub wyrd_queue::Row::json: alloc::vec::Vec<u8>
+pub wyrd_queue::Row::run_id: core::option::Option<wyrd_spec::vala::ids::RunId>
+pub struct wyrd_queue::SealedBatch
+pub wyrd_queue::SealedBatch::batch_id: [u8; 16]
+pub wyrd_queue::SealedBatch::frames: alloc::vec::Vec<u8>
+pub wyrd_queue::SealedBatch::rows: u64
+pub wyrd_queue::SealedBatch::table: alloc::string::String
+pub trait wyrd_queue::BatchSink: core::marker::Send + core::marker::Sync + 'static
+pub fn wyrd_queue::BatchSink::send<'life0, 'async_trait>(&'life0 self, batch: wyrd_queue::sink::SealedBatch) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<u64, wyrd_spec::error::WyrdError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+impl wyrd_queue::sink::BatchSink for wyrd_queue::sink::MockSink
+pub fn wyrd_queue::sink::MockSink::send<'life0, 'async_trait>(&'life0 self, batch: wyrd_queue::sink::SealedBatch) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<u64, wyrd_spec::error::WyrdError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub trait wyrd_queue::Flushable: core::marker::Send + core::marker::Sync
+pub fn wyrd_queue::Flushable::flush<'life0, 'async_trait>(&'life0 self) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<usize, wyrd_queue::error::WyrdQueueError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub fn wyrd_queue::Flushable::is_empty(&self) -> bool
+pub fn wyrd_queue::Flushable::len(&self) -> usize
+impl wyrd_queue::queue::Flushable for wyrd_queue::queue::RecordQueue
+pub fn wyrd_queue::queue::RecordQueue::flush<'life0, 'async_trait>(&'life0 self) -> core::pin::Pin<alloc::boxed::Box<(dyn core::future::future::Future<Output = core::result::Result<usize, wyrd_queue::error::WyrdQueueError>> + core::marker::Send + 'async_trait)>> where Self: 'async_trait, 'life0: 'async_trait
+pub fn wyrd_queue::queue::RecordQueue::is_empty(&self) -> bool
+pub fn wyrd_queue::queue::RecordQueue::len(&self) -> usize
+pub fn wyrd_queue::arrow_schema_to_fieldspec(schema: &arrow_schema::schema::Schema) -> alloc::vec::Vec<wyrd_spec::vala::api::FieldSpec>
+pub fn wyrd_queue::fieldspec_to_arrow(fields: &[wyrd_spec::vala::api::FieldSpec]) -> core::result::Result<arrow_schema::schema::Schema, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::json_schema_to_arrow(schema: &serde_json::value::Value) -> core::result::Result<arrow_schema::schema::Schema, wyrd_queue::error::WyrdQueueError>
+pub fn wyrd_queue::json_schema_to_fieldspec(schema: &serde_json::value::Value) -> core::result::Result<alloc::vec::Vec<wyrd_spec::vala::api::FieldSpec>, wyrd_queue::error::WyrdQueueError>
