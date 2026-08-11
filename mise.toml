@@ -47,7 +47,7 @@ depends = ["fmt:check", "lints"]
 # ---------------------------------------------------------------------------
 
 [tasks."test:unit"]
-description = "All non-PG tests across the 21 crates (pg feature excluded, so pg-gated code is not compiled here)"
+description = "All non-PG tests across the 20 crates (pg feature excluded, so pg-gated code is not compiled here)"
 run = "cargo test --locked --workspace -- --nocapture"
 
 [tasks."test:pg"]
