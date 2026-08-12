@@ -6,6 +6,7 @@ license = { workspace = true }
 rust-version = { workspace = true }
 repository = { workspace = true }
 authors = { workspace = true }
+publish = false
 description = "Plane-neutral development fixture primitives for Wyrd SQL integration tests."
 
 [features]
