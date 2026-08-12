@@ -28,6 +28,6 @@ mechanics remain implementation authority.
 Load the bundled planning references progressively. Validate every proposed
 command and cold-rehearse each task before `Ready`. Emit task packets for only
 `$wyrd-implement`; use the validator at
-`.claude/skills/wyrd-plan/scripts/validate_plan_artifacts.py` for materialized
+`.agents/skills/wyrd-plan/scripts/validate_plan_artifacts.py` for materialized
 plans. The root `$wyrd-implement-plan` serializes task implementation and
 mandatory review.

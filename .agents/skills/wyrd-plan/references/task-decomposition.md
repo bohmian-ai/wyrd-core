@@ -1,6 +1,6 @@
 # Task Decomposition
 
-Compile the implementation specification into bounded, risk-tiered Luna,
+Compile the implementation specification into bounded, risk-routed Luna,
 Terra, or Sol tasks. Task packetization and separate task files are mandatory
 for every plan.
 
@@ -88,8 +88,7 @@ Mark tasks parallel only when:
 All Cargo-backed commands remain sequential across agents sharing a checkout
 or target directory, regardless of source-task parallelism.
 
-If a task discovers a missing material decision, it stops and returns to plan
-authority.
+If a task discovers a missing material decision, it stops and returns to Sol.
 It does not expand scope or invent a contract.
 
 Assign Luna to mechanical, low-risk work with one established repository
@@ -160,7 +159,7 @@ Before finalizing:
 - every requirement maps to one or more tasks;
 - every task has one cohesive outcome;
 - task order follows contract and migration dependencies;
-- every task fits its assigned Luna, Terra, or Sol risk tier and context budget;
+- every task fits its assigned Luna, Terra, or Sol context and reasoning level;
 - every task passed a documented cold read-only implementation rehearsal,
   fresh-agent when available;
 - no task must reconstruct the full plan;

@@ -1,6 +1,6 @@
 ---
 name: wyrd-implement-plan
-description: Autonomously execute or resume a complete approved wyrd-core foundation implementation plan in one persistent root session. Use when asked to implement, continue, finish, or close a plan supplied in conversation or by file path. The root executes every dependency-ordered task through $wyrd-implement and invokes $wyrd-review after each task and terminal review at closeout.
+description: Autonomously execute or resume a complete approved wyrd-core foundation implementation plan in one persistent root session. Use when Codex is asked to implement, continue, finish, or close a plan supplied in conversation or by file path. The root executes every dependency-ordered task through $wyrd-implement and invokes $wyrd-review after each task and terminal review at closeout.
 ---
 
 # Wyrd Core Implement Plan

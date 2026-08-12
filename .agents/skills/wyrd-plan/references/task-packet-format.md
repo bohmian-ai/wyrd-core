@@ -125,18 +125,14 @@ Select execution skills from the write set:
 A write set outside this repository is a cross-repository dependency, not an
 executable `wyrd-core` task.
 
-Assign the risk tier. The `Assigned model:` field name is retained for schema
-compatibility, but its value is a **risk tier**, not a model selection:
+Assign models by risk:
 
 - Luna for mechanical, low-risk tasks with one established repository pattern;
 - Terra for ordinary implementation and review work;
 - Sol for security, public or persisted contracts, migrations, concurrency,
   cross-owner or cross-language work, and other materially high-risk tasks.
 
-The tier governs task scope, reviewer rigor, and how quickly the orchestrator
-escalates on repeated failure. It does not choose a model — implementation
-agents run on Sonnet and reviewers on Opus at every tier. See
-the repository's current execution constraints.
+Reasoning effort never exceeds `high`.
 
 ## Detail rules
 
@@ -185,6 +181,36 @@ outcomes, public or persisted contracts, security or tenancy semantics,
 data-loss behavior, prohibited material boundaries, or acceptance criteria.
 When one must change, set the task to `Blocked`, preserve the conflict
 evidence, and request authority before implementation.
+
+### Orchestrator-owned remediation revisions
+
+Review findings are diagnostic input, not executable instructions. Before an
+implementation agent is resumed, replaced, or dispatched to fix review or
+integration findings, the root orchestrator must append a `Remediation
+revision RR<N>` under `Completion evidence`. The revision is part of the
+canonical task and must be decision-complete at the same density as the
+original task.
+
+Each revision must identify its review attempt and every finding, then specify:
+
+- the violated requirement or invariant and current defective behavior;
+- the exact correction and behavior that remains unchanged;
+- target paths, owners, symbols, callers, consumers, and tests;
+- typed interface stubs or an explicit statement that interfaces do not change;
+- normative pseudocode when ordering, state, IO, errors, concurrency, or side
+  effects affect correctness;
+- negative and edge behavior, including durable effects;
+- named tests with setup, action, and critical assertions;
+- exact focused verification and required features;
+- allowed scope, prohibited fixes, and material escalation boundaries;
+- one source condition and regression assertion that closes each finding;
+- the existing decision authority or approved material revision.
+
+Use `Not applicable: <reason>` for disproportionate fields in a mechanical
+fix, but still name the exact symbol, edit outcome, and assertion. Do not
+resume implementation while a reasonable implementor would still need to
+choose behavior, architecture, ownership, contracts, ordering, failure
+semantics, features, scope, or proof.
 
 ## Complete example
 

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Wyrd Implement"
+  short_description: "Complete one foundation implementation task"
+  default_prompt: "Use $wyrd-implement to complete this approved wyrd-core foundation task and repair reversible verification failures."
+
+policy:
+  allow_implicit_invocation: true

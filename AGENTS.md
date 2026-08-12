@@ -350,7 +350,8 @@ git-ignored).
 - Skills are referenced by name; each harness resolves a named skill from its
   own skill directory.
 - Foundation Rust implementors use the `wyrd-implement` skill.
-- The plan orchestrator uses `wyrd-implement-plan`.
+- The repository-local `wyrd-implement-plan` orchestrates approved foundation
+  plans and loads this repository's architecture authorities before execution.
 - The integration review uses `wyrd-review`.
 
 ## 13. Implementation Rules

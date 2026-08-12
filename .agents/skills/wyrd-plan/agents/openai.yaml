@@ -1,0 +1,7 @@
+interface:
+  display_name: "Wyrd Plan"
+  short_description: "Create executable foundation implementation plans"
+  default_prompt: "Use $wyrd-plan to trace this wyrd-core change and produce rehearsed executable foundation task packets."
+
+policy:
+  allow_implicit_invocation: true
