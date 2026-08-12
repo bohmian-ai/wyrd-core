@@ -7,7 +7,5 @@ git_tag_name = "{{ package }}-v{{ version }}"
 # Changelog generation is enabled for every crate in the workspace.
 changelog_update = true
 
-# GitHub releases are created when a version PR is merged; no crates.io
-# publish is configured here. The `command: release` publish job is added
-# by the future publication plan once the 0.1.0 baseline is authorized.
+# The release workflow publishes GitHub releases and crates.io packages.
 git_release_enable = true
