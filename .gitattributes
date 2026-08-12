@@ -1,0 +1,4 @@
+# Schema goldens are compared byte-for-byte with generator output. Keep their
+# line endings stable when Git checks them out on Windows.
+crates/wyrd-spec/schemas/*.json text eol=lf
+crates/wyrd-client/schemas/*.json text eol=lf
