@@ -50,12 +50,8 @@ references/
 
 ## Consumers
 
-- `.claude/skills/wyrd-advise/SKILL.md`
-- `.claude/skills/wyrd-implement/SKILL.md`
-- `.claude/skills/wyrd-implement-plan/SKILL.md`
-- `.claude/skills/wyrd-plan/SKILL.md`
-- `.claude/skills/wyrd-plan-reviewer/SKILL.md`
-- `.claude/skills/wyrd-review/SKILL.md`
-- `.codex/skills/wyrd-implement/SKILL.md`
-- `.codex/skills/wyrd-plan/SKILL.md`
-- `.codex/skills/wyrd-review/SKILL.md`
+- `.agents/skills/wyrd-advise/SKILL.md`
+- `.agents/skills/wyrd-implement/SKILL.md`
+- `.agents/skills/wyrd-implement-plan/SKILL.md`
+- `.agents/skills/wyrd-plan/SKILL.md`
+- `.agents/skills/wyrd-review/SKILL.md`

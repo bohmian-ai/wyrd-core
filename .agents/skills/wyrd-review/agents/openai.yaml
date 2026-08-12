@@ -1,0 +1,7 @@
+interface:
+  display_name: "Wyrd Review"
+  short_description: "Adversarially review foundation implementation proof"
+  default_prompt: "Use $wyrd-review to falsify this wyrd-core implementation's correctness, proof, architecture fit, and consumer closure."
+
+policy:
+  allow_implicit_invocation: true

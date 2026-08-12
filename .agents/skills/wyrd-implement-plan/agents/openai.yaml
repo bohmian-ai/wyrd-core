@@ -1,0 +1,7 @@
+interface:
+  display_name: "Wyrd Core Implement Plan"
+  short_description: "Execute a complete approved foundation plan"
+  default_prompt: "Use $wyrd-implement-plan to execute this approved wyrd-core plan through task review and verified closeout."
+
+policy:
+  allow_implicit_invocation: true

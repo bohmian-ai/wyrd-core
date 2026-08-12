@@ -1,0 +1,7 @@
+interface:
+  display_name: "Wyrd Advise"
+  short_description: "Doctrine-grounded foundation architecture guidance"
+  default_prompt: "Use $wyrd-advise for concise, doctrine-grounded wyrd-core foundation architecture advice."
+
+policy:
+  allow_implicit_invocation: true
