@@ -1,62 +1,75 @@
 # wyrd-core
 
-Foundation crates for the [Wyrd](https://github.com/mitari-ai/wyrd) AI platform.
-Includes pure contracts (`wyrd-spec`, `skald-spec`), shared primitives
-(auth, telemetry, crypto, queue, semver, runtime), SQL migration core, and gRPC
-transport (`wyrd-tonic`). These crates publish as standalone Apache-2.0 libraries.
+`wyrd-core` is the Rust foundation workspace for [Wyrd](https://github.com/mitari-ai/wyrd). It defines contracts and shared infrastructure used by Wyrd services and clients.
+
+It contains 20 crates for cards and schemas, transport, authentication, telemetry, cryptography, versioning, queues, TLS, and Postgres migrations.
+
+This repository does not contain the Wyrd server, UI, CLI or MCP host, Skald runtime, Vala/Bifrost plane, or language SDKs.
 
 ## Crates
 
-| Crate | Purpose |
+| Area | Crates |
 |---|---|
-| `wyrd-spec` | Card envelope, specs, schemas, identifiers, stable error catalog |
-| `skald-spec` | Skald provider/capability specs |
-| `wyrd-tonic` | gRPC/protobuf transport layer |
-| `wyrd-client` | HTTP + gRPC client for the Wyrd server |
-| `wyrd-utils` | Shared primitives and helpers |
-| `wyrd-runtime` | Async runtime boundary helpers |
-| `wyrd-queue` | Task queue primitives |
-| `wyrd-semver` | Semantic versioning types |
-| `wyrd-version` | Version identity |
-| `wyrd-telemetry` | OpenTelemetry integration |
-| `wyrd-crypt` | Cryptographic primitives |
-| `wyrd-auth-issue` | Token issuance |
-| `wyrd-auth-verify` | Token verification |
-| `wyrd-auth-check` | Authorization checks |
-| `wyrd-auth-oidc` | OIDC integration |
-| `wyrd-tls` | TLS configuration |
-| `wyrd-sql-core` | Postgres migration runner and pool primitives |
-| `wyrd-dev-fixtures` | Test fixture helpers (dev/test only) |
-| `wyrd-error-derive` | `WyrdError` derive macro |
-| `wyrd-test-contract-macros` | Contract test macros |
+| Contracts | `wyrd-spec`, `skald-spec` |
+| Transport | `wyrd-tonic`, `wyrd-client` |
+| Authentication | `wyrd-auth-issue`, `wyrd-auth-verify`, `wyrd-auth-check`, `wyrd-auth-oidc` |
+| Data and runtime primitives | `wyrd-sql-core`, `wyrd-dev-fixtures`, `wyrd-runtime`, `wyrd-queue`, `wyrd-utils` |
+| Versioning | `wyrd-semver`, `wyrd-version` |
+| Security and observability | `wyrd-crypt`, `wyrd-tls`, `wyrd-telemetry` |
+| Test and error support | `wyrd-error-derive`, `wyrd-test-contract-macros` |
 
-## License
-
-Apache-2.0. See [LICENSE](LICENSE) for details.
+`wyrd-spec` is the durable contract layer. It contains typed Card envelopes, specs, identifiers, validation, schemas, and stable public errors. It is IO-free, async-free, and PyO3-free.
 
 ## Requirements
 
-- Rust stable (see `rust-toolchain.toml` for the pinned version)
-- Docker (for Postgres-backed tests only)
+- Rust, installed through `rustup`; the repository selects its pinned toolchain from [`rust-toolchain.toml`](rust-toolchain.toml)
+- Docker and the PostgreSQL client tools for Postgres-backed integration tests
 
-## Development
+## Build and test
+
+Run the fast workspace build and test suite:
 
 ```console
 cargo build --workspace
 cargo test --workspace
 ```
 
-Postgres-backed integration tests require a running Postgres instance. See
-`docker-compose.yml` to start one locally:
+Run the Postgres-backed integration tests:
 
 ```console
-docker compose up -d
+bash scripts/postgres/with-test-postgres.sh -- \
+  cargo test --locked -p wyrd-sql-core -p wyrd-dev-fixtures \
+  --features pg -- --test-threads=1
 ```
 
-Then run the Postgres-gated test suite:
+The wrapper starts an isolated Postgres container, configures test roles and connection variables, runs the command, and removes the container afterward.
 
-```console
-cargo test -p wyrd-dev-fixtures --features pg
+For formatting, linting, generated-schema checks, and the complete local validation workflow, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Design
+
+Wyrd models registered AI-system components as Cards with a shared envelope:
+
+```yaml
+apiVersion: wyrd/v1
+metadata:
+  name: churn-model
+  version: "1.2.0"
+kind: Model
+spec:
+  # kind-specific declaration
+relationships: []
+status: null
 ```
 
-See `CONTRIBUTING.md` for detailed setup and contribution guidelines.
+Cards declare intent. Specs provide kind-specific meaning. `CardRef` values connect cards, while the server derives relationships and manages status.
+
+The active protocol authority is [architecture/wyrd-design.md](architecture/wyrd-design.md). Read [architecture/wyrd-doctrine.mdx](architecture/wyrd-doctrine.mdx) for the broader design rationale.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local setup and validation requirements. Repository-wide contributor rules are in [AGENTS.md](AGENTS.md).
+
+## License
+
+This project is licensed under the [Apache License, Version 2.0](LICENSE).
