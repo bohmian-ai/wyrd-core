@@ -1,13 +1,87 @@
 [workspace]
-# Per-package git tags: <crate>-v<version> (e.g. wyrd-spec-v0.1.0).
-# A single global tag is intentionally omitted; each crate is independently
-# versioned and tagged so release-plz can track per-crate release state.
-git_tag_name = "{{ package }}-v{{ version }}"
-
-# Changelog generation is enabled for every crate in the workspace.
+# Publish only reviewed public crates. GitHub Release publication is the manual
+# approval gate; Release-plz does not create an additional tag or release.
+dependencies_update = true
 changelog_update = true
+semver_check = true
+publish_timeout = "10m"
+git_tag_enable = false
+git_release_enable = false
+publish = false
+repo_url = "https://github.com/bohmian-ai/wyrd-core"
 
-# GitHub releases are created when a version PR is merged; no crates.io
-# publish is configured here. The `command: release` publish job is added
-# by the future publication plan once the 0.1.0 baseline is authorized.
-git_release_enable = true
+[[package]]
+name = "wyrd-spec"
+publish = true
+
+[[package]]
+name = "skald-spec"
+publish = true
+
+[[package]]
+name = "wyrd-tonic"
+publish = true
+
+[[package]]
+name = "wyrd-sql-core"
+publish = true
+
+[[package]]
+name = "wyrd-client"
+publish = true
+
+[[package]]
+name = "wyrd-utils"
+publish = true
+
+[[package]]
+name = "wyrd-runtime"
+publish = true
+
+[[package]]
+name = "wyrd-queue"
+publish = true
+
+[[package]]
+name = "wyrd-semver"
+publish = true
+
+[[package]]
+name = "wyrd-version"
+publish = true
+
+[[package]]
+name = "wyrd-telemetry"
+publish = true
+
+[[package]]
+name = "wyrd-crypt"
+publish = true
+
+[[package]]
+name = "wyrd-error-derive"
+publish = true
+
+[[package]]
+name = "wyrd-test-contract-macros"
+publish = true
+
+[[package]]
+name = "wyrd-auth-verify"
+publish = true
+
+[[package]]
+name = "wyrd-auth-issue"
+publish = true
+
+[[package]]
+name = "wyrd-auth-check"
+publish = true
+
+[[package]]
+name = "wyrd-auth-oidc"
+publish = true
+
+[[package]]
+name = "wyrd-tls"
+publish = true
