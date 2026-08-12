@@ -2,3 +2,6 @@
 # line endings stable when Git checks them out on Windows.
 crates/wyrd-spec/schemas/*.json text eol=lf
 crates/wyrd-client/schemas/*.json text eol=lf
+crates/wyrd-spec/tests/fixtures/eval/schemas/*.json text eol=lf
+crates/wyrd-spec/tests/fixtures/observation/schemas/*.json text eol=lf
+crates/wyrd-spec/tests/fixtures/trace/schemas/*.json text eol=lf
